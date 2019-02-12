@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Test File 1</title>
+</head>
+<body>
+<div class="content">
+    <h1 id="header">Test file 1</h1>
+    <img src="/img/placeholder1.png">
+    <br>
+    <a href="test_2.html">Second file</a>
+    <br>
+    <button id="btn">clickMe</button>
+</div>
+<script>
+    let h1 = document.getElementById("header");
+    let btn = document.getElementById("btn");
+
+    btn.addEventListener("click", function () {
+            h1.innerText = h1.innerText === "Test file 1" ? "Kek" : "Test file 1";
+        }
+    );
+</script>
+</body>
+</html>
