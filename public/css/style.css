@@ -1,0 +1,15 @@
+h1 {
+    color: #4a1e94;
+    font-family: "Liberation Sans Narrow", serif;
+    position: center;
+}
+
+.content{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body{
+    background-color: antiquewhite;
+}
