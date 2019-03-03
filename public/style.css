@@ -1,0 +1,269 @@
+/* sign in */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: #FFCDD2;
+}
+
+.container {
+  height: 100%;
+  display: grid;
+}
+
+.container_theme_signin {
+  grid-template: 1.6fr 9fr 1.9fr/repeat(4, 1fr);
+}
+
+.content {
+  grid-column: 1/-1;
+  display: grid;
+}
+
+.content_theme_signin {
+  grid-template: 0fr 2fr 1.2fr/repeat(8, 1fr);
+  grid-template-areas: "t t t t t t t t" ". f f f f f f ." "b b b b b b b b";
+}
+
+.title {
+  grid-area: t;
+  font-family: Roboto;
+  font-size: 100px;
+  text-align: center;
+  color: white;
+}
+
+.title_theme_signin {
+  align-items: flex-end;
+}
+
+.forms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  grid-area: f;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 60px;
+}
+.form__form-title {
+  font-family: Roboto;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-size: 44px;
+  width: 100%;
+  color: white;
+}
+.form__text-form {
+  height: 110px;
+  border-radius: 20px;
+  border: none;
+  width: 100%;
+}
+
+.buttons {
+  grid-area: b;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.button {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size: 44px;
+  text-align: center;
+  color: white;
+  background-color: #EF9A9A;
+  display: block;
+  width: 100%;
+  height: 150px;
+  border: none;
+}
+
+.button_type_secondary {
+  background-color: rgba(239, 154, 154, 0.5);
+}
+
+.foot {
+  grid-column: 1/-1;
+}
+
+.back-arrow {
+  grid-column: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-arrow__icon {
+  width: 80px;
+}
+
+.head {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@keyframes line1 {
+  from {
+    width: 100px;
+  }
+  50% {
+    width: 200px;
+  }
+  to {
+    width: 332px;
+  }
+}
+.lines {
+  grid-column: 2/-1;
+}
+.lines__line1 {
+  position: absolute;
+  height: 0px;
+  right: 0px;
+  top: 40px;
+  border: 2px solid white;
+  transform: rotate(-180deg);
+  animation: line1 1s forwards linear;
+}
+.lines__line2 {
+  position: absolute;
+  width: 516px;
+  height: 0px;
+  right: 0px;
+  top: 70px;
+  border: 2px solid white;
+  transform: rotate(-180deg);
+}
+.lines__line3 {
+  position: absolute;
+  width: 250px;
+  height: 0px;
+  right: 0px;
+  top: 100px;
+  border: 2px solid white;
+  transform: rotate(-180deg);
+}
+
+/* sign in */
+.container_theme_signup {
+  grid-template: 1fr 7fr/repeat(4, 1fr);
+}
+
+.content_theme_signup {
+  grid-template: 1fr 5fr 2.3fr/repeat(8, 1fr);
+  grid-template-areas: "t t t t t t t t" ". f f f f f f ." "b b b b b b b b";
+}
+
+/* main */
+.container_theme_main {
+  grid-template: 1.2fr 9fr 1fr/repeat(4, 1fr);
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scoreboard {
+  border-right: 1px solid white;
+  padding: 10px 20px 10px 20px;
+}
+.scoreboard__icon {
+  width: 70px;
+}
+
+.rules__icon {
+  width: 80px;
+  height: 90px;
+}
+
+.content_theme_main {
+  grid-template: 0.5fr 1fr 1fr/repeat(8, 1fr);
+  grid-template-areas: "t t t t t t t t" ". m m m m m m ." "b b b b b b b b";
+}
+
+.main {
+  grid-area: m;
+}
+
+.main_theme_index {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.play__icon {
+  width: 250px;
+}
+
+.title_theme_main {
+  font-family: "Unica One", cursive;
+  font-size: 150px;
+  display: grid;
+  align-content: flex-end;
+}
+
+.buttons_theme_main {
+  justify-content: space-between;
+}
+
+/* scoreboard */
+.container_theme_scoreboard {
+  grid-template: 1fr 9fr 1.2fr/repeat(4, 1fr);
+}
+
+.content_theme_scoreboard {
+  grid-template: 1.4fr 7fr/repeat(8, 1fr);
+  grid-template-areas: "t t t t t t t t" ". m m m m m m .";
+}
+
+.main_theme_scoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  padding: 13px;
+  font-family: "Roboto";
+  font-size: 40px;
+  color: white;
+  background: #b68b8f;
+  border-radius: 35px 0px 0px 0px;
+  align-items: center;
+}
+.row__number {
+  padding: 0px 70px 0px 40px;
+}
+.row__photo {
+  padding: 0px 70px 0px 0px;
+}
+.row__photo__icon {
+  width: 100px;
+}
+.row__score {
+  padding-right: 40px;
+  margin-left: auto;
+}
+
+/*# sourceMappingURL=style.css.map */

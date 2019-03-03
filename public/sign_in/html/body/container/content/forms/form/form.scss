@@ -1,0 +1,22 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 60px;
+
+    &__form-title {
+        font-family: Roboto;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        font-size: 44px;
+        width: 100%;
+        color: $color-text;
+    }
+
+    &__text-form {
+        height: 110px;
+        border-radius: 20px;
+        border: none;
+        width: 100%;
+    }
+}

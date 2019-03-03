@@ -1,0 +1,45 @@
+/* sign in */
+
+@import 'variables.scss';
+@import '../sign_in/html/html.scss';
+@import '../sign_in/html/body/body.scss';
+@import '../sign_in/html/body/container/container.scss';
+@import '../sign_in/html/body/container/container_theme_signin.scss';
+@import '../sign_in/html/body/container/content/content.scss';
+@import '../sign_in/html/body/container/content/content_theme_signin.scss';
+@import '../sign_in/html/body/container/content/title/title.scss';
+@import '../sign_in/html/body/container/content/title/title_theme_signin.scss';
+@import '../sign_in/html/body/container/content/forms/forms.scss';
+@import '../sign_in/html/body/container/content/forms/form/form.scss';
+@import '../sign_in/html/body/container/content/buttons/buttons.scss';
+@import '../sign_in/html/body/container/content/buttons/button/button.scss';
+@import '../sign_in/html/body/container/content/buttons/button/button_type_secondary.scss';
+@import '../sign_in/html/body/container/foot/foot.scss';
+@import '../sign_in/html/body/container/head/back-arrow/back-arrow.scss';
+@import '../sign_in/html/body/container/head/head.scss';
+@import '../sign_in/html/body/container/head/lines/lines.scss';
+
+/* sign in */
+
+@import '../sign_up/container/container_theme_signup.scss';
+@import '../sign_up/container/content/content_theme_signup.scss';
+
+/* main */
+
+@import '../main_ws/container/container_theme_main.scss';
+@import '../main_ws/container/head/menu/menu.scss';
+@import '../main_ws/container/head/menu/scoreboard/scoreboard.scss';
+@import '../main_ws/container/head/menu/rules/rules.scss';
+@import '../main_ws/container/content/content_theme_main.scss';
+@import '../main_ws/container/content/main/main.scss';
+@import '../main_ws/container/content/main/main_theme_index.scss';
+@import '../main_ws/container/content/main/play/play.scss';
+@import '../main_ws/container/content/title/title_theme_main.scss';
+@import '../main_ws/container/content/buttons/buttons_theme_main.scss';
+
+/* scoreboard */
+
+@import '../scoreboard/container/container_theme_scoreboard.scss';
+@import '../scoreboard/container/content/content_theme_scoreboard.scss';
+@import '../scoreboard/container/content/main/main_theme_scoreboard.scss';
+@import '../scoreboard/container/content/main/row/row.scss';

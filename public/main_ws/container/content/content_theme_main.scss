@@ -1,0 +1,7 @@
+.content_theme_main {
+    grid-template: 0.5fr 1fr 1fr/ repeat(8, 1fr);
+    grid-template-areas: 
+                    "t t t t t t t t"
+                    ". m m m m m m ."
+                    "b b b b b b b b";
+}
