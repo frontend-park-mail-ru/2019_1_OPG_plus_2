@@ -10,8 +10,6 @@ import {Title} from '../blocks/html/body/application/container/content/title/tit
 import {Main} from '../blocks/html/body/application/container/content/main/main.js';
 import {Play} from '../blocks/html/body/application/container/content/main/play/play.js';
 import {Buttons} from '../blocks/html/body/application/container/content/buttons/buttons.js';
-import {Button} from '../blocks/html/body/application/container/content/buttons/button/button.js';
-
 
 export class MainPage {
     constructor({
@@ -42,6 +40,8 @@ export class MainPage {
 
         const scoreboardIcon = new ScoreBoard({
             el: menuBlock,
+            href: '/',
+            dataset: 'leaders',
         });
         scoreboardIcon.render();
 

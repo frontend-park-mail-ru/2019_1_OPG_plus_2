@@ -4,5 +4,10 @@
     
     &__icon {
         width: 70px;
+        height: 70px;
+        background: url(img/scoreboard.svg);
+        background-size: 70px;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 }

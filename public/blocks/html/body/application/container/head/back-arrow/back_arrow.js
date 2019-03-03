@@ -24,9 +24,7 @@ export class BackArrow {
         this._el.innerHTML += `
             <a href="${this._href}" class="back-arrow back-arrow__icon${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}" data-href="${this._dataset}">
-                
-            </div>
+            })}" data-href="${this._dataset}"></a>
         `;
     }
 

@@ -16,6 +16,7 @@ export class Main {
     }
 
     _renderMain() {
+        this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
             <div class="main ${this._modifiers.map((modifier) => {
                 return modifier;

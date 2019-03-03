@@ -4,6 +4,7 @@ import {AjaxModule} from './modules/ajax.js';
 import {MainPage} from './pages/main_page.js'
 import {SignInPage} from './pages/signin_page.js'
 import {SignUpPage} from './pages/signup_page.js'
+import {LeaderBoard} from './pages/scoreboard_page.js'
 
 const application = document.getElementById('application');
 
@@ -29,11 +30,18 @@ function createSignUp() {
     signup.render();
 }
 
+function createLeaderBoard() {
+    const leaderboard = new LeaderBoard({
+        el: application,
+    });
+    leaderboard.render();
+}
+
 const pages = {
     menu: createMenu,
     signin: createSignIn,
     signup: createSignUp,
-    // leaders: createLeaderBoard,
+    leaders: createLeaderBoard,
     // me: createProfile,
 };
 

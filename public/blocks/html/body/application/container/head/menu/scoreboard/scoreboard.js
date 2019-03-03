@@ -3,10 +3,12 @@
 export class ScoreBoard {
     constructor({
         el = document.body,
-        iconSrc = 'img/scoreboard.svg',
+        href = '/',
+        dataset = 'menu',
     } = {}) {
         this._el = el;
-        this._iconSrc = iconSrc;
+        this._href = href;
+        this._dataset = dataset;
     }
 
     get modifiers() {
@@ -20,11 +22,9 @@ export class ScoreBoard {
     _renderScoreboardIcon() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <div class="scoreboard${this._modifiers.map((modifier) => {
+            <a href="${this._href}" class="scoreboard scoreboard__icon${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}">
-                <img class="scoreboard__icon" src="${this._iconSrc}"/>
-            </div>
+            })}" data-href="${this._dataset}"></a>
         `;
     }
 

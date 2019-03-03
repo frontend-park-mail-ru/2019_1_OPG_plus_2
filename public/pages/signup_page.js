@@ -120,7 +120,6 @@ export class SignUpPage {
             el: containerBlock,
         });
         foot.render();
-
     }
 
     render() {
