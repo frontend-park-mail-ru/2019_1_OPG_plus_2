@@ -1,0 +1,7 @@
+.content_theme_signup {
+    grid-template: 1fr 5fr 2.3fr/ repeat(8, 1fr);
+    grid-template-areas: 
+                    "t t t t t t t t"
+                    ". f f f f f f ."
+                    "b b b b b b b b";
+}

@@ -1,0 +1,44 @@
+@keyframes line1 {
+    from {width: 100px;}
+    50% {width: 200px;}
+    to {width: 332px;}
+}
+
+.lines {
+    grid-column: 2 / -1;
+
+    &__line1 {
+        position: absolute;
+		// width: 332px;
+		height: 0px;
+		right: 0px;
+		top: 40px;
+
+		border: 2px solid $color-lines;
+        transform: rotate(-180deg);
+
+        animation: line1 1s forwards linear;
+    }
+
+    &__line2 {
+        position: absolute;
+		width: 516px;
+		height: 0px;
+		right: 0px;
+		top: 70px;
+
+		border: 2px solid $color-lines;
+		transform: rotate(-180deg);
+    }
+
+    &__line3 {
+        position: absolute;
+		width: 250px;
+		height: 0px;
+		right: 0px;
+		top: 100px;
+
+		border: 2px solid $color-lines;
+		transform: rotate(-180deg);
+    }
+}
