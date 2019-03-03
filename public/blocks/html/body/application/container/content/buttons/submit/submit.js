@@ -1,10 +1,14 @@
 'use strict';
 
-export class Content {
+export class Submit {
     constructor({
         el = document.body,
+        value = '',
+        form = '',
     } = {}) {
         this._el = el;
+        this._value = value;
+        this._form = form;
     }
 
     get modifiers() {
@@ -15,17 +19,17 @@ export class Content {
         this._modifiers = m;
     }
 
-    _renderContent() {
+    _renderSubmit() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <div class="content${this._modifiers.map((modifier) => {
+            <input form="${this._form}" type="submit" class="submit${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}"></div>
+            })}" value="${this._value}"/>
         `;
     }
 
     render() {
-        this._renderContent();
+        this._renderSubmit();
     }
 
 

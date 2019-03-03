@@ -16,9 +16,10 @@ export class Buttons {
     }
 
     _renderButtons() {
+        this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <div class="buttons ${this._modifiers.map((modifier) => {
-                return modifier;
+            <div class="buttons${this._modifiers.map((modifier) => {
+                return ' ' + modifier;
             })}"></div>
         `;
     }

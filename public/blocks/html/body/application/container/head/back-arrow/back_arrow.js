@@ -1,10 +1,14 @@
 'use strict';
 
-export class Content {
+export class BackArrow {
     constructor({
         el = document.body,
+        href = '/',
+        dataset = 'menu',
     } = {}) {
         this._el = el;
+        this._href = href;
+        this._dataset = dataset;
     }
 
     get modifiers() {
@@ -15,18 +19,18 @@ export class Content {
         this._modifiers = m;
     }
 
-    _renderContent() {
+    _renderBackArrow() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <div class="content${this._modifiers.map((modifier) => {
+            <a href="${this._href}" class="back-arrow back-arrow__icon${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}"></div>
+            })}" data-href="${this._dataset}">
+                
+            </div>
         `;
     }
 
     render() {
-        this._renderContent();
+        this._renderBackArrow();
     }
-
-
 }

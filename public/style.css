@@ -49,6 +49,32 @@ body {
   border: none;
 }
 
+.link {
+  font-family: Roboto;
+  font-size: 44px;
+  text-align: center;
+  color: white;
+  background-color: #EF9A9A;
+  display: block;
+  width: 100%;
+  padding: 40px 0px 40px;
+  text-decoration: none;
+  border: none;
+}
+
+.submit {
+  font-family: Roboto;
+  font-size: 44px;
+  text-align: center;
+  color: white;
+  background-color: #EF9A9A;
+  display: block;
+  width: 100%;
+  padding: 40px 30% 40px;
+  text-decoration: none;
+  border: none;
+}
+
 .button_type_secondary {
   background-color: rgba(239, 154, 154, 0.5);
 }
@@ -139,7 +165,10 @@ body {
   justify-content: center;
 }
 .back-arrow__icon {
-  width: 80px;
+  background: url(img/arrow_up_big.svg);
+  background-size: 80px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 @keyframes line1 {

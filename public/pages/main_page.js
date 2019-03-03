@@ -84,23 +84,26 @@ export class MainPage {
         buttons.render();
         const buttonsBlock = document.querySelector('.buttons.buttons_theme_main');
 
-        const buttonMultiplayer = new Button({
-            el: buttonsBlock,
-            title: 'MULTIPLAYER',
-        });
-        buttonMultiplayer.render();
+        const titles = {
+            multiplayer: 'MULTIPLAYER',
+            signin: 'SING IN',
+            signup: 'SIGN UP',
+        };
 
-        const buttonSignIn = new Button({
-            el: buttonsBlock,
-            title: 'SIGN IN',
-        });
-        buttonSignIn.render();
 
-        const buttonSignUp = new Button({
-            el: buttonsBlock,
-            title: 'SIGN UP',
+        // Вот это можно тоже вынести в класс, но тут надо подумать насчет a.dataset ????
+        Object.entries(titles).forEach((entry) => {
+            const href = entry[ 0 ];
+            const title = entry[ 1 ];
+    
+            const a = document.createElement('a');
+            a.href = href;
+            a.dataset.href = href;
+            a.textContent = title;
+            a.classList.add('link');
+    
+            buttonsBlock.appendChild(a);
         });
-        buttonSignUp.render();
     }
 
     render() {

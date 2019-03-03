@@ -1,6 +1,6 @@
 'use strict';
 
-export class Content {
+export class Foot {
     constructor({
         el = document.body,
     } = {}) {
@@ -15,17 +15,17 @@ export class Content {
         this._modifiers = m;
     }
 
-    _renderContent() {
+    _renderFoot() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <div class="content${this._modifiers.map((modifier) => {
+            <div class="foot${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
             })}"></div>
         `;
     }
 
     render() {
-        this._renderContent();
+        this._renderFoot();
     }
 
 
