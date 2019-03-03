@@ -3,6 +3,7 @@
 import {AjaxModule} from './modules/ajax.js';
 import {MainPage} from './pages/main_page.js'
 import {SignInPage} from './pages/signin_page.js'
+import {SignUpPage} from './pages/signup_page.js'
 
 const application = document.getElementById('application');
 
@@ -21,10 +22,17 @@ function createSignIn() {
     singin.render();
 }
 
+function createSignUp() {
+    const signup = new SignUpPage({
+        el: application,
+    });
+    signup.render();
+}
+
 const pages = {
     menu: createMenu,
     signin: createSignIn,
-    // sign_up: createSignUp,
+    signup: createSignUp,
     // leaders: createLeaderBoard,
     // me: createProfile,
 };

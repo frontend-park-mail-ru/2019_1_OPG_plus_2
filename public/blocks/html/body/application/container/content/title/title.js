@@ -18,6 +18,7 @@ export class Title {
     }
 
     _renderTitle() {
+        this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
             <div class="title ${this._modifiers.map((modifier) => {
                 return modifier;
