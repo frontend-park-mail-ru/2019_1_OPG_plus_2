@@ -51,6 +51,36 @@ function createSignUp() {
         el: application,
     });
     signup.render();
+
+    const formsBlock = document.querySelector('.forms');
+
+    formsBlock.addEventListener('submit', function (event) {
+		event.preventDefault();
+
+        const name = formsBlock.elements[ 'name' ].value;
+		const email = formsBlock.elements[ 'e-mail' ].value;
+		const password = formsBlock.elements[ 'password' ].value;
+		const password_repeat = formsBlock.elements[ 'repeat-password' ].value;
+
+		if (password !== password_repeat) {
+			alert('Passwords is not equals');
+
+			return;
+		}
+
+		ajax.doPost({
+			callback() {
+				application.innerHTML = '';
+				createProfile();
+			},
+			path: '/signup',
+			body: {
+                name: name,
+				email: email,
+				password: password,
+			},
+		});
+	});
 }
 
 function createLeaderBoard() {
@@ -61,9 +91,7 @@ function createLeaderBoard() {
 }
 
 function createProfile(me) {
-
     if (me) {
-
         const profile = new ProfilePage({
             el: application,
             name: me.name,
