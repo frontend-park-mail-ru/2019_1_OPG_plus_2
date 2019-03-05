@@ -5,6 +5,7 @@ import {Head} from '../blocks/html/body/application/container/head/head.js';
 import {Menu} from '../blocks/html/body/application/container/head/menu/menu.js';
 import {ScoreBoard} from '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.js';
 import {Rules} from '../blocks/html/body/application/container/head/menu/rules/rules.js';
+import {ProfileIcon} from '../blocks/html/body/application/container/head/menu/profile/profile.js';
 import {Content} from '../blocks/html/body/application/container/content/content.js';
 import {Title} from '../blocks/html/body/application/container/content/title/title.js';
 import {Main} from '../blocks/html/body/application/container/content/main/main.js';
@@ -49,6 +50,13 @@ export class MainPage {
             el: menuBlock,
         });
         rulesIcon.render();
+
+        const profileIcon = new ProfileIcon({
+            el: menuBlock,
+            href: '/',
+            dataset: 'me',
+        });
+        profileIcon.render();
 
         const content = new Content({
             el: containerBlock,

@@ -1,14 +1,10 @@
 'use strict';
 
-export class Forms {
+export class ProfileCard {
     constructor({
         el = document.body,
-        action = 'GET',
-        name = '',
     } = {}) {
         this._el = el;
-        this._action = action;
-        this._name = name;
     }
 
     get modifiers() {
@@ -19,19 +15,16 @@ export class Forms {
         this._modifiers = m;
     }
 
-    _renderForms() {
+    _renderProfileCard() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <form id="${this._name}" class="forms${this._modifiers.map((modifier) => {
+            <div class="profile-card${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}"></form>
+            })}"></div>
         `;
-        // action="${this._action}"
     }
 
     render() {
-        this._renderForms();
+        this._renderProfileCard();
     }
-
-
 }

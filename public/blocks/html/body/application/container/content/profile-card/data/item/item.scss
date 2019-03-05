@@ -1,0 +1,19 @@
+.item {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        font-family: $secondary-font-family;
+        color: $color-text;
+        font-size: 60px;
+        padding: 10px;
+    }
+
+    &__data {
+        font-family: $secondary-font-family;
+        color: $color-text;
+        border-top: 3px solid white;
+        font-size: 40px;
+        padding: 10px;
+    }
+}

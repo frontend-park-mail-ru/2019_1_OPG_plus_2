@@ -1,0 +1,6 @@
+.content_theme_profile {
+    grid-template: 0.1fr 1fr 0.8fr/repeat(8, 1fr);
+    grid-template-areas: 
+                    "t t t t t t t t"
+                    ". p p p p p p .";
+}

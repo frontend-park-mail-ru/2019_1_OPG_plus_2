@@ -1,14 +1,14 @@
 'use strict';
 
-export class Forms {
+export class EditIcon {
     constructor({
         el = document.body,
-        action = 'GET',
-        name = '',
+        href = '/',
+        dataset = 'menu',
     } = {}) {
         this._el = el;
-        this._action = action;
-        this._name = name;
+        this._href = href;
+        this._dataset = dataset;
     }
 
     get modifiers() {
@@ -19,19 +19,16 @@ export class Forms {
         this._modifiers = m;
     }
 
-    _renderForms() {
+    _renderEditIcon() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <form id="${this._name}" class="forms${this._modifiers.map((modifier) => {
+            <a href="${this._href}" class="edit edit__icon${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}"></form>
+            })}" data-href="${this._dataset}"></a>
         `;
-        // action="${this._action}"
     }
 
     render() {
-        this._renderForms();
+        this._renderEditIcon();
     }
-
-
 }

@@ -1,14 +1,14 @@
 'use strict';
 
-export class Forms {
+export class Item {
     constructor({
         el = document.body,
-        action = 'GET',
-        name = '',
+        title = '',
+        data = '',
     } = {}) {
         this._el = el;
-        this._action = action;
-        this._name = name;
+        this._title = title;
+        this._data = data;
     }
 
     get modifiers() {
@@ -19,19 +19,18 @@ export class Forms {
         this._modifiers = m;
     }
 
-    _renderForms() {
+    _renderItem() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <form id="${this._name}" class="forms${this._modifiers.map((modifier) => {
+            <div class="item${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}"></form>
+            })}">
+                <div class="item__title">${this._title}</div>
+                <div class="item__data">${encodeURI(this._data)}</div>
         `;
-        // action="${this._action}"
     }
 
     render() {
-        this._renderForms();
+        this._renderItem();
     }
-
-
 }
