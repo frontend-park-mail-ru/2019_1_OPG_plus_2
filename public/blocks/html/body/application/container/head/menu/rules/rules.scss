@@ -1,7 +1,17 @@
 .rules {
+    background: url(img/rules.svg);
+    background-repeat: no-repeat;
+    background-position: center;
 
-    &__icon {
-        width: 80px;
-        height: 90px;
+    @media (min-width: $desktop-min-width) {
+        padding: 0px 60px 0px 60px;
+        background-size: 70px;
+        height: 50px;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        padding: 10px 30px 10px 30px;
+        background-size: 40px;
+        height: 30px;
     }
 }

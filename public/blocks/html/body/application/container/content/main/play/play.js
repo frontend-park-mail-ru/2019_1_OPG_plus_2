@@ -3,10 +3,12 @@
 export class Play {
     constructor({
         el = document.body,
-        iconSrc = './img/play.svg',
+        href = '/',
+        dataset = 'menu',
     } = {}) {
         this._el = el;
-        this._iconSrc = iconSrc;
+        this._href = href;
+        this._dataset = dataset;
     }
 
     get modifiers() {
@@ -19,13 +21,11 @@ export class Play {
 
     _renderPlay() {
         this._modifiers = this._modifiers ? this._modifiers : [];
-        this._el.innerHTML = `
-            <button class="play${this._modifiers.map((modifier) => {
-                return ' ' + modifier;
-            })}">
-                <img class="play__icon" src="${this._iconSrc}"/>
-            </button>
-        `;
+        this._el.innerHTML += `
+        <a href="${this._href}" class="play${this._modifiers.map((modifier) => {
+            return ' ' + modifier;
+        })}" data-href="${this._dataset}"></a>
+    `;
     }
 
     render() {

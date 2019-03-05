@@ -1,3 +1,13 @@
 .container_theme_main {
-    grid-template: 1.2fr 9fr 1fr / repeat(4, 1fr);
+    @media (min-width: $desktop-min-width) {
+        grid-template: 1.3fr 9fr 0.5fr/repeat(12, 1fr);
+    }
+
+    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
+        grid-template: 2fr 9fr 2fr / repeat(12, 1fr);
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-template: 2fr 9fr 2fr / repeat(4, 1fr);
+    }
 }

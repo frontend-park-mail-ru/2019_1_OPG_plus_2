@@ -11,9 +11,6 @@ import {Avatar} from '../blocks/html/body/application/container/content/profile-
 import {EditIcon} from '../blocks/html/body/application/container/content/profile-card/profile-head/edit/edit.js';
 import {Data} from '../blocks/html/body/application/container/content/profile-card/data/data.js';
 import {Item} from '../blocks/html/body/application/container/content/profile-card/data/item/item.js';
-// import {Main} from '../blocks/html/body/application/container/content/main/main.js';
-// import {Play} from '../blocks/html/body/application/container/content/main/play/play.js';
-// import {Buttons} from '../blocks/html/body/application/container/content/buttons/buttons.js';
 
 export class ProfilePage {
     constructor({
@@ -73,6 +70,17 @@ export class ProfilePage {
         });
         profileHead.render();
         const profileHeadBlock = document.querySelector('.profile-head');
+
+        const href = 'signout';
+        const t = 'signout';
+    
+        const a = document.createElement('a');
+        a.href = href;
+        a.dataset.href = href;
+        a.textContent = t;
+        a.classList.add('link');
+    
+        profileBlock.appendChild(a);
 
         const avatar = new Avatar({
             el: profileHeadBlock,

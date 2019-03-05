@@ -22,7 +22,7 @@ export class ProfileIcon {
     _renderProfileIcon() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <a href="${this._href}" class="profile profile__icon${this._modifiers.map((modifier) => {
+            <a href="${this._href}" class="profile${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
             })}" data-href="${this._dataset}"></a>
         `;

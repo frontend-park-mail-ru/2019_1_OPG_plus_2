@@ -5,3 +5,13 @@ $color-lines: white;
 $main-font-family: 'Unica One', cursive;
 $secondary-font-family: 'Roboto';
 $scoreboard-font-size: 40px;
+
+/* media query sizes */
+
+$mobile-min-width: 320px;
+$mobile-max-width: 480px;
+
+$laptop-min-width: 1025px;
+$laptop-max-width: 1280px;
+
+$desktop-min-width: 1281px;

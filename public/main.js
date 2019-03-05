@@ -64,7 +64,6 @@ function createSignUp() {
 
 		if (password !== password_repeat) {
 			alert('Passwords is not equals');
-
 			return;
 		}
 
@@ -100,6 +99,11 @@ function createProfile(me) {
         });
         profile.render();
     } else {
+        const profile = new ProfilePage({
+            el: application,
+        });
+        profile.render();
+
         ajax.doGet({
 			callback(xhr) {
 				if (!xhr.responseText) {
@@ -118,12 +122,23 @@ function createProfile(me) {
     }
 }
 
+function createSignout() {
+    ajax.doPost({
+        callback() {
+            application.innerHTML = '';
+            createMenu();
+        },
+        path: '/signout'
+    });
+}
+
 const pages = {
     menu: createMenu,
     signin: createSignIn,
     signup: createSignUp,
     leaders: createLeaderBoard,
     me: createProfile,
+    signout: createSignout,
 };
 
 createMenu();
@@ -145,5 +160,3 @@ application.addEventListener('click', function (event) {
 
     pages[link.dataset.href]();
 });
-
-console.log('HI');

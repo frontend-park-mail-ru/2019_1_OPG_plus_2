@@ -48,6 +48,8 @@ export class MainPage {
 
         const rulesIcon = new Rules({
             el: menuBlock,
+            href: '/',
+            dataset: 'rules',
         });
         rulesIcon.render();
 
@@ -81,7 +83,8 @@ export class MainPage {
 
         const play = new Play({
             el: mainBlock,
-            iconSrc: './img/play.svg',
+            href: 'game',
+            dataset: 'game',
         });
         play.render();
 
@@ -98,8 +101,7 @@ export class MainPage {
             signup: 'SIGN UP',
         };
 
-
-        // Вот это можно тоже вынести в класс, но тут надо подумать насчет a.dataset ????
+        // // Вот это можно тоже вынести в класс, но тут надо подумать насчет a.dataset ????
         Object.entries(titles).forEach((entry) => {
             const href = entry[ 0 ];
             const title = entry[ 1 ];

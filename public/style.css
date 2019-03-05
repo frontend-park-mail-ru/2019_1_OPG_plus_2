@@ -1,3 +1,4 @@
+/* media query sizes */
 * {
   margin: 0;
   padding: 0;
@@ -30,8 +31,8 @@ body {
   grid-area: b;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .button {
@@ -51,15 +52,25 @@ body {
 
 .link {
   font-family: Roboto;
-  font-size: 44px;
   text-align: center;
   color: white;
   background-color: #EF9A9A;
-  display: block;
   width: 100%;
-  padding: 40px 0px 40px;
   text-decoration: none;
-  border: none;
+}
+@media (min-width: 1281px) {
+  .link {
+    font-size: 1.5em;
+    padding: 15px 0px 15px;
+    border-radius: 20px;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .link {
+    padding: 3% 0% 3%;
+    font-size: 1em;
+    display: block;
+  }
 }
 
 .submit {
@@ -114,8 +125,26 @@ body {
   grid-area: m;
 }
 
-.play__icon {
-  width: 250px;
+.play {
+  background: url(img/play.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media (min-width: 1281px) {
+  .play {
+    padding: 0px 60px 0px 60px;
+    background-size: 50%;
+    height: 100%;
+    width: 20%;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .play {
+    padding: 10px 30px 10px 30px;
+    background-size: 60%;
+    height: 100%;
+    width: 40%;
+  }
 }
 
 .row {
@@ -145,9 +174,10 @@ body {
 .title {
   grid-area: t;
   font-family: Roboto;
-  font-size: 100px;
-  text-align: center;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .foot {
@@ -157,7 +187,21 @@ body {
 .head {
   grid-column: 1/-1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+}
+@media (min-width: 1281px) {
+  .head {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .head {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .head {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .back-arrow {
@@ -217,39 +261,87 @@ body {
 
 .menu {
   display: flex;
-  align-items: center;
-  justify-content: center;
+}
+@media (min-width: 1281px) {
+  .menu {
+    grid-column: 1/5;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .menu {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .menu {
+    grid-column: 1/-1;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.rules__icon {
-  width: 80px;
-  height: 90px;
+.rules {
+  background: url(img/rules.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media (min-width: 1281px) {
+  .rules {
+    padding: 0px 60px 0px 60px;
+    background-size: 70px;
+    height: 50px;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .rules {
+    padding: 10px 30px 10px 30px;
+    background-size: 40px;
+    height: 30px;
+  }
 }
 
 .profile {
   border-left: 1px solid white;
-  padding: 10px 20px 10px 20px;
-}
-.profile__icon {
-  width: 60px;
-  height: 60px;
   background: url(img/profile.svg);
-  background-size: 60px;
   background-repeat: no-repeat;
   background-position: center;
+}
+@media (min-width: 1281px) {
+  .profile {
+    padding: 0px 60px 0px 60px;
+    background-size: 50px;
+    height: 50px;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .profile {
+    padding: 10px 30px 10px 30px;
+    background-size: 30px;
+    height: 30px;
+  }
 }
 
 .scoreboard {
   border-right: 1px solid white;
-  padding: 10px 20px 10px 20px;
-}
-.scoreboard__icon {
-  width: 70px;
-  height: 70px;
   background: url(img/scoreboard.svg);
-  background-size: 70px;
   background-repeat: no-repeat;
   background-position: center;
+}
+@media (min-width: 1281px) {
+  .scoreboard {
+    padding: 0px 60px 0px 60px;
+    background-size: 50px;
+    height: 50px;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .scoreboard {
+    padding: 10px 30px 10px 30px;
+    background-size: 30px;
+    height: 30px;
+  }
 }
 
 /* sign up */
@@ -273,30 +365,53 @@ body {
 }
 
 /* main */
-.container_theme_main {
-  grid-template: 1.2fr 9fr 1fr/repeat(4, 1fr);
+@media (min-width: 1281px) {
+  .container_theme_main {
+    grid-template: 1.3fr 9fr 0.5fr/repeat(12, 1fr);
+  }
+}
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .container_theme_main {
+    grid-template: 2fr 9fr 2fr/repeat(12, 1fr);
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .container_theme_main {
+    grid-template: 2fr 9fr 2fr/repeat(4, 1fr);
+  }
 }
 
-.content_theme_main {
-  grid-template: 0.5fr 1fr 1fr/repeat(8, 1fr);
-  grid-template-areas: "t t t t t t t t" ". m m m m m m ." "b b b b b b b b";
+@media (min-width: 1281px) {
+  .content_theme_main {
+    grid-template: 0.5fr 2fr 1.4fr/repeat(12, 1fr);
+    grid-template-areas: "t t t t t t t t t t t t" ". . m m m m m m m m . ." ". . . . b b b b . . . .";
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .content_theme_main {
+    grid-template: 0.5fr 1fr 1fr/repeat(8, 1fr);
+    grid-template-areas: "t t t t t t t t" ". m m m m m m ." "b b b b b b b b";
+  }
 }
 
 .title_theme_main {
   font-family: "Unica One", cursive;
-  font-size: 150px;
-  display: grid;
-  align-content: flex-end;
+}
+@media (min-width: 1281px) {
+  .title_theme_main {
+    font-size: 6em;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .title_theme_main {
+    font-size: 4em;
+  }
 }
 
 .main_theme_index {
   display: flex;
   justify-content: center;
-  align-content: center;
-}
-
-.buttons_theme_main {
-  justify-content: space-between;
+  align-items: center;
 }
 
 /* scoreboard */

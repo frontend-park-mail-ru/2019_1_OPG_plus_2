@@ -3,10 +3,12 @@
 export class Rules{
     constructor({
         el = document.body,
-        iconSrc = 'img/rules.svg',
+        href = '/',
+        dataset = 'menu',
     } = {}) {
         this._el = el;
-        this._iconSrc = iconSrc;
+        this._href = href;
+        this._dataset = dataset;
     }
 
     get modifiers() {
@@ -19,12 +21,17 @@ export class Rules{
 
     _renderRulesIcon() {
         this._modifiers = this._modifiers ? this._modifiers : [];
+        // this._el.innerHTML += `
+        //     <div class="rules${this._modifiers.map((modifier) => {
+        //         return ' ' + modifier;
+        //     })}">
+        //         <img class="rules__icon" src="${this._iconSrc}"/>
+        //     </div>
+        // `;
         this._el.innerHTML += `
-            <div class="rules${this._modifiers.map((modifier) => {
+            <a href="${this._href}" class="rules${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
-            })}">
-                <img class="rules__icon" src="${this._iconSrc}"/>
-            </div>
+            })}" data-href="${this._dataset}"></a>
         `;
     }
 

@@ -22,7 +22,7 @@ export class ScoreBoard {
     _renderScoreboardIcon() {
         this._modifiers = this._modifiers ? this._modifiers : [];
         this._el.innerHTML += `
-            <a href="${this._href}" class="scoreboard scoreboard__icon${this._modifiers.map((modifier) => {
+            <a href="${this._href}" class="scoreboard${this._modifiers.map((modifier) => {
                 return ' ' + modifier;
             })}" data-href="${this._dataset}"></a>
         `;

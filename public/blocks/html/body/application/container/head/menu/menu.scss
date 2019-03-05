@@ -1,5 +1,19 @@
 .menu {
     display: flex;
-    align-items: center;
-    justify-content: center;
+
+    @media (min-width: $desktop-min-width) {
+        grid-column: 1 / 5;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1 / -1;
+        align-items: center;
+        justify-content: center;
+    }
 }
