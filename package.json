@@ -1,23 +1,22 @@
 {
-  "name": "2019_1_opg_plus_2",
+  "name": "project",
   "version": "1.0.0",
-  "description": "- Даниил Никольcкий @DanikNik  - Иван Морозов @Xatabch  - Владимир Северов @hackallcode",
-  "main": "index.js",
+  "description": "test server",
+  "main": "server/index.js",
   "scripts": {
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/frontend-park-mail-ru/2019_1_OPG_plus_2.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/frontend-park-mail-ru/2019_1_OPG_plus_2/issues"
-  },
-  "homepage": "https://github.com/frontend-park-mail-ru/2019_1_OPG_plus_2#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body": "5.1.0",
+    "cookie": "0.3.1",
+    "cookie-parser": "1.4.4",
+    "express": "4.16.4",
+    "morgan": "1.9.1",
+    "path": "0.12.7",
+    "uuid": "3.3.2"
   }
 }
