@@ -1,11 +1,11 @@
 .profile {
-    border-left: 1px solid white;
+    border-bottom: 1px solid white;
     background: url(img/profile.svg);
     background-repeat: no-repeat;
     background-position: center;
 
     @media (min-width: $desktop-min-width) {
-        padding: 0px 60px 0px 60px;
+        padding: 30px 30px 30px 30px;
         background-size: 50px;
         height: 50px;
     }

@@ -24,7 +24,6 @@ function createSignIn() {
     });
     singin.render();
 
-    const submitBlock = document.querySelector('.submit');
     const formsBlock = document.querySelector('.forms');
     formsBlock.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -52,34 +51,34 @@ function createSignUp() {
     });
     signup.render();
 
-    const formsBlock = document.querySelector('.forms');
+    // const formsBlock = document.querySelector('.forms');
 
-    formsBlock.addEventListener('submit', function (event) {
-		event.preventDefault();
+    // formsBlock.addEventListener('submit', function (event) {
+	// 	event.preventDefault();
 
-        const name = formsBlock.elements[ 'name' ].value;
-		const email = formsBlock.elements[ 'e-mail' ].value;
-		const password = formsBlock.elements[ 'password' ].value;
-		const password_repeat = formsBlock.elements[ 'repeat-password' ].value;
+    //     const name = formsBlock.elements[ 'name' ].value;
+	// 	const email = formsBlock.elements[ 'email' ].value;
+	// 	const password = formsBlock.elements[ 'password' ].value;
+	// 	const password_repeat = formsBlock.elements[ 'repeat-password' ].value;
 
-		if (password !== password_repeat) {
-			alert('Passwords is not equals');
-			return;
-		}
+	// 	if (password !== password_repeat) {
+	// 		alert('Passwords is not equals');
+	// 		return;
+	// 	}
 
-		ajax.doPost({
-			callback() {
-				application.innerHTML = '';
-				createProfile();
-			},
-			path: '/signup',
-			body: {
-                name: name,
-				email: email,
-				password: password,
-			},
-		});
-	});
+	// 	ajax.doPost({
+	// 		callback() {
+	// 			application.innerHTML = '';
+	// 			createProfile();
+	// 		},
+	// 		path: '/signup',
+	// 		body: {
+    //             name: name,
+	// 			email: email,
+	// 			password: password,
+	// 		},
+	// 	});
+	// });
 }
 
 function createLeaderBoard() {

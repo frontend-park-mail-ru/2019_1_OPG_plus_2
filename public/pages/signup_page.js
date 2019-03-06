@@ -29,6 +29,7 @@ export class SignUpPage {
         const head = new Head({
             el: containerBlock,
         });
+        head.modifiers = ['head_theme_signup'];
         head.render();
         const headBlock = document.querySelector('.head');
 
@@ -50,6 +51,7 @@ export class SignUpPage {
             el: contentBlock,
             title: 'SIGN UP',
         });
+        title.modifiers = ['title_theme_signup'];
         title.render();
 
         const forms = new Forms({
@@ -67,8 +69,8 @@ export class SignUpPage {
                 placeholder: 'Name',
             },
             {
-                name: 'e-mail',
-                type: 'e-mail',
+                name: 'email',
+                type: 'email',
                 placeholder: 'E-mail',
             },
             {
@@ -89,13 +91,16 @@ export class SignUpPage {
                 name: item.name,
                 placeholder: item.placeholder,
                 type: item.type,
+                req: true,
             });
+            input.modifiers = ['form_theme_signup'];
             input.render();
         });
 
         const buttons = new Buttons({
             el: contentBlock,
         });
+        buttons.modifiers = ['buttons_theme_signup'];
         buttons.render();
         const buttonsBlock = document.querySelector('.buttons');
 
@@ -106,20 +111,20 @@ export class SignUpPage {
         });
         submit.render();
 
-        // Ссылка, надо переделать под блок!!!!
-        const a = document.createElement('a');
-        a.href = 'signin';
-        a.dataset.href = '/signin';
-        a.textContent = 'SIGN IN';
-        a.classList.add('link');
-        a.classList.add('button_type_secondary');
-        buttonsBlock.appendChild(a);
+        // // Ссылка, надо переделать под блок!!!!
+        // const a = document.createElement('a');
+        // a.href = 'signin';
+        // a.dataset.href = '/signin';
+        // a.textContent = 'SIGN IN';
+        // a.classList.add('link');
+        // a.classList.add('button_type_secondary');
+        // buttonsBlock.appendChild(a);
 
-        // в foot надо будет добавить линии
-        const foot = new Foot({
-            el: containerBlock,
-        });
-        foot.render();
+        // // в foot надо будет добавить линии
+        // const foot = new Foot({
+        //     el: containerBlock,
+        // });
+        // foot.render();
     }
 
     render() {

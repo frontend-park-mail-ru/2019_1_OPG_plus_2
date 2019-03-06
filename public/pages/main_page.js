@@ -30,6 +30,7 @@ export class MainPage {
         const head = new Head({
             el: containerBlock,
         });
+        head.modifiers = ['head_theme_main'];
         head.render();
         const headBlock = document.querySelector('.head');
 
@@ -38,6 +39,13 @@ export class MainPage {
         });
         menu.render();
         const menuBlock = document.querySelector('.menu');
+
+        const profileIcon = new ProfileIcon({
+            el: menuBlock,
+            href: '/',
+            dataset: 'me',
+        });
+        profileIcon.render();
 
         const scoreboardIcon = new ScoreBoard({
             el: menuBlock,
@@ -52,13 +60,6 @@ export class MainPage {
             dataset: 'rules',
         });
         rulesIcon.render();
-
-        const profileIcon = new ProfileIcon({
-            el: menuBlock,
-            href: '/',
-            dataset: 'me',
-        });
-        profileIcon.render();
 
         const content = new Content({
             el: containerBlock,

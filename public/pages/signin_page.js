@@ -31,6 +31,7 @@ export class SignInPage {
         const head = new Head({
             el: containerBlock,
         });
+        head.modifiers = ['head_theme_signin']
         head.render();
         const headBlock = document.querySelector('.head');
 
@@ -82,6 +83,7 @@ export class SignInPage {
                 name: item.name,
                 placeholder: item.placeholder,
                 type: item.type,
+                req: true,
             });
             input.render();
         });
@@ -89,6 +91,7 @@ export class SignInPage {
         const buttons = new Buttons({
             el: contentBlock,
         });
+        // buttons.modifiers = ['buttons_theme_signin'];
         buttons.render();
         const buttonsBlock = document.querySelector('.buttons');
 
@@ -109,11 +112,11 @@ export class SignInPage {
         a.classList.add('button_type_secondary');
         buttonsBlock.appendChild(a);
 
-        // в foot надо будет добавить линии
-        const foot = new Foot({
-            el: containerBlock,
-        });
-        foot.render();
+        // // в foot надо будет добавить линии
+        // const foot = new Foot({
+        //     el: containerBlock,
+        // });
+        // foot.render();
     }
 
     render() {

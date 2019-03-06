@@ -11,6 +11,7 @@ import {Avatar} from '../blocks/html/body/application/container/content/profile-
 import {EditIcon} from '../blocks/html/body/application/container/content/profile-card/profile-head/edit/edit.js';
 import {Data} from '../blocks/html/body/application/container/content/profile-card/data/data.js';
 import {Item} from '../blocks/html/body/application/container/content/profile-card/data/item/item.js';
+import {makeSafe} from '../utils/utils.js';
 
 export class ProfilePage {
     constructor({
@@ -36,6 +37,7 @@ export class ProfilePage {
         const head = new Head({
             el: containerBlock,
         });
+        head.modifiers = ['head_theme_profile'];
         head.render();
         const headBlock = document.querySelector('.head');
 
@@ -53,11 +55,11 @@ export class ProfilePage {
         content.render();
         const contentBlock = document.querySelector('.content.content_theme_profile');
 
-        const title = new Title({
-            el: contentBlock,
-            title: 'PROFILE',
-        });
-        title.render();
+        // const title = new Title({
+        //     el: contentBlock,
+        //     title: 'PROFILE',
+        // });
+        // title.render();
 
         const profile = new ProfileCard({
             el: contentBlock
@@ -71,55 +73,55 @@ export class ProfilePage {
         profileHead.render();
         const profileHeadBlock = document.querySelector('.profile-head');
 
-        const href = 'signout';
-        const t = 'signout';
+        // const href = 'signout';
+        // const t = 'signout';
     
-        const a = document.createElement('a');
-        a.href = href;
-        a.dataset.href = href;
-        a.textContent = t;
-        a.classList.add('link');
+        // const a = document.createElement('a');
+        // a.href = href;
+        // a.dataset.href = href;
+        // a.textContent = t;
+        // a.classList.add('link');
     
-        profileBlock.appendChild(a);
+        // profileBlock.appendChild(a);
 
         const avatar = new Avatar({
             el: profileHeadBlock,
         });
         avatar.render();
 
-        const edit = new EditIcon({
-            el: profileHeadBlock,
-            href: '/',
-            dataset: 'menu',
-        });
-        edit.render();
+        // const edit = new EditIcon({
+        //     el: profileHeadBlock,
+        //     href: '/',
+        //     dataset: 'menu',
+        // });
+        // edit.render();
 
-        const data = new Data({
-            el: profileBlock,
-        });
-        data.render();
-        const dataBlock = document.querySelector('.data');
+        // const data = new Data({
+        //     el: profileBlock,
+        // });
+        // data.render();
+        // const dataBlock = document.querySelector('.data');
 
-        const itemName = new Item({
-            el: dataBlock,
-            title: 'Name',
-            data: this._name,
-        });
-        itemName.render();
+        // const itemName = new Item({
+        //     el: dataBlock,
+        //     title: 'Name',
+        //     data: makeSafe(this._name),
+        // });
+        // itemName.render();
 
-        const itemEmail= new Item({
-            el: dataBlock,
-            title: 'E-mail',
-            data: this._email,
-        });
-        itemEmail.render();
+        // const itemEmail= new Item({
+        //     el: dataBlock,
+        //     title: 'E-mail',
+        //     data: this._email,
+        // });
+        // itemEmail.render();
 
-        const itemScore = new Item({
-            el: dataBlock,
-            title: 'Score',
-            data: this._score,
-        });
-        itemScore.render();
+        // const itemScore = new Item({
+        //     el: dataBlock,
+        //     title: 'Score',
+        //     data: this._score,
+        // });
+        // itemScore.render();
     }
 
     render() {

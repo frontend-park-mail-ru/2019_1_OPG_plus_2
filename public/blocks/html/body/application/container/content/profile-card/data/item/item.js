@@ -26,7 +26,7 @@ export class Item {
                 return ' ' + modifier;
             })}">
                 <div class="item__title">${this._title}</div>
-                <div class="item__data">${encodeURI(this._data)}</div>
+                <div class="item__data">${this._data}</div>
         `;
     }
 

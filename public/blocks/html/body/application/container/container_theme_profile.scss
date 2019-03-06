@@ -1,3 +1,5 @@
 .container_theme_profile {
-    grid-template: 1fr 7fr / repeat(4, 1fr);
+    @media (min-width: $desktop-min-width) {
+        grid-template-columns: repeat(12, 1fr);
+    }
 }

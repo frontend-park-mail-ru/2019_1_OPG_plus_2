@@ -18,6 +18,8 @@
 @import '../blocks/html/body/application/container/content/title/title.scss';
 @import '../blocks/html/body/application/container/foot/foot.scss';
 @import '../blocks/html/body/application/container/head/head.scss';
+@import '../blocks/html/body/application/container/head/head_theme_main.scss';
+@import '../blocks/html/body/application/container/head/head_theme_signin.scss';
 @import '../blocks/html/body/application/container/head/back-arrow/back-arrow.scss';
 @import '../blocks/html/body/application/container/head/lines/lines.scss';
 @import '../blocks/html/body/application/container/head/menu/menu.scss';
@@ -29,11 +31,17 @@
 
 @import '../blocks/html/body/application/container/container_theme_signup.scss';
 @import '../blocks/html/body/application/container/content/content_theme_signup.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_signup.scss';
+@import '../blocks/html/body/application/container/head/head_theme_signup.scss';
+@import '../blocks/html/body/application/container/content/forms/form/form_theme_signup.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons_theme_signup.scss';
 
 /* sign in */
 
 @import '../blocks/html/body/application/container/container_theme_signin.scss';
 @import '../blocks/html/body/application/container/content/content_theme_signin.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_signin.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons_theme_signin.scss';
 
 /* main */
 
@@ -58,3 +66,4 @@
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/edit/edit.scss';
 @import '../blocks/html/body/application/container/content/profile-card/data/data.scss';
 @import '../blocks/html/body/application/container/content/profile-card/data/item/item.scss';
+@import '../blocks/html/body/application/container/head/head_theme_profile.scss';
