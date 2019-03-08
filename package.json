@@ -4,7 +4,7 @@
   "description": "test server",
   "main": "server/index.js",
   "scripts": {
-    "start": "webpack",
+    "start": "webpack --watch",
     "serv": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

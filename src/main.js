@@ -1,15 +1,19 @@
 'use strict';
 
 // import {AjaxModule} from './modules/ajax.js';
-import {MainPage} from './pages/main_page'
+// import {MainPage} from './pages/main_page'
 // import {SignInPage} from './pages/signin_page.js'
 // import {SignUpPage} from './pages/signup_page.js'
 // import {LeaderBoard} from './pages/scoreboard_page.js'
 // import {ProfilePage} from './pages/profile_page.js'
 
 // const ajax = new AjaxModule();
-debugger;
-const application = document.getElementById('application');
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log('wow ok');
+    console.log('hi');
+    // const application = document.getElementById('application');
+});
 
 // function createMenu() {
 //     const main = new MainPage({

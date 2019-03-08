@@ -14,7 +14,18 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Colors'
+            template: PATHS.source + '/index.pug',
         })
-    ]
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.pug$/,
+                loader: 'pug-loader',
+                options: {
+                    pretty: true,
+                }
+            }
+        ]
+    }
 };
