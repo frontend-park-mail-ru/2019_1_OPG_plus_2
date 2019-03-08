@@ -7,13 +7,19 @@ module.exports = function() {
               {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                   MiniCssExtractPlugin.loader,
-                  'css-loader',
-                  'sass-loader',
-                //   'sass',
+                    {loader: MiniCssExtractPlugin.loader},
+                    {loader: 'css-loader'},
+                    {loader: 'sass-loader', options: {
+                            implementation: require("sass")
+                    }},
                 ],
               }
             ]
-        }
+        },
+        plugins: [
+            new MiniCssExtractPlugin({
+                filename: "style.css",
+            })
+        ]
     }
-}
+};

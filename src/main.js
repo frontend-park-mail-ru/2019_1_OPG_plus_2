@@ -1,6 +1,7 @@
 'use strict';
-import './scss/style.scss'
-import 'normalize.css'
+
+import 'normalize.css';
+import './scss/style.scss';
 
 // import {AjaxModule} from './modules/ajax.js';
 import MainPage from './pages/main_page.js'
