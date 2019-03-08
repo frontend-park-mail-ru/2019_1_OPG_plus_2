@@ -1,29 +1,22 @@
 'use strict';
+var template = require('./title.pug');
 
 export default class Title {
     constructor({
         el = document.body,
         title = '',
+        modifiers = [],
     } = {}) {
         this._el = el;
         this._title = title;
-    }
-
-    get modifiers() {
-        return this._modifiers;
-    }
-
-    set modifiers(m = []) {
-        this._modifiers = m;
+        this._modifiers = modifiers;
     }
 
     _renderTitle() {
-        this._modifiers = this._modifiers ? this._modifiers : [];
-        this._el.innerHTML += `
-            <div class="title ${this._modifiers.map((modifier) => {
-                return modifier;
-            })}">${this._title}</div>
-        `;
+        this._el.innerHTML += template({
+            modifiers: this._modifiers,
+            title: this._title,
+        });
     }
 
     render() {

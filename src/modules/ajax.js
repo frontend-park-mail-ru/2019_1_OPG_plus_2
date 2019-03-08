@@ -1,6 +1,6 @@
 const noop = () => null;
 
-export class AjaxModule {
+export default class AjaxModule {
     _ajax({
         callback = noop,
         method = 'GET',

@@ -1,27 +1,19 @@
 'use strict';
+var template = require('./menu.pug');
 
 export default class Menu {
     constructor({
-        el = document.body
+        el = document.body,
+        modifiers = [],
     } = {}) {
         this._el = el;
-    }
-
-    get modifiers() {
-        return this._modifiers;
-    }
-
-    set modifiers(m = []) {
-        this._modifiers = m;
+        this._modifiers = modifiers;
     }
 
     _renderMenu() {
-        this._modifiers = this._modifiers ? this._modifiers : [];
-        this._el.innerHTML += `
-            <div class="menu${this._modifiers.map((modifier) => {
-                return ' ' + modifier;
-            })}"></div>
-        `;
+        this._el.innerHTML += template({
+            modifiers: this._modifiers,
+        });
     }
 
     render() {

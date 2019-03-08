@@ -3,7 +3,7 @@
 import 'normalize.css';
 import './scss/style.scss';
 
-// import {AjaxModule} from './modules/ajax.js';
+import AjaxModule from './modules/ajax.js';
 import MainPage from './pages/main_page.js'
 // import {SignInPage} from './pages/signin_page.js'
 // import {SignUpPage} from './pages/signup_page.js'
@@ -22,9 +22,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
         main.render();
     }
 
-    createMenu();
+    const pages = {
+		menu: createMenu,
+		// signin: createSignIn,
+		// signup: createSignUp,
+	    // leaders: createLeaderBoard,
+		// me: createProfile,
+		// signout: createSignout,
+		};
+		
+		createMenu();
+		
+		application.addEventListener('click', function (event) {
+		    if (!(event.target instanceof HTMLAnchorElement)) {
+		        return;
+		    }
+		
+		    event.preventDefault();
+		    const link = event.target;
+		
+		    console.log({
+		        href: link.href,
+		        dataHref: link.dataset.href,
+		    });
+		
+		    application.innerHTML = '';
+		
+		    pages[link.dataset.href]();
+		});
 
-    console.log('HI');
 });
 
 // function createMenu() {

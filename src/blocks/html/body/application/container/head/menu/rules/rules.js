@@ -1,38 +1,25 @@
 'use strict';
+var template = require('./rules.pug');
 
 export default class Rules{
     constructor({
         el = document.body,
         href = '/',
         dataset = 'menu',
+        modifiers = [],
     } = {}) {
         this._el = el;
         this._href = href;
         this._dataset = dataset;
-    }
-
-    get modifiers() {
-        return this._modifiers;
-    }
-
-    set modifiers(m = []) {
-        this._modifiers = m;
+        this._modifiers = modifiers;
     }
 
     _renderRulesIcon() {
-        this._modifiers = this._modifiers ? this._modifiers : [];
-        // this._el.innerHTML += `
-        //     <div class="rules${this._modifiers.map((modifier) => {
-        //         return ' ' + modifier;
-        //     })}">
-        //         <img class="rules__icon" src="${this._iconSrc}"/>
-        //     </div>
-        // `;
-        this._el.innerHTML += `
-            <a href="${this._href}" class="rules${this._modifiers.map((modifier) => {
-                return ' ' + modifier;
-            })}" data-href="${this._dataset}"></a>
-        `;
+        this._el.innerHTML += template({
+            hr: this._href,
+            modifiers: this._modifiers,
+            dataset: this._dataset,
+        });
     }
 
     render() {

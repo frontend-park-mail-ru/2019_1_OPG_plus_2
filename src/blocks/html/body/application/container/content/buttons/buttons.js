@@ -1,27 +1,18 @@
 'use strict';
+var template = require('./buttons.pug');
 
 export default class Buttons {
     constructor({
         el = document.body,
+        modifiers = [],
     } = {}) {
         this._el = el;
+        this._modifiers = modifiers;
     }
-
-    get modifiers() {
-        return this._modifiers;
-    }
-
-    set modifiers(m = []) {
-        this._modifiers = m;
-    }
-
     _renderButtons() {
-        this._modifiers = this._modifiers ? this._modifiers : [];
-        this._el.innerHTML += `
-            <div class="buttons${this._modifiers.map((modifier) => {
-                return ' ' + modifier;
-            })}"></div>
-        `;
+        this._el.innerHTML += template({
+            modifiers: this._modifiers,
+        });
     }
 
     render() {
