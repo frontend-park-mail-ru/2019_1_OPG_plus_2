@@ -4,7 +4,8 @@
   "description": "test server",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server",
+    "start": "webpack",
+    "serv": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,8 +16,13 @@
     "cookie": "0.3.1",
     "cookie-parser": "1.4.4",
     "express": "4.16.4",
+    "html-webpack-plugin": "^3.2.0",
     "morgan": "1.9.1",
     "path": "0.12.7",
-    "uuid": "3.3.2"
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "uuid": "3.3.2",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   }
 }
