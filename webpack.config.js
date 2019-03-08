@@ -4,7 +4,6 @@ const merge = require('webpack-merge');
 const pug = require('./webpack/pug');
 const devserver = require('./webpack/devserver');
 const sass = require('./webpack/sass');
-const css = require('./webpack/css');
 const extractCSS = require('./webpack/css.extract');
 const images = require('./webpack/images');
 
@@ -43,7 +42,6 @@ module.exports = function(env) {
             common,
             devserver(),
             sass(),
-            css(),
         ])
     }
 }
