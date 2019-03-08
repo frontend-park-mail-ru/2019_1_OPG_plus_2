@@ -1,6 +1,6 @@
 'use strict';
 
-export class Play {
+export default class Play {
     constructor({
         el = document.body,
         href = '/',

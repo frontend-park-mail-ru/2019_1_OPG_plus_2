@@ -1,32 +1,22 @@
-'use strict'
+'use strict';
+var template = require('./container.pug');
 
-export class Container {
+export default class Container {
     constructor({
         el = document.body,
+        modifiers = [],
     } = {}) {
         this._el = el;
-    }
-
-    get modifiers() {
-        return this._modifiers;
-    }
-
-    set modifiers(m = []) {
-        this._modifiers = m;
+        this._modifiers = modifiers;
     }
 
     _renderContainer() {
-        this._modifiers = this._modifiers ? this._modifiers : [];
-        this._el.innerHTML += `
-            <div class="container${this._modifiers.map((modifier) => {
-                return ' ' + modifier;
-            })}"></div>
-        `;
+        this._el.innerHTML += template({
+            modifiers: this._modifiers,
+        })
     }
 
     render() {
         this._renderContainer();
     }
-
-
 }

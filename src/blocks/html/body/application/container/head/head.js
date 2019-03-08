@@ -1,6 +1,6 @@
 'use strict';
 
-export class Head {
+export default class Head {
     constructor({
         el = document.body,
     } = {}) {

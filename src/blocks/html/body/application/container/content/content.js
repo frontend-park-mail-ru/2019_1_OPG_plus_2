@@ -1,6 +1,6 @@
 'use strict';
 
-export class Content {
+export default class Content {
     constructor({
         el = document.body,
     } = {}) {

@@ -1,6 +1,6 @@
 'use strict'
 
-export class Main {
+export default class Main {
     constructor({
         el = document.body,
     } = {}) {

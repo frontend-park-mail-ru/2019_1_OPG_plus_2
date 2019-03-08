@@ -1,6 +1,6 @@
 'use strict';
 
-export class Buttons {
+export default class Buttons {
     constructor({
         el = document.body,
     } = {}) {

@@ -1,6 +1,6 @@
 'use strict';
 
-export class Title {
+export default class Title {
     constructor({
         el = document.body,
         title = '',

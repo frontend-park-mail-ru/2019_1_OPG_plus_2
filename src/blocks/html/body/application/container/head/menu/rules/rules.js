@@ -1,6 +1,6 @@
 'use strict';
 
-export class Rules{
+export default class Rules{
     constructor({
         el = document.body,
         href = '/',

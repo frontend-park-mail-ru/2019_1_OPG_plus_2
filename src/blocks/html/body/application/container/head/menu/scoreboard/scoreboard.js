@@ -1,6 +1,6 @@
 'use strict';
 
-export class ScoreBoard {
+export default class ScoreBoard {
     constructor({
         el = document.body,
         href = '/',

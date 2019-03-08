@@ -1,6 +1,6 @@
 'use strict';
 
-export class Menu {
+export default class Menu {
     constructor({
         el = document.body
     } = {}) {

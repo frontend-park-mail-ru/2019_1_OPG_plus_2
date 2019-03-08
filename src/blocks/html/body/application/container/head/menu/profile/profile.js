@@ -1,6 +1,6 @@
 'use strict';
 
-export class ProfileIcon {
+export default class ProfileIcon {
     constructor({
         el = document.body,
         href = '/',
