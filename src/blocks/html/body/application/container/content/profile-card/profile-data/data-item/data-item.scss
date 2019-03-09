@@ -4,17 +4,13 @@
         color: $color-text;
         font-family: $secondary-font-family;
         text-align: left;
-    }
 
-    &__title {
-        @media (min-width: $desktop-min-width) {
-            font-size: 35px;
+        &__title {
+            font-size: 3.6vh;
         }
-    }
 
-    &__data {
-        @media (min-width: $desktop-min-width) {
-            font-size: 25px;
+        &__data {
+            font-size: 2.5vh;
         }
     }
 }
