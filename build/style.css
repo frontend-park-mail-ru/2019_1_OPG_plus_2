@@ -1082,15 +1082,17 @@ body {
 }
 
 /* edit profile */
-.settings-icon {
-  background-color: #FFCDD2;
-  background-image: url(img/settings.svg);
-  border: 2vh solid #FFCDD2;
-  border-radius: 15vh;
-  background-position: center;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  padding: 1vh 9vh 2vh 9vh;
+@media (min-width: 1281px) {
+  .settings-icon {
+    background-color: #FFCDD2;
+    background-image: url(img/settings.svg);
+    border: 2vh solid #FFCDD2;
+    border-radius: 14vh;
+    background-position: 0px 3.8vh;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding: 0vh 9vh 0vh 9vh;
+  }
 }
 
 @media (min-width: 1281px) {
