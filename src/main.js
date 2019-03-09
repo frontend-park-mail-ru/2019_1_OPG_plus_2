@@ -8,7 +8,7 @@ import MainPage from './pages/main_page.js'
 import SignInPage from './pages/signin_page.js'
 import SignUpPage from './pages/signup_page.js'
 // import {LeaderBoard} from './pages/scoreboard_page.js'
-// import {ProfilePage} from './pages/profile_page.js'
+import ProfilePage from './pages/profile_page.js'
 
 const ajax = new AjaxModule();
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const main = new MainPage({
             el: application,
         });
-        main.render();
+		main.render();
 	}
 	
 	function createSignIn() {
@@ -85,12 +85,45 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	}
 
+	function createProfile(me) {
+		if (me) {
+			const profile = new ProfilePage({
+				el: application,
+				name: me.name,
+				email: me.email,
+				score: me.score,
+			});
+			profile.render();
+		} else {
+			const profile = new ProfilePage({
+				el: application,
+			});
+			profile.render();
+
+			ajax.doGet({
+				callback(xhr) {
+					if (!xhr.responseText) {
+						alert('Unauthorized');
+						application.innerHTML = '';
+						createMenu();
+						return;
+					}
+
+					const user = JSON.parse(xhr.responseText);
+					application.innerHTML = '';
+					createProfile(user);
+				},
+				path: '/me',
+			});
+    }
+}
+
     const pages = {
 		menu: createMenu,
 		signin: createSignIn,
 		signup: createSignUp,
 	    // leaders: createLeaderBoard,
-		// me: createProfile,
+		me: createProfile,
 		// signout: createSignout,
 		};
 		
@@ -165,32 +198,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
 //         path: '/signout'
 //     });
 // }
-
-// const pages = {
-//     menu: createMenu,
-//     // signin: createSignIn,
-//     // signup: createSignUp,
-//     // leaders: createLeaderBoard,
-//     // me: createProfile,
-//     // signout: createSignout,
-// };
-
-// createMenu();
-
-// application.addEventListener('click', function (event) {
-//     if (!(event.target instanceof HTMLAnchorElement)) {
-//         return;
-//     }
-
-//     event.preventDefault();
-//     const link = event.target;
-
-//     console.log({
-//         href: link.href,
-//         dataHref: link.dataset.href,
-//     });
-
-//     application.innerHTML = '';
-
-//     pages[link.dataset.href]();
-// });
