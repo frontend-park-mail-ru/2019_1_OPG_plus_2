@@ -1,0 +1,8 @@
+if req
+    div(class='form ' + modifiers)
+        label(class='form__form-title' for=name) #{placeholder}
+        input(type=type, id=id, class='form__text-form' required)
+else 
+    div(class='form ' + modifiers)
+        label(class='form__form-title' for=name) #{placeholder}
+        input(type=type, id=id, class='form__text-form')

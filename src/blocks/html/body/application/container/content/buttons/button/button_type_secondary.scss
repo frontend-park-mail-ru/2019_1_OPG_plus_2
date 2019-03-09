@@ -1,0 +1,11 @@
+.button_type_secondary {
+    background-color: rgba(239, 154, 154, 0.5);
+    transition: background-color 300ms ease;
+    @media (min-width: $desktop-min-width) {
+        font-size: 2.3em;
+    }
+
+    &:hover {
+        background-color: rgba(239, 154, 154, 1);
+    }
+}

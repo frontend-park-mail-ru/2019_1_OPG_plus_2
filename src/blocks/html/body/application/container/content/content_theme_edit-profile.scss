@@ -1,0 +1,6 @@
+.content_theme_edit-profile {
+    @media (min-width: $desktop-min-width) {
+        grid-column: 3/-2;
+        grid-template: 4fr 1fr / repeat(14, 1fr);
+    }
+}

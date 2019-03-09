@@ -1,0 +1,20 @@
+.data-item {
+    @media (min-width: $desktop-min-width) {
+        grid-column: 3/-1;
+        color: $color-text;
+        font-family: $secondary-font-family;
+        text-align: left;
+    }
+
+    &__title {
+        @media (min-width: $desktop-min-width) {
+            font-size: 35px;
+        }
+    }
+
+    &__data {
+        @media (min-width: $desktop-min-width) {
+            font-size: 25px;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+.container_theme_signin {
+    @media (min-width: $desktop-min-width) {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    // @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
+    //     grid-template: 2fr 9fr 2fr / repeat(12, 1fr);
+    // }
+
+    // @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    //     grid-template: 2fr 9fr 2fr / repeat(4, 1fr);
+    // }
+}

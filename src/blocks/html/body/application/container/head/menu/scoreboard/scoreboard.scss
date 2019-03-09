@@ -1,0 +1,18 @@
+.scoreboard {
+    border-bottom: 1px solid white;
+    background: url(../img/scoreboard.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    @media (min-width: $desktop-min-width) {
+        padding: 30px 30px 30px 30px;
+        background-size: 50px;
+        height: 50px;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        padding: 10px 30px 10px 30px;
+        background-size: 30px;
+        height: 30px;
+    }
+}

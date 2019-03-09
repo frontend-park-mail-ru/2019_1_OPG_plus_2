@@ -1,0 +1,27 @@
+@keyframes move {
+    from {background-position-x: 40%;}
+    40% {background-position-x: 38%;}
+    50% {background-position-x: 36%;}
+    70% {background-position-x: 34%;}
+    to {background-position-x: 33%;}
+}
+
+.back-arrow {
+    grid-column: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        background: url(../img/arrow_up_big.svg);
+        background-size: 80px;
+        background-repeat: no-repeat;
+        // background-position: center;
+        background-position-y: center;
+        background-position-x: 40%;
+    }
+
+    &:hover {
+        animation: move 300ms forwards ease;
+    }
+}

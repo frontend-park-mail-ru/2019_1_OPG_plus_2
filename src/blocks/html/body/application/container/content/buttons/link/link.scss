@@ -1,0 +1,21 @@
+.link {
+    font-family: Roboto;
+    text-align: center;
+    color: $color-text;
+    background-color: #EF9A9A;
+    width: 100%;
+    text-decoration: none;
+
+    @media (min-width: $desktop-min-width) {
+        font-size: 1.5em;
+        padding: 15px 0px 15px;
+        border-radius: 20px;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        padding: 3% 0% 3%;
+        font-size: 1em;
+        display: block;
+    }
+
+}

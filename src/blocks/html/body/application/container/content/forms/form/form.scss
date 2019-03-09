@@ -1,0 +1,23 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 25px;
+
+    @media (min-width: $desktop-min-width) {
+        &__form-title {
+            font-family: Roboto;
+            font-size: 2rem;
+            width: 100%;
+            color: $color-text;
+        }
+    
+        &__text-form {
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+            font-size: 2rem;
+            padding: 18px 0px 18px;
+        }
+    }
+}
