@@ -63,6 +63,16 @@
 @import '../blocks/html/body/application/container/container_theme_profile.scss';
 @import '../blocks/html/body/application/container/content/content_theme_profile.scss';
 @import '../blocks/html/body/application/container/head/head_theme_profile.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/name/name.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/profile-data.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_score.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_games.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_win.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_lose.scss';
 @import '../blocks/html/body/application/container/head/menu/logout/logout.scss';
 @import '../blocks/html/body/application/container/head/menu/menu_theme_profile.scss';
 @import '../blocks/html/body/application/container/head/menu/settings/settings.scss';

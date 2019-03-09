@@ -1,15 +1,6 @@
 .content_theme_profile {
     @media (min-width: $desktop-min-width) {
         grid-column: 3/-2;
-        grid-template: 1fr 1.6fr 1.4fr/repeat(13, 1fr);
-        // grid-template-columns: repeat(10, 1fr);
-        // grid-template-areas: 
-        //                     ". . . . . . . . . ."
-        //                     ". . p p p p p p . ."
-        //                     ". . . . . . . . . .";
-        // grid-template-areas: 
-        //                     "t t t t t t t t t t . . . ." 
-        //                     ". . f f f f f f . . . . . ." 
-        //                     ". . b b b b b b . . . . . .";
+        grid-template-columns: repeat(14, 1fr);
     }
 }
