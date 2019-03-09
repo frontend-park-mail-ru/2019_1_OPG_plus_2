@@ -399,7 +399,7 @@ body {
 @media (min-width: 1281px) {
   .link {
     font-size: 1.5em;
-    padding: 15px 0px 15px;
+    padding: 2vh 0px 2vh;
     border-radius: 20px;
   }
 }
@@ -419,7 +419,7 @@ body {
   background-color: #EF9A9A;
   display: block;
   width: 100%;
-  padding: 15px 30% 15px;
+  padding: 2vh 8% 2vh;
   border-radius: 20px;
   text-decoration: none;
   border: none;
@@ -478,8 +478,8 @@ body {
 }
 @media (min-width: 1281px) {
   .play {
-    padding: 0px 60px 0px 60px;
-    background-size: 75%;
+    padding: 0px 8vh 0px 8vh;
+    background-size: 22vh;
     height: 70%;
     width: 20%;
   }
@@ -682,9 +682,9 @@ body {
 }
 @media (min-width: 1281px) {
   .rules {
-    padding: 30px 30px 30px 30px;
-    background-size: 50px;
-    height: 50px;
+    padding: 4vh 4vh 4vh 4vh;
+    background-size: 7vh;
+    height: 4vh;
   }
 }
 @media (min-width: 320px) and (max-width: 480px) {
@@ -703,9 +703,9 @@ body {
 }
 @media (min-width: 1281px) {
   .profile {
-    padding: 30px 30px 30px 30px;
-    background-size: 50px;
-    height: 50px;
+    padding: 4vh 4vh 4vh 4vh;
+    background-size: 7vh;
+    height: 4vh;
   }
 }
 @media (min-width: 320px) and (max-width: 480px) {
@@ -724,9 +724,9 @@ body {
 }
 @media (min-width: 1281px) {
   .scoreboard {
-    padding: 30px 30px 30px 30px;
-    background-size: 50px;
-    height: 50px;
+    padding: 4vh 4vh 4vh 4vh;
+    background-size: 7vh;
+    height: 4vh;
   }
 }
 @media (min-width: 320px) and (max-width: 480px) {
@@ -843,8 +843,8 @@ body {
 @media (min-width: 1281px) {
   .content_theme_main {
     grid-column: 2/-1;
-    grid-template: 1fr 1.6fr 1.4fr/repeat(13, 1fr);
-    grid-template-areas: ". . t t t t t t t t . . ." ". . . m m m m m m . . . ." ". . . . b b b b . . . . .";
+    grid-template: 1fr 1.6fr 1.4fr/repeat(16, 1fr);
+    grid-template-areas: ". . . t t t t t t t t . . . . ." ". . . . . m m m m . . . . . . ." ". . . . b b b b b b . . . . . .";
   }
 }
 @media (min-width: 320px) and (max-width: 480px) {
@@ -859,7 +859,7 @@ body {
 }
 @media (min-width: 1281px) {
   .title_theme_main {
-    font-size: 6em;
+    font-size: 10vh;
   }
 }
 @media (min-width: 320px) and (max-width: 480px) {
