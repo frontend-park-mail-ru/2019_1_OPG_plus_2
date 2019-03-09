@@ -5,12 +5,12 @@ import './scss/style.scss';
 
 import AjaxModule from './modules/ajax.js';
 import MainPage from './pages/main_page.js'
-// import {SignInPage} from './pages/signin_page.js'
+import SignInPage from './pages/signin_page.js'
 // import {SignUpPage} from './pages/signup_page.js'
 // import {LeaderBoard} from './pages/scoreboard_page.js'
 // import {ProfilePage} from './pages/profile_page.js'
 
-// const ajax = new AjaxModule();
+const ajax = new AjaxModule();
 
 document.addEventListener("DOMContentLoaded", function(event) {
     const application = document.getElementById('application');
@@ -20,11 +20,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
             el: application,
         });
         main.render();
-    }
+	}
+	
+	function createSignIn() {
+		const singin = new SignInPage({
+			el: application,
+		});
+		singin.render();
+	
+		const formsBlock = document.querySelector('.forms');
+		formsBlock.addEventListener('submit', function(event) {
+			event.preventDefault();
+	
+			const email = formsBlock.elements['email'].value;
+			const password = formsBlock.elements['password'].value;
+	
+			ajax.doPost({
+				callback() {
+					application.innerHTML = '';
+					createProfile();
+				},
+				path: '/login',
+				body: {
+					email: email,
+					password: password,
+				},
+			});
+		});
+	}
 
     const pages = {
 		menu: createMenu,
-		// signin: createSignIn,
+		signin: createSignIn,
 		// signup: createSignUp,
 	    // leaders: createLeaderBoard,
 		// me: createProfile,

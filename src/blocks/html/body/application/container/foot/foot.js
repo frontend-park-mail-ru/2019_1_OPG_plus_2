@@ -1,6 +1,6 @@
 'use strict';
 
-export class Foot {
+export default class Foot {
     constructor({
         el = document.body,
     } = {}) {

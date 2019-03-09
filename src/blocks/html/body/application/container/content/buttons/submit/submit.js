@@ -1,31 +1,25 @@
 'use strict';
+var template = require('./submit.pug');
 
-export class Submit {
+export default class Submit {
     constructor({
         el = document.body,
         value = '',
         form = '',
+        modifiers = [],
     } = {}) {
         this._el = el;
         this._value = value;
         this._form = form;
-    }
-
-    get modifiers() {
-        return this._modifiers;
-    }
-
-    set modifiers(m = []) {
-        this._modifiers = m;
+        this._modifiers = modifiers;
     }
 
     _renderSubmit() {
-        this._modifiers = this._modifiers ? this._modifiers : [];
-        this._el.innerHTML += `
-            <input form="${this._form}" type="submit" class="submit${this._modifiers.map((modifier) => {
-                return ' ' + modifier;
-            })}" value="${this._value}"/>
-        `;
+        this._el.innerHTML += template({
+            modifiers: this._modifiers,
+            form: this._form,
+            value: this._value,
+        });
     }
 
     render() {

@@ -1,19 +1,17 @@
 'use strict';
 
-// добавить в блоки формы, back_arrow, кнопки связать с формами !!!!!!!
+import Container from '../blocks/html/body/application/container/container.js';
+import Head from '../blocks/html/body/application/container/head/head.js';
+import Content from '../blocks/html/body/application/container/content/content.js';
+import Title from '../blocks/html/body/application/container/content/title/title.js';
+import BackArrow from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
+import Forms from '../blocks/html/body/application/container/content/forms/forms.js';
+import Form from '../blocks/html/body/application/container/content/forms/form/form.js';
+import Buttons from '../blocks/html/body/application/container/content/buttons/buttons.js';
+import Submit from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
+import Link from '../blocks/html/body/application/container/content/buttons/link/link.js'
 
-import {Container} from '../blocks/html/body/application/container/container.js';
-import {Head} from '../blocks/html/body/application/container/head/head.js';
-import {Content} from '../blocks/html/body/application/container/content/content.js';
-import {Title} from '../blocks/html/body/application/container/content/title/title.js';
-import {BackArrow} from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
-import {Forms} from '../blocks/html/body/application/container/content/forms/forms.js';
-import {Form} from '../blocks/html/body/application/container/content/forms/form/form.js';
-import {Buttons} from '../blocks/html/body/application/container/content/buttons/buttons.js';
-import {Submit} from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
-import {Foot} from '../blocks/html/body/application/container/foot/foot.js';
-
-export class SignInPage {
+export default class SignInPage {
     constructor({
         el = document.body,
     } = {}) {
@@ -23,17 +21,17 @@ export class SignInPage {
     _renderSignIn() {
         const container = new Container({
             el: this._el,
+            modifiers: ['container_theme_signin'],
         });
-        container.modifiers = ['container_theme_signin']
         container.render();
         const containerBlock = document.querySelector('.container.container_theme_signin');
 
         const head = new Head({
             el: containerBlock,
+            modifiers: ['head_theme_signin'],
         });
-        head.modifiers = ['head_theme_signin']
         head.render();
-        const headBlock = document.querySelector('.head');
+        const headBlock = document.querySelector('.head.head_theme_signin');
 
         const backArrow = new BackArrow({
             el: headBlock,
@@ -44,16 +42,16 @@ export class SignInPage {
 
         const content = new Content({
             el: containerBlock,
+            modifiers: ['content_theme_signin'],
         });
-        content.modifiers = ['content_theme_signin']
         content.render();
         const contentBlock = document.querySelector('.content.content_theme_signin');
 
         const title = new Title({
             el: contentBlock,
-            title: 'SIGN IN',
+            title: 'SING IN',
+            modifiers: ['title_theme_signin'],
         });
-        title.modifiers = ['title_theme_signin'];
         title.render();
 
         const forms = new Forms({
@@ -91,7 +89,6 @@ export class SignInPage {
         const buttons = new Buttons({
             el: contentBlock,
         });
-        // buttons.modifiers = ['buttons_theme_signin'];
         buttons.render();
         const buttonsBlock = document.querySelector('.buttons');
 
@@ -102,21 +99,14 @@ export class SignInPage {
         });
         submit.render();
 
-
-        // Ссылка, надо переделать под блок!!!!
-        const a = document.createElement('a');
-        a.href = 'signup';
-        a.dataset.href = '/signup';
-        a.textContent = 'SIGN UP';
-        a.classList.add('link');
-        a.classList.add('button_type_secondary');
-        buttonsBlock.appendChild(a);
-
-        // // в foot надо будет добавить линии
-        // const foot = new Foot({
-        //     el: containerBlock,
-        // });
-        // foot.render();
+        const link = new Link({
+            el: buttonsBlock,
+            href: 'signup',
+            title: 'SIGN UP',
+            dataset: 'signup',
+            modifiers: ['button_type_secondary'],
+        });
+        link.render();
     }
 
     render() {
