@@ -2,5 +2,7 @@
     @media (min-width: $desktop-min-width) {
         grid-column: 3/-2;
         grid-template: 4fr 1fr / repeat(14, 1fr);
+        grid-template-areas: ". . c c c c c c c c c . . ." 
+                             ". . . b b b b b b b . . . .";
     }
 }

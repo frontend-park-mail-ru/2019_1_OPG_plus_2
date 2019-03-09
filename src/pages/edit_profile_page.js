@@ -138,15 +138,18 @@ export default class EditProfilePage {
 
         const buttons = new Buttons({
             el: contentBlock,
+            modifiers: ['buttons_theme_edit-profile'],
         });
+        buttons.render();
         const buttonsBlock = document.querySelector('.buttons');
-        console.log(buttonsBlock );
 
-        // const submit = new Submit({
-        //     el: buttonsBlock,
-        //     value: 'GOD SAVE AND BLESS US',
-        //     form: 'profile-edit',
-        // });
+        const submit = new Submit({
+            el: buttonsBlock,
+            value: 'GOD SAVE AND BLESS US',
+            form: 'profile-edit',
+            modifiers: ['submit_theme_edit-profile'],
+        });
+        submit.render();
 
         const menu = new Menu({
             el: containerBlock,
