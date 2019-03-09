@@ -1,0 +1,24 @@
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding-bottom: 2vh;
+
+    @media (min-width: $desktop-min-width) {
+        &__form-title {
+            font-family: Roboto;
+            font-size: 1.5rem;
+            width: 100%;
+            color: white;
+            margin-bottom: 1vh;
+        }
+    
+        &__text-form {
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+            font-size: 1rem;
+            padding: 1.5vh 0px 1.5vh;
+        }
+    }
+}

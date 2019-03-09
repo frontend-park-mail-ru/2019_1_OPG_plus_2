@@ -934,17 +934,29 @@ body {
 }
 
 .profile-card {
+  display: grid;
+}
+
+.profile-card_theme_main {
   grid-column: 3/12;
   grid-row: 2;
-  border-radius: 0px 0px 30px 30px;
-  display: grid;
   grid-template: 1fr 2fr/repeat(6, 1fr);
   grid-template-areas: "h h h h h h" ". i i i . .";
+}
+
+.profile-card_theme_edit {
+  grid-column: 3/12;
+  background: linear-gradient(to top, #EF9A9A 80%, #FFCDD2 10%);
+  border-radius: 0px 0px 30px 30px;
+  display: grid;
+  grid-template: 1fr 2fr/repeat(12, 1fr);
+  grid-template-areas: "h h h h h h h h h h h h" "p p p p p p f f f f f f";
 }
 
 .profile-head {
   display: flex;
   grid-area: h;
+  justify-content: center;
 }
 
 .name {
@@ -960,8 +972,8 @@ body {
 .avatar {
   border: 20px solid #FFCDD2;
   border-radius: 200px;
-  width: 200px;
-  height: 200px;
+  width: 20vh;
+  height: 20vh;
   background-image: url(img/pers1.svg);
   background-size: 100%;
 }
@@ -1067,4 +1079,76 @@ body {
     background-size: 30px;
     height: 30px;
   }
+}
+
+/* edit profile */
+.settings-icon {
+  background-color: #FFCDD2;
+  background-image: url(img/settings.svg);
+  border: 2vh solid #FFCDD2;
+  border-radius: 15vh;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding: 1vh 9vh 2vh 9vh;
+}
+
+@media (min-width: 1281px) {
+  .form_theme_profile {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1281px) {
+  .content_theme_edit-profile {
+    grid-column: 3/-2;
+    grid-template: 4fr 1fr/repeat(14, 1fr);
+  }
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding-bottom: 2vh;
+}
+@media (min-width: 1281px) {
+  .profile-form__form-title {
+    font-family: Roboto;
+    font-size: 1.5rem;
+    width: 100%;
+    color: white;
+    margin-bottom: 1vh;
+  }
+  .profile-form__text-form {
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+    padding: 1.5vh 0px 1.5vh;
+  }
+}
+
+.photo-edit {
+  grid-area: p;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.edit-icon {
+  padding: 1vh;
+}
+.edit-icon__icon {
+  cursor: pointer;
+}
+.edit-icon__icon__img {
+  width: 6vh;
+}
+.edit-icon__input {
+  display: none;
+}
+
+.profile-card_theme_forms {
+  grid-area: f;
 }

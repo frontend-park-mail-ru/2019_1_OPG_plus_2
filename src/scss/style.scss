@@ -64,6 +64,8 @@
 @import '../blocks/html/body/application/container/content/content_theme_profile.scss';
 @import '../blocks/html/body/application/container/head/head_theme_profile.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-card.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card_theme_main.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card_theme_edit.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/name/name.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.scss';
@@ -76,3 +78,13 @@
 @import '../blocks/html/body/application/container/head/menu/logout/logout.scss';
 @import '../blocks/html/body/application/container/head/menu/menu_theme_profile.scss';
 @import '../blocks/html/body/application/container/head/menu/settings/settings.scss';
+
+/* edit profile */
+
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.scss';
+@import '../blocks/html/body/application/container/content/forms/form/form_theme_profile.scss';
+@import '../blocks/html/body/application/container/content/content_theme_edit-profile.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.scss';
+@import '../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.scss';
+@import '../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card_theme_forms.scss';

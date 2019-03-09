@@ -1,7 +1,7 @@
 'use strict';
-var template = require('./profile-data.pug');
+var template = require('./settings-icon.pug');
 
-export default class ProfileData {
+export default class SettingsIcon {
     constructor({
         el = document.body,
         modifiers = [],
@@ -10,13 +10,15 @@ export default class ProfileData {
         this._modifiers = modifiers;
     }
 
-    _renderProfileData() {
+    _renderSettingsIcon() {
         this._el.innerHTML += template({
             modifiers: this._modifiers,
         });
     }
 
     render() {
-        this._renderProfileData();
+        this._renderSettingsIcon();
     }
+
+
 }

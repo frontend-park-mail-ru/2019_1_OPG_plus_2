@@ -58,6 +58,7 @@ export default class ProfilePage {
 
         const profileCard = new ProfileCard({
             el: contentBlock,
+            modifiers: ['profile-card_theme_main'],
         });
         profileCard.render()
         const profileCardBlock = document.querySelector('.profile-card');
@@ -126,6 +127,8 @@ export default class ProfilePage {
 
         const settings = new SettingsIcon({
             el: menuBlock,
+            href: 'editme',
+            dataset: 'editme',
         });
         settings.render();
     }

@@ -9,6 +9,7 @@ import SignInPage from './pages/signin_page.js'
 import SignUpPage from './pages/signup_page.js'
 // import {LeaderBoard} from './pages/scoreboard_page.js'
 import ProfilePage from './pages/profile_page.js'
+import EditProfilePage from './pages/edit_profile_page.js'
 
 const ajax = new AjaxModule();
 
@@ -115,8 +116,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				},
 				path: '/me',
 			});
-    }
-}
+    	}
+	}
+
+	function createEditProfile() {
+		const editProfile = new EditProfilePage({
+			el: application,
+		});
+		editProfile.render();
+	}
 
     const pages = {
 		menu: createMenu,
@@ -124,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		signup: createSignUp,
 	    // leaders: createLeaderBoard,
 		me: createProfile,
+		editme: createEditProfile,
 		// signout: createSignout,
 		};
 		

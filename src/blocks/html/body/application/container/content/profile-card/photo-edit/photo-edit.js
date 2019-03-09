@@ -1,7 +1,7 @@
 'use strict';
-var template = require('./profile-data.pug');
+var template = require('./photo-edit.pug');
 
-export default class ProfileData {
+export default class PhotoEdit {
     constructor({
         el = document.body,
         modifiers = [],
@@ -10,13 +10,13 @@ export default class ProfileData {
         this._modifiers = modifiers;
     }
 
-    _renderProfileData() {
+    _renderPhotoEdit() {
         this._el.innerHTML += template({
             modifiers: this._modifiers,
         });
     }
 
     render() {
-        this._renderProfileData();
+        this._renderPhotoEdit();
     }
 }
