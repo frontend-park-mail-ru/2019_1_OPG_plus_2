@@ -398,7 +398,7 @@ body {
 }
 @media (min-width: 1281px) {
   .link {
-    font-size: 1.5em;
+    font-size: 1.9em;
     padding: 2vh 0px 2vh;
     border-radius: 20px;
   }
@@ -441,6 +441,7 @@ body {
 .forms {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   grid-area: f;
 }
@@ -449,21 +450,22 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-bottom: 25px;
+  padding-bottom: 5vh;
 }
 @media (min-width: 1281px) {
   .form__form-title {
     font-family: Roboto;
-    font-size: 2rem;
+    font-size: 3vh;
     width: 100%;
     color: white;
+    margin-bottom: 1vh;
   }
   .form__text-form {
     border-radius: 10px;
     border: none;
     width: 100%;
     font-size: 2rem;
-    padding: 18px 0px 18px;
+    padding: 2vh 0px 2vh;
   }
 }
 
@@ -789,7 +791,7 @@ body {
 }
 
 .form_theme_signup {
-  padding-bottom: 15px;
+  padding-bottom: 3vh;
 }
 
 .buttons_theme_signup {
