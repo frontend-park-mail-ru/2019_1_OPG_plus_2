@@ -4,7 +4,7 @@
   "description": "test server",
   "main": "server/index.js",
   "scripts": {
-    "start": "webpack-dev-server --env development",
+    "start": "webpack --env production && node server",
     "build": "webpack --watch --env production",
     "serv": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
