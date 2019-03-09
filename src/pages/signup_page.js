@@ -1,17 +1,16 @@
 'use strict';
 
-import {Container} from '../blocks/html/body/application/container/container.js';
-import {Head} from '../blocks/html/body/application/container/head/head.js';
-import {BackArrow} from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
-import {Content} from '../blocks/html/body/application/container/content/content.js';
-import {Title} from '../blocks/html/body/application/container/content/title/title.js';
-import {Forms} from '../blocks/html/body/application/container/content/forms/forms.js';
-import {Form} from '../blocks/html/body/application/container/content/forms/form/form.js';
-import {Buttons} from '../blocks/html/body/application/container/content/buttons/buttons.js';
-import {Submit} from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
-import {Foot} from '../blocks/html/body/application/container/foot/foot.js';
+import Container from '../blocks/html/body/application/container/container.js';
+import Head from '../blocks/html/body/application/container/head/head.js';
+import BackArrow from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
+import Content from '../blocks/html/body/application/container/content/content.js';
+import Title from '../blocks/html/body/application/container/content/title/title.js';
+import Forms from '../blocks/html/body/application/container/content/forms/forms.js';
+import Form from '../blocks/html/body/application/container/content/forms/form/form.js';
+import Buttons from '../blocks/html/body/application/container/content/buttons/buttons.js';
+import Submit from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
 
-export class SignUpPage {
+export default class SignUpPage {
     constructor({
         el = document.body,
     } = {}) {
@@ -21,15 +20,15 @@ export class SignUpPage {
     _renderSignUp() {
         const container = new Container({
             el: this._el,
+            modifiers: ['container_theme_signup'],
         });
-        container.modifiers = ['container_theme_signup']
         container.render();
         const containerBlock = document.querySelector('.container.container_theme_signup');
 
         const head = new Head({
             el: containerBlock,
+            modifiers: ['head_theme_signup'],
         });
-        head.modifiers = ['head_theme_signup'];
         head.render();
         const headBlock = document.querySelector('.head');
 
@@ -42,16 +41,16 @@ export class SignUpPage {
 
         const content = new Content({
             el: containerBlock,
+            modifiers: ['content_theme_signup'],
         });
-        content.modifiers = ['content_theme_signup']
         content.render();
         const contentBlock = document.querySelector('.content.content_theme_signup');
 
         const title = new Title({
             el: contentBlock,
             title: 'SIGN UP',
+            modifiers: ['title_theme_signup'],
         });
-        title.modifiers = ['title_theme_signup'];
         title.render();
 
         const forms = new Forms({
@@ -92,15 +91,15 @@ export class SignUpPage {
                 placeholder: item.placeholder,
                 type: item.type,
                 req: true,
+                modifiers: ['form_theme_signup'],
             });
-            input.modifiers = ['form_theme_signup'];
             input.render();
         });
 
         const buttons = new Buttons({
             el: contentBlock,
+            modifiers: ['buttons_theme_signup'],
         });
-        buttons.modifiers = ['buttons_theme_signup'];
         buttons.render();
         const buttonsBlock = document.querySelector('.buttons');
 
@@ -110,21 +109,6 @@ export class SignUpPage {
             form: 'signup',
         });
         submit.render();
-
-        // // Ссылка, надо переделать под блок!!!!
-        // const a = document.createElement('a');
-        // a.href = 'signin';
-        // a.dataset.href = '/signin';
-        // a.textContent = 'SIGN IN';
-        // a.classList.add('link');
-        // a.classList.add('button_type_secondary');
-        // buttonsBlock.appendChild(a);
-
-        // // в foot надо будет добавить линии
-        // const foot = new Foot({
-        //     el: containerBlock,
-        // });
-        // foot.render();
     }
 
     render() {

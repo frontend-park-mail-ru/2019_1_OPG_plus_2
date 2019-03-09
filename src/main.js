@@ -6,7 +6,7 @@ import './scss/style.scss';
 import AjaxModule from './modules/ajax.js';
 import MainPage from './pages/main_page.js'
 import SignInPage from './pages/signin_page.js'
-// import {SignUpPage} from './pages/signup_page.js'
+import SignUpPage from './pages/signup_page.js'
 // import {LeaderBoard} from './pages/scoreboard_page.js'
 // import {ProfilePage} from './pages/profile_page.js'
 
@@ -49,10 +49,46 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 	}
 
+	function createSignUp() {
+		const signup = new SignUpPage({
+			el: application,
+		});
+		signup.render();
+
+		const formsBlock = document.querySelector('.forms');
+
+		formsBlock.addEventListener('submit', function (event) {
+			event.preventDefault();
+
+			const name = formsBlock.elements[ 'name' ].value;
+			const email = formsBlock.elements[ 'email' ].value;
+			const password = formsBlock.elements[ 'password' ].value;
+			const password_repeat = formsBlock.elements[ 'repeat-password' ].value;
+
+			if (password !== password_repeat) {
+				alert('Passwords is not equals');
+				return;
+			}
+
+			ajax.doPost({
+				callback() {
+					application.innerHTML = '';
+					createProfile();
+				},
+				path: '/signup',
+				body: {
+					name: name,
+					email: email,
+					password: password,
+				},
+			});
+		});
+	}
+
     const pages = {
 		menu: createMenu,
 		signin: createSignIn,
-		// signup: createSignUp,
+		signup: createSignUp,
 	    // leaders: createLeaderBoard,
 		// me: createProfile,
 		// signout: createSignout,
@@ -79,76 +115,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		});
 
 });
-
-// function createMenu() {
-//     const main = new MainPage({
-//         el: application,
-//     });
-//     main.render();
-// }
-
-// function createSignIn() {
-//     const singin = new SignInPage({
-//         el: application,
-//     });
-//     singin.render();
-
-//     const formsBlock = document.querySelector('.forms');
-//     formsBlock.addEventListener('submit', function(event) {
-//         event.preventDefault();
-
-//         const email = formsBlock.elements['email'].value;
-//         const password = formsBlock.elements['password'].value;
-
-//         ajax.doPost({
-//             callback() {
-//                 application.innerHTML = '';
-//                 createProfile();
-//             },
-//             path: '/login',
-//             body: {
-//                 email: email,
-//                 password: password,
-//             },
-//         });
-//     });
-// }
-
-// function createSignUp() {
-//     const signup = new SignUpPage({
-//         el: application,
-//     });
-//     signup.render();
-
-    // const formsBlock = document.querySelector('.forms');
-
-    // formsBlock.addEventListener('submit', function (event) {
-	// 	event.preventDefault();
-
-    //     const name = formsBlock.elements[ 'name' ].value;
-	// 	const email = formsBlock.elements[ 'email' ].value;
-	// 	const password = formsBlock.elements[ 'password' ].value;
-	// 	const password_repeat = formsBlock.elements[ 'repeat-password' ].value;
-
-	// 	if (password !== password_repeat) {
-	// 		alert('Passwords is not equals');
-	// 		return;
-	// 	}
-
-	// 	ajax.doPost({
-	// 		callback() {
-	// 			application.innerHTML = '';
-	// 			createProfile();
-	// 		},
-	// 		path: '/signup',
-	// 		body: {
-    //             name: name,
-	// 			email: email,
-	// 			password: password,
-	// 		},
-	// 	});
-	// });
-// }
 
 // function createLeaderBoard() {
 //     const leaderboard = new LeaderBoard({
