@@ -1,11 +1,13 @@
 'use strict';
 
 import Container from '../blocks/html/body/application/container/container.js';
-// import {Head} from '../blocks/html/body/application/container/head/head.js';
-// import {BackArrow} from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
-// import {Content} from '../blocks/html/body/application/container/content/content.js';
-// import {Title} from '../blocks/html/body/application/container/content/title/title.js';
-// import {ProfileCard} from '../blocks/html/body/application/container/content/profile-card/profile-card.js';
+import Head from '../blocks/html/body/application/container/head/head.js';
+import BackArrow from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
+import Content from '../blocks/html/body/application/container/content/content.js';
+import Menu from '../blocks/html/body/application/container/head/menu/menu.js'
+import LogoutIcon from '../blocks/html/body/application/container/head/menu/logout/logout.js';
+import SettingsIcon from '../blocks/html/body/application/container/head/menu/settings/settings.js';
+// import ProfileCard from '../blocks/html/body/application/container/content/profile-card/profile-card.js';
 // import {ProfileHead} from '../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.js';
 // import {Avatar} from '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.js';
 // import {EditIcon} from '../blocks/html/body/application/container/content/profile-card/profile-head/edit/edit.js';
@@ -34,94 +36,43 @@ export default class ProfilePage {
         container.render();
         const containerBlock = document.querySelector('.container.container_theme_profile');
 
-        // const head = new Head({
-        //     el: containerBlock,
-        // });
-        // head.modifiers = ['head_theme_profile'];
-        // head.render();
-        // const headBlock = document.querySelector('.head');
+        const head = new Head({
+            el: containerBlock,
+            modifiers: ['head_theme_profile'],
+        });
+        head.render();
+        const headBlock = document.querySelector('.head');
 
-        // const backArrow = new BackArrow({
-        //     el: headBlock,
-        //     href: '/',
-        //     dataset: 'menu',
-        // });
-        // backArrow.render();
+        const backArrow = new BackArrow({
+            el: headBlock,
+            href: '/',
+            dataset: 'menu',
+        });
+        backArrow.render();
 
-        // const content = new Content({
-        //     el: containerBlock,
-        // });
-        // content.modifiers = ['content_theme_profile']
-        // content.render();
-        // const contentBlock = document.querySelector('.content.content_theme_profile');
+        const content = new Content({
+            el: containerBlock,
+            modifiers: ['content_theme_profile'],
+        });
+        content.render();
+        const contentBlock = document.querySelector('.content.content_theme_profile');
 
-        // const title = new Title({
-        //     el: contentBlock,
-        //     title: 'PROFILE',
-        // });
-        // title.render();
+        const menu = new Menu({
+            el: containerBlock,
+            modifiers: ['menu_theme_profile'],
+        });
+        menu.render();
+        const menuBlock = document.querySelector('.menu');
 
-        // const profile = new ProfileCard({
-        //     el: contentBlock
-        // });
-        // profile.render();
-        // const profileBlock = document.querySelector('.profile-card');
+        const logout = new LogoutIcon({
+            el: menuBlock,
+        });
+        logout.render();
 
-        // const profileHead = new ProfileHead({
-        //     el: profileBlock,
-        // });
-        // profileHead.render();
-        // const profileHeadBlock = document.querySelector('.profile-head');
-
-        // const href = 'signout';
-        // const t = 'signout';
-    
-        // const a = document.createElement('a');
-        // a.href = href;
-        // a.dataset.href = href;
-        // a.textContent = t;
-        // a.classList.add('link');
-    
-        // profileBlock.appendChild(a);
-
-        // const avatar = new Avatar({
-        //     el: profileHeadBlock,
-        // });
-        // avatar.render();
-
-        // const edit = new EditIcon({
-        //     el: profileHeadBlock,
-        //     href: '/',
-        //     dataset: 'menu',
-        // });
-        // edit.render();
-
-        // const data = new Data({
-        //     el: profileBlock,
-        // });
-        // data.render();
-        // const dataBlock = document.querySelector('.data');
-
-        // const itemName = new Item({
-        //     el: dataBlock,
-        //     title: 'Name',
-        //     data: makeSafe(this._name),
-        // });
-        // itemName.render();
-
-        // const itemEmail= new Item({
-        //     el: dataBlock,
-        //     title: 'E-mail',
-        //     data: this._email,
-        // });
-        // itemEmail.render();
-
-        // const itemScore = new Item({
-        //     el: dataBlock,
-        //     title: 'Score',
-        //     data: this._score,
-        // });
-        // itemScore.render();
+        const settings = new SettingsIcon({
+            el: menuBlock,
+        });
+        settings.render();
     }
 
     render() {

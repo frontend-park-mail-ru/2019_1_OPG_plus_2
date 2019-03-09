@@ -2,10 +2,7 @@
     display: flex;
 
     @media (min-width: $desktop-min-width) {
-        // grid-column: 1 / 2;
         display: flex;
-        // justify-content: center;
-        align-items: flex-end;
         flex-direction: column;
     }
 

@@ -37,6 +37,7 @@ export default class MainPage {
 
         const menu = new Menu({
             el: headBlock,
+            modifiers: ['menu_theme_main'],
         });
         menu.render();
         const menuBlock = document.querySelector('.menu');
