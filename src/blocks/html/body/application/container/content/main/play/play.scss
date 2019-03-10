@@ -4,14 +4,14 @@
     background-position: center;
 
     @media (min-width: $desktop-min-width) {
-        padding: 0px 8vh 0px 8vh;
+        padding: 0px 8vh;
         background-size: 22vh;
         height: 70%;
         width: 20%;
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        padding: 10px 30px 10px 30px;
+        padding: 10px 30px;
         background-size: 60%;
         height: 100%;
         width: 40%;

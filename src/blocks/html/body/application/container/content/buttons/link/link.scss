@@ -8,12 +8,12 @@
 
     @media (min-width: $desktop-min-width) {
         font-size: 1.9em;
-        padding: 2vh 0px 2vh;
+        padding: 2vh 0 2vh;
         border-radius: 20px;
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        padding: 3% 0% 3%;
+        padding: 3% 0 3%;
         font-size: 1em;
         display: block;
     }

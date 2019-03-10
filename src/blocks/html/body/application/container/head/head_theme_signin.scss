@@ -1,4 +1,4 @@
-@keyframes shadow {
+@keyframes opacity {
     from { opacity: 0.5;}
     40% {opacity: 0.6;}
     50% {opacity: 0.7;}
@@ -16,6 +16,6 @@
     }
 
     &:hover {
-        animation: shadow 300ms forwards ease;
+        animation: opacity 300ms forwards ease;
     }
 }
