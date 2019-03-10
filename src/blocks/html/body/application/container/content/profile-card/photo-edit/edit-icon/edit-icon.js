@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./edit-icon.pug');
+let template = require('./edit-icon.pug');
 
 export default class EditIcon {
     constructor({

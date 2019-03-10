@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./buttons.pug');
+let template = require('./buttons.pug');
 
 export default class Buttons {
     constructor({

@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./scoreboard.pug');
+let template = require('./scoreboard.pug');
 
 export default class ScoreBoard {
     constructor({

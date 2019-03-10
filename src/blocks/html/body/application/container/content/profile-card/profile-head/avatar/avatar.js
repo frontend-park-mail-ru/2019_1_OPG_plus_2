@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./avatar.pug');
+let template = require('./avatar.pug');
 
 export default class Avatar {
     constructor({

@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./settings-icon.pug');
+let template = require('./settings-icon.pug');
 
 export default class SettingsIcon {
     constructor({

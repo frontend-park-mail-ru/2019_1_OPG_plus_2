@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./profile-data.pug');
+let template = require('./profile-data.pug');
 
 export default class ProfileData {
     constructor({

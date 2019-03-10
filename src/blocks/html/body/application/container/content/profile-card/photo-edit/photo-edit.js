@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./photo-edit.pug');
+let template = require('./photo-edit.pug');
 
 export default class PhotoEdit {
     constructor({

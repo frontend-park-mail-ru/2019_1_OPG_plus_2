@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./submit.pug');
+let template = require('./submit.pug');
 
 export default class Submit {
     constructor({

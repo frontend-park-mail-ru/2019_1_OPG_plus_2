@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./logout.pug');
+let template = require('./logout.pug');
 
 export default class LogoutIcon {
     constructor({

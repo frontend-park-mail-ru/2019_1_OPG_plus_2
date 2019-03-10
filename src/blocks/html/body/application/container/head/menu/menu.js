@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./menu.pug');
+let template = require('./menu.pug');
 
 export default class Menu {
     constructor({

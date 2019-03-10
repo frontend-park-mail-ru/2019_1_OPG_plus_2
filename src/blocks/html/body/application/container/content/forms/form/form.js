@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./form.pug');
+let template = require('./form.pug');
 
 export default class Form {
     constructor({

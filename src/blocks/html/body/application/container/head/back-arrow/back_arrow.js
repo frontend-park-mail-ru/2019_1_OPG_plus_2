@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./back_arrow.pug');
+let template = require('./back_arrow.pug');
 
 export default class BackArrow {
     constructor({

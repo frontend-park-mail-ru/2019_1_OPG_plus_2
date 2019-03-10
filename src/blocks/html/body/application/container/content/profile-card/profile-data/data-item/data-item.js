@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./data-item.pug');
+let template = require('./data-item.pug');
 
 export default class DataItem {
     constructor({

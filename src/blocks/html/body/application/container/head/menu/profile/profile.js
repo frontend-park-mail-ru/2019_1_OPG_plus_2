@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./profile.pug');
+let template = require('./profile.pug');
 
 export default class ProfileIcon {
     constructor({

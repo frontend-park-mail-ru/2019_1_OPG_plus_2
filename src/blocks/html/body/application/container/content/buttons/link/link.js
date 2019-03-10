@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./link.pug');
+let template = require('./link.pug');
 
 export default class Link {
     constructor({

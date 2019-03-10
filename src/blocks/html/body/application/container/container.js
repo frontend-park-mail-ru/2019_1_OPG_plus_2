@@ -1,5 +1,4 @@
-'use strict';
-var template = require('./container.pug');
+let template = require('./container.pug');
 
 export default class Container {
     constructor({
