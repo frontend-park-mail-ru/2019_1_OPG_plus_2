@@ -30,6 +30,7 @@
     "sass": "^1.17.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "svgo": "^1.2.0",
     "uuid": "3.3.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
