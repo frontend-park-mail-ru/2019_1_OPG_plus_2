@@ -4,7 +4,9 @@
   "description": "test server",
   "main": "server/index.js",
   "scripts": {
-    "start": "webpack --env production && node server"
+    "start": "webpack --env production && node server",
+    "build": "webpack --watch --env production",
+    "serv": "node server"
   },
   "keywords": [],
   "author": "",

@@ -55,6 +55,9 @@ app.post('/login', function(req, res) {
 	const password = req.body.password;
 	const email = req.body.email;
 
+	// console.log(email, password);
+	console.log(req);
+
 	if (!password || !email) {
 		return res.status(400).json({error: 'Не указан E-mail или пароль'});
 	}
