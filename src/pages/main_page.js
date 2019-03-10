@@ -12,14 +12,9 @@ import buttonsTemplate from '../blocks/html/body/application/container/content/b
 import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js'
+import Page from './page';
 
-export default class MainPage {
-    constructor({
-        el = document.body,
-    } = {}) {
-        this._el = el;
-    }
-
+export default class MainPage extends Page {
     _renderMainPage() {
         genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_main'],
@@ -95,7 +90,7 @@ export default class MainPage {
             linkTemplate({
                 href: 'signin',
                 title: 'SING IN',
-                dataset: 'signin',
+                dataset: '/signin',
                 modifiers: [],
             }),
             linkTemplate({
@@ -107,7 +102,8 @@ export default class MainPage {
         );
     }
 
-    render() {
+    open(root) {
+        this._el = root;
         this._renderMainPage();
     }
 }

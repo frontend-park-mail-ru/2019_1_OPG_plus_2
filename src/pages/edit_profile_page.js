@@ -10,9 +10,6 @@ import photoEditTemplate from '../blocks/html/body/application/container/content
 import logoutIconTemplate from '../blocks/html/body/application/container/head/menu/logout/logout.pug';
 import formsTemplates from '../blocks/html/body/application/container/content/forms/forms.pug';
 import profileFormTemplate from '../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
-import nameTemplate from '../blocks/html/body/application/container/content/profile-card/profile-head/name/name.pug';
-import profileDataTemplate from '../blocks/html/body/application/container/content/profile-card/profile-data/profile-data.pug';
-import dataItemTemplate from '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item.pug';
 import avatarTemplate from '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import editIconTemplate from '../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.pug';
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';

@@ -9,15 +9,11 @@ import buttonsTemplate from '../blocks/html/body/application/container/content/b
 import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
 
+import AjaxModule from '../modules/ajax.js';
 import {genericBeforeEnd} from '../modules/helpers.js'
+import Page from './page';
 
-export default class SignInPage {
-    constructor({
-        el = document.body,
-    } = {}) {
-        this._el = el;
-    }
-
+export default class SignInPage extends Page {
     _renderSignIn() {
 
         genericBeforeEnd(this._el, containerTemplate({
@@ -93,7 +89,28 @@ export default class SignInPage {
         );
     }
 
-    render() {
+    open(root) {
+        this._el = root;
         this._renderSignIn();
+
+        // const formsBlock = document.querySelector('.forms');
+		// formsBlock.addEventListener('submit', function(event) {
+		// 	event.preventDefault();
+	
+		// 	const email = formsBlock.elements['email'].value;
+		// 	const password = formsBlock.elements['password'].value;
+	
+		// 	AjaxModule.doPost({
+		// 		callback() {
+		// 			root.innerHTML = '';
+		// 			createProfile();
+		// 		},
+		// 		path: '/login',
+		// 		body: {
+		// 			email: email,
+		// 			password: password,
+		// 		},
+		// 	});
+		// });
     }
 }

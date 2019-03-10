@@ -1,7 +1,7 @@
 const noop = () => null;
 
 export default class AjaxModule {
-    doGet({
+    static doGet({
         callback = noop,
         path = '/',
         body = {},
@@ -15,7 +15,7 @@ export default class AjaxModule {
         }).then(json => callback(json));
     }
 
-    doPost({
+    static doPost({
         callback = noop,
         path = '/',
         body = {},
