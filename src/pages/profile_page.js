@@ -13,7 +13,6 @@ import logoutIconTemplate from '../blocks/html/body/application/container/head/m
 import settingsIconTemplate from '../blocks/html/body/application/container/head/menu/settings/settings.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js'
-import { isTemplateElement } from 'babel-types';
 
 export default class ProfilePage {
     constructor({

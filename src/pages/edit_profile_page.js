@@ -1,19 +1,24 @@
-import Container from '../blocks/html/body/application/container/container.js';
-import Head from '../blocks/html/body/application/container/head/head.js';
-import BackArrow from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
-import Content from '../blocks/html/body/application/container/content/content.js';
-import Menu from '../blocks/html/body/application/container/head/menu/menu.js'
-import ProfileCard from '../blocks/html/body/application/container/content/profile-card/profile-card.js';
-import ProfileHead from '../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.js';
-import SettingsIcon from '../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.js';
-import PhotoEdit from '../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.js';
-import LogoutIcon from '../blocks/html/body/application/container/head/menu/logout/logout.js';
-import Forms from '../blocks/html/body/application/container/content/forms/forms.js';
-import ProfileForm from '../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.js';
-import Avatar from '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.js';
-import EditIcon from '../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.js';
-import Buttons from '../blocks/html/body/application/container/content/buttons/buttons.js';
-import Submit from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
+import containerTemplate from '../blocks/html/body/application/container/container.pug';
+import headTemplate from '../blocks/html/body/application/container/head/head.pug';
+import contentTemplate from '../blocks/html/body/application/container/content/content.pug';
+import backArrowTemplate from '../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
+import menuTemplate from '../blocks/html/body/application/container/head/menu/menu.pug';
+import profileCardTemplate from '../blocks/html/body/application/container/content/profile-card/profile-card.pug';
+import profileHeadTemplate from '../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
+import settingsIconTemplate from '../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.pug';
+import photoEditTemplate from '../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.pug';
+import logoutIconTemplate from '../blocks/html/body/application/container/head/menu/logout/logout.pug';
+import formsTemplates from '../blocks/html/body/application/container/content/forms/forms.pug';
+import profileFormTemplate from '../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
+import nameTemplate from '../blocks/html/body/application/container/content/profile-card/profile-head/name/name.pug';
+import profileDataTemplate from '../blocks/html/body/application/container/content/profile-card/profile-data/profile-data.pug';
+import dataItemTemplate from '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item.pug';
+import avatarTemplate from '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
+import editIconTemplate from '../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.pug';
+import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
+import submitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+
+import {genericBeforeEnd} from '../modules/helpers.js'
 
 export default class EditProfilePage {
     constructor({
@@ -29,137 +34,123 @@ export default class EditProfilePage {
     }
 
     _renderEditProfilePage() {
-        const container = new Container({
-            el: this._el,
+        genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_profile'],
-        });
-        container.render();
+        }));
         const containerBlock = document.querySelector('.container.container_theme_profile');
 
-        const head = new Head({
-            el: containerBlock,
-            modifiers: ['head_theme_profile'],
-        });
-        head.render();
-        const headBlock = document.querySelector('.head');
-        
-        const backArrow = new BackArrow({
-            el: headBlock,
-            href: '/',
-            dataset: 'menu',
-        });
-        backArrow.render();
-
-        const content = new Content({
-            el: containerBlock,
-            modifiers: ['content_theme_edit-profile'],
-        });
-        content.render();
+        genericBeforeEnd(containerBlock, 
+            headTemplate({
+                modifiers: ['head_theme_profile'],
+            }),
+            contentTemplate({
+                modifiers: ['content_theme_edit-profile'],
+            }),
+            menuTemplate({
+                modifiers: ['menu_theme_profile'],
+            }),
+        );
+        const headBlock = document.querySelector('.head.head_theme_profile');
         const contentBlock = document.querySelector('.content.content_theme_edit-profile');
+        const menuBlock = document.querySelector('.menu.menu_theme_profile');
+        
+        genericBeforeEnd(headBlock, 
+            backArrowTemplate({
+                modifiers: [],
+                href: '/',
+                dataset: 'menu',
+            }),
+        );
 
-        const profileCard = new ProfileCard({
-            el: contentBlock,
-            modifiers: ['profile-card_theme_edit']
-        });
-        profileCard.render()
-        const profileCardBlock = document.querySelector('.profile-card');
-
-        const profileHead = new ProfileHead({
-            el: profileCardBlock,
-        });
-        profileHead.render();
-        const profileHeadBlock = document.querySelector('.profile-head');
-
-        const settingsIcon = new SettingsIcon({
-            el: profileHeadBlock,
-        });
-        settingsIcon.render();
-
-        const photoEdit = new PhotoEdit({
-            el: profileCardBlock,
-        });
-        photoEdit.render();
-        const photoEditBlock = document.querySelector('.photo-edit');
-
-        const avatar = new Avatar({
-            el: photoEditBlock,
-        });
-        avatar.render();
-
-        const editIcon = new EditIcon({
-            el: photoEditBlock,
-            id: 'profile-edit',
-        });
-        editIcon.render();
-
-        const forms = new Forms({
-            el: profileCardBlock,
-            modifiers: ['profile-card_theme_forms'],
-            action: 'POST',
-            name: 'profile-edit'
-        });
-        forms.render();
-        const formsBlock = document.querySelector('.profile-card_theme_forms');
-
-        const formsInput = [
-            {
-                name: 'name',
-                type: 'text',
-                placeholder: 'Name',
-            },
-            {
-                name: 'email',
-                type: 'email',
-                placeholder: 'E-mail',
-            },
-            {
-                name: 'password',
-                type: 'password',
-                placeholder: 'Password',
-            },
-            {
-                name: 'repeat-password',
-                type: 'password',
-                placeholder: 'Repeat password',
-            },
-        ];
-
-        formsInput.forEach(function (item) {
-            const profileForm = new ProfileForm({
-                el: formsBlock,
-                name: item.name,
-                title: item.placeholder,
-                type: item.type,
-            });
-            profileForm.render();
-        });
-
-        renderButtonsBlock({
-            el: contentBlock, 
-            modifiers: ['buttons_theme_edit-profile'],
-        });
+        genericBeforeEnd(contentBlock, 
+            profileCardTemplate({
+                modifiers: ['profile-card_theme_edit'],
+            }),
+            buttonsTemplate({
+                modifiers: ['buttons_theme_edit-profile'],
+            }),
+        );
+        const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
         const buttonsBlock = document.querySelector('.buttons.buttons_theme_edit-profile');
 
-        const submit = new Submit({
-            el: buttonsBlock,
-            value: 'GOD SAVE AND BLESS US',
-            form: 'profile-edit',
-            modifiers: ['submit_theme_edit-profile'],
-        });
-        submit.render();
+        genericBeforeEnd(profileCardBlock, 
+            profileHeadTemplate({
+                modifiers: [],
+            }),
+        );
+        const profileHeadBlock = document.querySelector('.profile-head');
 
-        const menu = new Menu({
-            el: containerBlock,
-            modifiers: ['menu_theme_profile'],
-        });
-        menu.render();
-        const menuBlock = document.querySelector('.menu');
+        genericBeforeEnd(profileHeadBlock, 
+            settingsIconTemplate({
+                modifiers: [],
+            })
+        );
 
-        const logout = new LogoutIcon({
-            el: menuBlock,
-        });
-        logout.render();
-}
+        genericBeforeEnd(profileCardBlock, 
+            photoEditTemplate({
+                modifiers: [],
+            }),
+            formsTemplates({
+                modifiers: ['profile-card_theme_forms'],
+                action: 'POST',
+                name: 'profile-edit'
+            }),
+        );
+        const photoEditBlock = document.querySelector('.photo-edit');
+        const formsBlock = document.querySelector('.profile-card_theme_forms');
+
+        genericBeforeEnd(photoEditBlock, 
+            avatarTemplate({
+                modifiers: [],
+            }),
+            editIconTemplate({
+                modifiers: [],
+                id: 'profile-edit',
+            }),
+        );
+
+        genericBeforeEnd(formsBlock, 
+            profileFormTemplate({
+                modifiers: [],
+                name: 'name',
+                type: 'text',
+                title: 'Name',
+            }),
+            profileFormTemplate({
+                modifiers: [],
+                name: 'email',
+                type: 'email',
+                title: 'E-mail',
+            }),
+            profileFormTemplate({
+                modifiers: [],
+                name: 'password',
+                type: 'password',
+                title: 'Password',
+            }),
+            profileFormTemplate({
+                modifiers: [],
+                name: 'repeat-password',
+                type: 'password',
+                title: 'Repeat password',
+            }),
+        );
+
+        genericBeforeEnd(buttonsBlock, 
+            submitTemplate({
+                el: buttonsBlock,
+                value: 'GOD SAVE AND BLESS US',
+                form: 'profile-edit',
+                modifiers: ['submit_theme_edit-profile'],
+            }),
+        );
+
+        genericBeforeEnd(menuBlock, 
+            logoutIconTemplate({
+                modifiers: [],
+            }),
+        );
+    }
 
     render() {
         this._renderEditProfilePage();
