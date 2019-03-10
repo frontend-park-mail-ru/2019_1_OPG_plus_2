@@ -1,5 +1,3 @@
-'use strict';
-
 import {Container} from '../blocks/html/body/application/container/container.js';
 import {Head} from '../blocks/html/body/application/container/head/head.js';
 import {BackArrow} from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';

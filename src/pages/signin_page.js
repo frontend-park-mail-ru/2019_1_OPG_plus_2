@@ -1,5 +1,3 @@
-'use strict';
-
 import Container from '../blocks/html/body/application/container/container.js';
 import Head from '../blocks/html/body/application/container/head/head.js';
 import Content from '../blocks/html/body/application/container/content/content.js';
