@@ -8,7 +8,7 @@ import Content from '../blocks/html/body/application/container/content/content.j
 import Title from '../blocks/html/body/application/container/content/title/title.js';
 import Main from '../blocks/html/body/application/container/content/main/main.js';
 import Play from '../blocks/html/body/application/container/content/main/play/play.js';
-import Buttons from '../blocks/html/body/application/container/content/buttons/buttons.js';
+import renderButtonsBlock from '../blocks/html/body/application/container/content/buttons/buttons.js';
 import Link from '../blocks/html/body/application/container/content/buttons/link/link.js';
 
 export default class MainPage {
@@ -89,11 +89,10 @@ export default class MainPage {
         });
         play.render();
 
-        const buttons = new Buttons({
-            el: contentBlock,
+        renderButtonsBlock({
+            el: contentBlock, 
             modifiers: ['buttons_theme_main'],
         });
-        buttons.render();
         const buttonsBlock = document.querySelector('.buttons.buttons_theme_main');
 
         const titles = {

@@ -5,7 +5,7 @@ import Title from '../blocks/html/body/application/container/content/title/title
 import BackArrow from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
 import Forms from '../blocks/html/body/application/container/content/forms/forms.js';
 import Form from '../blocks/html/body/application/container/content/forms/form/form.js';
-import Buttons from '../blocks/html/body/application/container/content/buttons/buttons.js';
+import renderButtonsBlock from '../blocks/html/body/application/container/content/buttons/buttons.js';
 import Submit from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
 import Link from '../blocks/html/body/application/container/content/buttons/link/link.js'
 
@@ -84,10 +84,9 @@ export default class SignInPage {
             input.render();
         });
 
-        const buttons = new Buttons({
-            el: contentBlock,
+        renderButtonsBlock({
+            el: contentBlock, 
         });
-        buttons.render();
         const buttonsBlock = document.querySelector('.buttons');
 
         const submit = new Submit({

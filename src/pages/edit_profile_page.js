@@ -134,12 +134,11 @@ export default class EditProfilePage {
             profileForm.render();
         });
 
-        const buttons = new Buttons({
-            el: contentBlock,
+        renderButtonsBlock({
+            el: contentBlock, 
             modifiers: ['buttons_theme_edit-profile'],
         });
-        buttons.render();
-        const buttonsBlock = document.querySelector('.buttons');
+        const buttonsBlock = document.querySelector('.buttons.buttons_theme_edit-profile');
 
         const submit = new Submit({
             el: buttonsBlock,

@@ -5,7 +5,7 @@ import Content from '../blocks/html/body/application/container/content/content.j
 import Title from '../blocks/html/body/application/container/content/title/title.js';
 import Forms from '../blocks/html/body/application/container/content/forms/forms.js';
 import Form from '../blocks/html/body/application/container/content/forms/form/form.js';
-import Buttons from '../blocks/html/body/application/container/content/buttons/buttons.js';
+import renderButtonsBlock from '../blocks/html/body/application/container/content/buttons/buttons.js';
 import Submit from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
 
 export default class SignUpPage {
@@ -94,12 +94,11 @@ export default class SignUpPage {
             input.render();
         });
 
-        const buttons = new Buttons({
-            el: contentBlock,
+        renderButtonsBlock({
+            el: contentBlock, 
             modifiers: ['buttons_theme_signup'],
         });
-        buttons.render();
-        const buttonsBlock = document.querySelector('.buttons');
+        const buttonsBlock = document.querySelector('.buttons.buttons_theme_signup');
 
         const submit = new Submit({
             el: buttonsBlock,
