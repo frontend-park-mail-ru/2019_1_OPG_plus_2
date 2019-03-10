@@ -99,21 +99,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			});
 			profile.render();
 
-			ajax.doGet({
-				callback(xhr) {
-					if (!xhr.responseText) {
-						alert('Unauthorized');
-						application.innerHTML = '';
-						createMenu();
-						return;
-					}
+			// ajax.doGet({
+			// 	callback(xhr) {
+			// 		if (!xhr.responseText) {
+			// 			alert('Unauthorized');
+			// 			application.innerHTML = '';
+			// 			createMenu();
+			// 			return;
+			// 		}
 
-					const user = JSON.parse(xhr.responseText);
-					application.innerHTML = '';
-					createProfile(user);
-				},
-				path: '/me',
-			});
+			// 		const user = JSON.parse(xhr.responseText);
+			// 		application.innerHTML = '';
+			// 		createProfile(user);
+			// 	},
+			// 	path: '/me',
+			// });
     	}
 	}
 

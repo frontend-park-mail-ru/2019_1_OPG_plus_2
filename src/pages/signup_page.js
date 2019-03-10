@@ -4,7 +4,7 @@ import contentTemplate from '../blocks/html/body/application/container/content/c
 import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug';
 import backArrowTemplate from '../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
 import formsTemplate from '../blocks/html/body/application/container/content/forms/forms.pug';
-import formsTemplate from '../blocks/html/body/application/container/content/forms/form/form.pug';
+import formTemplate from '../blocks/html/body/application/container/content/forms/form/form.pug';
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
 import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 
