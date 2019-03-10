@@ -1,12 +1,14 @@
-import Container from '../blocks/html/body/application/container/container.js';
-import Head from '../blocks/html/body/application/container/head/head.js';
-import BackArrow from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
-import Content from '../blocks/html/body/application/container/content/content.js';
-import Title from '../blocks/html/body/application/container/content/title/title.js';
-import Forms from '../blocks/html/body/application/container/content/forms/forms.js';
-import Form from '../blocks/html/body/application/container/content/forms/form/form.js';
-import renderButtonsBlock from '../blocks/html/body/application/container/content/buttons/buttons.js';
-import Submit from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
+import containerTemplate from '../blocks/html/body/application/container/container.pug';
+import headTemplate from '../blocks/html/body/application/container/head/head.pug';
+import contentTemplate from '../blocks/html/body/application/container/content/content.pug';
+import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug';
+import backArrowTemplate from '../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
+import formsTemplate from '../blocks/html/body/application/container/content/forms/forms.pug';
+import formsTemplate from '../blocks/html/body/application/container/content/forms/form/form.pug';
+import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
+import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+
+import {genericBeforeEnd} from '../modules/helpers.js'
 
 export default class SignUpPage {
     constructor({
@@ -16,96 +18,86 @@ export default class SignUpPage {
     }
 
     _renderSignUp() {
-        const container = new Container({
-            el: this._el,
+
+        genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_signup'],
-        });
-        container.render();
+        }));
         const containerBlock = document.querySelector('.container.container_theme_signup');
 
-        const head = new Head({
-            el: containerBlock,
-            modifiers: ['head_theme_signup'],
-        });
-        head.render();
-        const headBlock = document.querySelector('.head');
-
-        const backArrow = new BackArrow({
-            el: headBlock,
-            href: '/',
-            dataset: 'menu',
-        });
-        backArrow.render();
-
-        const content = new Content({
-            el: containerBlock,
-            modifiers: ['content_theme_signup'],
-        });
-        content.render();
+        genericBeforeEnd(containerBlock, 
+            headTemplate({
+                modifiers: ['head_theme_signup'],
+            }),
+            contentTemplate({
+                modifiers: ['content_theme_signup'],
+            })
+        );
+        const headBlock = document.querySelector('.head.head_theme_signup');
         const contentBlock = document.querySelector('.content.content_theme_signup');
 
-        const title = new Title({
-            el: contentBlock,
-            title: 'SIGN UP',
-            modifiers: ['title_theme_signup'],
-        });
-        title.render();
+        genericBeforeEnd(headBlock, 
+            backArrowTemplate({
+                modifiers: [],
+                href: '/',
+                dataset: 'menu',
+            }),
+        );
 
-        const forms = new Forms({
-            el: contentBlock,
-            action: 'POST',
-            name: 'signup',
-        });
-        forms.render();
+        genericBeforeEnd(contentBlock, 
+            titleTemplate({
+                title: 'SING UP',
+                modifiers: ['title_theme_signup'],
+            }),
+            formsTemplate({
+                modifiers: [],
+                action: 'POST',
+                name: 'signup',
+            }),
+            buttonsTemplate({
+                modifiers: [],
+            }),
+        );
         const formsBlock = document.querySelector('.forms');
+        const buttonsBlock = document.querySelector('.buttons');
 
-        const formsInput = [
-            {
+        genericBeforeEnd(formsBlock, 
+            formTemplate({
+                modifiers: [],
                 name: 'name',
                 type: 'text',
                 placeholder: 'Name',
-            },
-            {
+                req: true,
+            }),
+            formTemplate({
+                modifiers: [],
                 name: 'email',
                 type: 'email',
                 placeholder: 'E-mail',
-            },
-            {
+                req: true,
+            }),
+            formTemplate({
+                modifiers: [],
                 name: 'password',
                 type: 'password',
                 placeholder: 'Password',
-            },
-            {
+                req: true,
+            }),
+            formTemplate({
+                modifiers: [],
                 name: 'repeat-password',
                 type: 'password',
                 placeholder: 'Repeat password',
-            },
-        ];
-
-        formsInput.forEach(function (item) {
-            const input = new Form({
-                el: formsBlock,
-                name: item.name,
-                placeholder: item.placeholder,
-                type: item.type,
                 req: true,
-                modifiers: ['form_theme_signup'],
-            });
-            input.render();
-        });
+            }),
+        );
 
-        renderButtonsBlock({
-            el: contentBlock, 
-            modifiers: ['buttons_theme_signup'],
-        });
-        const buttonsBlock = document.querySelector('.buttons.buttons_theme_signup');
-
-        const submit = new Submit({
-            el: buttonsBlock,
-            value: 'SIGN UP',
-            form: 'signup',
-        });
-        submit.render();
+        genericBeforeEnd(buttonsBlock, 
+            sumbitTemplate({
+                value: 'SIGN UP',
+                form: 'signup',
+                modifiers: [],
+            }),
+        );
     }
 
     render() {
