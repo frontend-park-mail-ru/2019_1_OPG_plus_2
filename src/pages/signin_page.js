@@ -1,13 +1,15 @@
-import Container from '../blocks/html/body/application/container/container.js';
-import Head from '../blocks/html/body/application/container/head/head.js';
-import Content from '../blocks/html/body/application/container/content/content.js';
-import Title from '../blocks/html/body/application/container/content/title/title.js';
-import BackArrow from '../blocks/html/body/application/container/head/back-arrow/back_arrow.js';
-import Forms from '../blocks/html/body/application/container/content/forms/forms.js';
-import Form from '../blocks/html/body/application/container/content/forms/form/form.js';
-import renderButtonsBlock from '../blocks/html/body/application/container/content/buttons/buttons.js';
-import Submit from '../blocks/html/body/application/container/content/buttons/submit/submit.js';
-import Link from '../blocks/html/body/application/container/content/buttons/link/link.js'
+import containerTemplate from '../blocks/html/body/application/container/container.pug';
+import headTemplate from '../blocks/html/body/application/container/head/head.pug';
+import contentTemplate from '../blocks/html/body/application/container/content/content.pug';
+import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug';
+import backArrowTemplate from '../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
+import formsTemplate from '../blocks/html/body/application/container/content/forms/forms.pug';
+import formsTemplate from '../blocks/html/body/application/container/content/forms/form/form.pug';
+import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
+import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
+
+import {genericBeforeEnd} from '../modules/helpers.js'
 
 export default class SignInPage {
     constructor({
@@ -17,93 +19,78 @@ export default class SignInPage {
     }
 
     _renderSignIn() {
-        const container = new Container({
-            el: this._el,
+
+        genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_signin'],
-        });
-        container.render();
+        }));
         const containerBlock = document.querySelector('.container.container_theme_signin');
 
-        const head = new Head({
-            el: containerBlock,
-            modifiers: ['head_theme_signin'],
-        });
-        head.render();
+        genericBeforeEnd(containerBlock, 
+            headTemplate({
+                modifiers: ['head_theme_signin'],
+            }),
+            contentTemplate({
+                modifiers: ['content_theme_signin'],
+            })
+        );
         const headBlock = document.querySelector('.head.head_theme_signin');
-
-        const backArrow = new BackArrow({
-            el: headBlock,
-            href: '/',
-            dataset: 'menu',
-        });
-        backArrow.render();
-
-        const content = new Content({
-            el: containerBlock,
-            modifiers: ['content_theme_signin'],
-        });
-        content.render();
         const contentBlock = document.querySelector('.content.content_theme_signin');
 
-        const title = new Title({
-            el: contentBlock,
-            title: 'SING IN',
-            modifiers: ['title_theme_signin'],
-        });
-        title.render();
+        genericBeforeEnd(headBlock, 
+            backArrowTemplate({
+                modifiers: [],
+                href: '/',
+                dataset: 'menu',
+            }),
+        );
 
-        const forms = new Forms({
-            el: contentBlock,
-            action: 'POST',
-            name: 'signin',
-        });
-        forms.render();
+        genericBeforeEnd(contentBlock, 
+            titleTemplate({
+                title: 'SING IN',
+                modifiers: ['title_theme_signin'],
+            }),
+            formsTemplate({
+                modifiers: [],
+                action: 'POST',
+                name: 'signin',
+            }),
+            buttonsTemplate({
+                modifiers: [],
+            }),
+        );
         const formsBlock = document.querySelector('.forms');
-
-        const formsInput = [
-            {
-                name: 'email',
-                type: 'email',
-                placeholder: 'E-mail'
-            },
-            {
-                name: 'password',
-                type: 'password',
-                placeholder: 'Password'
-            },
-        ];
-
-        formsInput.forEach(function (item) {
-            const input = new Form({
-                el: formsBlock,
-                name: item.name,
-                placeholder: item.placeholder,
-                type: item.type,
-                req: true,
-            });
-            input.render();
-        });
-
-        renderButtonsBlock({
-            el: contentBlock, 
-        });
         const buttonsBlock = document.querySelector('.buttons');
 
-        const submit = new Submit({
-            el: buttonsBlock,
-            value: 'SIGN IN',
-            form: 'signin',
-        });
-        submit.render();
+        genericBeforeEnd(formsBlock, 
+            formTemplate({
+                modifiers: [],
+                name: 'email',
+                placeholder: 'E-mail',
+                type: 'email',
+                req: true,
+            }),
+            formTemplate({
+                modifiers: [],
+                name: 'password',
+                placeholder: 'Password',
+                type: 'password',
+                req: true,
+            }),
+        );
 
-        const link = new Link({
-            el: buttonsBlock,
-            href: 'signup',
-            title: 'SIGN UP',
-            dataset: 'signup',
-            modifiers: ['button_type_secondary'],
-        });
-        link.render();
+        genericBeforeEnd(buttonsBlock, 
+            sumbitTemplate({
+                value: 'SIGN IN',
+                form: 'signin',
+                modifiers: [],
+            }),
+            linkTemplate({
+                href: 'signup',
+                title: 'SIGN UP',
+                dataset: 'signup',
+                modifiers: ['button_type_secondary'],
+            }),
+        );
     }
 
     render() {

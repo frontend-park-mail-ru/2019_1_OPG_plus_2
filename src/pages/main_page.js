@@ -2,10 +2,10 @@ import containerTemplate from '../blocks/html/body/application/container/contain
 import headTemplate from '../blocks/html/body/application/container/head/head.pug';
 import menuTemplate from '../blocks/html/body/application/container/head/menu/menu.pug';
 import profileIconTemplate from '../blocks/html/body/application/container/head/menu/profile/profile.pug';
-import scoreBoardTemplate from '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.pug'
-import rulesTemplate from '../blocks/html/body/application/container/head/menu/rules/rules.pug'
-import contentTemplate from '../blocks/html/body/application/container/content/content.pug'
-import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug'
+import scoreBoardTemplate from '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.pug';
+import rulesTemplate from '../blocks/html/body/application/container/head/menu/rules/rules.pug';
+import contentTemplate from '../blocks/html/body/application/container/content/content.pug';
+import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug';
 import mainTemplate from '../blocks/html/body/application/container/content/main/main.pug';
 import playTemplate from '../blocks/html/body/application/container/content/main/play/play.pug';
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
