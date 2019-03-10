@@ -17,7 +17,7 @@ export default class Router {
 
     open(path) {
         if (this._prevPath) {
-            close();
+            this.close();
         }
 
         this._routes[path].open(this._root);

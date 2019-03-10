@@ -30,6 +30,13 @@ const common = merge([
 
 ]);
 
+const dev = {
+    optimization: {
+        minimize: false
+    },
+    devtool: "eval",
+};
+
 module.exports = function(env) {
     if (env === 'production') {
         return merge([
@@ -42,6 +49,7 @@ module.exports = function(env) {
             common,
             devserver(),
             sass(),
+            dev,
         ])
     }
-}
+};

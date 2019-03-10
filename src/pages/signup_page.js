@@ -9,12 +9,15 @@ import buttonsTemplate from '../blocks/html/body/application/container/content/b
 import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js'
+import Page from './page';
+import AjaxModule from '../modules/ajax';
 
-export default class SignUpPage {
+export default class SignUpPage extends Page {
     constructor({
-        el = document.body,
+        router = {},
     } = {}) {
-        this._el = el;
+        super();
+        this._router = router;
     }
 
     _renderSignUp() {
@@ -39,7 +42,7 @@ export default class SignUpPage {
             backArrowTemplate({
                 modifiers: [],
                 href: '/',
-                dataset: 'menu',
+                dataset: '/',
             }),
         );
 
@@ -100,7 +103,37 @@ export default class SignUpPage {
         );
     }
 
-    render() {
+    open(root) {
+        this._el = root;
         this._renderSignUp();
+
+        const formsBlock = document.querySelector('.forms');
+
+		formsBlock.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			const name = formsBlock.elements[0].value;
+			const email = formsBlock.elements[1].value;
+			const password = formsBlock.elements[2].value;
+			const password_repeat = formsBlock.elements[3].value;
+
+			if (password !== password_repeat) {
+				alert('Passwords is not equals');
+				return;
+			}
+
+			AjaxModule.doPost({
+				callback: () => {
+					application.innerHTML = '';
+					this._router.open('/me')
+				},
+				path: '/signup',
+				body: {
+					name: name,
+					email: email,
+					password: password,
+				},
+			});
+		});
     }
 }

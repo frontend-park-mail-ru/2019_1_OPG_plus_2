@@ -9,6 +9,10 @@ export default class AjaxModule {
         fetch(path, {
             method: 'GET',
             mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
             credentials: 'include',
         }).then(function(response) {
             return response.json();
@@ -23,8 +27,12 @@ export default class AjaxModule {
         fetch(path, {
             method: 'POST',
             mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
             credentials: 'include',
-            body: body,
+            body: JSON.stringify(body),
         }).then(function(response) {
             return response.json();
         }).then(json => callback(json));

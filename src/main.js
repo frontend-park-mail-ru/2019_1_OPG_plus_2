@@ -8,132 +8,22 @@ import SignUpPage from './pages/signup_page.js'
 // import {LeaderBoard} from './pages/scoreboard_page.js'
 import ProfilePage from './pages/profile_page.js'
 import EditProfilePage from './pages/edit_profile_page.js'
-
 import Router from './modules/router.js'
 
-const ajax = new AjaxModule();
-
 document.addEventListener("DOMContentLoaded", function(event) {
-    const application = document.getElementById('application');
-
-    // function createMenu() {
-    //     const main = new MainPage({
-    //         el: application,
-    //     });
-	// 	main.render();
-	// }
-	
-	// function createSignIn() {
-	// 	const singin = new SignInPage({
-	// 		el: application,
-	// 	});
-	// 	singin.render();
-	
-	// 	const formsBlock = document.querySelector('.forms');
-	// 	formsBlock.addEventListener('submit', function(event) {
-	// 		event.preventDefault();
-	
-	// 		const email = formsBlock.elements['email'].value;
-	// 		const password = formsBlock.elements['password'].value;
-	
-	// 		ajax.doPost({
-	// 			callback() {
-	// 				application.innerHTML = '';
-	// 				createProfile();
-	// 			},
-	// 			path: '/login',
-	// 			body: {
-	// 				email: email,
-	// 				password: password,
-	// 			},
-	// 		});
-	// 	});
-	// }
-
-	// function createSignUp() {
-	// 	const signup = new SignUpPage({
-	// 		el: application,
-	// 	});
-	// 	signup.render();
-
-	// 	const formsBlock = document.querySelector('.forms');
-
-	// 	formsBlock.addEventListener('submit', function (event) {
-	// 		event.preventDefault();
-
-	// 		const name = formsBlock.elements[ 'name' ].value;
-	// 		const email = formsBlock.elements[ 'email' ].value;
-	// 		const password = formsBlock.elements[ 'password' ].value;
-	// 		const password_repeat = formsBlock.elements[ 'repeat-password' ].value;
-
-	// 		if (password !== password_repeat) {
-	// 			alert('Passwords is not equals');
-	// 			return;
-	// 		}
-
-	// 		ajax.doPost({
-	// 			callback() {
-	// 				application.innerHTML = '';
-	// 				createProfile();
-	// 			},
-	// 			path: '/signup',
-	// 			body: {
-	// 				name: name,
-	// 				email: email,
-	// 				password: password,
-	// 			},
-	// 		});
-	// 	});
-	// }
-
-	// function createProfile(me) {
-	// 	if (me) {
-	// 		const profile = new ProfilePage({
-	// 			el: application,
-	// 			name: me.name,
-	// 			email: me.email,
-	// 			score: me.score,
-	// 		});
-	// 		profile.render();
-	// 	} else {
-	// 		const profile = new ProfilePage({
-	// 			el: application,
-	// 		});
-	// 		profile.render();
-
-	// 		// ajax.doGet({
-	// 		// 	callback(xhr) {
-	// 		// 		if (!xhr.responseText) {
-	// 		// 			alert('Unauthorized');
-	// 		// 			application.innerHTML = '';
-	// 		// 			createMenu();
-	// 		// 			return;
-	// 		// 		}
-
-	// 		// 		const user = JSON.parse(xhr.responseText);
-	// 		// 		application.innerHTML = '';
-	// 		// 		createProfile(user);
-	// 		// 	},
-	// 		// 	path: '/me',
-	// 		// });
-    // 	}
-	// }
-
-	// function createEditProfile() {
-	// 	const editProfile = new EditProfilePage({
-	// 		el: application,
-	// 	});
-	// 	editProfile.render();
-	// }
-
-		
-	// createMenu();
-
-	const route = new Router({
-		root: application,
+	const router = new Router({
+		root: document.getElementById('application'),
 	});
-	route.add('/', new MainPage());
-	route.add('/signin', new SignInPage());
+	router.add('/', new MainPage());
+	router.add('/signin', new SignInPage({
+		router: router,
+	}));
+	router.add('/me', new ProfilePage({
+		router: router,
+	}));
+	router.add('/signup', new SignUpPage({
+		router: router,
+	}));
 
-	route.start();
+	router.start();
 });

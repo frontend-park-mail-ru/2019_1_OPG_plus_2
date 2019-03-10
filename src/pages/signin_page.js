@@ -14,6 +14,12 @@ import {genericBeforeEnd} from '../modules/helpers.js'
 import Page from './page';
 
 export default class SignInPage extends Page {
+    constructor({
+        router = {},
+    } = {}) {
+        super();
+        this._router = router;
+    }
     _renderSignIn() {
 
         genericBeforeEnd(this._el, containerTemplate({
@@ -36,7 +42,7 @@ export default class SignInPage extends Page {
             backArrowTemplate({
                 modifiers: [],
                 href: '/',
-                dataset: 'menu',
+                dataset: '/',
             }),
         );
 
@@ -47,7 +53,6 @@ export default class SignInPage extends Page {
             }),
             formsTemplate({
                 modifiers: [],
-                action: 'POST',
                 name: 'signin',
             }),
             buttonsTemplate({
@@ -93,24 +98,23 @@ export default class SignInPage extends Page {
         this._el = root;
         this._renderSignIn();
 
-        // const formsBlock = document.querySelector('.forms');
-		// formsBlock.addEventListener('submit', function(event) {
-		// 	event.preventDefault();
-	
-		// 	const email = formsBlock.elements['email'].value;
-		// 	const password = formsBlock.elements['password'].value;
-	
-		// 	AjaxModule.doPost({
-		// 		callback() {
-		// 			root.innerHTML = '';
-		// 			createProfile();
-		// 		},
-		// 		path: '/login',
-		// 		body: {
-		// 			email: email,
-		// 			password: password,
-		// 		},
-		// 	});
-		// });
+        const formsBlock = document.querySelector('.forms');
+		formsBlock.addEventListener('submit', (event) => {
+            event.preventDefault();
+            	
+			const email = formsBlock.elements[0].value;
+            const password = formsBlock.elements[1].value;
+            console.log(email, password);
+			AjaxModule.doPost({
+				callback: () => {
+					this._router.open('/me');
+				},
+				path: '/login',
+				body: {
+					email: email,
+					password: password,
+				},
+			});
+		});
     }
 }

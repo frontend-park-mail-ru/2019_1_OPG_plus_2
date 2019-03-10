@@ -13,22 +13,19 @@ import logoutIconTemplate from '../blocks/html/body/application/container/head/m
 import settingsIconTemplate from '../blocks/html/body/application/container/head/menu/settings/settings.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js'
+import Page from './page';
+import User from '../modules/user.js'
+import AjaxModule from '../modules/ajax';
 
-export default class ProfilePage {
+export default class ProfilePage extends Page {
     constructor({
-        el = document.body,
-        name = '',
-        email = '',
-        score = '',
+        router = {},
     } = {}) {
-        this._el = el;
-        this._name = name;
-        this._email = email;
-        this._score = score;
+        super();
+        this._router = router;
     }
 
-    _renderProfilePage() {
-
+    _renderProfilePage(data) {
         genericBeforeEnd(this._el, 
             containerTemplate({
                 modifiers: ['container_theme_profile']
@@ -55,7 +52,7 @@ export default class ProfilePage {
             backArrowTemplate({
                 modifiers: [],
                 href: '/',
-                dataset: 'menu',
+                dataset: '/',
             }),
         );
 
@@ -82,30 +79,30 @@ export default class ProfilePage {
                 modifiers: [],
             }),
             nameTemplate({
-                name: 'Vasya Pupkin',
+                name: data.name,
                 modifiers: [],
             }),
         );
-
+        
         genericBeforeEnd(profileDataBlock, 
             dataItemTemplate({
                 title: 'Score',
-                data: '45',
+                data: data.score,
                 modifiers: ['data-item_type_score'],
             }),
             dataItemTemplate({
                 title: 'Games played',
-                data: '60',
+                data: data.games || 0,
                 modifiers: ['data-item_type_games'],
             }),
             dataItemTemplate({
                 title: 'Win',
-                data: '47',
+                data: data.win || 0,
                 modifiers: ['data-item_type_win'],
             }),
             dataItemTemplate({
                 title: 'Lose',
-                data: '13',
+                data: data.lose || 0,
                 modifiers: ['data-item_type_lose'],
             }),
         );
@@ -122,7 +119,25 @@ export default class ProfilePage {
         );
     }
 
-    render() {
-        this._renderProfilePage();
+    open(root) {
+        if (User.exist()) {
+            this._el = root;
+            this._renderProfilePage(User.get());
+        } else {
+        AjaxModule.doGet({
+            callback: (xhr) => {
+                if (!xhr) {
+                    alert('Unauthorized');
+                    this._router.open('/');
+                    return;
+                }
+
+                User.set(xhr);
+                this._router.open('/me');
+            },
+            path: '/me',
+            });
+
+        }
     }
 }

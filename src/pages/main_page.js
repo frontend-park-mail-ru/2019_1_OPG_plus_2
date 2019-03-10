@@ -43,17 +43,17 @@ export default class MainPage extends Page {
             profileIconTemplate({
                 modifiers: [],
                 href: '/',
-                dataset: 'me',
+                dataset: '/me',
             }),
             scoreBoardTemplate({
                 modifiers: [],
                 href: '/',
-                dataset: 'leaders',
+                dataset: '/leaders',
             }),
             rulesTemplate({
                 modifiers: [],
                 hreaf: '/',
-                dataset: 'rules',
+                dataset: '/rules',
             })
         );
 
@@ -96,7 +96,7 @@ export default class MainPage extends Page {
             linkTemplate({
                 href: 'signup',
                 title: 'SIGN UP',
-                dataset: 'signup',
+                dataset: '/signup',
                 modifiers: [],
             }),
         );

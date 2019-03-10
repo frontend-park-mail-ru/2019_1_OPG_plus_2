@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "webpack --env production && node server",
-    "build": "webpack --watch --env production",
+    "build": "webpack --watch --env development",
     "serv": "node server"
   },
   "keywords": [],

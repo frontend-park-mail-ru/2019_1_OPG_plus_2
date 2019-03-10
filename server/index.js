@@ -17,10 +17,13 @@ app.use(cookie());
 
 const users = {
 	'ivan.morozov@list.ru': {
-		name: 'Ivan',
+		name: 'Ivan Morozov',
 		email: 'ivan.morozov@list.ru',
 		password: 'password',
 		score: 72,
+		games: 60,
+		win: 47,
+		lose: 13,
 	}
 };
 const ids = {};
@@ -31,7 +34,6 @@ app.post('/signup', function(req, res) {
 	const password = req.body.password;
 	const email = req.body.email;
 
-	console.log(name, password, email);
 	if (
 		!password || !email ||
 		!email.match(/@/)
@@ -55,9 +57,6 @@ app.post('/login', function(req, res) {
 	const password = req.body.password;
 	const email = req.body.email;
 
-	// console.log(email, password);
-	console.log(req);
-
 	if (!password || !email) {
 		return res.status(400).json({error: 'Не указан E-mail или пароль'});
 	}
@@ -75,6 +74,7 @@ app.post('/login', function(req, res) {
 app.get('/me', function(req, res) {
 	const id = req.cookies['sessionid'];
 	const email = ids[id];
+
 	if (!email || !users[email]) {
 		return res.status(401).end();
 	}
