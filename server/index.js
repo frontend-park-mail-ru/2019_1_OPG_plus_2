@@ -107,7 +107,7 @@ app.get('/users', function (req, res) {
 			return {
 				name: user.name,
 				score: user.score,
-			}
+			};
 		});
 
 	res.json(scorelist);
@@ -119,10 +119,10 @@ app.post('/logout', function (req, res) {
 
 	delete ids[id];
 	res.status(200).json({});
-})
+});
 
 const port = process.env.PORT || 3000;
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);
-})
+});

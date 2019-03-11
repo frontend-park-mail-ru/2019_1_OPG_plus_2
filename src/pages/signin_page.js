@@ -11,7 +11,7 @@ import linkTemplate from '../blocks/html/body/application/container/content/butt
 import errorTemplate from '../blocks/html/body/application/container/content/forms/error/error.pug';
 
 import AjaxModule from '../modules/ajax.js';
-import {genericBeforeEnd} from '../modules/helpers.js'
+import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 
 export default class SignInPage extends Page {
@@ -54,40 +54,40 @@ export default class SignInPage extends Page {
         }));
         const containerBlock = document.querySelector('.container.container_theme_signin');
 
-        genericBeforeEnd(containerBlock, 
-            headTemplate({
-                modifiers: ['head_theme_signin'],
-            }),
-            contentTemplate({
-                modifiers: ['content_theme_signin'],
-            })
-        );
-        const headBlock = document.querySelector('.head.head_theme_signin');
-        const contentBlock = document.querySelector('.content.content_theme_signin');
+		genericBeforeEnd(containerBlock, 
+			headTemplate({
+				modifiers: ['head_theme_signin'],
+			}),
+			contentTemplate({
+				modifiers: ['content_theme_signin'],
+			})
+		);
+		const headBlock = document.querySelector('.head.head_theme_signin');
+		const contentBlock = document.querySelector('.content.content_theme_signin');
 
-        genericBeforeEnd(headBlock, 
-            backArrowTemplate({
-                modifiers: [],
-                href: '/',
-                dataset: '/',
-            }),
-        );
+		genericBeforeEnd(headBlock, 
+			backArrowTemplate({
+				modifiers: [],
+				href: '/',
+				dataset: '/',
+			}),
+		);
 
-        genericBeforeEnd(contentBlock, 
-            titleTemplate({
-                title: 'SING IN',
-                modifiers: ['title_theme_signin'],
-            }),
-            formsTemplate({
-                modifiers: [],
-                name: 'signin',
-            }),
-            buttonsTemplate({
-                modifiers: [],
-            }),
-        );
-        const formsBlock = document.querySelector('.forms');
-        const buttonsBlock = document.querySelector('.buttons');
+		genericBeforeEnd(contentBlock, 
+			titleTemplate({
+				title: 'SING IN',
+				modifiers: ['title_theme_signin'],
+			}),
+			formsTemplate({
+				modifiers: [],
+				name: 'signin',
+			}),
+			buttonsTemplate({
+				modifiers: [],
+			}),
+		);
+		const formsBlock = document.querySelector('.forms');
+		const buttonsBlock = document.querySelector('.buttons');
 
         genericBeforeEnd(formsBlock, 
             errorTemplate({

@@ -13,6 +13,10 @@
         "sourceType": "module"
     },
     "rules": {
+<<<<<<< HEAD
+=======
+        "no-mixed-spaces-and-tabs": "off",
+>>>>>>> c72122b284ea85360af1ac80b13efc514aff6ae4
         "indent": [
             "error",
             "tab"
