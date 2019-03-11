@@ -10,7 +10,7 @@ class User {
     }
 
     exist() {
-        if (this._name === null || this._email === null || this._score === null) {
+        if (!this._name || !this._email || !this._score) {
             return false;
         }
 

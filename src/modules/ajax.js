@@ -15,8 +15,14 @@ export default class AjaxModule {
             },
             credentials: 'include',
         }).then(function(response) {
+            if (response.status === 401) {
+                throw '';
+            }
+            debugger;
+            console.log(response);
             return response.json();
-        }).then(json => callback(json));
+        }).then(json => callback(json))
+        .catch(err => callback(err));
     }
 
     static doPost({

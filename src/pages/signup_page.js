@@ -7,10 +7,12 @@ import formsTemplate from '../blocks/html/body/application/container/content/for
 import formTemplate from '../blocks/html/body/application/container/content/forms/form/form.pug';
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
 import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+import errorTemplate from '../blocks/html/body/application/container/content/forms/error/error.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js'
 import Page from './page';
 import AjaxModule from '../modules/ajax';
+import {validEmail, validLogin} from '../modules/utils.js';
 
 export default class SignUpPage extends Page {
     constructor({
@@ -20,10 +22,10 @@ export default class SignUpPage extends Page {
         this._router = router;
     }
 
-    _renderSignUp() {
-
+    _renderSignUp(data) {
+        console.log(data);
         genericBeforeEnd(this._el, containerTemplate({
-            modifiers: ['container_theme_signup'],
+            modifiers: [`container_theme_signup ${data.modifier || ' '}`],
         }));
         const containerBlock = document.querySelector('.container.container_theme_signup');
 
@@ -63,7 +65,11 @@ export default class SignUpPage extends Page {
         const formsBlock = document.querySelector('.forms');
         const buttonsBlock = document.querySelector('.buttons');
 
-        genericBeforeEnd(formsBlock, 
+        genericBeforeEnd(formsBlock,
+            errorTemplate({
+                modifiers: [],
+                text: data.error,
+            }), 
             formTemplate({
                 modifiers: [],
                 name: 'name',
@@ -105,7 +111,7 @@ export default class SignUpPage extends Page {
 
     open(root) {
         this._el = root;
-        this._renderSignUp();
+        this._renderSignUp({});
 
         const formsBlock = document.querySelector('.forms');
 
@@ -117,9 +123,31 @@ export default class SignUpPage extends Page {
 			const password = formsBlock.elements[2].value;
 			const password_repeat = formsBlock.elements[3].value;
 
-			if (password !== password_repeat) {
-				alert('Passwords is not equals');
-				return;
+            if (!validEmail(email) || !email) {
+                this._el.innerHTML = '';
+                this._renderSignUp({
+                    error: 'Invalid Email',
+                    modifier: 'container_theme_error',
+                });
+                return;
+            }
+
+            if (!validLogin(name) || !name) {
+                this._el.innerHTML = '';
+                this._renderSignUp({
+                    error: 'Invalid Name',
+                    modifier: 'container_theme_error',
+                });
+                return;
+            } 
+
+			if (password !== password_repeat || !password || !password_repeat) {
+                this._el.innerHTML = '';
+				this._renderSignUp({
+                    error: 'Passwords doesn\' not match',
+                    modifier: 'container_theme_error',
+                });
+                return;
 			}
 
 			AjaxModule.doPost({

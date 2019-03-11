@@ -1,0 +1,8 @@
+.error {
+    color: #C24949;
+
+    @media (min-width: $desktop-min-width) {
+        font-size: 3vh;
+        padding: 0.2vh;
+    }
+}

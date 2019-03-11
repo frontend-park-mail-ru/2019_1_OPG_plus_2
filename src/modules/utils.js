@@ -10,6 +10,7 @@ const WHITELIST_ATTRS = [
 
 const R_TAG = /<(\w+)\s?(.*?)>.*?(<\/(.*?)>)?/;
 const R_ATTRIBUTES = /(\w+\s*)=(\s*".*?")/g;
+const emailRe = /[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
 export function makeSafe(unsafeString = '') {
 	return unsafeString
@@ -20,4 +21,12 @@ export function makeSafe(unsafeString = '') {
 			return WHITELIST_ATTRS.includes(g1) ? match : '';
 		})
 	;
+}
+
+export function validEmail(string = '') {
+	return emailRe.test(string.toLowerCase());
+}
+
+export function validLogin(string = '') {
+	return string.length < 15;
 }
