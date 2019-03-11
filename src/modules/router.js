@@ -29,6 +29,12 @@ export default class Router {
 			this.close();
 		}
 
+		if (!this._routes[path]){
+			this._routes['/not_found'].open(this._root);
+			this._prevPath = path;
+			return;
+		}
+
 		this._routes[path].open(this._root);
 		this._prevPath = path;
 	}

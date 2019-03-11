@@ -8,6 +8,7 @@ import LeaderBoard from './pages/scoreboard_page.js';
 import ProfilePage from './pages/profile_page.js';
 import EditProfilePage from './pages/edit_profile_page.js';
 import Router from './modules/router.js';
+import NotFound from './pages/404.js';
 
 document.addEventListener('DOMContentLoaded', function() {
 	const router = new Router({
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		router: router,
 	}));
 	router.add('/leaders', new LeaderBoard());
+	router.add('/not_found', new NotFound());
 
 	router.start();
 });

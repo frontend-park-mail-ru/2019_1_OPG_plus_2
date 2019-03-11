@@ -127,13 +127,6 @@ export default class EditProfilePage extends Page{
             }),
             profileFormTemplate({
                 modifiers: [],
-                name: 'email',
-                type: 'email',
-                title: 'E-mail',
-                val: data.email,
-            }),
-            profileFormTemplate({
-                modifiers: [],
                 name: 'password',
                 type: 'password',
                 title: 'Password',
