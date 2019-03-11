@@ -1,0 +1,29 @@
+.row {
+    display: flex;
+    padding: 13px;
+    font-family: "Roboto";
+    font-size: 4vh;
+    color: white;
+    background: #b68b8f;
+    border-radius: 35px 0px 0px 0px;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 3vh;
+
+    &__number {
+        padding: 0 5vw 0 4vw;
+    }
+
+    &__photo {
+        padding: 0 7vh 0 0;
+        
+        &__icon {
+            width: 8vh;
+        }
+    }
+
+    &__score {
+        padding-right: 2vw;
+        margin-left: auto;
+    }
+}

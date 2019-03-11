@@ -1,0 +1,11 @@
+.title_theme_main {
+    font-family: $main-font-family;
+
+    @media (min-width: $desktop-min-width) {
+        font-size: 11vh;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        font-size: 4em;
+    }
+}

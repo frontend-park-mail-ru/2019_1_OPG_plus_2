@@ -1,0 +1,13 @@
+.profile-data {
+    @media (min-width: $desktop-min-width) {
+        grid-column: 3/8;
+        border-radius: 0px 0px 30px 30px;
+        background-color: #EF9A9A;
+        position: relative;
+        top: -15vh;
+        z-index: -2;
+        display: grid;
+        grid-template: repeat(6, 1fr)/repeat(6, 1fr);
+        grid-gap: 15px;
+    }
+}

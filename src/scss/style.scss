@@ -1,0 +1,97 @@
+@import 'variables.scss';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Unica+One');
+@import '../blocks/html/html.scss';
+@import '../blocks/html/body/body.scss';
+@import '../blocks/html/body/application/application.scss';
+@import '../blocks/html/body/application/container/container.scss';
+@import '../blocks/html/body/application/container/container_theme_error.scss';
+@import '../blocks/html/body/application/container/content/content.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons.scss';
+@import '../blocks/html/body/application/container/content/buttons/link/link.scss';
+@import '../blocks/html/body/application/container/content/buttons/submit/submit.scss';
+@import '../blocks/html/body/application/container/content/buttons/button/button_type_secondary.scss';
+@import '../blocks/html/body/application/container/content/forms/forms.scss';
+@import '../blocks/html/body/application/container/content/forms/form/form.scss';
+@import '../blocks/html/body/application/container/content/forms/error/error.scss';
+@import '../blocks/html/body/application/container/content/main/main.scss';
+@import '../blocks/html/body/application/container/content/main/play/play.scss';
+@import '../blocks/html/body/application/container/content/title/title.scss';
+@import '../blocks/html/body/application/container/head/head.scss';
+@import '../blocks/html/body/application/container/head/head_theme_main.scss';
+@import '../blocks/html/body/application/container/head/head_theme_signin.scss';
+@import '../blocks/html/body/application/container/head/back-arrow/back-arrow.scss';
+@import '../blocks/html/body/application/container/head/head_theme_back-arrow.scss';
+@import '../blocks/html/body/application/container/head/lines/lines.scss';
+@import '../blocks/html/body/application/container/head/menu/menu.scss';
+@import '../blocks/html/body/application/container/head/menu/rules/rules.scss';
+@import '../blocks/html/body/application/container/head/menu/profile/profile.scss';
+@import '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.scss';
+@import '../blocks/html/body/application/container/content/buttons/link/link_theme_hidden.scss';
+@import '../blocks/html/body/application/container/head/menu/profile/profile_theme_hidden.scss';
+
+/* sign up */
+
+@import '../blocks/html/body/application/container/container_theme_signup.scss';
+@import '../blocks/html/body/application/container/content/content_theme_signup.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_signup.scss';
+@import '../blocks/html/body/application/container/head/head_theme_signup.scss';
+@import '../blocks/html/body/application/container/content/forms/form/form_theme_signup.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons_theme_signup.scss';
+
+/* sign in */
+
+@import '../blocks/html/body/application/container/container_theme_signin.scss';
+@import '../blocks/html/body/application/container/content/content_theme_signin.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_signin.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons_theme_signin.scss';
+
+/* main */
+
+@import '../blocks/html/body/application/container/container_theme_main.scss';
+@import '../blocks/html/body/application/container/content/content_theme_main.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_main.scss';
+@import '../blocks/html/body/application/container/content/main/main_theme_index.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons_theme_main.scss';
+@import '../blocks/html/body/application/container/head/menu/menu_theme_main.scss';
+
+
+/* scoreboard */
+
+@import '../blocks/html/body/application/container/container_theme_scoreboard.scss';
+@import '../blocks/html/body/application/container/content/content_theme_scoreboard.scss';
+@import '../blocks/html/body/application/container/content/main/main_theme_scoreboard.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_scoreboard.scss';
+@import '../blocks/html/body/application/container/content/main/row/row.scss';
+
+/* profile */
+
+@import '../blocks/html/body/application/container/container_theme_profile.scss';
+@import '../blocks/html/body/application/container/content/content_theme_profile.scss';
+@import '../blocks/html/body/application/container/head/head_theme_profile.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card_theme_main.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card_theme_edit.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/name/name.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/profile-data.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_score.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_games.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_win.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_lose.scss';
+@import '../blocks/html/body/application/container/head/menu/logout/logout.scss';
+@import '../blocks/html/body/application/container/head/menu/menu_theme_profile.scss';
+@import '../blocks/html/body/application/container/head/menu/settings/settings.scss';
+
+/* edit profile */
+
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.scss';
+@import '../blocks/html/body/application/container/content/forms/form/form_theme_profile.scss';
+@import '../blocks/html/body/application/container/content/content_theme_edit-profile.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.scss';
+@import '../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.scss';
+@import '../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-card_theme_forms.scss';
+@import '../blocks/html/body/application/container/content/buttons/submit/submit_theme_edit-profile.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons_theme_edit-profile.scss';

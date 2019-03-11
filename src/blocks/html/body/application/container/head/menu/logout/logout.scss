@@ -1,0 +1,17 @@
+.logout {
+    background-image: url("data:image/svg+xml,%3Csvg width='66' height='66' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16.295v33.41c0 4.604 3.756 8.36 8.36 8.36h27.002c4.604 0 8.36-3.756 8.36-8.36v-5.411a1.655 1.655 0 1 0-3.312 0v5.411a5.073 5.073 0 0 1-5.061 5.062H8.359a5.073 5.073 0 0 1-5.061-5.062v-33.41a5.073 5.073 0 0 1 5.061-5.062h27.003a5.073 5.073 0 0 1 5.062 5.062v5.411c0 .916.74 1.656 1.656 1.656.915 0 1.655-.74 1.655-1.656v-5.411c0-4.604-3.755-8.36-8.36-8.36H8.36C3.756 7.935 0 11.678 0 16.295z' fill='%23fff'/%3E%3Cpath d='M51.879 45.452c.323.323.74.484 1.171.484.43 0 .848-.161 1.171-.484l11.294-11.294a1.641 1.641 0 0 0 0-2.33L54.221 20.536a1.641 1.641 0 0 0-2.329 0 1.641 1.641 0 0 0 0 2.329l8.48 8.48H29.427c-.916 0-1.656.74-1.656 1.656 0 .915.74 1.656 1.656 1.656h30.933l-8.48 8.48a1.625 1.625 0 0 0 0 2.316z' fill='%23fff'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    @media (min-width: $desktop-min-width) {
+        padding: 70px 60px 24px 40px;
+        background-size: 70px;
+        height: 50px;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        padding: 10px 30px;
+        background-size: 30px;
+        height: 30px;
+    }
+}

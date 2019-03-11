@@ -1,0 +1,16 @@
+.data-item {
+    @media (min-width: $desktop-min-width) {
+        grid-column: 3/-1;
+        color: $color-text;
+        font-family: $secondary-font-family;
+        text-align: left;
+
+        &__title {
+            font-size: 3.6vh;
+        }
+
+        &__data {
+            font-size: 2.5vh;
+        }
+    }
+}

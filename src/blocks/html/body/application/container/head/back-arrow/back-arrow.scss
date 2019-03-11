@@ -1,0 +1,26 @@
+@keyframes move {
+    from {background-position-x: 40%;}
+    40% {background-position-x: 38%;}
+    50% {background-position-x: 36%;}
+    70% {background-position-x: 34%;}
+    to {background-position-x: 33%;}
+}
+
+.back-arrow {
+    grid-column: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        background-image: url("data:image/svg+xml,%3Csvg width='25' height='25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6.897 14.063h14.978a1.562 1.562 0 1 0 0-3.126H6.897l4.08-4.08a1.562 1.562 0 1 0-2.21-2.209l-6.73 6.729-.017.018a1.558 1.558 0 0 0 0 2.21l.017.018 6.73 6.729a1.563 1.563 0 0 0 2.21-2.21l-4.08-4.08z' fill='%23fff'/%3E%3C/svg%3E");
+        background-size: 80px;
+        background-repeat: no-repeat;
+        background-position-y: center;
+        background-position-x: 40%;
+    }
+
+    &:hover {
+        animation: move 300ms forwards ease;
+    }
+}

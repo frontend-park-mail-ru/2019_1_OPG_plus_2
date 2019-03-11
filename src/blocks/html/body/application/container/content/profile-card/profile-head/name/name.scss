@@ -1,0 +1,8 @@
+.name {
+    font-family: $secondary-font-family;
+    color: $color-text;
+
+    @media (min-width: $desktop-min-width) {
+        font-size: 7vh;
+    }
+}

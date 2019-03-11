@@ -1,0 +1,6 @@
+.head_theme_main {    
+    @media (min-width: $desktop-min-width) {
+        grid-column: 1;
+        display: grid;
+    }
+}

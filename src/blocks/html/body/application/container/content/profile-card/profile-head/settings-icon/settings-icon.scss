@@ -1,0 +1,12 @@
+.settings-icon {
+    @media (min-width: $desktop-min-width) {
+        background-color: #FFCDD2;
+        background-image: url(../img/settings.svg);
+        border: 2vh solid #FFCDD2;
+        border-radius: 14vh;
+        background-position: 0px 3.8vh;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        padding: 0vh 9vh;
+    }
+}
