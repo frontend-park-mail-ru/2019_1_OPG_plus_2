@@ -12,7 +12,6 @@ import Page from './page';
 
 export default class LeaderBoard extends Page{
     _renderLeaderBoard(data) {
-        console.log(data);
         genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_scoreboard'],
         }));
@@ -40,21 +39,19 @@ export default class LeaderBoard extends Page{
         genericBeforeEnd(contentBlock, 
             titleTemplate({
                 title: 'SCOREBOARD',
-                modifiers: ['title_theme_main'],
+                modifiers: ['title_theme_scoreboard'],
             }),
             mainTemplate({
-                modifiers: ['main_theme_index'],
+                modifiers: ['main_theme_scoreboard'],
             }),
         );
-        const mainBlock = document.querySelector('.main.main_theme_index');
+        const mainBlock = document.querySelector('.main.main_theme_scoreboard');
 
         genericBeforeEnd(mainBlock, 
             rowTemplate({
                 modifiers: [],
-                number: 1,
-                name: 'Ivan',
-                score: 25,
-            }),
+                lst: [...data],
+            })
         );
     }
 

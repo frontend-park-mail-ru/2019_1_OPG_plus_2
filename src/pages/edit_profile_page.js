@@ -29,6 +29,19 @@ export default class EditProfilePage extends Page{
         this._router = router;
     }
 
+    _createEventListener(el) {
+        el.addEventListener('click', function (event) {
+            event.preventDefault();
+            AjaxModule.doPost({
+				callback: () => {
+					this._router.open('/');
+				},
+				path: '/logout',
+				body: {},
+			});
+        }.bind(this));
+    }
+
     _renderEditProfilePage(data) {
         genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_profile'],
@@ -139,7 +152,7 @@ export default class EditProfilePage extends Page{
         genericBeforeEnd(buttonsBlock, 
             submitTemplate({
                 el: buttonsBlock,
-                value: 'GOD SAVE AND BLESS US',
+                value: 'SAVE',
                 form: 'profile-edit',
                 modifiers: ['submit_theme_edit-profile'],
             }),
@@ -148,8 +161,12 @@ export default class EditProfilePage extends Page{
         genericBeforeEnd(menuBlock, 
             logoutIconTemplate({
                 modifiers: [],
+                href: '/logout',
+                dataset: '/logout',
             }),
         );
+
+        this._createEventListener(document.querySelector('.logout'));
     }
 
     open(root) {

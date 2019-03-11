@@ -13,6 +13,7 @@ import {genericBeforeEnd} from '../modules/helpers.js'
 import Page from './page';
 import AjaxModule from '../modules/ajax';
 import {validEmail, validLogin} from '../modules/utils.js';
+import { debug } from 'util';
 
 export default class SignUpPage extends Page {
     constructor({
@@ -22,8 +23,60 @@ export default class SignUpPage extends Page {
         this._router = router;
     }
 
+    _createEventListener() {
+        const formsBlock = this._el.querySelector('.forms');
+
+        formsBlock.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			const name = formsBlock.elements[0].value;
+			const email = formsBlock.elements[1].value;
+			const password = formsBlock.elements[2].value;
+			const password_repeat = formsBlock.elements[3].value;
+
+            if (!validEmail(email) || !email) {
+                this._el.innerHTML = '';
+                this._renderSignUp({
+                    error: 'Invalid Email',
+                    modifier: 'container_theme_error',
+                });
+                return;
+            }
+
+            if (!validLogin(name) || !name) {
+                this._el.innerHTML = '';
+                this._renderSignUp({
+                    error: 'Invalid Name',
+                    modifier: 'container_theme_error',
+                });
+                return;
+            } 
+
+			if (password !== password_repeat || !password || !password_repeat) {
+                this._el.innerHTML = '';
+				this._renderSignUp({
+                    error: 'Passwords doesn\' not match',
+                    modifier: 'container_theme_error',
+                });
+                return;
+            }
+            
+			AjaxModule.doPost({
+				callback: () => {
+					application.innerHTML = '';
+					this._router.open('/me')
+				},
+				path: '/signup',
+				body: {
+					name: name,
+					email: email,
+					password: password,
+				},
+			});
+		});
+    }
+
     _renderSignUp(data) {
-        console.log(data);
         genericBeforeEnd(this._el, containerTemplate({
             modifiers: [`container_theme_signup ${data.modifier || ' '}`],
         }));
@@ -107,61 +160,12 @@ export default class SignUpPage extends Page {
                 modifiers: [],
             }),
         );
+
+        this._createEventListener();
     }
 
     open(root) {
         this._el = root;
         this._renderSignUp({});
-
-        const formsBlock = document.querySelector('.forms');
-
-		formsBlock.addEventListener('submit', (event) => {
-			event.preventDefault();
-
-			const name = formsBlock.elements[0].value;
-			const email = formsBlock.elements[1].value;
-			const password = formsBlock.elements[2].value;
-			const password_repeat = formsBlock.elements[3].value;
-
-            if (!validEmail(email) || !email) {
-                this._el.innerHTML = '';
-                this._renderSignUp({
-                    error: 'Invalid Email',
-                    modifier: 'container_theme_error',
-                });
-                return;
-            }
-
-            if (!validLogin(name) || !name) {
-                this._el.innerHTML = '';
-                this._renderSignUp({
-                    error: 'Invalid Name',
-                    modifier: 'container_theme_error',
-                });
-                return;
-            } 
-
-			if (password !== password_repeat || !password || !password_repeat) {
-                this._el.innerHTML = '';
-				this._renderSignUp({
-                    error: 'Passwords doesn\' not match',
-                    modifier: 'container_theme_error',
-                });
-                return;
-			}
-
-			AjaxModule.doPost({
-				callback: () => {
-					application.innerHTML = '';
-					this._router.open('/me')
-				},
-				path: '/signup',
-				body: {
-					name: name,
-					email: email,
-					password: password,
-				},
-			});
-		});
     }
 }

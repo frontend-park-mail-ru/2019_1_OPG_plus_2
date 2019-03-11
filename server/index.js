@@ -113,13 +113,12 @@ app.get('/users', function (req, res) {
 	res.json(scorelist);
 });
 
-app.post('/signout', function (req, res) {
+app.post('/logout', function (req, res) {
 	const id = req.cookies['sessionid'];
 	const email = ids[id];
 
 	delete ids[id];
 	res.status(200).json({});
-
 })
 
 const port = process.env.PORT || 3000;

@@ -13,13 +13,21 @@ import linkTemplate from '../blocks/html/body/application/container/content/butt
 
 import {genericBeforeEnd} from '../modules/helpers.js'
 import Page from './page';
+import User from '../modules/user.js';
+import Auth from '../modules/auth.js';
 
 export default class MainPage extends Page {
-    _renderMainPage() {
+    constructor({
+        router = {},
+    } = {}) {
+        super();
+        this._router = router;
+    }
+    _renderMainPage(data) {
         genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_main'],
         }));
-        const containerBlock = document.querySelector('.container.container_theme_main');
+        const containerBlock = this._el.querySelector('.container.container_theme_main');
 
         genericBeforeEnd(containerBlock, 
             headTemplate({
@@ -29,19 +37,19 @@ export default class MainPage extends Page {
                 modifiers: ['content_theme_main'],
             })
         );
-        const headBlock = document.querySelector('.head.head_theme_main');
-        const contentBlock = document.querySelector('.content.content_theme_main');
+        const headBlock = this._el.querySelector('.head.head_theme_main');
+        const contentBlock = this._el.querySelector('.content.content_theme_main');
 
         genericBeforeEnd(headBlock, 
             menuTemplate({
                 modifiers: ['menu_theme_main'],
             })
         );
-        const menuBlock = document.querySelector('.menu.menu_theme_main');
+        const menuBlock = this._el.querySelector('.menu.menu_theme_main');
 
         genericBeforeEnd(menuBlock, 
             profileIconTemplate({
-                modifiers: [],
+                modifiers: [`${data ? '' : 'profile_theme_hidden'}`],
                 href: '/',
                 dataset: '/me',
             }),
@@ -69,8 +77,8 @@ export default class MainPage extends Page {
                 modifiers: ['buttons_theme_main'],
             })
         );
-        const mainBlock = document.querySelector('.main.main_theme_index');
-        const buttonsBlock = document.querySelector('.buttons.buttons_theme_main');
+        const mainBlock = this._el.querySelector('.main.main_theme_index');
+        const buttonsBlock = this._el.querySelector('.buttons.buttons_theme_main');
 
         genericBeforeEnd(mainBlock, 
             playTemplate({
@@ -91,19 +99,25 @@ export default class MainPage extends Page {
                 href: 'signin',
                 title: 'SING IN',
                 dataset: '/signin',
-                modifiers: [],
+                modifiers: [`${data ? 'link_theme_hidden' : ''}`],
             }),
             linkTemplate({
                 href: 'signup',
                 title: 'SIGN UP',
                 dataset: '/signup',
-                modifiers: [],
+                modifiers: [`${data ? 'link_theme_hidden' : ''}`],
             }),
         );
     }
 
     open(root) {
         this._el = root;
-        this._renderMainPage();
+        Auth.isAuth()
+        .then(res => {
+            this._renderMainPage(res);
+        })
+        .catch(res => {
+            this._renderMainPage(null);
+        });
     }
 }

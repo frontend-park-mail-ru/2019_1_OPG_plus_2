@@ -26,6 +26,8 @@
 @import '../blocks/html/body/application/container/head/menu/rules/rules.scss';
 @import '../blocks/html/body/application/container/head/menu/profile/profile.scss';
 @import '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.scss';
+@import '../blocks/html/body/application/container/content/buttons/link/link_theme_hidden.scss';
+@import '../blocks/html/body/application/container/head/menu/profile/profile_theme_hidden.scss';
 
 /* sign up */
 
@@ -57,6 +59,8 @@
 
 @import '../blocks/html/body/application/container/container_theme_scoreboard.scss';
 @import '../blocks/html/body/application/container/content/content_theme_scoreboard.scss';
+@import '../blocks/html/body/application/container/content/main/main_theme_scoreboard.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_scoreboard.scss';
 @import '../blocks/html/body/application/container/content/main/row/row.scss';
 
 /* profile */

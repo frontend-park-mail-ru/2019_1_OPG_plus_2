@@ -25,6 +25,19 @@ export default class ProfilePage extends Page {
         this._router = router;
     }
 
+    _createEventListener(el) {
+        el.addEventListener('click', function (event) {
+            event.preventDefault();
+            AjaxModule.doPost({
+				callback: () => {
+					this._router.open('/');
+				},
+				path: '/logout',
+				body: {},
+			});
+        }.bind(this));
+    }
+
     _renderProfilePage(data) {
         genericBeforeEnd(this._el, 
             containerTemplate({
@@ -110,6 +123,8 @@ export default class ProfilePage extends Page {
         genericBeforeEnd(menuBlock, 
             logoutIconTemplate({
                 modifiers: [],
+                hr: '/logout',
+                dataset: '/logout',
             }),
             settingsIconTemplate({
                 href: '/editme',
@@ -117,6 +132,8 @@ export default class ProfilePage extends Page {
                 modifiers: [],
             })
         );
+
+        this._createEventListener(document.querySelector('.logout'));
     }
 
     open(root) {
@@ -137,7 +154,6 @@ export default class ProfilePage extends Page {
             },
             path: '/me',
         });
-
         }
     }
 }
