@@ -13,7 +13,6 @@ import {genericBeforeEnd} from '../modules/helpers.js'
 import Page from './page';
 import AjaxModule from '../modules/ajax';
 import {validEmail, validLogin} from '../modules/utils.js';
-import { debug } from 'util';
 
 export default class SignUpPage extends Page {
     constructor({

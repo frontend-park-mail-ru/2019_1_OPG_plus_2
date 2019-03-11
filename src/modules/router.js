@@ -20,11 +20,18 @@ export default class Router {
             this.close();
         }
 
+        if (!this._routes[path]) {
+            this._routes['/not_found'].open(this._root);
+            this._prevPath = '/not_found';
+            return;
+        }
+
         this._routes[path].open(this._root);
         this._prevPath = path;
     }
 
     start() {
+        console.log(window.location.pathname);
         this.open(window.location.pathname);
         this._root.addEventListener('click', function (event) {
             if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
