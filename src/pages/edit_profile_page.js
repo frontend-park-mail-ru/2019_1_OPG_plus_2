@@ -130,7 +130,7 @@ export default class EditProfilePage extends Page{
 				name: 'password',
 				type: 'password',
 				title: 'Password',
-				val: "••••••••",
+				val: '••••••••',
 			}),
 			profileFormTemplate({
 				modifiers: [],
