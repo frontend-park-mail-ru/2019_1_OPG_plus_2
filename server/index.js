@@ -84,6 +84,24 @@ app.get('/me', function(req, res) {
 	res.json(users[email]);
 });
 
+app.post('/editme', function(req, res) {
+	const id = req.cookies['sessionid'];
+	const email = ids[id];
+
+	if (!email || !users[email]) {
+		return res.status(401).end();
+	}
+
+	const name = req.body.name;
+
+	users[email].name = name;
+	users[email].email = email;
+
+	// console.log(users[email]);
+
+	res.json(users[email]);
+});
+
 app.get('/users', function (req, res) {
 	const scorelist = Object.values(users)
 		.sort((l, r) => r.score - l.score)

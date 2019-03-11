@@ -16,21 +16,20 @@ import buttonsTemplate from '../blocks/html/body/application/container/content/b
 import submitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js'
+import Page from './page';
+import User from '../modules/user.js';
+import AjaxModule from '../modules/ajax';
+import { isUserWhitespacable } from 'babel-types';
 
-export default class EditProfilePage {
+export default class EditProfilePage extends Page{
     constructor({
-        el = document.body,
-        name = '',
-        email = '',
-        score = '',
+        router = {},
     } = {}) {
-        this._el = el;
-        this._name = name;
-        this._email = email;
-        this._score = score;
+        super();
+        this._router = router;
     }
 
-    _renderEditProfilePage() {
+    _renderEditProfilePage(data) {
         genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_profile'],
         }));
@@ -55,7 +54,7 @@ export default class EditProfilePage {
             backArrowTemplate({
                 modifiers: [],
                 href: '/',
-                dataset: 'menu',
+                dataset: '/',
             }),
         );
 
@@ -112,24 +111,28 @@ export default class EditProfilePage {
                 name: 'name',
                 type: 'text',
                 title: 'Name',
+                val: data.name,
             }),
             profileFormTemplate({
                 modifiers: [],
                 name: 'email',
                 type: 'email',
                 title: 'E-mail',
+                val: data.email,
             }),
             profileFormTemplate({
                 modifiers: [],
                 name: 'password',
                 type: 'password',
                 title: 'Password',
+                val: data.password,
             }),
             profileFormTemplate({
                 modifiers: [],
                 name: 'repeat-password',
                 type: 'password',
                 title: 'Repeat password',
+                val: '',
             }),
         );
 
@@ -149,7 +152,44 @@ export default class EditProfilePage {
         );
     }
 
-    render() {
-        this._renderEditProfilePage();
+    open(root) {
+        if (User.exist()) {
+            this._el = root;
+            this._renderEditProfilePage(User.get());
+
+            const formsBlock = document.querySelector('.forms');
+		    formsBlock.addEventListener('submit', (event) => {
+                event.preventDefault();
+                    
+                const name = formsBlock.elements[0].value;
+                const email = formsBlock.elements[1].value;
+
+                AjaxModule.doPost({
+                    callback: (xhr) => {
+                        User.set(xhr);
+                        this._router.open('/me');
+                    },
+                    path: '/editme',
+                    body: {
+                        name: name,
+                        email: email,
+                    },
+                });
+            });
+        } else {
+            AjaxModule.doGet({
+                callback: (xhr) => {
+                    if (!xhr) {
+                        alert('Unauthorized');
+                        this._router.open('/');
+                        return;
+                    }
+    
+                    User.set(xhr);
+                    this._router.open('/editme');
+                },
+                path: '/me',
+            });
+        }
     }
 }

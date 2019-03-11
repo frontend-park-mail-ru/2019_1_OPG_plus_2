@@ -18,8 +18,6 @@ export default class AjaxModule {
             if (response.status === 401) {
                 throw '';
             }
-            debugger;
-            console.log(response);
             return response.json();
         }).then(json => callback(json))
         .catch(err => callback(err));

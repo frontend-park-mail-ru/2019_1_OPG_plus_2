@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	router.add('/signup', new SignUpPage({
 		router: router,
 	}));
+	router.add('/editme', new EditProfilePage({
+		router: router,
+	}));
 
 	router.start();
 });

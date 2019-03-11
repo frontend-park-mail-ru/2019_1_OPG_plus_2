@@ -104,7 +104,7 @@ export default class SignInPage extends Page {
             	
 			const email = formsBlock.elements[0].value;
             const password = formsBlock.elements[1].value;
-            console.log(email, password);
+            
 			AjaxModule.doPost({
 				callback: () => {
 					this._router.open('/me');

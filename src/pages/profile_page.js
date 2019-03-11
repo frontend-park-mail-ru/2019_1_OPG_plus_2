@@ -113,8 +113,8 @@ export default class ProfilePage extends Page {
                 modifiers: [],
             }),
             settingsIconTemplate({
-                href: 'editme',
-                dataset: 'editme',
+                href: '/editme',
+                dataset: '/editme',
                 modifiers: [],
             })
         );
