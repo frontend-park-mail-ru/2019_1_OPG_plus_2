@@ -9,7 +9,7 @@ import buttonsTemplate from '../blocks/html/body/application/container/content/b
 import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 import errorTemplate from '../blocks/html/body/application/container/content/forms/error/error.pug';
 
-import {genericBeforeEnd} from '../modules/helpers.js'
+import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import AjaxModule from '../modules/ajax';
 import {validEmail, validLogin} from '../modules/utils.js';
@@ -27,6 +27,7 @@ export default class SignUpPage extends Page {
         const formsBlock = this._el.querySelector('.forms');
 
         formsBlock.addEventListener('submit', (event) => {
+
 			event.preventDefault();
 
 			const name = formsBlock.elements[0].value;
@@ -65,6 +66,7 @@ export default class SignUpPage extends Page {
 				callback: () => {
 					application.innerHTML = '';
 					this._router.open('/me')
+
 				},
 				path: '/signup',
 				body: {

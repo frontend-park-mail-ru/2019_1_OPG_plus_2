@@ -11,12 +11,13 @@ import playTemplate from '../blocks/html/body/application/container/content/main
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
 import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
 
-import {genericBeforeEnd} from '../modules/helpers.js'
+import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import User from '../modules/user.js';
 import Auth from '../modules/auth.js';
 
 export default class MainPage extends Page {
+
     constructor({
         router = {},
     } = {}) {
@@ -80,14 +81,14 @@ export default class MainPage extends Page {
         const mainBlock = this._el.querySelector('.main.main_theme_index');
         const buttonsBlock = this._el.querySelector('.buttons.buttons_theme_main');
 
-        genericBeforeEnd(mainBlock, 
-            playTemplate({
-                href: 'game',
-                dataset: 'game',
-                modifiers: [],
-            })
-        );
-
+		genericBeforeEnd(mainBlock, 
+			playTemplate({
+				href: 'game',
+				dataset: '/game',
+				modifiers: [],
+			})
+		);
+      
         genericBeforeEnd(buttonsBlock, 
             linkTemplate({
                 href: 'multiplayer',

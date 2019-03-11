@@ -15,11 +15,10 @@ import editIconTemplate from '../blocks/html/body/application/container/content/
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
 import submitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 
-import {genericBeforeEnd} from '../modules/helpers.js'
+import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import User from '../modules/user.js';
 import AjaxModule from '../modules/ajax';
-import { isUserWhitespacable } from 'babel-types';
 
 export default class EditProfilePage extends Page{
     constructor({

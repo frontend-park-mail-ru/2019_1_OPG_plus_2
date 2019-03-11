@@ -6,36 +6,37 @@ import titleTemplate from '../blocks/html/body/application/container/content/tit
 import mainTemplate from '../blocks/html/body/application/container/content/main/main.pug';
 import rowTemplate from '../blocks/html/body/application/container/content/main/row/row.pug';
 
-import {genericBeforeEnd} from '../modules/helpers.js'
+import {genericBeforeEnd} from '../modules/helpers.js';
 import AjaxModule from '../modules/ajax';
 import Page from './page';
 
 export default class LeaderBoard extends Page{
+
     _renderLeaderBoard(data) {
         genericBeforeEnd(this._el, containerTemplate({
             modifiers: ['container_theme_scoreboard'],
         }));
         const containerBlock = document.querySelector('.container.container_theme_scoreboard');
 
-        genericBeforeEnd(containerBlock, 
-            headTemplate({
-                modifiers: ['head_theme_back-arrow'],
-            }),
-            contentTemplate({
-                modifiers: ['content_theme_scoreboard'],
-            })
-        );
-        const headBlock = document.querySelector('.head.head_theme_back-arrow');
-        const contentBlock = document.querySelector('.content.content_theme_scoreboard');
 
-        genericBeforeEnd(headBlock, 
-            backArrowTemplate({
-                modifiers: [],
-                href: '/',
-                dataset: '/',
-            }),
-        );
+		genericBeforeEnd(containerBlock, 
+			headTemplate({
+				modifiers: ['head_theme_back-arrow'],
+			}),
+			contentTemplate({
+				modifiers: ['content_theme_scoreboard'],
+			})
+		);
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
+		const contentBlock = document.querySelector('.content.content_theme_scoreboard');
 
+		genericBeforeEnd(headBlock, 
+			backArrowTemplate({
+				modifiers: [],
+				href: '/',
+				dataset: '/',
+			}),
+		);
         genericBeforeEnd(contentBlock, 
             titleTemplate({
                 title: 'SCOREBOARD',
@@ -55,13 +56,14 @@ export default class LeaderBoard extends Page{
         );
     }
 
-    open(root) {
-        this._el = root;
-        AjaxModule.doGet({
-            callback: (xhr) => {
-                this._renderLeaderBoard(xhr);
-            },
-            path: '/users',
-        });
-    }
+
+	open(root) {
+		this._el = root;
+		AjaxModule.doGet({
+			callback: (xhr) => {
+				this._renderLeaderBoard(xhr);
+			},
+			path: '/users',
+		});
+	}
 }
