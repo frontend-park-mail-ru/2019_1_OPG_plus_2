@@ -136,17 +136,17 @@ export default class ProfilePage extends Page {
 		this._createEventListener(document.querySelector('.logout'));
 	}
 
-    open(root) {
-        if (User.exist()) {
-            this._el = root;
-            this._renderProfilePage(User.get());
-        } else {
-        AjaxModule.doGet({
-            callback: (xhr) => {
-                if (!xhr) {
-                    this._router.open('/signin');
-                    return;
-                }
+	open(root) {
+		if (User.exist()) {
+			this._el = root;
+			this._renderProfilePage(User.get());
+		} else {
+			AjaxModule.doGet({
+				callback: (xhr) => {
+					if (!xhr) {
+						this._router.open('/signin');
+						return;
+					}
 
 					User.set(xhr);
 					this._router.open('/me');

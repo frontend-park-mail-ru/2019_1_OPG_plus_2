@@ -15,29 +15,29 @@ import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 
 export default class SignInPage extends Page {
-    constructor({
-        router = {},
-    } = {}) {
-        super();
-        this._router = router;
-    }
+	constructor({
+		router = {},
+	} = {}) {
+		super();
+		this._router = router;
+	}
 
-    _createEventListener() {
-        const formsBlock = this._el.querySelector('.forms');
+	_createEventListener() {
+		const formsBlock = this._el.querySelector('.forms');
 		formsBlock.addEventListener('submit', (event) => {
-            event.preventDefault();
+			event.preventDefault();
             	
 			const email = formsBlock.elements[0].value;
-            const password = formsBlock.elements[1].value;
+			const password = formsBlock.elements[1].value;
             
 			AjaxModule.doPost({
 				callback: (xhr) => {
-                    if (xhr.id) {
-                        this._router.open('/me');
-                    } else {
-                        this._el.innerHTML = '';
-                        this._renderSignIn(xhr);
-                    }
+					if (xhr.id) {
+						this._router.open('/me');
+					} else {
+						this._el.innerHTML = '';
+						this._renderSignIn(xhr);
+					}
 				},
 				path: '/login',
 				body: {
@@ -46,13 +46,13 @@ export default class SignInPage extends Page {
 				},
 			});
 		});
-    }
+	}
 
-    _renderSignIn(data) {
-        genericBeforeEnd(this._el, containerTemplate({
-            modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
-        }));
-        const containerBlock = document.querySelector('.container.container_theme_signin');
+	_renderSignIn(data) {
+		genericBeforeEnd(this._el, containerTemplate({
+			modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
+		}));
+		const containerBlock = document.querySelector('.container.container_theme_signin');
 
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
@@ -89,46 +89,46 @@ export default class SignInPage extends Page {
 		const formsBlock = document.querySelector('.forms');
 		const buttonsBlock = document.querySelector('.buttons');
 
-        genericBeforeEnd(formsBlock, 
-            errorTemplate({
-                modifiers: [],
-                text: data.error,
-            }),
-            formTemplate({
-                modifiers: [],
-                name: 'email',
-                placeholder: 'E-mail',
-                type: 'email',
-                req: true,
-            }),
-            formTemplate({
-                modifiers: [],
-                name: 'password',
-                placeholder: 'Password',
-                type: 'password',
-                req: true,
-            }),
-        );
+		genericBeforeEnd(formsBlock, 
+			errorTemplate({
+				modifiers: [],
+				text: data.error,
+			}),
+			formTemplate({
+				modifiers: [],
+				name: 'email',
+				placeholder: 'E-mail',
+				type: 'email',
+				req: true,
+			}),
+			formTemplate({
+				modifiers: [],
+				name: 'password',
+				placeholder: 'Password',
+				type: 'password',
+				req: true,
+			}),
+		);
 
-        genericBeforeEnd(buttonsBlock, 
-            sumbitTemplate({
-                value: 'SIGN IN',
-                form: 'signin',
-                modifiers: [],
-            }),
-            linkTemplate({
-                href: 'signup',
-                title: 'SIGN UP',
-                dataset: 'signup',
-                modifiers: ['button_type_secondary'],
-            }),
-        );
+		genericBeforeEnd(buttonsBlock, 
+			sumbitTemplate({
+				value: 'SIGN IN',
+				form: 'signin',
+				modifiers: [],
+			}),
+			linkTemplate({
+				href: 'signup',
+				title: 'SIGN UP',
+				dataset: 'signup',
+				modifiers: ['button_type_secondary'],
+			}),
+		);
 
-        this._createEventListener();
-    }
+		this._createEventListener();
+	}
 
-    open(root) {
-        this._el = root;
-        this._renderSignIn({});
-    }
+	open(root) {
+		this._el = root;
+		this._renderSignIn({});
+	}
 }

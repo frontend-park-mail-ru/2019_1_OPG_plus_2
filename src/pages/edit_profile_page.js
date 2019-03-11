@@ -28,8 +28,8 @@ import AjaxModule from '../modules/ajax';
 
 export default class EditProfilePage extends Page {
 	constructor({
-					router = {},
-				} = {}) {
+		router = {},
+	} = {}) {
 		super();
 		this._router = router;
 	}
