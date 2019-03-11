@@ -130,14 +130,14 @@ export default class EditProfilePage extends Page{
 				name: 'password',
 				type: 'password',
 				title: 'Password',
-				val: data.password,
+				val: "••••••••",
 			}),
 			profileFormTemplate({
 				modifiers: [],
 				name: 'repeat-password',
 				type: 'password',
 				title: 'Repeat password',
-				val: '',
+				val: '••••••••',
 			}),
 		);
 
