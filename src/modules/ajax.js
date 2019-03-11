@@ -85,10 +85,10 @@ export default class AjaxModule {
 	 * @param body Body of the request
 	 */
 	static doDelete({
-					 callback = noop,
-					 path = '/',
-					 body = {},
-				 } = {}) {
+		callback = noop,
+		path = '/',
+		body = {},
+	} = {}) {
 		fetch(path, {
 			method: 'DELETE',
 			mode: 'cors',

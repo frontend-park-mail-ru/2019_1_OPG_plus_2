@@ -12,11 +12,11 @@ import Page from './page';
 
 export default class LeaderBoard extends Page{
 
-    _renderLeaderBoard(data) {
-        genericBeforeEnd(this._el, containerTemplate({
-            modifiers: ['container_theme_scoreboard'],
-        }));
-        const containerBlock = document.querySelector('.container.container_theme_scoreboard');
+	_renderLeaderBoard(data) {
+		genericBeforeEnd(this._el, containerTemplate({
+			modifiers: ['container_theme_scoreboard'],
+		}));
+		const containerBlock = document.querySelector('.container.container_theme_scoreboard');
 
 
 		genericBeforeEnd(containerBlock, 
@@ -37,24 +37,24 @@ export default class LeaderBoard extends Page{
 				dataset: '/',
 			}),
 		);
-        genericBeforeEnd(contentBlock, 
-            titleTemplate({
-                title: 'SCOREBOARD',
-                modifiers: ['title_theme_scoreboard'],
-            }),
-            mainTemplate({
-                modifiers: ['main_theme_scoreboard'],
-            }),
-        );
-        const mainBlock = document.querySelector('.main.main_theme_scoreboard');
+		genericBeforeEnd(contentBlock, 
+			titleTemplate({
+				title: 'SCOREBOARD',
+				modifiers: ['title_theme_scoreboard'],
+			}),
+			mainTemplate({
+				modifiers: ['main_theme_scoreboard'],
+			}),
+		);
+		const mainBlock = document.querySelector('.main.main_theme_scoreboard');
 
-        genericBeforeEnd(mainBlock, 
-            rowTemplate({
-                modifiers: [],
-                lst: [...data],
-            })
-        );
-    }
+		genericBeforeEnd(mainBlock, 
+			rowTemplate({
+				modifiers: [],
+				lst: [...data],
+			})
+		);
+	}
 
 
 	open(root) {

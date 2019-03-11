@@ -26,26 +26,26 @@ export default class ProfilePage extends Page {
 	}
 
 
-    _createEventListener(el) {
-        el.addEventListener('click', function (event) {
-            event.preventDefault();
-            AjaxModule.doPost({
+	_createEventListener(el) {
+		el.addEventListener('click', function (event) {
+			event.preventDefault();
+			AjaxModule.doPost({
 				callback: () => {
 					this._router.open('/');
 				},
 				path: '/logout',
 				body: {},
 			});
-        }.bind(this));
-    }
+		}.bind(this));
+	}
 
-    _renderProfilePage(data) {
-        genericBeforeEnd(this._el, 
-            containerTemplate({
-                modifiers: ['container_theme_profile']
-            })
-        )
-        const containerBlock = document.querySelector('.container.container_theme_profile');
+	_renderProfilePage(data) {
+		genericBeforeEnd(this._el, 
+			containerTemplate({
+				modifiers: ['container_theme_profile']
+			})
+		);
+		const containerBlock = document.querySelector('.container.container_theme_profile');
 
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
@@ -120,21 +120,21 @@ export default class ProfilePage extends Page {
 				modifiers: ['data-item_type_lose'],
 			}),
 		);
-        genericBeforeEnd(menuBlock, 
-            logoutIconTemplate({
-                modifiers: [],
-                hr: '/logout',
-                dataset: '/logout',
-            }),
-            settingsIconTemplate({
-                href: '/editme',
-                dataset: '/editme',
-                modifiers: [],
-            })
-        );
+		genericBeforeEnd(menuBlock, 
+			logoutIconTemplate({
+				modifiers: [],
+				hr: '/logout',
+				dataset: '/logout',
+			}),
+			settingsIconTemplate({
+				href: '/editme',
+				dataset: '/editme',
+				modifiers: [],
+			})
+		);
 
-        this._createEventListener(document.querySelector('.logout'));
-    }
+		this._createEventListener(document.querySelector('.logout'));
+	}
 
 	open(root) {
 		if (User.exist()) {
@@ -149,12 +149,12 @@ export default class ProfilePage extends Page {
 						return;
 					}
 
-                User.set(xhr);
-                this._router.open('/me');
-            },
-            path: '/me',
-        });
-        }
-    }
+					User.set(xhr);
+					this._router.open('/me');
+				},
+				path: '/me',
+			});
+		}
+	}
 
 }
