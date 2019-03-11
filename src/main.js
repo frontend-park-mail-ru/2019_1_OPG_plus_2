@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	const router = new Router({
 		root: document.getElementById('application'),
 	});
-	router.add('/', new MainPage());
+	router.add('/', new MainPage({
+		router: router,
+	}));
 	router.add('/signin', new SignInPage({
 		router: router,
 	}));

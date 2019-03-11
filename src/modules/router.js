@@ -36,14 +36,13 @@ export default class Router {
 	/**
 	 * Starts routing
 	 */
-	start() {
-		this.open(window.location.pathname);
-
-		this._root.addEventListener('click', function (event) {
-			if (!(event.target instanceof HTMLAnchorElement)) {
-				return;
-			}
-			event.preventDefault();
+    start() {
+        this.open(window.location.pathname);
+        this._root.addEventListener('click', function (event) {
+            if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
+                return;
+            }
+            event.preventDefault();
             
 			this.open(event.target.dataset.href);
 		}.bind(this));
