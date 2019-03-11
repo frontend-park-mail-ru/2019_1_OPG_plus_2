@@ -5,7 +5,7 @@ import AjaxModule from './modules/ajax.js';
 import MainPage from './pages/main_page.js'
 import SignInPage from './pages/signin_page.js'
 import SignUpPage from './pages/signup_page.js'
-// import {LeaderBoard} from './pages/scoreboard_page.js'
+import LeaderBoard from './pages/scoreboard_page.js'
 import ProfilePage from './pages/profile_page.js'
 import EditProfilePage from './pages/edit_profile_page.js'
 import Router from './modules/router.js'
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	router.add('/editme', new EditProfilePage({
 		router: router,
 	}));
+	router.add('/leaders', new LeaderBoard());
 
 	router.start();
 });

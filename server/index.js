@@ -97,8 +97,6 @@ app.post('/editme', function(req, res) {
 	users[email].name = name;
 	users[email].email = email;
 
-	// console.log(users[email]);
-
 	res.json(users[email]);
 });
 
@@ -107,8 +105,7 @@ app.get('/users', function (req, res) {
 		.sort((l, r) => r.score - l.score)
 		.map(user => {
 			return {
-				email: user.email,
-				age: user.age,
+				name: user.name,
 				score: user.score,
 			}
 		});

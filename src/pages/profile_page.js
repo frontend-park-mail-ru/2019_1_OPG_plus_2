@@ -16,7 +16,6 @@ import {genericBeforeEnd} from '../modules/helpers.js'
 import Page from './page';
 import User from '../modules/user.js'
 import AjaxModule from '../modules/ajax';
-import makeSafe from '../modules/utils.js'
 
 export default class ProfilePage extends Page {
     constructor({
@@ -127,7 +126,6 @@ export default class ProfilePage extends Page {
         } else {
         AjaxModule.doGet({
             callback: (xhr) => {
-                console.log(xhr);
                 if (!xhr) {
                     alert('Unauthorized');
                     this._router.open('/');

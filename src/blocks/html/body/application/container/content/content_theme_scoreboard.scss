@@ -1,6 +1,6 @@
 .content_theme_scoreboard {
-    grid-template: 1.4fr 7fr/ repeat(8, 1fr);
-    grid-template-areas: 
-                    "t t t t t t t t"
-                    ". m m m m m m .";
+    grid-column: 3/-1;
+    grid-template: 1.4fr 7fr/repeat(10, 1fr);
+    grid-template-areas: "t t t t t t t t . ." 
+                         ". m m m m m m . . .";
 }
