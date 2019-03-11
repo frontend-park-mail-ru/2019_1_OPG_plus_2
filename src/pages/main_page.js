@@ -75,7 +75,7 @@ export default class MainPage extends Page {
 		genericBeforeEnd(mainBlock, 
 			playTemplate({
 				href: 'game',
-				dataset: 'game',
+				dataset: '/game',
 				modifiers: [],
 			})
 		);
@@ -84,7 +84,7 @@ export default class MainPage extends Page {
 			linkTemplate({
 				href: 'multiplayer',
 				title: 'MULTIPLAYER',
-				dataset: 'multiplayer',
+				dataset: '/multiplayer',
 				modifiers: [],
 			}),
 			linkTemplate({

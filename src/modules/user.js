@@ -1,4 +1,10 @@
+/**
+ * Singleton User structure that represents client
+ */
 class UserS {
+	/**
+	 * @constructor
+	 */
 	constructor() {
 		this._name = null;
 		this._email = null;
@@ -9,6 +15,10 @@ class UserS {
 
 	}
 
+	/**
+	 * Checks whether user exists
+	 * @return {boolean}
+	 */
 	exist() {
 		if (!this._name || !this._email || !this._score) {
 			return false;
@@ -17,6 +27,10 @@ class UserS {
 		return true;
 	}
 
+	/**
+	 * Returns User data
+	 * @return {{score: null, lose: number, name: null, games: number, win: number, email: null}}
+	 */
 	get() {
 		return {
 			name: this._name,
@@ -28,6 +42,10 @@ class UserS {
 		};
 	}
 
+	/**
+	 * Sets User data
+	 * @param data
+	 */
 	set(data) {
 		this._name = data.name;
 		this._email = data.email;
@@ -38,5 +56,9 @@ class UserS {
 	}
 }
 
+/**
+ * Singleton variable that represents user
+ * @type {UserS}
+ */
 const User = new UserS();
 export default User;

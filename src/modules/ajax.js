@@ -1,6 +1,13 @@
 const noop = () => null;
 
+
+
 export default class AjaxModule {
+	/**
+	 * Performs asynchronous GET request
+	 * @param callback Function called as callback
+	 * @param path Path of the request
+	 */
 	static doGet({
 		callback = noop,
 		path = '/',
@@ -22,6 +29,12 @@ export default class AjaxModule {
 			.catch(err => callback(err));
 	}
 
+	/**
+	 * Performs asynchronous POST request with body
+	 * @param callback Function called as callback
+	 * @param path Path of the request
+	 * @param body Body of the request
+	 */
 	static doPost({
 		callback = noop,
 		path = '/',

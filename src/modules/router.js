@@ -1,4 +1,8 @@
 export default class Router {
+	/**
+	 * @constructor
+	 * @param root
+	 */
 	constructor({
 		root = document.body,
 	} = {}) {
@@ -8,13 +12,18 @@ export default class Router {
 	}
 
 	/**
-     * 
-     * @param {Page} view
-    */
+	 * Adds controller to routing
+	 * @param {string} path Path on which controller is routed
+	 * @param {Page} view Controller served by route
+	 */
 	add(path, view) {
 		this._routes[path] = view;
-	} 
+	}
 
+	/**
+	 * Renders page routed by path
+	 * @param path Path to be rendered
+	 */
 	open(path) {
 		if (this._prevPath) {
 			this.close();
@@ -24,6 +33,9 @@ export default class Router {
 		this._prevPath = path;
 	}
 
+	/**
+	 * Starts routing
+	 */
 	start() {
 		this.open(window.location.pathname);
 
@@ -37,6 +49,9 @@ export default class Router {
 		}.bind(this));
 	}
 
+	/**
+	 * Closes page
+	 */
 	close() {
 		this._root.innerHTML = '';
 	}
