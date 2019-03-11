@@ -8,6 +8,7 @@ import formTemplate from '../blocks/html/body/application/container/content/form
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
 import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
+import errorTemplate from '../blocks/html/body/application/container/content/forms/error/error.pug';
 
 import AjaxModule from '../modules/ajax.js';
 import {genericBeforeEnd} from '../modules/helpers.js'
@@ -20,10 +21,36 @@ export default class SignInPage extends Page {
         super();
         this._router = router;
     }
-    _renderSignIn() {
 
+    _createEventListener() {
+        const formsBlock = this._el.querySelector('.forms');
+		formsBlock.addEventListener('submit', (event) => {
+            event.preventDefault();
+            	
+			const email = formsBlock.elements[0].value;
+            const password = formsBlock.elements[1].value;
+            
+			AjaxModule.doPost({
+				callback: (xhr) => {
+                    if (xhr.id) {
+                        this._router.open('/me');
+                    } else {
+                        this._el.innerHTML = '';
+                        this._renderSignIn(xhr);
+                    }
+				},
+				path: '/login',
+				body: {
+					email: email,
+					password: password,
+				},
+			});
+		});
+    }
+
+    _renderSignIn(data) {
         genericBeforeEnd(this._el, containerTemplate({
-            modifiers: ['container_theme_signin'],
+            modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
         }));
         const containerBlock = document.querySelector('.container.container_theme_signin');
 
@@ -63,6 +90,10 @@ export default class SignInPage extends Page {
         const buttonsBlock = document.querySelector('.buttons');
 
         genericBeforeEnd(formsBlock, 
+            errorTemplate({
+                modifiers: [],
+                text: data.error,
+            }),
             formTemplate({
                 modifiers: [],
                 name: 'email',
@@ -92,29 +123,12 @@ export default class SignInPage extends Page {
                 modifiers: ['button_type_secondary'],
             }),
         );
+
+        this._createEventListener();
     }
 
     open(root) {
         this._el = root;
-        this._renderSignIn();
-
-        const formsBlock = document.querySelector('.forms');
-		formsBlock.addEventListener('submit', (event) => {
-            event.preventDefault();
-            	
-			const email = formsBlock.elements[0].value;
-            const password = formsBlock.elements[1].value;
-            
-			AjaxModule.doPost({
-				callback: () => {
-					this._router.open('/me');
-				},
-				path: '/login',
-				body: {
-					email: email,
-					password: password,
-				},
-			});
-		});
+        this._renderSignIn({});
     }
 }

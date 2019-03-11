@@ -58,10 +58,10 @@ app.post('/login', function(req, res) {
 	const email = req.body.email;
 
 	if (!password || !email) {
-		return res.status(400).json({error: 'Не указан E-mail или пароль'});
+		return res.status(400).json({error: 'Invalid e-mail or password'});
 	}
 	if (!users[email] || users[email].password !== password) {
-		return res.status(400).json({error: 'Не верный E-mail и/или пароль'});
+		return res.status(400).json({error: 'Invalid e-mail or password'});
 	}
 
 	const id = uuid();

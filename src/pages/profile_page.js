@@ -145,7 +145,7 @@ export default class ProfilePage extends Page {
             callback: (xhr) => {
                 if (!xhr) {
                     alert('Unauthorized');
-                    this._router.open('/');
+                    this._router.open('/signin');
                     return;
                 }
 

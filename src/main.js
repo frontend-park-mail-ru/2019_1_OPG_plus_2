@@ -11,7 +11,8 @@ import EditProfilePage from './pages/edit_profile_page.js'
 import NotFound from './pages/404.js'
 import Router from './modules/router.js'
 
-document.addEventListener("DOMContentLoaded", function(event) {
+
+document.addEventListener('DOMContentLoaded', function() {
 	const router = new Router({
 		root: document.getElementById('application'),
 	});
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		router: router,
 	}));
 	router.add('/leaders', new LeaderBoard());
-	router.add('/not_found', new NotFound());
+	//router.add('/not_found', new NotFound());
 
 	router.start();
 });
