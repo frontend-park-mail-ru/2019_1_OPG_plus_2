@@ -11,99 +11,99 @@ import playTemplate from '../blocks/html/body/application/container/content/main
 import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
 import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
 
-import {genericBeforeEnd} from '../modules/helpers.js'
+import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 
 export default class MainPage extends Page {
-    _renderMainPage() {
-        genericBeforeEnd(this._el, containerTemplate({
-            modifiers: ['container_theme_main'],
-        }));
-        const containerBlock = document.querySelector('.container.container_theme_main');
+	_renderMainPage() {
+		genericBeforeEnd(this._el, containerTemplate({
+			modifiers: ['container_theme_main'],
+		}));
+		const containerBlock = document.querySelector('.container.container_theme_main');
 
-        genericBeforeEnd(containerBlock, 
-            headTemplate({
-                modifiers: ['head_theme_main'],
-            }),
-            contentTemplate({
-                modifiers: ['content_theme_main'],
-            })
-        );
-        const headBlock = document.querySelector('.head.head_theme_main');
-        const contentBlock = document.querySelector('.content.content_theme_main');
+		genericBeforeEnd(containerBlock, 
+			headTemplate({
+				modifiers: ['head_theme_main'],
+			}),
+			contentTemplate({
+				modifiers: ['content_theme_main'],
+			})
+		);
+		const headBlock = document.querySelector('.head.head_theme_main');
+		const contentBlock = document.querySelector('.content.content_theme_main');
 
-        genericBeforeEnd(headBlock, 
-            menuTemplate({
-                modifiers: ['menu_theme_main'],
-            })
-        );
-        const menuBlock = document.querySelector('.menu.menu_theme_main');
+		genericBeforeEnd(headBlock, 
+			menuTemplate({
+				modifiers: ['menu_theme_main'],
+			})
+		);
+		const menuBlock = document.querySelector('.menu.menu_theme_main');
 
-        genericBeforeEnd(menuBlock, 
-            profileIconTemplate({
-                modifiers: [],
-                href: '/',
-                dataset: '/me',
-            }),
-            scoreBoardTemplate({
-                modifiers: [],
-                href: '/',
-                dataset: '/leaders',
-            }),
-            rulesTemplate({
-                modifiers: [],
-                hreaf: '/',
-                dataset: '/rules',
-            })
-        );
+		genericBeforeEnd(menuBlock, 
+			profileIconTemplate({
+				modifiers: [],
+				href: '/',
+				dataset: '/me',
+			}),
+			scoreBoardTemplate({
+				modifiers: [],
+				href: '/',
+				dataset: '/leaders',
+			}),
+			rulesTemplate({
+				modifiers: [],
+				hreaf: '/',
+				dataset: '/rules',
+			})
+		);
 
-        genericBeforeEnd(contentBlock, 
-            titleTemplate({
-                title: 'colors',
-                modifiers: ['title_theme_main'],
-            }),
-            mainTemplate({
-                modifiers: ['main_theme_index'],
-            }),
-            buttonsTemplate({
-                modifiers: ['buttons_theme_main'],
-            })
-        );
-        const mainBlock = document.querySelector('.main.main_theme_index');
-        const buttonsBlock = document.querySelector('.buttons.buttons_theme_main');
+		genericBeforeEnd(contentBlock, 
+			titleTemplate({
+				title: 'colors',
+				modifiers: ['title_theme_main'],
+			}),
+			mainTemplate({
+				modifiers: ['main_theme_index'],
+			}),
+			buttonsTemplate({
+				modifiers: ['buttons_theme_main'],
+			})
+		);
+		const mainBlock = document.querySelector('.main.main_theme_index');
+		const buttonsBlock = document.querySelector('.buttons.buttons_theme_main');
 
-        genericBeforeEnd(mainBlock, 
-            playTemplate({
-                href: 'game',
-                dataset: 'game',
-                modifiers: [],
-            })
-        );
+		genericBeforeEnd(mainBlock, 
+			playTemplate({
+				href: 'game',
+				dataset: 'game',
+				modifiers: [],
+			})
+		);
 
-        genericBeforeEnd(buttonsBlock, 
-            linkTemplate({
-                href: 'multiplayer',
-                title: 'MULTIPLAYER',
-                dataset: 'multiplayer',
-                modifiers: [],
-            }),
-            linkTemplate({
-                href: 'signin',
-                title: 'SING IN',
-                dataset: '/signin',
-                modifiers: [],
-            }),
-            linkTemplate({
-                href: 'signup',
-                title: 'SIGN UP',
-                dataset: '/signup',
-                modifiers: [],
-            }),
-        );
-    }
+		genericBeforeEnd(buttonsBlock, 
+			linkTemplate({
+				href: 'multiplayer',
+				title: 'MULTIPLAYER',
+				dataset: 'multiplayer',
+				modifiers: [],
+			}),
+			linkTemplate({
+				href: 'signin',
+				title: 'SING IN',
+				dataset: '/signin',
+				modifiers: [],
+			}),
+			linkTemplate({
+				href: 'signup',
+				title: 'SIGN UP',
+				dataset: '/signup',
+				modifiers: [],
+			}),
+		);
+	}
 
-    open(root) {
-        this._el = root;
-        this._renderMainPage();
-    }
+	open(root) {
+		this._el = root;
+		this._renderMainPage();
+	}
 }

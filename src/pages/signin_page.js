@@ -10,100 +10,100 @@ import sumbitTemplate from '../blocks/html/body/application/container/content/bu
 import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
 
 import AjaxModule from '../modules/ajax.js';
-import {genericBeforeEnd} from '../modules/helpers.js'
+import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 
 export default class SignInPage extends Page {
-    constructor({
-        router = {},
-    } = {}) {
-        super();
-        this._router = router;
-    }
-    _renderSignIn() {
+	constructor({
+		router = {},
+	} = {}) {
+		super();
+		this._router = router;
+	}
+	_renderSignIn() {
 
-        genericBeforeEnd(this._el, containerTemplate({
-            modifiers: ['container_theme_signin'],
-        }));
-        const containerBlock = document.querySelector('.container.container_theme_signin');
+		genericBeforeEnd(this._el, containerTemplate({
+			modifiers: ['container_theme_signin'],
+		}));
+		const containerBlock = document.querySelector('.container.container_theme_signin');
 
-        genericBeforeEnd(containerBlock, 
-            headTemplate({
-                modifiers: ['head_theme_signin'],
-            }),
-            contentTemplate({
-                modifiers: ['content_theme_signin'],
-            })
-        );
-        const headBlock = document.querySelector('.head.head_theme_signin');
-        const contentBlock = document.querySelector('.content.content_theme_signin');
+		genericBeforeEnd(containerBlock, 
+			headTemplate({
+				modifiers: ['head_theme_signin'],
+			}),
+			contentTemplate({
+				modifiers: ['content_theme_signin'],
+			})
+		);
+		const headBlock = document.querySelector('.head.head_theme_signin');
+		const contentBlock = document.querySelector('.content.content_theme_signin');
 
-        genericBeforeEnd(headBlock, 
-            backArrowTemplate({
-                modifiers: [],
-                href: '/',
-                dataset: '/',
-            }),
-        );
+		genericBeforeEnd(headBlock, 
+			backArrowTemplate({
+				modifiers: [],
+				href: '/',
+				dataset: '/',
+			}),
+		);
 
-        genericBeforeEnd(contentBlock, 
-            titleTemplate({
-                title: 'SING IN',
-                modifiers: ['title_theme_signin'],
-            }),
-            formsTemplate({
-                modifiers: [],
-                name: 'signin',
-            }),
-            buttonsTemplate({
-                modifiers: [],
-            }),
-        );
-        const formsBlock = document.querySelector('.forms');
-        const buttonsBlock = document.querySelector('.buttons');
+		genericBeforeEnd(contentBlock, 
+			titleTemplate({
+				title: 'SING IN',
+				modifiers: ['title_theme_signin'],
+			}),
+			formsTemplate({
+				modifiers: [],
+				name: 'signin',
+			}),
+			buttonsTemplate({
+				modifiers: [],
+			}),
+		);
+		const formsBlock = document.querySelector('.forms');
+		const buttonsBlock = document.querySelector('.buttons');
 
-        genericBeforeEnd(formsBlock, 
-            formTemplate({
-                modifiers: [],
-                name: 'email',
-                placeholder: 'E-mail',
-                type: 'email',
-                req: true,
-            }),
-            formTemplate({
-                modifiers: [],
-                name: 'password',
-                placeholder: 'Password',
-                type: 'password',
-                req: true,
-            }),
-        );
+		genericBeforeEnd(formsBlock, 
+			formTemplate({
+				modifiers: [],
+				name: 'email',
+				placeholder: 'E-mail',
+				type: 'email',
+				req: true,
+			}),
+			formTemplate({
+				modifiers: [],
+				name: 'password',
+				placeholder: 'Password',
+				type: 'password',
+				req: true,
+			}),
+		);
 
-        genericBeforeEnd(buttonsBlock, 
-            sumbitTemplate({
-                value: 'SIGN IN',
-                form: 'signin',
-                modifiers: [],
-            }),
-            linkTemplate({
-                href: 'signup',
-                title: 'SIGN UP',
-                dataset: 'signup',
-                modifiers: ['button_type_secondary'],
-            }),
-        );
-    }
+		genericBeforeEnd(buttonsBlock, 
+			sumbitTemplate({
+				value: 'SIGN IN',
+				form: 'signin',
+				modifiers: [],
+			}),
+			linkTemplate({
+				href: 'signup',
+				title: 'SIGN UP',
+				dataset: 'signup',
+				modifiers: ['button_type_secondary'],
+			}),
+		);
+	}
 
-    open(root) {
-        this._el = root;
-        this._renderSignIn();
+	open(root) {
+		this._el = root;
+		this._renderSignIn();
 
-        const formsBlock = document.querySelector('.forms');
+		const formsBlock = document.querySelector('.forms');
 		formsBlock.addEventListener('submit', (event) => {
-            event.preventDefault();
-            	
+			event.preventDefault();
+
 			const email = formsBlock.elements[0].value;
-            const password = formsBlock.elements[1].value;
+			const password = formsBlock.elements[1].value;
             
 			AjaxModule.doPost({
 				callback: () => {
@@ -116,5 +116,5 @@ export default class SignInPage extends Page {
 				},
 			});
 		});
-    }
+	}
 }
