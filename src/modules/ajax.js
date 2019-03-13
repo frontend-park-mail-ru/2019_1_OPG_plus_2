@@ -66,7 +66,6 @@ export default class AjaxModule {
      */
     static doDelete({
         path = '/',
-        body = {},
     } = {}) {
         return fetch(path, {
             method: 'DELETE',
@@ -75,7 +74,6 @@ export default class AjaxModule {
             },
             mode: 'cors',
             credentials: 'include',
-            body: JSON.stringify(body),
         });
     }
 }

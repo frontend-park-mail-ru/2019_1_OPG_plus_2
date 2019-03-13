@@ -111,12 +111,13 @@ export default class MainPage extends Page {
 
 	open(root) {
 		this._el = root;
-		Auth.isAuth()
-			.then(res => {
-				this._renderMainPage(res);
-			})
-			.catch(() => {
-				this._renderMainPage(null);
-			});
+		this._renderMainPage(res);
+		// Auth.isAuth()
+		// 	.then(res => {
+		// 		this._renderMainPage(res);
+		// 	})
+		// 	.catch(() => {
+		// 		this._renderMainPage(null);
+		// 	});
 	}
 }

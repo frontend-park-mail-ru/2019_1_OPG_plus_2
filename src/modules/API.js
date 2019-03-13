@@ -31,10 +31,7 @@ export class API {
      * This method logs user out and deletes cookie
      * @param Object object with user login or email
      */
-    static logout({
-        login = '',
-        password = '',
-    } = {}) {
+    static logout() {
         AjaxModule.doDelete({
             path: 'https://api.colors.hackallcode.ru/api/session',
             body: {
@@ -116,6 +113,31 @@ export class API {
     } = {}) {
         AjaxModule.doGet({
             path: `https://api.colors.hackallcode.ru/api/user/${id}`,
+        });
+    }
+
+    /**
+     * This method saves avatar image in server storage and sets it as clients user avatar
+     */
+    static getAvatar() {
+        AjaxModule.doGet({
+            path: 'https://api.colors.hackallcode.ru/api/avatar',
+        });
+    }
+
+    /**
+     * This method updates info in profile and auth-db record of user, who is making a query
+     */
+    static updatePassword({
+        new_password = '',
+        password_confirm = '',
+    } = {}) {
+        AjaxModule.doPut({
+            path: 'https://api.colors.hackallcode.ru/api/password',
+            body: {
+                new_password: new_password,
+                password_confirm: password_confirm,
+            },
         });
     }
 
