@@ -29,11 +29,11 @@ export default class ProfilePage extends Page {
 	_createEventListener(el) {
 		el.addEventListener('click', function (event) {
 			event.preventDefault();
-			AjaxModule.doPost({
+			AjaxModule.doDelete({
 				callback: () => {
 					this._router.open('/');
 				},
-				path: '/logout',
+				path: 'http://localhost:8002/api/logout',
 				body: {},
 			});
 		}.bind(this));

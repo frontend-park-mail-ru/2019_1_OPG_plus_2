@@ -87,11 +87,12 @@ export default class SignUpPage extends Page {
 					this._router.open('/me');
 
 				},
-				path: '/signup',
+				path: 'http://localhost:8002/api/user',
 				body: {
-					name: name,
+					avatar: '',
 					email: email,
 					password: password,
+					username: name,
 				},
 			});
 		});

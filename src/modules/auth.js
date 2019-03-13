@@ -6,14 +6,14 @@ export default class Auth {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				callback: (xhr) => {
-					if (xhr.email) {
+					if (xhr.status === 200) {
 						User.set(xhr);
 						resolve(User.get());
 					} else {
 						reject(null);
 					}
 				},
-				path: '/me',
+				path: 'http://localhost:8002/api/session',
 			});
 		});
 	}

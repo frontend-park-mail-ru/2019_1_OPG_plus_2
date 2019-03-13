@@ -24,6 +24,7 @@ const users = {
 		games: 60,
 		win: 47,
 		lose: 13,
+		photo: '',
 	}
 };
 const ids = {};
@@ -93,9 +94,10 @@ app.post('/editme', function(req, res) {
 	}
 
 	const name = req.body.name;
+	const photo = req.body.photo;
 
 	users[email].name = name;
-	users[email].email = email;
+	users[email].photo = photo;
 
 	res.json(users[email]);
 });
@@ -121,7 +123,7 @@ app.post('/logout', function (req, res) {
 	res.status(200).json({});
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8001;
 
 app.listen(port, function () {
 	console.log(`Server listening port ${port}`);

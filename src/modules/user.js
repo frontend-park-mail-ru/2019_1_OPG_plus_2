@@ -6,6 +6,7 @@ class UserS {
 	 * @constructor
 	 */
 	constructor() {
+		this._photo = null;
 		this._name = null;
 		this._email = null;
 		this._score = null;
@@ -33,6 +34,7 @@ class UserS {
 	 */
 	get() {
 		return {
+			photo: this._photo,
 			name: this._name,
 			email: this._email,
 			score: this._score,
@@ -47,6 +49,7 @@ class UserS {
 	 * @param data
 	 */
 	set(data) {
+		this._photo = data.photo;
 		this._name = data.name;
 		this._email = data.email;
 		this._score = data.score;

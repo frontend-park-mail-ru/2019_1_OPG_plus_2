@@ -32,16 +32,17 @@ export default class SignInPage extends Page {
             
 			AjaxModule.doPost({
 				callback: (xhr) => {
-					if (xhr.id) {
+					console.log(xhr);
+					if (xhr.status === 200) {
 						this._router.open('/me');
 					} else {
 						this._el.innerHTML = '';
 						this._renderSignIn(xhr, email);
 					}
 				},
-				path: '/login',
+				path: 'http://localhost:8002/api/session',
 				body: {
-					email: email,
+					login: email,
 					password: password,
 				},
 			});
