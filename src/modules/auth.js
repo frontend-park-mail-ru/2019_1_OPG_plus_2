@@ -6,14 +6,15 @@ export default class Auth {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				callback: (xhr) => {
-					if (xhr.email) {
+					console.log(xhr);
+					if (xhr.status === 200) {
 						User.set(xhr);
 						resolve(User.get());
 					} else {
 						reject(null);
 					}
 				},
-				path: '/me',
+				path: 'http://https://api.colors.hackallcode.ru/api/session',
 			});
 		});
 	}

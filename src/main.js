@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		router: router,
 	}));
 	router.add('/leaders', new LeaderBoard());
+
 	router.add('/not_found', new NotFound());
 
 	router.start();

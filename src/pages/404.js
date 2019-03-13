@@ -2,6 +2,7 @@ import containerTemplate from '../blocks/html/body/application/container/contain
 import contentTemplate from '../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug';
 
+
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 

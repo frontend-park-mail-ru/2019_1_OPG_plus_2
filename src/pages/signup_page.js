@@ -12,7 +12,7 @@ import errorTemplate from '../blocks/html/body/application/container/content/for
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import AjaxModule from '../modules/ajax';
-import {validEmail, validLogin} from '../modules/utils.js';
+import {validEmail, validLogin, validPassword} from '../modules/utils.js';
 
 export default class SignUpPage extends Page {
 	constructor({
@@ -39,6 +39,9 @@ export default class SignUpPage extends Page {
 				this._renderSignUp({
 					error: 'Invalid Email',
 					modifier: 'container_theme_error',
+				}, {
+					name,
+					email,
 				});
 				return;
 			}
@@ -48,6 +51,9 @@ export default class SignUpPage extends Page {
 				this._renderSignUp({
 					error: 'Invalid Name',
 					modifier: 'container_theme_error',
+				}, {
+					name,
+					email,
 				});
 				return;
 			} 
@@ -57,6 +63,21 @@ export default class SignUpPage extends Page {
 				this._renderSignUp({
 					error: 'Passwords doesn\' not match',
 					modifier: 'container_theme_error',
+				},{
+					name,
+					email,
+				});
+				return;
+			}
+
+			if (!validPassword(password)) {
+				this._el.innerHTML = '';
+				this._renderSignUp({
+					error: 'Invalid password, must be more than 5 symbols',
+					modifier: 'container_theme_error',
+				},{
+					name,
+					email,
 				});
 				return;
 			}
@@ -66,17 +87,18 @@ export default class SignUpPage extends Page {
 					this._router.open('/me');
 
 				},
-				path: '/signup',
+				path: 'http://https://api.colors.hackallcode.ru/api/user',
 				body: {
-					name: name,
+					avatar: '',
 					email: email,
 					password: password,
+					username: name,
 				},
 			});
 		});
 	}
 
-	_renderSignUp(data) {
+	_renderSignUp(data, fields) {
 		genericBeforeEnd(this._el, containerTemplate({
 			modifiers: [`container_theme_signup ${data.modifier || ' '}`],
 		}));
@@ -129,6 +151,7 @@ export default class SignUpPage extends Page {
 				type: 'text',
 				placeholder: 'Name',
 				req: true,
+				value: `${fields ? fields.name : ''}`,
 			}),
 			formTemplate({
 				modifiers: [],
@@ -136,6 +159,7 @@ export default class SignUpPage extends Page {
 				type: 'email',
 				placeholder: 'E-mail',
 				req: true,
+				value: `${fields ? fields.email: ''}`,
 			}),
 			formTemplate({
 				modifiers: [],

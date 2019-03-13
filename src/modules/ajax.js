@@ -15,8 +15,7 @@ export default class AjaxModule {
 			method: 'GET',
 			mode: 'cors',
 			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
+				'Origin':'https://colors.hackallcode.ru',
 			},
 			credentials: 'include',
 		}).then(function (response) {
@@ -43,15 +42,24 @@ export default class AjaxModule {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
+				// 'Accept': 'application/json',
+				// 'Content-Type': 'application/json',
+				'Origin':'https://colors.hackallcode.ru',
 			},
 			credentials: 'include',
-			body: JSON.stringify(body),
+			body: body,
+			// body: JSON.stringify(body),
 		}).then(function (response) {
 			return response.json();
 		}).then(json => callback(json));
 	}
+
+// 	fetch('http://https://api.colors.hackallcode.ru/api/session', {method: 'POST', mode: 'cors', credentials: 'include', headers: {
+// 	'Origin' : 'https://colors.hackallcode.ru',
+// }, body: {
+// 	login: 'test@mail.ru',
+// 	password: 'test',
+// }});
 
 	/**
 	 * Performs asynchronous PUT request with body
@@ -93,11 +101,11 @@ export default class AjaxModule {
 			method: 'DELETE',
 			mode: 'cors',
 			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
+				'Origin':'https://colors.hackallcode.ru',
 			},
 			credentials: 'include',
 			body: JSON.stringify(body),
+			// body: JSON.stringify(body),
 		}).then(function (response) {
 			return response.json();
 		}).then(json => callback(json));

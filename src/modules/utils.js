@@ -31,6 +31,7 @@ const R_ATTRIBUTES = /(\w+\s*)=(\s*".*?")/g;
  * @type {RegExp}
  */
 const emailRe = /[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+const nameRe = /[^\.\,\-\_\'\"\@\?\!\:\$ А-Яа-я()]/
 
 /**
  * Makes passed string safe
@@ -63,5 +64,14 @@ export function validEmail(string = '') {
  * @return {boolean}
  */
 export function validLogin(string = '') {
-	return string.length < 15;
+	return nameRe.test(string.toLowerCase()) && string.length < 15;
+}
+
+/**
+ * Validates password
+ * @param {string} string
+ * @return {boolean}
+ */
+export function validPassword(string = '') {
+	return string.length > 5;
 }

@@ -29,11 +29,11 @@ export default class ProfilePage extends Page {
 	_createEventListener(el) {
 		el.addEventListener('click', function (event) {
 			event.preventDefault();
-			AjaxModule.doPost({
+			AjaxModule.doDelete({
 				callback: () => {
 					this._router.open('/');
 				},
-				path: '/logout',
+				path: 'http://https://api.colors.hackallcode.ru/api/logout',
 				body: {},
 			});
 		}.bind(this));
@@ -138,21 +138,21 @@ export default class ProfilePage extends Page {
 
 	open(root) {
 		if (User.exist()) {
+			console.log(User.get());
 			this._el = root;
 			this._renderProfilePage(User.get());
 		} else {
 			AjaxModule.doGet({
 				callback: (xhr) => {
 					if (!xhr) {
-						alert('Unauthorized');
-						this._router.open('/');
+						this._router.open('/signin');
 						return;
 					}
 
 					User.set(xhr);
-					this._router.open('/me');
+					// this._router.open('/me');
 				},
-				path: '/me',
+				path: 'https://colors.hackallcode.ru/api/user',
 			});
 		}
 	}
