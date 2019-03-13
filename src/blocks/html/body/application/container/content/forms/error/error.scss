@@ -1,8 +1,9 @@
 .error {
+    font-family: $secondary-font-family;
     color: #C24949;
 
     @media (min-width: $desktop-min-width) {
-        font-size: 3vh;
+        font-size: 2.5vh;
         padding: 0.2vh;
     }
 }

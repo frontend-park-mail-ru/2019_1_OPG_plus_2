@@ -36,7 +36,7 @@ export default class SignInPage extends Page {
 						this._router.open('/me');
 					} else {
 						this._el.innerHTML = '';
-						this._renderSignIn(xhr);
+						this._renderSignIn(xhr, email);
 					}
 				},
 				path: '/login',
@@ -48,7 +48,7 @@ export default class SignInPage extends Page {
 		});
 	}
 
-	_renderSignIn(data) {
+	_renderSignIn(data, email) {
 		genericBeforeEnd(this._el, containerTemplate({
 			modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
 		}));
@@ -100,6 +100,7 @@ export default class SignInPage extends Page {
 				placeholder: 'E-mail',
 				type: 'email',
 				req: true,
+				value: `${email || ''}`,
 			}),
 			formTemplate({
 				modifiers: [],
