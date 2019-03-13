@@ -53,22 +53,35 @@ export default class EditProfilePage extends Page {
 		formsBlock.addEventListener('submit', (event) => {
 			event.preventDefault();
 
-			const photo = photoEditBlock.elements[0].value;
-			const name = formsBlock.elements[0].value;
+			const username = formsBlock.elements[0].value;
 			const email = formsBlock.elements[1].value;
 
-			AjaxModule.doPost({
+			AjaxModule.doPut({
 				callback: (xhr) => {
-					User.set(xhr);
-					this._router.open('/me');
+					// User.set(xhr);
+					// const avatar = photoEditBlock.elements[0].value;
+					// if (avatar) {
+					// 	AjaxModule.doPost({
+					// 		callback: (xhr) => {
+					// 			this._router.open('/me');
+					// 		},
+					// 		path: 'https://api.colors.hackallcode.ru/api/avatar',
+					// 		body: {
+					// 			avatar: avatar,
+					// 		},
+					// 	});
+					// }
+					// else {
+						this._router.open('/me')
+					// }
 				},
 				path: '/editme',
 				body: {
-					photo: photo,
-					name: name,
+					username: username,
 					email: email,
 				},
 			});
+
 		});
 	}
 
@@ -132,7 +145,7 @@ export default class EditProfilePage extends Page {
 			formsTemplates({
 				modifiers: ['profile-card_theme_forms'],
 				action: 'POST',
-				name: 'profile-edit',
+				username: 'profile-edit',
 			}),
 		);
 		const photoEditBlock = document.querySelector('.photo-edit');
@@ -150,21 +163,21 @@ export default class EditProfilePage extends Page {
 		genericBeforeEnd(formsBlock,
 			profileFormTemplate({
 				modifiers: [],
-				name: 'name',
+				username: 'username',
 				type: 'text',
 				title: 'Name',
-				val: data.name,
+				val: data.username,
 			}),
 			profileFormTemplate({
 				modifiers: [],
-				name: 'password',
+				username: 'password',
 				type: 'password',
 				title: 'Password',
 				val: '••••••••',
 			}),
 			profileFormTemplate({
 				modifiers: [],
-				name: 'repeat-password',
+				username: 'repeat-password',
 				type: 'password',
 				title: 'Repeat password',
 				val: '••••••••',

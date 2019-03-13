@@ -17,7 +17,7 @@ app.use(cookie());
 
 const users = {
 	'ivan.morozov@list.ru': {
-		name: 'Ivan Morozov',
+		username: 'Ivan Morozov',
 		email: 'ivan.morozov@list.ru',
 		password: 'password',
 		score: 72,
@@ -31,7 +31,7 @@ const ids = {};
 
 app.post('/signup', function(req, res) {
 
-	const name = req.body.name;
+	const name = req.body.username;
 	const password = req.body.password;
 	const email = req.body.email;
 
@@ -46,7 +46,7 @@ app.post('/signup', function(req, res) {
 	}
 
 	const id = uuid();
-	const user = {name, email, password, score: 0};
+	const user = {name: username, email, password, score: 0};
 	ids[id] = email;
 	users[email] = user;
 
@@ -93,10 +93,10 @@ app.post('/editme', function(req, res) {
 		return res.status(401).end();
 	}
 
-	const name = req.body.name;
+	const name = req.body.username;
 	const photo = req.body.photo;
 
-	users[email].name = name;
+	users[email].username = name;
 	users[email].photo = photo;
 
 	res.json(users[email]);
@@ -107,7 +107,7 @@ app.get('/users', function (req, res) {
 		.sort((l, r) => r.score - l.score)
 		.map(user => {
 			return {
-				name: user.name,
+				username: user.username,
 				score: user.score,
 			};
 		});

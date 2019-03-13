@@ -32,7 +32,6 @@ export default class SignInPage extends Page {
             
 			AjaxModule.doPost({
 				callback: (xhr) => {
-					console.log(xhr);
 					if (xhr.status === 200) {
 						this._router.open('/me');
 					} else {
@@ -81,7 +80,7 @@ export default class SignInPage extends Page {
 			}),
 			formsTemplate({
 				modifiers: [],
-				name: 'signin',
+				username: 'signin',
 			}),
 			buttonsTemplate({
 				modifiers: [],
@@ -97,7 +96,7 @@ export default class SignInPage extends Page {
 			}),
 			formTemplate({
 				modifiers: [],
-				name: 'email',
+				username: 'email',
 				placeholder: 'E-mail',
 				type: 'email',
 				req: true,
@@ -105,7 +104,7 @@ export default class SignInPage extends Page {
 			}),
 			formTemplate({
 				modifiers: [],
-				name: 'password',
+				username: 'password',
 				placeholder: 'Password',
 				type: 'password',
 				req: true,

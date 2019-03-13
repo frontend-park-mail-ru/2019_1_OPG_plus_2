@@ -33,7 +33,7 @@ export default class ProfilePage extends Page {
 				callback: () => {
 					this._router.open('/');
 				},
-				path: 'http://https://api.colors.hackallcode.ru/api/logout',
+				path: 'https://api.colors.hackallcode.ru/api/session',
 				body: {},
 			});
 		}.bind(this));
@@ -93,7 +93,7 @@ export default class ProfilePage extends Page {
 				modifiers: [],
 			}),
 			nameTemplate({
-				name: data.name,
+				username: data.username,
 				modifiers: [],
 			}),
 		);
@@ -138,7 +138,6 @@ export default class ProfilePage extends Page {
 
 	open(root) {
 		if (User.exist()) {
-			console.log(User.get());
 			this._el = root;
 			this._renderProfilePage(User.get());
 		} else {
@@ -149,8 +148,8 @@ export default class ProfilePage extends Page {
 						return;
 					}
 
-					User.set(xhr);
-					// this._router.open('/me');
+					User.set(xhr.data);
+					this._router.open('/me');
 				},
 				path: 'https://colors.hackallcode.ru/api/user',
 			});

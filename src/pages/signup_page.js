@@ -40,7 +40,7 @@ export default class SignUpPage extends Page {
 					error: 'Invalid Email',
 					modifier: 'container_theme_error',
 				}, {
-					name,
+					name: username,
 					email,
 				});
 				return;
@@ -52,7 +52,7 @@ export default class SignUpPage extends Page {
 					error: 'Invalid Name',
 					modifier: 'container_theme_error',
 				}, {
-					name,
+					username: username,
 					email,
 				});
 				return;
@@ -64,7 +64,7 @@ export default class SignUpPage extends Page {
 					error: 'Passwords doesn\' not match',
 					modifier: 'container_theme_error',
 				},{
-					name,
+					username: username,
 					email,
 				});
 				return;
@@ -76,7 +76,7 @@ export default class SignUpPage extends Page {
 					error: 'Invalid password, must be more than 5 symbols',
 					modifier: 'container_theme_error',
 				},{
-					name,
+					username: username,
 					email,
 				});
 				return;
@@ -87,12 +87,12 @@ export default class SignUpPage extends Page {
 					this._router.open('/me');
 
 				},
-				path: 'http://https://api.colors.hackallcode.ru/api/user',
+				path: 'https://api.colors.hackallcode.ru/api/user',
 				body: {
 					avatar: '',
 					email: email,
 					password: password,
-					username: name,
+					username: username,
 				},
 			});
 		});
@@ -131,7 +131,7 @@ export default class SignUpPage extends Page {
 			formsTemplate({
 				modifiers: [],
 				action: 'POST',
-				name: 'signup',
+				username: 'signup',
 			}),
 			buttonsTemplate({
 				modifiers: [],
@@ -147,15 +147,15 @@ export default class SignUpPage extends Page {
 			}), 
 			formTemplate({
 				modifiers: [],
-				name: 'name',
+				username: 'username',
 				type: 'text',
 				placeholder: 'Name',
 				req: true,
-				value: `${fields ? fields.name : ''}`,
+				value: `${fields ? fields.username : ''}`,
 			}),
 			formTemplate({
 				modifiers: [],
-				name: 'email',
+				username: 'email',
 				type: 'email',
 				placeholder: 'E-mail',
 				req: true,
@@ -163,14 +163,14 @@ export default class SignUpPage extends Page {
 			}),
 			formTemplate({
 				modifiers: [],
-				name: 'password',
+				username: 'password',
 				type: 'password',
 				placeholder: 'Password',
 				req: true,
 			}),
 			formTemplate({
 				modifiers: [],
-				name: 'repeat-password',
+				username: 'repeat-password',
 				type: 'password',
 				placeholder: 'Repeat password',
 				req: true,
