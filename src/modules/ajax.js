@@ -15,7 +15,7 @@ export default class AjaxModule {
 			method: 'GET',
 			mode: 'cors',
 			headers: {
-				'Origin':'http://localhost:8001',
+				'Origin':'https://colors.hackallcode.ru',
 			},
 			credentials: 'include',
 		}).then(function (response) {
@@ -44,7 +44,7 @@ export default class AjaxModule {
 			headers: {
 				// 'Accept': 'application/json',
 				// 'Content-Type': 'application/json',
-				'Origin':'http://localhost:8001',
+				'Origin':'https://colors.hackallcode.ru',
 			},
 			credentials: 'include',
 			body: body,
@@ -54,8 +54,8 @@ export default class AjaxModule {
 		}).then(json => callback(json));
 	}
 
-// 	fetch('http://localhost:8002/api/session', {method: 'POST', mode: 'cors', credentials: 'include', headers: {
-// 	'Origin' : 'http://localhost:8001',
+// 	fetch('http://https://api.colors.hackallcode.ru/api/session', {method: 'POST', mode: 'cors', credentials: 'include', headers: {
+// 	'Origin' : 'https://colors.hackallcode.ru',
 // }, body: {
 // 	login: 'test@mail.ru',
 // 	password: 'test',
@@ -101,10 +101,10 @@ export default class AjaxModule {
 			method: 'DELETE',
 			mode: 'cors',
 			headers: {
-				'Origin':'http://localhost:8001',
+				'Origin':'https://colors.hackallcode.ru',
 			},
 			credentials: 'include',
-			body: body,
+			body: JSON.stringify(body),
 			// body: JSON.stringify(body),
 		}).then(function (response) {
 			return response.json();

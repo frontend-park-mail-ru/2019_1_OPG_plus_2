@@ -87,7 +87,7 @@ export default class SignUpPage extends Page {
 					this._router.open('/me');
 
 				},
-				path: 'http://localhost:8002/api/user',
+				path: 'http://https://api.colors.hackallcode.ru/api/user',
 				body: {
 					avatar: '',
 					email: email,

@@ -40,7 +40,7 @@ export default class SignInPage extends Page {
 						this._renderSignIn(xhr, email);
 					}
 				},
-				path: 'http://localhost:8002/api/session',
+				path: 'https://api.colors.hackallcode.ru/api/session',
 				body: {
 					login: email,
 					password: password,

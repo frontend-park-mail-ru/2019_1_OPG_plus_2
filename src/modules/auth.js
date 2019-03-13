@@ -6,6 +6,7 @@ export default class Auth {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				callback: (xhr) => {
+					console.log(xhr);
 					if (xhr.status === 200) {
 						User.set(xhr);
 						resolve(User.get());
@@ -13,7 +14,7 @@ export default class Auth {
 						reject(null);
 					}
 				},
-				path: 'http://localhost:8002/api/session',
+				path: 'http://https://api.colors.hackallcode.ru/api/session',
 			});
 		});
 	}
