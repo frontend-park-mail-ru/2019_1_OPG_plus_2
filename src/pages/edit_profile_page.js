@@ -34,7 +34,7 @@ export default class EditProfilePage extends Page {
 		this._router = router;
 	}
 
-	_createEventListener(el) {
+	_createLogoutListener(el) {
 		el.addEventListener('click', function (event) {
 			event.preventDefault();
 			AjaxModule.doPost({
@@ -45,6 +45,31 @@ export default class EditProfilePage extends Page {
 				body: {},
 			});
 		}.bind(this));
+	}
+
+	_createEventListener() {
+		const formsBlock = this._el.querySelector('.forms');
+		const photoEditBlock = this._el.querySelector('.edit-icon')
+		formsBlock.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			const photo = photoEditBlock.elements[0].value;
+			const name = formsBlock.elements[0].value;
+			const email = formsBlock.elements[1].value;
+
+			AjaxModule.doPost({
+				callback: (xhr) => {
+					User.set(xhr);
+					this._router.open('/me');
+				},
+				path: '/editme',
+				body: {
+					photo: photo,
+					name: name,
+					email: email,
+				},
+			});
+		});
 	}
 
 	_renderEditProfilePage(data) {
@@ -107,7 +132,7 @@ export default class EditProfilePage extends Page {
 			formsTemplates({
 				modifiers: ['profile-card_theme_forms'],
 				action: 'POST',
-				name: 'profile-edit'
+				name: 'profile-edit',
 			}),
 		);
 		const photoEditBlock = document.querySelector('.photo-edit');
@@ -119,7 +144,6 @@ export default class EditProfilePage extends Page {
 			}),
 			editIconTemplate({
 				modifiers: [],
-				id: 'profile-edit',
 			}),
 		);
 
@@ -164,33 +188,14 @@ export default class EditProfilePage extends Page {
 			}),
 		);
 
-		this._createEventListener(document.querySelector('.logout'));
+		this._createLogoutListener(document.querySelector('.logout'));
+		this._createEventListener();
 	}
 
 	open(root) {
 		if (User.exist()) {
 			this._el = root;
 			this._renderEditProfilePage(User.get());
-
-			const formsBlock = document.querySelector('.forms');
-			formsBlock.addEventListener('submit', (event) => {
-				event.preventDefault();
-
-				const name = formsBlock.elements[0].value;
-				const email = formsBlock.elements[1].value;
-
-				AjaxModule.doPost({
-					callback: (xhr) => {
-						User.set(xhr);
-						this._router.open('/me');
-					},
-					path: '/editme',
-					body: {
-						name: name,
-						email: email,
-					},
-				});
-			});
 		} else {
 			AjaxModule.doGet({
 				callback: (xhr) => {
