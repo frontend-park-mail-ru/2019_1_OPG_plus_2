@@ -16,7 +16,6 @@ import Page from './page';
 import Auth from '../modules/auth.js';
 
 export default class MainPage extends Page {
-
 	constructor({
 		router = {},
 	} = {}) {
