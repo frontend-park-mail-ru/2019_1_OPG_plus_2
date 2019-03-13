@@ -14,6 +14,7 @@ import linkTemplate from '../blocks/html/body/application/container/content/butt
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import Auth from '../modules/auth.js';
+import { throwStatement } from 'babel-types';
 
 export default class MainPage extends Page {
 	constructor({
@@ -22,6 +23,18 @@ export default class MainPage extends Page {
 		super();
 		this._router = router;
 	}
+
+	_createEventListener() {
+		this._el.addEventListener('click', (event) => {
+			if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
+				return;
+			}
+			event.preventDefault();
+
+			this._router.open(event.target.dataset.href);
+		}, true);
+	}
+
 	_renderMainPage(data) {
 		genericBeforeEnd(this._el, containerTemplate({
 			modifiers: ['container_theme_main'],
@@ -107,11 +120,13 @@ export default class MainPage extends Page {
 				modifiers: [`${data ? 'link_theme_hidden' : ''}`],
 			}),
 		);
+
+		this._createEventListener();
 	}
 
 	open(root) {
 		this._el = root;
-		this._renderMainPage(res);
+		this._renderMainPage(null);
 		// Auth.isAuth()
 		// 	.then(res => {
 		// 		this._renderMainPage(res);

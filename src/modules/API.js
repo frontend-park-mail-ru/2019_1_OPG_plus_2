@@ -10,7 +10,7 @@ export class API {
         password = '',
     } = {}) {
         AjaxModule.doPost({
-            path: 'https://api.colors.hackallcode.ru/api/session',
+            path: `${HOST}/api/session`,
             body: {
                 login: login,
                 password: password,
@@ -23,7 +23,7 @@ export class API {
      */
     static isAuth() {
         AjaxModule.doGet({
-            path: 'https://api.colors.hackallcode.ru/api/session',
+            path: `${HOST}/api/session`,
         });
     }
 
@@ -33,7 +33,7 @@ export class API {
      */
     static logout() {
         AjaxModule.doDelete({
-            path: 'https://api.colors.hackallcode.ru/api/session',
+            path: `${HOST}/api/session`,
             body: {
                 login: login,
                 password: password,
@@ -47,7 +47,7 @@ export class API {
      */
     static getUsers() {
         AjaxModule.doGet({
-            path: 'https://api.colors.hackallcode.ru/api/score',
+            path: `${HOST}/api/score`,
         })
     }
 
@@ -63,7 +63,7 @@ export class API {
         username = '', 
     } = {}) {
         AjaxModule.doPut({
-            path: 'https://api.colors.hackallcode.ru/api/score',
+            path: `${HOST}/api/score`,
             body: {
                 avatar: avatar,
                 email: email,
@@ -85,7 +85,7 @@ export class API {
         username = '',
     } = {}) {
         AjaxModule.doPost({
-            path: 'https://api.colors.hackallcode.ru/api/user',
+            path: `${HOST}/api/user`,
             body: {
                 avatar: avatar,
                 email: email,
@@ -101,7 +101,7 @@ export class API {
      */
     static deleteUser() {
         AjaxModule.doDelete({
-            path: 'https://api.colors.hackallcode.ru/api/user',
+            path: `${HOST}/api/user`,
         });
     }
 
@@ -112,7 +112,7 @@ export class API {
         id = '',
     } = {}) {
         AjaxModule.doGet({
-            path: `https://api.colors.hackallcode.ru/api/user/${id}`,
+            path: `${HOST}/api/user/${id}`,
         });
     }
 
@@ -121,7 +121,7 @@ export class API {
      */
     static getAvatar() {
         AjaxModule.doGet({
-            path: 'https://api.colors.hackallcode.ru/api/avatar',
+            path: `${HOST}/api/avatar`,
         });
     }
 
@@ -133,7 +133,7 @@ export class API {
         password_confirm = '',
     } = {}) {
         AjaxModule.doPut({
-            path: 'https://api.colors.hackallcode.ru/api/password',
+            path: `${HOST}/api/password`,
             body: {
                 new_password: new_password,
                 password_confirm: password_confirm,

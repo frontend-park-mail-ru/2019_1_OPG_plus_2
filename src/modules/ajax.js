@@ -10,7 +10,7 @@ export default class AjaxModule {
         return fetch(path, {
             method: 'GET',
             headers: {
-                'Origin' : 'https://colors.hackallcode.ru',
+                'Origin' : ORIGIN,
             },
             mode: 'cors',
             credentials: 'include',
@@ -30,7 +30,7 @@ export default class AjaxModule {
             method: 'POST',
             headers: {
                 'Content-type' : 'application/json; charset=utf-8',
-                'Origin' : 'https://colors.hackallcode.ru',
+                'Origin' : ORIGIN,
             },
             mode: 'cors',
             credentials: 'include',
@@ -51,7 +51,7 @@ export default class AjaxModule {
             method: 'PUT',
             headers: {
                 'Content-type' : 'application/json; charset=utf-8',
-                'Origin' : 'https://colors.hackallcode.ru',
+                'Origin' : ORIGIN,
             },
             mode: 'cors',
             credentials: 'include',
@@ -70,7 +70,7 @@ export default class AjaxModule {
         return fetch(path, {
             method: 'DELETE',
             headers: {
-                'Origin' : 'https://colors.hackallcode.ru',
+                'Origin' : ORIGIN,
             },
             mode: 'cors',
             credentials: 'include',

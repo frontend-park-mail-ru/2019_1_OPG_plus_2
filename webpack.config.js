@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const pug = require('./webpack/pug');
 const devserver = require('./webpack/devserver');
@@ -22,7 +23,7 @@ const common = merge([
         plugins: [
             new HtmlWebpackPlugin({
                 template: PATHS.source + '/index.pug',
-            })
+            }),
         ],
     },
     pug(),
@@ -37,11 +38,32 @@ const dev = {
     devtool: "eval",
 };
 
+const devMode = {
+    mode: 'development',
+    plugins: [
+        new webpack.DefinePlugin({
+            ORIGIN: JSON.stringify('http://localhost:8001'),
+            HOST: 'http://localhost:8002',
+        }),
+    ]
+}
+
+const prodMode = {
+    mode: 'production',
+    plugins: [
+        new webpack.DefinePlugin({
+            ORIGIN: JSON.stringify('https://colors.hackallcode.ru'),
+            HOST: 'https://api.colors.hackallcode.ru',
+        }),
+    ]
+}
+
 module.exports = function(env) {
     if (env === 'production') {
         return merge([
             common,
             extractCSS(),
+            prodMode,
         ]);
     }
     if (env === 'development') {
@@ -50,6 +72,7 @@ module.exports = function(env) {
             devserver(),
             sass(),
             dev,
+            devMode,
         ])
     }
 };
