@@ -49,7 +49,7 @@ class UserS {
 	 * @param data
 	 */
 	set(data) {
-		console.log(data);
+		// console.log(data);
 		this._avatar = data.avatar;
 		this._username = data.username;
 		this._email = data.email;

@@ -6,7 +6,7 @@ module.exports = function() {
                   test: /\.(jpg|png|svg)$/,
                   loader: 'file-loader',
                   options: {
-                      username: 'img/[username].[ext]'
+                      username: 'img/[name].[ext]'
                   },
               },
           ],

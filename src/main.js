@@ -11,6 +11,7 @@ import Router from './modules/router.js';
 import NotFound from './pages/404.js';
 
 document.addEventListener('DOMContentLoaded', function() {
+	console.log(HOST);
 	const router = new Router({
 		root: document.getElementById('application'),
 	});
@@ -20,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	router.add('/signin', new SignInPage({
 		router: router,
 	}));
-	// router.add('/me', new ProfilePage({
-	// 	router: router,
-	// }));
+	router.add('/me', new ProfilePage({
+		router: router,
+	}));
 	// router.add('/signup', new SignUpPage({
 	// 	router: router,
 	// }));

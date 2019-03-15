@@ -1,20 +1,30 @@
 import AjaxModule from './ajax.js'
+import User from './user.js'
 
-export class API {
+export default class API {
     /**
      * This method logs user in and sets cookie
      * @param Object object with user login or email
+     * @returns {Promise} object with user login or email
      */
     static signIn({
         login = '',
         password = '',
     } = {}) {
-        AjaxModule.doPost({
-            path: `${HOST}/api/session`,
-            body: {
-                login: login,
-                password: password,
-            }
+        return new Promise((resolve, reject) => {
+            AjaxModule.doPost({
+                path: `${HOST}/api/session`,
+                body: {
+                    login: login,
+                    password: password,
+                }
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => reject(error));
+                } else {
+                    resolve();
+                }
+            })
         });
     }
 
@@ -32,24 +42,43 @@ export class API {
      * @param Object object with user login or email
      */
     static logout() {
-        AjaxModule.doDelete({
-            path: `${HOST}/api/session`,
-            body: {
-                login: login,
-                password: password,
-            },
+        return new Promise(function(resolve, reject) {
+            AjaxModule.doDelete({
+                path: `${HOST}/api/session`,
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => {
+                        reject(error);
+                    });
+                } else {
+                    resolve();
+                }
+            });
         });
+
     } 
 
     /**
      * This method provides client with scoreboard limited with {limit} 
      * entries per page and offset of {offset} from the first position
      */
-    static getUsers() {
-        AjaxModule.doGet({
-            path: `${HOST}/api/score`,
-        })
-    }
+    // static getUsers() {
+    //     return new Promise(function(resolve, reject) {
+    //         AjaxModule.doGet({
+    //             path: `${HOST}/api/score`,
+    //         }).then(response => {
+    //             if (response.status !== 200) {
+    //                 response.json().then(error => {
+    //                     reject(error);
+    //                 });
+    //             } else {
+    //                 response.json().then(user => {
+    //                     reject(user);
+    //                 });
+    //             }
+    //         });
+    //     });
+    // }
 
     /**
      * This method updates info in user and auth-db record of user, 
@@ -108,11 +137,18 @@ export class API {
     /**
      * This method provides client with user data, matching required ID
      */
-    static getUser({
-        id = '',
-    } = {}) {
-        AjaxModule.doGet({
-            path: `${HOST}/api/user/${id}`,
+    static getUser() {
+        return new Promise((resolve, reject) => {
+            AjaxModule.doGet({
+                path: `${HOST}/api/user`,
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => reject(error));
+                } else {
+                    response.json().then(user => User.set(user.data));
+                    resolve();
+                }
+            })
         });
     }
 

@@ -18,7 +18,7 @@ const common = merge([
         entry: PATHS.source + '/main.js',
         output: {
             path: PATHS.build,
-            filename: 'js/[username].js',
+            filename: 'js/[name].js',
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -43,7 +43,7 @@ const devMode = {
     plugins: [
         new webpack.DefinePlugin({
             ORIGIN: JSON.stringify('http://localhost:8001'),
-            HOST: 'http://localhost:8002',
+            HOST: JSON.stringify('http://localhost:8002'),
         }),
     ]
 }
@@ -53,7 +53,7 @@ const prodMode = {
     plugins: [
         new webpack.DefinePlugin({
             ORIGIN: JSON.stringify('https://colors.hackallcode.ru'),
-            HOST: 'https://api.colors.hackallcode.ru',
+            HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
         }),
     ]
 }
