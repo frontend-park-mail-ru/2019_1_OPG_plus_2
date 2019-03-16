@@ -32,9 +32,17 @@ export default class API {
      * Checks whether user is signed in or signed out
      */
     static isAuth() {
-        AjaxModule.doGet({
-            path: `${HOST}/api/session`,
-        });
+        return new Promise((resolve, reject) => {
+            AjaxModule.doGet({
+                path: `${HOST}/api/session`,
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => reject(error));
+                } else {
+                    resolve();
+                }
+            })
+        })
     }
 
     /**
@@ -86,20 +94,39 @@ export default class API {
      * @param Object object with user avatar, email, password and username
      */
     static updateUser({
-        avatar = '',
+        // avatar = '',
         email = '',
-        password = '',
+        // password = '',
         username = '', 
     } = {}) {
-        AjaxModule.doPut({
-            path: `${HOST}/api/score`,
-            body: {
-                avatar: avatar,
-                email: email,
-                password: password,
-                username: username,
-            },
+        return new Promise((resolve, reject) => {
+            AjaxModule.doPut({
+                path: `${HOST}/api/user`,
+                body: {
+                    // avatar: avatar,
+                    email: email,
+                    // password: password,
+                    username: username,
+                }
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => {
+                        reject(error);
+                    });
+                } else {
+                    resolve();
+                }
+            });
         });
+        // AjaxModule.doPut({
+        //     path: `${HOST}/api/score`,
+        //     body: {
+        //         avatar: avatar,
+        //         email: email,
+        //         password: password,
+        //         username: username,
+        //     },
+        // });
     }
 
     /**
@@ -113,15 +140,25 @@ export default class API {
         password = '',
         username = '',
     } = {}) {
-        AjaxModule.doPost({
-            path: `${HOST}/api/user`,
-            body: {
-                avatar: avatar,
-                email: email,
-                password: password,
-                username: username,
-            },
-        });
+        return new Promise((resolve, reject) => {
+            AjaxModule.doPost({
+                path: `${HOST}/api/user`,
+                body: {
+                    avatar: avatar,
+                    email: email,
+                    password: password,
+                    username: username,
+                },
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => {
+                        reject(error);
+                    });
+                } else {
+                    resolve();
+                }
+            });
+        })
     }
 
     /**

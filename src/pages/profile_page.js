@@ -15,7 +15,6 @@ import settingsIconTemplate from '../blocks/html/body/application/container/head
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import User from '../modules/user.js';
-import AjaxModule from '../modules/ajax';
 import API from '../modules/API.js';
 
 export default class ProfilePage extends Page {
@@ -24,16 +23,22 @@ export default class ProfilePage extends Page {
 	} = {}) {
 		super();
 		this._router = router;
+		this.onLogoutEvent = this.onLogoutEvent.bind(this);
 	}
 
+	onLogoutEvent(event) {
+		event.preventDefault();
+		API.logout()
+			.then(() => this._router.open('/'))
+			.catch(() => this._router.open('/'));
+	}
 
-	_createEventListener(el) {
-		el.addEventListener('click', (event) => {
-			event.preventDefault();
-			API.logout()
-			.then(() => {this._router.open('/')})
-			.catch(() => {this._router.open('/')});
-		});
+	_createLogutListener() {
+		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
+	}
+
+	_removeLogoutListener() {
+		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
 	}
 
 	_renderProfilePage(data) {
@@ -90,7 +95,7 @@ export default class ProfilePage extends Page {
 				modifiers: [],
 			}),
 			nameTemplate({
-				username: data.username,
+				name: data.username,
 				modifiers: [],
 			}),
 		);
@@ -130,7 +135,8 @@ export default class ProfilePage extends Page {
 			})
 		);
 
-		this._createEventListener(document.querySelector('.logout'));
+		this._removeLogoutListener();
+		this._createLogutListener();
 	}
 
 	open(root) {
@@ -140,7 +146,7 @@ export default class ProfilePage extends Page {
 		} else {
 			API.getUser()
 			.then(() => this._router.open('/me'))
-			.catch(() => this._router.open('/singin'));
+			.catch(() => this._router.open('/signin'));
 		}
 	}
 

@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	router.add('/me', new ProfilePage({
 		router: router,
 	}));
-	// router.add('/signup', new SignUpPage({
-	// 	router: router,
-	// }));
-	// router.add('/editme', new EditProfilePage({
-	// 	router: router,
-	// }));
+	router.add('/signup', new SignUpPage({
+		router: router,
+	}));
+	router.add('/editme', new EditProfilePage({
+		router: router,
+	}));
 	// router.add('/leaders', new LeaderBoard());
 
 	router.add('/not_found', new NotFound());

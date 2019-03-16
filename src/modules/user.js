@@ -21,7 +21,7 @@ class UserS {
 	 * @return {boolean}
 	 */
 	exist() {
-		if (!this._username || !this._email || !this._score) {
+		if (!this._username || !this._email) {
 			return false;
 		}
 

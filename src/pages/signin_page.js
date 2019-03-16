@@ -20,26 +20,35 @@ export default class SignInPage extends Page {
 	} = {}) {
 		super();
 		this._router = router;
+		this.onFormSubmit = this.onFormSubmit.bind(this);
+	}
+
+	onFormSubmit(event) {
+		const formsBlock = this._el.querySelector('.forms');
+		event.preventDefault();
+            	
+		const email = formsBlock.elements[0].value;
+		const password = formsBlock.elements[1].value;
+
+		API.signIn({
+			login: email,
+			password: password,
+		})
+		.then(() => {this._router.open('/me')})
+		.catch(err => {
+			this._el.innerHTML = '';
+			this._renderSignIn(err, err.data.login);
+		});
 	}
 
 	_createEventListener() {
 		const formsBlock = this._el.querySelector('.forms');
-		formsBlock.addEventListener('submit', event => {
-			event.preventDefault();
-            	
-			const email = formsBlock.elements[0].value;
-			const password = formsBlock.elements[1].value;
+		formsBlock.addEventListener('submit', this.onFormSubmit, false);
+	}
 
-			API.signIn({
-				login: email,
-				password: password,
-			})
-			.then(() => this._router.open('/me'))
-			.catch(err => {
-				this._el.innerHTML = '';
-				this._renderSignIn(err, err.data);
-			});
-		});
+	_removeEventListener() {
+		const formsBlock = this._el.querySelector('.forms');
+		formsBlock.addEventListener('submit', this.onFormSubmit, false);
 	}
 
 	_renderSignIn(data, email) {
@@ -119,6 +128,7 @@ export default class SignInPage extends Page {
 			}),
 		);
 
+		this._removeEventListener();
 		this._createEventListener();
 	}
 

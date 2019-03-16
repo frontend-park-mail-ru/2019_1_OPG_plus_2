@@ -13,8 +13,7 @@ import linkTemplate from '../blocks/html/body/application/container/content/butt
 
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
-import Auth from '../modules/auth.js';
-import { throwStatement } from 'babel-types';
+import API from '../modules/API.js';
 
 export default class MainPage extends Page {
 	constructor({
@@ -22,17 +21,23 @@ export default class MainPage extends Page {
 	} = {}) {
 		super();
 		this._router = router;
+		this.onLinkClick = this.onLinkClick.bind(this);
+	}
+
+	onLinkClick(event) {
+		if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
+			return;
+		}
+		event.preventDefault();
+		this._router.open(event.target.dataset.href);
 	}
 
 	_createEventListener() {
-		this._el.addEventListener('click', (event) => {
-			if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
-				return;
-			}
-			event.preventDefault();
+		this._el.addEventListener('click', this.onLinkClick, true);
+	}
 
-			this._router.open(event.target.dataset.href);
-		}, true);
+	_removeEventListener() {
+		this._el.removeEventListener('click', this.onLinkClick, true);
 	}
 
 	_renderMainPage(data) {
@@ -51,7 +56,6 @@ export default class MainPage extends Page {
 		);
 		const headBlock = this._el.querySelector('.head.head_theme_main');
 		const contentBlock = this._el.querySelector('.content.content_theme_main');
-
 		genericBeforeEnd(headBlock, 
 			menuTemplate({
 				modifiers: ['menu_theme_main'],
@@ -72,7 +76,7 @@ export default class MainPage extends Page {
 			}),
 			rulesTemplate({
 				modifiers: [],
-				hreaf: '/',
+				href: '/',
 				dataset: '/rules',
 			})
 		);
@@ -120,19 +124,21 @@ export default class MainPage extends Page {
 				modifiers: [`${data ? 'link_theme_hidden' : ''}`],
 			}),
 		);
-
+		
+		this._removeEventListener();
 		this._createEventListener();
 	}
 
 	open(root) {
 		this._el = root;
-		this._renderMainPage(null);
-		// Auth.isAuth()
-		// 	.then(res => {
-		// 		this._renderMainPage(res);
-		// 	})
-		// 	.catch(() => {
-		// 		this._renderMainPage(null);
-		// 	});
+		API.isAuth()
+		.then(() => {
+			this._el.innerHTML = '';
+			this._renderMainPage(true)
+		})
+		.catch(() => {
+			this._el.innerHTML = '';
+			this._renderMainPage(false)
+		});
 	}
 }
