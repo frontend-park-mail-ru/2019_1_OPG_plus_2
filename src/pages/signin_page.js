@@ -37,7 +37,7 @@ export default class SignInPage extends Page {
 			.then(() => {this._router.open('/me');})
 			.catch(err => {
 				this._el.innerHTML = '';
-				this._renderSignIn(err, err.data.login);
+				this._renderSignIn(err, email);
 			});
 	}
 
