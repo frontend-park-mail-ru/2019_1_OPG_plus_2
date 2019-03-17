@@ -38,7 +38,7 @@ export default class ProfilePage extends Page {
 	}
 
 	_removeLogoutListener() {
-		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
+		document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
 	}
 
 	_renderProfilePage(data) {
@@ -89,10 +89,10 @@ export default class ProfilePage extends Page {
 		);
 		const profileHeadBlock = document.querySelector('.profile-head.profile-card_theme_main');
 		const profileDataBlock = document.querySelector('.profile-data');
-
 		genericBeforeEnd(profileHeadBlock, 
 			avatarTemplate({
 				modifiers: [],
+				url: `${HOST}${data.photo}`,
 			}),
 			nameTemplate({
 				name: data.username,

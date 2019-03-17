@@ -25,16 +25,17 @@ export default class AjaxModule {
     static doPost({
         path = '/',
         body = {},
+        headers = {
+            'Content-type' : 'application/json; charset=utf-8',
+            'Origin' : ORIGIN,
+        }
     } = {}) {
         return fetch(path, {
             method: 'POST',
-            headers: {
-                'Content-type' : 'application/json; charset=utf-8',
-                'Origin' : ORIGIN,
-            },
+            headers: headers,
             mode: 'cors',
             credentials: 'include',
-            body: JSON.stringify(body),
+            body: body,
         });
     }
 

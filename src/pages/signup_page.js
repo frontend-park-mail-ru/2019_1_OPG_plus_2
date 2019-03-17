@@ -11,7 +11,6 @@ import errorTemplate from '../blocks/html/body/application/container/content/for
 
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
-import AjaxModule from '../modules/ajax';
 import {validEmail, validLogin, validPassword} from '../modules/utils.js';
 import API from '../modules/API.js';
 

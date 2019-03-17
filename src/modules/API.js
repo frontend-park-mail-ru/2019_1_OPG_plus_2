@@ -14,10 +14,10 @@ export default class API {
         return new Promise((resolve, reject) => {
             AjaxModule.doPost({
                 path: `${HOST}/api/session`,
-                body: {
+                body: JSON.stringify({
                     login: login,
                     password: password,
-                }
+                })
             }).then(response => {
                 if (response.status !== 200) {
                     response.json().then(error => reject(error));
@@ -70,23 +70,23 @@ export default class API {
      * This method provides client with scoreboard limited with {limit} 
      * entries per page and offset of {offset} from the first position
      */
-    // static getUsers() {
-    //     return new Promise(function(resolve, reject) {
-    //         AjaxModule.doGet({
-    //             path: `${HOST}/api/score`,
-    //         }).then(response => {
-    //             if (response.status !== 200) {
-    //                 response.json().then(error => {
-    //                     reject(error);
-    //                 });
-    //             } else {
-    //                 response.json().then(user => {
-    //                     reject(user);
-    //                 });
-    //             }
-    //         });
-    //     });
-    // }
+    static getUsers() {
+        return new Promise(function(resolve, reject) {
+            AjaxModule.doGet({
+                path: `${HOST}/api/users`,
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => {
+                        reject(error);
+                    });
+                } else {
+                    response.json().then(user => {
+                        resolve(user);
+                    });
+                }
+            });
+        });
+    }
 
     /**
      * This method updates info in user and auth-db record of user, 
@@ -114,6 +114,7 @@ export default class API {
                         reject(error);
                     });
                 } else {
+                    User.set({username: username});
                     resolve();
                 }
             });
@@ -143,12 +144,12 @@ export default class API {
         return new Promise((resolve, reject) => {
             AjaxModule.doPost({
                 path: `${HOST}/api/user`,
-                body: {
+                body: JSON.stringify({
                     avatar: avatar,
                     email: email,
                     password: password,
                     username: username,
-                },
+                }),
             }).then(response => {
                 if (response.status !== 200) {
                     response.json().then(error => {
@@ -198,19 +199,52 @@ export default class API {
         });
     }
 
+    static uploadAvatar({
+        avatar = {},
+    } = {}) {
+        return new Promise((resolve, reject) => {
+            AjaxModule.doPost({
+                path: `${HOST}/api/avatar`,
+                headers: {
+                    'Origin': ORIGIN,
+                },
+                body: avatar,
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => reject(error));
+                } else {
+                    response.json().then(data => User.set({
+                        avatar: data.message, 
+                        username: User.get().username, 
+                        email: User.get().email
+                    }));
+                    resolve();
+                }
+            })
+        });
+    }
+
     /**
      * This method updates info in profile and auth-db record of user, who is making a query
      */
     static updatePassword({
-        new_password = '',
-        password_confirm = '',
+        newPassword = '',
+        passwordConfirm = '',
     } = {}) {
-        AjaxModule.doPut({
-            path: `${HOST}/api/password`,
-            body: {
-                new_password: new_password,
-                password_confirm: password_confirm,
-            },
+        return new Promise((resolve, reject) => {
+            AjaxModule.doPut({
+                path: `${HOST}/api/password`,
+                body: {
+                    new_password: newPassword,
+                    password_confirm: passwordConfirm,
+                },
+            }).then(response => {
+                if (response.status !== 200) {
+                    response.json().then(error => reject(error));
+                } else {
+                    resolve();
+                }
+            });
         });
     }
 

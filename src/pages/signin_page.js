@@ -48,7 +48,7 @@ export default class SignInPage extends Page {
 
 	_removeEventListener() {
 		const formsBlock = this._el.querySelector('.forms');
-		formsBlock.addEventListener('submit', this.onFormSubmit, false);
+		formsBlock.removeEventListener('submit', this.onFormSubmit, false);
 	}
 
 	_renderSignIn(data, email) {
