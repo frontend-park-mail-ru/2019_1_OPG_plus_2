@@ -92,7 +92,7 @@ export default class ProfilePage extends Page {
 		genericBeforeEnd(profileHeadBlock, 
 			avatarTemplate({
 				modifiers: [],
-				url: `${HOST}${data.photo}`,
+				url: `${data.photo ? HOST + data.photo : ''}`,
 			}),
 			nameTemplate({
 				name: data.username,

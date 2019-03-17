@@ -1,2 +1,6 @@
-div(class='avatar ' + modifiers)
-    img(src=url)
+if url
+    div(class='avatar ' + modifiers)
+        img(src=url)
+else
+    div(class='avatar ' + modifiers)
+        img(src=require('./pers1.svg'))

@@ -185,7 +185,7 @@ export default class EditProfilePage extends Page {
 		genericBeforeEnd(photoEditBlock,
 			avatarTemplate({
 				modifiers: [],
-				url: `${HOST}${data.photo}`,
+				url: `${data.photo ? HOST + data.photo : ''}`,
 			}),
 			editIconTemplate({
 				modifiers: [],
