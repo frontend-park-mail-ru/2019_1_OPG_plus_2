@@ -145,8 +145,8 @@ export default class ProfilePage extends Page {
 			this._renderProfilePage(User.get());
 		} else {
 			API.getUser()
-			.then(() => this._router.open('/me'))
-			.catch(() => this._router.open('/signin'));
+				.then(() => this._router.open('/me'))
+				.catch(() => this._router.open('/signin'));
 		}
 	}
 

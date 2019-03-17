@@ -7,14 +7,12 @@ import mainTemplate from '../blocks/html/body/application/container/content/main
 import rowTemplate from '../blocks/html/body/application/container/content/main/row/row.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js';
-import AjaxModule from '../modules/ajax';
 import Page from './page';
 import API from '../modules/API.js';
 
 export default class LeaderBoard extends Page {
 
 	_renderLeaderBoard(data) {
-		console.log(data);
 		genericBeforeEnd(this._el, containerTemplate({
 			modifiers: ['container_theme_scoreboard'],
 		}));
@@ -62,7 +60,7 @@ export default class LeaderBoard extends Page {
 	open(root) {
 		this._el = root;
 		API.getUsers()
-		.then(users => this._renderLeaderBoard(users.data))
-		.catch(err => console.log(err));
+			.then(users => this._renderLeaderBoard(users.data))
+			.catch(() => this._router.open('/'));
 	}
 }

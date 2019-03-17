@@ -86,14 +86,14 @@ export default class SignUpPage extends Page {
 			password: password,
 			username: username,
 		})
-		.then(() => this._router.open('/me'))
-		.catch(err => {
-			this._el.innerHTML = '';
-			this._renderSignUp(err, {
-				username,
-				email,
-			}
-		)});
+			.then(() => this._router.open('/me'))
+			.catch(err => {
+				this._el.innerHTML = '';
+				this._renderSignUp(err, {
+					username,
+					email,
+				}
+				);});
 
 	}
 
@@ -152,7 +152,7 @@ export default class SignUpPage extends Page {
 		genericBeforeEnd(formsBlock,
 			errorTemplate({
 				modifiers: [],
-				text: data.message,
+				text: data.error,
 			}), 
 			formTemplate({
 				modifiers: [],

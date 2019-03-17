@@ -34,11 +34,11 @@ export default class SignInPage extends Page {
 			login: email,
 			password: password,
 		})
-		.then(() => {this._router.open('/me')})
-		.catch(err => {
-			this._el.innerHTML = '';
-			this._renderSignIn(err, err.data.login);
-		});
+			.then(() => {this._router.open('/me');})
+			.catch(err => {
+				this._el.innerHTML = '';
+				this._renderSignIn(err, err.data.login);
+			});
 	}
 
 	_createEventListener() {

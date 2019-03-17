@@ -24,8 +24,7 @@ import submitTemplate from '../blocks/html/body/application/container/content/bu
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import User from '../modules/user.js';
-import API from '../modules/API.js'
-import {validEmail, validLogin, validPassword} from '../modules/utils.js';
+import API from '../modules/API.js';
 
 export default class EditProfilePage extends Page {
 	constructor({
@@ -38,30 +37,29 @@ export default class EditProfilePage extends Page {
 		this.onLoadEvent = this.onLoadEvent.bind(this);
 	}
 
-	onLoadEvent(event) {
+	onLoadEvent() {
 		const photo = this._el.querySelector('#file-input').files;
 		let form = new FormData();
 		form.append('avatar', photo[0]);
 		API.uploadAvatar({
 			avatar: form,
 		})
-		.then(() => {
-			this._el.innerHTML = '';
-			this._renderEditProfilePage(User.get());
-		})
-		.catch(err => console.log(err));
+			.then(() => {
+				this._el.innerHTML = '';
+				this._renderEditProfilePage(User.get());
+			})
+			.catch(() => this._router.open('/'));
 	}
 
 	onLogoutEvent(event) {
 		event.preventDefault();
 		API.logout()
 			.then(() => this._router.open('/'))
-			.catch((err) => console.log(err));
+			.catch(() => this._router.open('/'));
 	}
 
 	onFormSubmit(event) {
 		const formsBlock = this._el.querySelector('.forms');
-		const photoBlock = this._el.querySelector('#file-input');
 		event.preventDefault();
 
 		const email = User.get().email;
@@ -69,22 +67,21 @@ export default class EditProfilePage extends Page {
 		const newUsername = formsBlock.elements[0].value;
 		const newPassword = formsBlock.elements[1].value;
 		const repeatNewPassword = formsBlock.elements[2].value;
-		const photo = photoBlock.files;
 
 		if (newUsername != username) {
 			API.updateUser({
 				email: email,
 				username: newUsername,
 			})
-			.then(() => this._router.open('/me'))
-			.catch(err => console.log(err))
+				.then(() => this._router.open('/me'))
+				.catch(() => this._router.open('/'));
 		} else if(newPassword != '' && newPassword === repeatNewPassword) {
 			API.updatePassword({
 				newPassword: newPassword,
 				passwordConfirm: repeatNewPassword,
 			})
-			.then(() => this._router.open('/me'))
-			.catch(err => сonsole.log(err));
+				.then(() => this._router.open('/me'))
+				.catch(() => this._router.open('/'));
 		}
 	}
 
@@ -108,12 +105,12 @@ export default class EditProfilePage extends Page {
 
 	_createLoadListener() {
 		const photoBlock = this._el.querySelector('#file-input');
-		photoBlock.addEventListener("change", this.onLoadEvent, true);
+		photoBlock.addEventListener('change', this.onLoadEvent, true);
 	}
 
 	_removeLoadListener() {
 		const photoBlock = this._el.querySelector('#file-input');
-		photoBlock.removeEventListener("change", this.onLoadEvent, true);
+		photoBlock.removeEventListener('change', this.onLoadEvent, true);
 	}
 
 	_renderEditProfilePage(data) {
@@ -248,8 +245,8 @@ export default class EditProfilePage extends Page {
 			this._renderEditProfilePage(User.get());
 		} else {
 			API.getUser()
-			.then(() => this._router.open('/editme'))
-			.catch(() => this._router.open('/signin'));
+				.then(() => this._router.open('/editme'))
+				.catch(() => this._router.open('/signin'));
 		}
 	}
 }

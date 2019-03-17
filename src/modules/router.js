@@ -1,5 +1,3 @@
-import { debug } from "util";
-
 export default class Router {
 	/**
 	 * @constructor

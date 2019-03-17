@@ -11,7 +11,6 @@ import Router from './modules/router.js';
 import NotFound from './pages/404.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-	console.log(HOST);
 	const router = new Router({
 		root: document.getElementById('application'),
 	});

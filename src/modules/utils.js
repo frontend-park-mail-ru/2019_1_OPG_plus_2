@@ -31,7 +31,7 @@ const R_ATTRIBUTES = /(\w+\s*)=(\s*".*?")/g;
  * @type {RegExp}
  */
 const emailRe = /[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-const nameRe = /[^\.\,\-\_\'\"\@\?\!\:\$ А-Яа-я()]/
+const nameRe = /[^.,-_'"@?!:$ А-Яа-я()]/;
 
 /**
  * Makes passed string safe
