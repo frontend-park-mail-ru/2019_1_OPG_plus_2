@@ -17,11 +17,12 @@ export default class API {
                 body: JSON.stringify({
                     login: login,
                     password: password,
-                })
+                }),
             }).then(response => {
                 if (response.status !== 200) {
                     response.json().then(error => reject(error));
                 } else {
+                    User.set({});
                     resolve();
                 }
             })
@@ -156,6 +157,7 @@ export default class API {
                         reject(error);
                     });
                 } else {
+                    User.set({});
                     resolve();
                 }
             });
