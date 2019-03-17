@@ -71,10 +71,13 @@ export default class API {
      * This method provides client with scoreboard limited with {limit} 
      * entries per page and offset of {offset} from the first position
      */
-	static getUsers() {
+	static getUsers({
+		limit = 5,
+		page = 1
+	} = {}) {
 		return new Promise(function(resolve, reject) {
 			AjaxModule.doGet({
-				path: `${HOST}/api/users`,
+				path: `${HOST}/api/users?limit=${limit}&page=${page}`,
 			}).then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => {

@@ -1,0 +1,22 @@
+.pages {
+    grid-area: p;
+    display: flex;
+    justify-content: space-between;
+
+    &__back {
+        background-image: url('../img/arrow_up_big.svg');
+        background-size: 73%;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 2.1vw;
+    }
+
+    &__next {
+        background-image: url('../img/arrow_up_big.svg');
+        background-size: 73%;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 2.1vw;
+        transform: rotate(180deg);
+    }
+}
