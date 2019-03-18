@@ -2,6 +2,9 @@ each item, index in lst
     div(class='row ' + modifiers)
         div(class='row__number')=index+1
         div(class='row__photo')
-            img(class="row__photo__icon" src="img/pers1.svg")
+            if item.avatar
+                img(class='row__photo__icon' src=host+item.avatar)
+            else
+                img(class='row__photo__icon' src=require('./pers1.svg'))
         div(class='row__name')=item.username
         div(class='row__score')=item.score

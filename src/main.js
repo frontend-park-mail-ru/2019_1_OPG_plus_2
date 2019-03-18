@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	router.add('/editme', new EditProfilePage({
 		router: router,
 	}));
-	router.add('/leaders', new LeaderBoard());
+	router.add('/leaders', new LeaderBoard({
+		router: router,
+	}));
 
 	router.add('/not_found', new NotFound());
 

@@ -49,7 +49,8 @@ export default class LeaderBoard extends Page {
 				.then(users => {
 					this._el.innerHTML = '';
 					this._renderLeaderBoard(users.data, pagesNum);
-				});
+				})
+				.catch(() => this._router.open('/leaders'));
 		}
 	}
 
@@ -106,7 +107,8 @@ export default class LeaderBoard extends Page {
 		genericBeforeEnd(mainBlock, 
 			rowTemplate({
 				modifiers: [],
-				lst: [...data],
+				lst: [...data.users],
+				host: HOST,
 			}),
 		);
 
