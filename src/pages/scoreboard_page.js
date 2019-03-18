@@ -5,14 +5,66 @@ import contentTemplate from '../blocks/html/body/application/container/content/c
 import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug';
 import mainTemplate from '../blocks/html/body/application/container/content/main/main.pug';
 import rowTemplate from '../blocks/html/body/application/container/content/main/row/row.pug';
+import pagesTemplate from '../blocks/html/body/application/container/content/main/pages/pages.pug';
 
 import {genericBeforeEnd} from '../modules/helpers.js';
-import AjaxModule from '../modules/ajax';
 import Page from './page';
+import API from '../modules/API.js';
 
-export default class LeaderBoard extends Page{
+export default class LeaderBoard extends Page {
+	constructor({
+		router = {},
+	} = {}) {
+		super();
+		this._router = router;
+		this.onClick = this.onClick.bind(this);
+	}
 
-	_renderLeaderBoard(data) {
+	onClick(event) {
+		if (event.target.classList.contains('pages__first')) {
+			API.getUsers({
+				limit: 5,
+				pages: 1,
+			})
+				.then(users => {
+					this._el.innerHTML = '';
+					this._renderLeaderBoard(users.data, 1);
+				});
+		} else if (event.target.classList.contains('pages__back')) {
+			const pagesNum = parseInt(document.querySelector('.pages__num').textContent) - 1;
+			API.getUsers({
+				limit: 5,
+				page: pagesNum > 0 ? pagesNum : 1,
+			})
+				.then(users => {
+					this._el.innerHTML = '';
+					this._renderLeaderBoard(users.data, pagesNum > 0 ? pagesNum : 1);
+				});
+		} else if (event.target.classList.contains('pages__next')) {
+			const pagesNum = parseInt(document.querySelector('.pages__num').textContent) + 1;
+			API.getUsers({
+				limit: 5,
+				page: pagesNum,
+			})
+				.then(users => {
+					this._el.innerHTML = '';
+					this._renderLeaderBoard(users.data, pagesNum);
+				})
+				.catch(() => this._router.open('/leaders'));
+		}
+	}
+
+	_createEventListener() {
+		const pages = this._el.querySelector('.pages');
+		pages.addEventListener('click', this.onClick, true);
+	}
+
+	_removeEventListener() {
+		const pages = this._el.querySelector('.pages');
+		pages.removeEventListener('click', this.onClick, true);
+	}
+
+	_renderLeaderBoard(data, pageNum) {
 		genericBeforeEnd(this._el, containerTemplate({
 			modifiers: ['container_theme_scoreboard'],
 		}));
@@ -45,25 +97,33 @@ export default class LeaderBoard extends Page{
 			mainTemplate({
 				modifiers: ['main_theme_scoreboard'],
 			}),
+			pagesTemplate({
+				modifiers: [],
+				page_num: pageNum,
+			})
 		);
 		const mainBlock = document.querySelector('.main.main_theme_scoreboard');
 
 		genericBeforeEnd(mainBlock, 
 			rowTemplate({
 				modifiers: [],
-				lst: [...data],
-			})
+				lst: [...data.users],
+				host: HOST,
+			}),
 		);
-	}
 
+		this._removeEventListener();
+		this._createEventListener();
+	}
 
 	open(root) {
 		this._el = root;
-		AjaxModule.doGet({
-			callback: (xhr) => {
-				this._renderLeaderBoard(xhr);
-			},
-			path: '/users',
-		});
+		API.getUsers({
+			limit: 5,
+			page: 1,
+		})
+			.then(users => {
+				this._renderLeaderBoard(users.data, 1);
+			});
 	}
 }

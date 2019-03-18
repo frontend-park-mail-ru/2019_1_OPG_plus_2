@@ -21,7 +21,7 @@ class UserS {
 	 * @return {boolean}
 	 */
 	exist() {
-		if (!this._username || !this._email || !this._score) {
+		if (!this._username || !this._email) {
 			return false;
 		}
 
@@ -49,7 +49,7 @@ class UserS {
 	 * @param data
 	 */
 	set(data) {
-		console.log(data);
+		// console.log(data);
 		this._avatar = data.avatar;
 		this._username = data.username;
 		this._email = data.email;

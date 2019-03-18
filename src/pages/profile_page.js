@@ -15,7 +15,7 @@ import settingsIconTemplate from '../blocks/html/body/application/container/head
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import User from '../modules/user.js';
-import AjaxModule from '../modules/ajax';
+import API from '../modules/API.js';
 
 export default class ProfilePage extends Page {
 	constructor({
@@ -23,20 +23,22 @@ export default class ProfilePage extends Page {
 	} = {}) {
 		super();
 		this._router = router;
+		this.onLogoutEvent = this.onLogoutEvent.bind(this);
 	}
 
+	onLogoutEvent(event) {
+		event.preventDefault();
+		API.logout()
+			.then(() => this._router.open('/'))
+			.catch(() => this._router.open('/'));
+	}
 
-	_createEventListener(el) {
-		el.addEventListener('click', function (event) {
-			event.preventDefault();
-			AjaxModule.doDelete({
-				callback: () => {
-					this._router.open('/');
-				},
-				path: 'https://api.colors.hackallcode.ru/api/session',
-				body: {},
-			});
-		}.bind(this));
+	_createLogutListener() {
+		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
+	}
+
+	_removeLogoutListener() {
+		document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
 	}
 
 	_renderProfilePage(data) {
@@ -87,13 +89,13 @@ export default class ProfilePage extends Page {
 		);
 		const profileHeadBlock = document.querySelector('.profile-head.profile-card_theme_main');
 		const profileDataBlock = document.querySelector('.profile-data');
-
 		genericBeforeEnd(profileHeadBlock, 
 			avatarTemplate({
 				modifiers: [],
+				url: `${data.photo ? HOST + data.photo : ''}`,
 			}),
 			nameTemplate({
-				username: data.username,
+				name: data.username,
 				modifiers: [],
 			}),
 		);
@@ -133,7 +135,8 @@ export default class ProfilePage extends Page {
 			})
 		);
 
-		this._createEventListener(document.querySelector('.logout'));
+		this._removeLogoutListener();
+		this._createLogutListener();
 	}
 
 	open(root) {
@@ -141,18 +144,9 @@ export default class ProfilePage extends Page {
 			this._el = root;
 			this._renderProfilePage(User.get());
 		} else {
-			AjaxModule.doGet({
-				callback: (xhr) => {
-					if (!xhr) {
-						this._router.open('/signin');
-						return;
-					}
-
-					User.set(xhr.data);
-					this._router.open('/me');
-				},
-				path: 'https://colors.hackallcode.ru/api/user',
-			});
+			API.getUser()
+				.then(() => this._router.open('/me'))
+				.catch(() => this._router.open('/signin'));
 		}
 	}
 

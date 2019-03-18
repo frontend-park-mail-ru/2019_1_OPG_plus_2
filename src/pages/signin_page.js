@@ -10,9 +10,9 @@ import sumbitTemplate from '../blocks/html/body/application/container/content/bu
 import linkTemplate from '../blocks/html/body/application/container/content/buttons/link/link.pug';
 import errorTemplate from '../blocks/html/body/application/container/content/forms/error/error.pug';
 
-import AjaxModule from '../modules/ajax.js';
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
+import API from '../modules/API.js';
 
 export default class SignInPage extends Page {
 	constructor({
@@ -20,37 +20,40 @@ export default class SignInPage extends Page {
 	} = {}) {
 		super();
 		this._router = router;
+		this.onFormSubmit = this.onFormSubmit.bind(this);
+	}
+
+	onFormSubmit(event) {
+		const formsBlock = this._el.querySelector('.forms');
+		event.preventDefault();
+            	
+		const email = formsBlock.elements[0].value;
+		const password = formsBlock.elements[1].value;
+
+		API.signIn({
+			login: email,
+			password: password,
+		})
+			.then(() => {this._router.open('/me');})
+			.catch(err => {
+				this._el.innerHTML = '';
+				this._renderSignIn(err, email);
+			});
 	}
 
 	_createEventListener() {
 		const formsBlock = this._el.querySelector('.forms');
-		formsBlock.addEventListener('submit', (event) => {
-			event.preventDefault();
-            	
-			const email = formsBlock.elements[0].value;
-			const password = formsBlock.elements[1].value;
-            
-			AjaxModule.doPost({
-				callback: (xhr) => {
-					if (xhr.status === 200) {
-						this._router.open('/me');
-					} else {
-						this._el.innerHTML = '';
-						this._renderSignIn(xhr, email);
-					}
-				},
-				path: 'https://api.colors.hackallcode.ru/api/session',
-				body: {
-					login: email,
-					password: password,
-				},
-			});
-		});
+		formsBlock.addEventListener('submit', this.onFormSubmit, false);
+	}
+
+	_removeEventListener() {
+		const formsBlock = this._el.querySelector('.forms');
+		formsBlock.removeEventListener('submit', this.onFormSubmit, false);
 	}
 
 	_renderSignIn(data, email) {
 		genericBeforeEnd(this._el, containerTemplate({
-			modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
+			modifiers: [`container_theme_signin ${data.message ? 'container_theme_error' : ' '}`],
 		}));
 		const containerBlock = document.querySelector('.container.container_theme_signin');
 
@@ -80,7 +83,7 @@ export default class SignInPage extends Page {
 			}),
 			formsTemplate({
 				modifiers: [],
-				username: 'signin',
+				name: 'signin',
 			}),
 			buttonsTemplate({
 				modifiers: [],
@@ -92,7 +95,7 @@ export default class SignInPage extends Page {
 		genericBeforeEnd(formsBlock, 
 			errorTemplate({
 				modifiers: [],
-				text: data.error,
+				text: data.message,
 			}),
 			formTemplate({
 				modifiers: [],
@@ -125,6 +128,7 @@ export default class SignInPage extends Page {
 			}),
 		);
 
+		this._removeEventListener();
 		this._createEventListener();
 	}
 

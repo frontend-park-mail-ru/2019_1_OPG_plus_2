@@ -45,14 +45,6 @@ export default class Router {
 	 */
 	start() {
 		this.open(window.location.pathname);
-		this._root.addEventListener('click', function (event) {
-			if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
-				return;
-			}
-			event.preventDefault();
-            
-			this.open(event.target.dataset.href);
-		}.bind(this));
 	}
 
 	/**

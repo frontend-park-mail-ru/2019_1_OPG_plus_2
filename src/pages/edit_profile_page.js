@@ -24,7 +24,7 @@ import submitTemplate from '../blocks/html/body/application/container/content/bu
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
 import User from '../modules/user.js';
-import AjaxModule from '../modules/ajax';
+import API from '../modules/API.js';
 
 export default class EditProfilePage extends Page {
 	constructor({
@@ -32,57 +32,85 @@ export default class EditProfilePage extends Page {
 	} = {}) {
 		super();
 		this._router = router;
+		this.onLogoutEvent = this.onLogoutEvent.bind(this);
+		this.onFormSubmit = this.onFormSubmit.bind(this);
+		this.onLoadEvent = this.onLoadEvent.bind(this);
 	}
 
-	_createLogoutListener(el) {
-		el.addEventListener('click', function (event) {
-			event.preventDefault();
-			AjaxModule.doPost({
-				callback: () => {
-					this._router.open('/');
-				},
-				path: '/logout',
-				body: {},
-			});
-		}.bind(this));
+	onLoadEvent() {
+		const photo = this._el.querySelector('#file-input').files;
+		let form = new FormData();
+		form.append('avatar', photo[0]);
+		API.uploadAvatar({
+			avatar: form,
+		})
+			.then(() => {
+				this._el.innerHTML = '';
+				this._renderEditProfilePage(User.get());
+			})
+			.catch(() => this._router.open('/'));
+	}
+
+	onLogoutEvent(event) {
+		event.preventDefault();
+		API.logout()
+			.then(() => this._router.open('/'))
+			.catch(() => this._router.open('/'));
+	}
+
+	onFormSubmit(event) {
+		const formsBlock = this._el.querySelector('.forms');
+		event.preventDefault();
+
+		const email = User.get().email;
+		const username = User.get().username;
+		const newUsername = formsBlock.elements[0].value;
+		const newPassword = formsBlock.elements[1].value;
+		const repeatNewPassword = formsBlock.elements[2].value;
+
+		if (newUsername != username) {
+			API.updateUser({
+				email: email,
+				username: newUsername,
+			})
+				.then(() => this._router.open('/me'))
+				.catch(() => this._router.open('/'));
+		} else if(newPassword != '' && newPassword === repeatNewPassword) {
+			API.updatePassword({
+				newPassword: newPassword,
+				passwordConfirm: repeatNewPassword,
+			})
+				.then(() => this._router.open('/me'))
+				.catch(() => this._router.open('/'));
+		}
+	}
+
+	_createLogoutListener() {
+		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
+	}
+
+	_removeLogoutListener() {
+		document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
 	}
 
 	_createEventListener() {
 		const formsBlock = this._el.querySelector('.forms');
-		const photoEditBlock = this._el.querySelector('.edit-icon')
-		formsBlock.addEventListener('submit', (event) => {
-			event.preventDefault();
+		formsBlock.addEventListener('submit', this.onFormSubmit, true);
+	}
 
-			const username = formsBlock.elements[0].value;
-			const email = formsBlock.elements[1].value;
+	_removeEventListener() {
+		const formsBlock = this._el.querySelector('.forms');
+		formsBlock.removeEventListener('submit', this.onFormSubmit, true);
+	}
 
-			AjaxModule.doPut({
-				callback: (xhr) => {
-					// User.set(xhr);
-					// const avatar = photoEditBlock.elements[0].value;
-					// if (avatar) {
-					// 	AjaxModule.doPost({
-					// 		callback: (xhr) => {
-					// 			this._router.open('/me');
-					// 		},
-					// 		path: 'https://api.colors.hackallcode.ru/api/avatar',
-					// 		body: {
-					// 			avatar: avatar,
-					// 		},
-					// 	});
-					// }
-					// else {
-						this._router.open('/me')
-					// }
-				},
-				path: '/editme',
-				body: {
-					username: username,
-					email: email,
-				},
-			});
+	_createLoadListener() {
+		const photoBlock = this._el.querySelector('#file-input');
+		photoBlock.addEventListener('change', this.onLoadEvent, true);
+	}
 
-		});
+	_removeLoadListener() {
+		const photoBlock = this._el.querySelector('#file-input');
+		photoBlock.removeEventListener('change', this.onLoadEvent, true);
 	}
 
 	_renderEditProfilePage(data) {
@@ -145,7 +173,7 @@ export default class EditProfilePage extends Page {
 			formsTemplates({
 				modifiers: ['profile-card_theme_forms'],
 				action: 'POST',
-				username: 'profile-edit',
+				name: 'profile-edit',
 			}),
 		);
 		const photoEditBlock = document.querySelector('.photo-edit');
@@ -154,33 +182,35 @@ export default class EditProfilePage extends Page {
 		genericBeforeEnd(photoEditBlock,
 			avatarTemplate({
 				modifiers: [],
+				url: `${data.photo ? HOST + data.photo : ''}`,
 			}),
 			editIconTemplate({
 				modifiers: [],
+				name: 'photo-edit',
 			}),
 		);
 
 		genericBeforeEnd(formsBlock,
 			profileFormTemplate({
 				modifiers: [],
-				username: 'username',
+				name: 'username',
 				type: 'text',
 				title: 'Name',
 				val: data.username,
 			}),
 			profileFormTemplate({
 				modifiers: [],
-				username: 'password',
+				name: 'password',
 				type: 'password',
 				title: 'Password',
-				val: '••••••••',
+				val: '',
 			}),
 			profileFormTemplate({
 				modifiers: [],
-				username: 'repeat-password',
+				name: 'repeat-password',
 				type: 'password',
 				title: 'Repeat password',
-				val: '••••••••',
+				val: '',
 			}),
 		);
 
@@ -200,8 +230,12 @@ export default class EditProfilePage extends Page {
 				dataset: '/logout',
 			}),
 		);
-
-		this._createLogoutListener(document.querySelector('.logout'));
+		
+		this._removeLogoutListener();
+		this._removeEventListener();
+		this._removeLoadListener();
+		this._createLoadListener();
+		this._createLogoutListener();
 		this._createEventListener();
 	}
 
@@ -210,19 +244,9 @@ export default class EditProfilePage extends Page {
 			this._el = root;
 			this._renderEditProfilePage(User.get());
 		} else {
-			AjaxModule.doGet({
-				callback: (xhr) => {
-					if (!xhr) {
-						alert('Unauthorized');
-						this._router.open('/');
-						return;
-					}
-
-					User.set(xhr);
-					this._router.open('/editme');
-				},
-				path: '/me',
-			});
+			API.getUser()
+				.then(() => this._router.open('/editme'))
+				.catch(() => this._router.open('/signin'));
 		}
 	}
 }

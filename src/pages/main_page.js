@@ -13,16 +13,33 @@ import linkTemplate from '../blocks/html/body/application/container/content/butt
 
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
-import Auth from '../modules/auth.js';
+import API from '../modules/API.js';
 
 export default class MainPage extends Page {
-
 	constructor({
 		router = {},
 	} = {}) {
 		super();
 		this._router = router;
+		this.onLinkClick = this.onLinkClick.bind(this);
 	}
+
+	onLinkClick(event) {
+		if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
+			return;
+		}
+		event.preventDefault();
+		this._router.open(event.target.dataset.href);
+	}
+
+	_createEventListener() {
+		this._el.addEventListener('click', this.onLinkClick, true);
+	}
+
+	_removeEventListener() {
+		this._el.removeEventListener('click', this.onLinkClick, true);
+	}
+
 	_renderMainPage(data) {
 		genericBeforeEnd(this._el, containerTemplate({
 			modifiers: ['container_theme_main'],
@@ -39,7 +56,6 @@ export default class MainPage extends Page {
 		);
 		const headBlock = this._el.querySelector('.head.head_theme_main');
 		const contentBlock = this._el.querySelector('.content.content_theme_main');
-
 		genericBeforeEnd(headBlock, 
 			menuTemplate({
 				modifiers: ['menu_theme_main'],
@@ -60,7 +76,7 @@ export default class MainPage extends Page {
 			}),
 			rulesTemplate({
 				modifiers: [],
-				hreaf: '/',
+				href: '/',
 				dataset: '/rules',
 			})
 		);
@@ -108,16 +124,21 @@ export default class MainPage extends Page {
 				modifiers: [`${data ? 'link_theme_hidden' : ''}`],
 			}),
 		);
+		
+		this._removeEventListener();
+		this._createEventListener();
 	}
 
 	open(root) {
 		this._el = root;
-		Auth.isAuth()
-			.then(res => {
-				this._renderMainPage(res);
+		API.isAuth()
+			.then(() => {
+				this._el.innerHTML = '';
+				this._renderMainPage(true);
 			})
 			.catch(() => {
-				this._renderMainPage(null);
+				this._el.innerHTML = '';
+				this._renderMainPage(false);
 			});
 	}
 }

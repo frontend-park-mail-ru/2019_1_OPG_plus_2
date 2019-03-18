@@ -11,8 +11,8 @@ import errorTemplate from '../blocks/html/body/application/container/content/for
 
 import {genericBeforeEnd} from '../modules/helpers.js';
 import Page from './page';
-import AjaxModule from '../modules/ajax';
 import {validEmail, validLogin, validPassword} from '../modules/utils.js';
+import API from '../modules/API.js';
 
 export default class SignUpPage extends Page {
 	constructor({
@@ -20,82 +20,91 @@ export default class SignUpPage extends Page {
 	} = {}) {
 		super();
 		this._router = router;
+		this.onFormSubmit = this.onFormSubmit.bind(this);
+	}
+
+	onFormSubmit(event) {
+		const formsBlock = this._el.querySelector('.forms');
+
+		event.preventDefault();
+
+		const username = formsBlock.elements[0].value;
+		const email = formsBlock.elements[1].value;
+		const password = formsBlock.elements[2].value;
+		const password_repeat = formsBlock.elements[3].value;
+
+		if (!validEmail(email) || !email) {
+			this._el.innerHTML = '';
+			this._renderSignUp({
+				error: 'Invalid Email',
+				modifier: 'container_theme_error',
+			}, {
+				name: username,
+				email,
+			});
+			return;
+		}
+
+		if (!validLogin(username) || !username) {
+			this._el.innerHTML = '';
+			this._renderSignUp({
+				error: 'Invalid Name',
+				modifier: 'container_theme_error',
+			}, {
+				username: username,
+				email,
+			});
+			return;
+		} 
+
+		if (password !== password_repeat || !password || !password_repeat) {
+			this._el.innerHTML = '';
+			this._renderSignUp({
+				error: 'Passwords doesn\' not match',
+				modifier: 'container_theme_error',
+			},{
+				username: username,
+				email,
+			});
+			return;
+		}
+
+		if (!validPassword(password)) {
+			this._el.innerHTML = '';
+			this._renderSignUp({
+				error: 'Invalid password, must be more than 5 symbols',
+				modifier: 'container_theme_error',
+			},{
+				username,
+				email,
+			});
+			return;
+		}
+
+		API.signUp({
+			email: email,
+			password: password,
+			username: username,
+		})
+			.then(() => this._router.open('/me'))
+			.catch(err => {
+				this._el.innerHTML = '';
+				this._renderSignUp(err, {
+					username,
+					email,
+				}
+				);});
+
 	}
 
 	_createEventListener() {
 		const formsBlock = this._el.querySelector('.forms');
+		formsBlock.addEventListener('submit', this.onFormSubmit, true);
+	}
 
-		formsBlock.addEventListener('submit', (event) => {
-
-			event.preventDefault();
-
-			const name = formsBlock.elements[0].value;
-			const email = formsBlock.elements[1].value;
-			const password = formsBlock.elements[2].value;
-			const password_repeat = formsBlock.elements[3].value;
-
-			if (!validEmail(email) || !email) {
-				this._el.innerHTML = '';
-				this._renderSignUp({
-					error: 'Invalid Email',
-					modifier: 'container_theme_error',
-				}, {
-					name: username,
-					email,
-				});
-				return;
-			}
-
-			if (!validLogin(name) || !name) {
-				this._el.innerHTML = '';
-				this._renderSignUp({
-					error: 'Invalid Name',
-					modifier: 'container_theme_error',
-				}, {
-					username: username,
-					email,
-				});
-				return;
-			} 
-
-			if (password !== password_repeat || !password || !password_repeat) {
-				this._el.innerHTML = '';
-				this._renderSignUp({
-					error: 'Passwords doesn\' not match',
-					modifier: 'container_theme_error',
-				},{
-					username: username,
-					email,
-				});
-				return;
-			}
-
-			if (!validPassword(password)) {
-				this._el.innerHTML = '';
-				this._renderSignUp({
-					error: 'Invalid password, must be more than 5 symbols',
-					modifier: 'container_theme_error',
-				},{
-					username: username,
-					email,
-				});
-				return;
-			}
-            
-			AjaxModule.doPost({
-				callback: () => {
-					this._router.open('/me');
-
-				},
-				path: 'https://api.colors.hackallcode.ru/api/user',
-				body: {
-					avatar: '',
-					email: email,
-					password: password,
-					username: username,
-				},
-			});
-		});
+	_removeEventListener() {
+		const formsBlock = this._el.querySelector('.forms');
+		formsBlock.removeEventListener('submit', this.onFormSubmit, true);
 	}
 
 	_renderSignUp(data, fields) {
@@ -131,7 +140,7 @@ export default class SignUpPage extends Page {
 			formsTemplate({
 				modifiers: [],
 				action: 'POST',
-				username: 'signup',
+				name: 'signup',
 			}),
 			buttonsTemplate({
 				modifiers: [],
@@ -184,7 +193,8 @@ export default class SignUpPage extends Page {
 				modifiers: [],
 			}),
 		);
-
+		
+		this._removeEventListener();
 		this._createEventListener();
 	}
 
