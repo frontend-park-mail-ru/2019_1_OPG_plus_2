@@ -2,7 +2,7 @@
     font-family: $main-font-family;
 
     @media (min-width: $desktop-min-width) {
-        font-size: 11vh;
+        font-size: 15vh;
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {

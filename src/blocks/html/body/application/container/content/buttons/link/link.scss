@@ -7,9 +7,10 @@
     text-decoration: none;
 
     @media (min-width: $desktop-min-width) {
-        font-size: 1.9em;
-        padding: 2vh 0 2vh;
+        font-size: 2.9vh;
+        padding: 2.5vh 0 2.5vh;
         border-radius: 20px;
+        margin-bottom: 3vh;
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {

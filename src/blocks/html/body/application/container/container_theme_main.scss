@@ -1,5 +1,5 @@
 .container_theme_main {
     @media (min-width: $desktop-min-width) {
-        grid-template: 9fr 0.5fr/repeat(12, 1fr);
+        grid-template-columns: repeat(12, 1fr);
     }
 }
