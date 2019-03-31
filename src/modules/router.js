@@ -11,10 +11,6 @@ export default class Router {
 		this.root = root
 	}
 
-	_clearSlashes(path) {
-		return path.toString().replace(/\/$/, '').replace(/^\//, '');
-	}
-
 	add(re, handler) {
 		if(re instanceof Controller) {
 	      this.routes["/"] = re;
@@ -25,7 +21,7 @@ export default class Router {
 	navigate({ path = null, data = {} } = {}) {
 		path = path ? path : '';
 		if(this.mode === 'history') {
-		  history.pushState(null, null, this._clearSlashes(path));
+		  history.pushState(null, null, path);
 
 		  if (!this.routes[path]) {
 			  return;

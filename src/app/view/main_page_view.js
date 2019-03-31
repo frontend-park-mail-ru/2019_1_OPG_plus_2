@@ -22,19 +22,20 @@ export default class MainPageView extends EventEmitterMixin(View) {
     }
 
     onLinkClick(event) {
-		if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
-			return;
-		}
-		event.preventDefault();
-    this.emit('onLinkClick', { path: event.target.dataset.href });
+			if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
+				return;
+			}
+			event.preventDefault();
+			// debugger;
+			this.emit('onLinkClick', { path: event.target.dataset.href });
     }
     
     _createEventListener() {
-		this._root.addEventListener('click', this.onLinkClick, true);
+			this._root.addEventListener('click', this.onLinkClick, true);
     }
     
     _removeEventListener() {
-		this._root.removeEventListener('click', this.onLinkClick, true);
+			this._root.removeEventListener('click', this.onLinkClick, true);
     }
     
     _renderMainPage(data) {
@@ -68,7 +69,7 @@ export default class MainPageView extends EventEmitterMixin(View) {
 			}),
 			scoreBoardTemplate({
 				modifiers: [],
-				href: '/',
+				href: 'score',
 				dataset: '/leaders',
 			}),
 			rulesTemplate({
@@ -129,6 +130,6 @@ export default class MainPageView extends EventEmitterMixin(View) {
     open({root = {}, data = {}}) {
 			this._root = root;
 			this._root.innerHTML = '';
-			this._renderMainPage(data.isAuth);
+			this._renderMainPage(data);
     }
 }
