@@ -12,14 +12,12 @@ import errorTemplate from '../../blocks/html/body/application/container/content/
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixin } from '../navigate';
 import View from './view';
 
-export default class SignInView extends EventEmitterMixin(View) {
-	constructor({
-		router = {},
-	} = {}) {
+export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
+	constructor() {
 		super();
-		this._router = router;
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
@@ -62,7 +60,7 @@ export default class SignInView extends EventEmitterMixin(View) {
 		genericBeforeEnd(headBlock, 
 			backArrowTemplate({
 				modifiers: [],
-				href: '/',
+				hr: '/',
 				dataset: '/',
 			}),
 		);
@@ -114,23 +112,20 @@ export default class SignInView extends EventEmitterMixin(View) {
 			linkTemplate({
 				href: 'signup',
 				title: 'SIGN UP',
-				dataset: 'signup',
+				dataset: '/signup',
+				hr: '/signup',
 				modifiers: ['button_type_secondary'],
 			}),
 		);
 
 		this._removeEventListener();
 		this._createEventListener();
+		this._createOnLinkListener();
 	}
 
 	open({root = {}, data = {}}) {
 		this._root = root;
 		this._root.innerHTML = '';
 		this._renderSignIn(data);
-		// if(data === false) {
-		//     this._renderSignIn({});
-		// } else {
-		// 	this._renderSignIn(data);
-		// }
 	}
 }

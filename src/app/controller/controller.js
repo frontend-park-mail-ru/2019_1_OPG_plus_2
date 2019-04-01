@@ -8,6 +8,8 @@ export default class Controller {
 		this._view = view;
 		this._router = router;
 		this.onNavigate = this.onNavigate.bind(this);
+		this._view.on('onLinkClick', ({ path = '' }) => { this.onNavigate({ path: path }); });
+		this._view.on('onBackClick', () => { this.back(); });
 	}
 
 	onNavigate({ path = null, data = {} } = {}) {

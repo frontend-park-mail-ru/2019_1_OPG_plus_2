@@ -29,7 +29,7 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
 					email: User.get().email
 				});
 
-				this.emit('userUpdated');
+				this.emit('avatarUploaded');
 
 			})
 		  .catch(() => { this.emit('getEditProfileError'); });

@@ -12,9 +12,10 @@ import errorTemplate from '../../blocks/html/body/application/container/content/
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { validEmail, validLogin, validPassword } from '../../modules/utils.js';
 import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixin } from '../navigate';
 import View from './view';
 
-export default class SignUpView extends EventEmitterMixin(View) {
+export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -179,6 +180,7 @@ export default class SignUpView extends EventEmitterMixin(View) {
 		
 		this._removeEventListener();
 		this._createEventListener();
+		this._createOnLinkListener();
 	}
 
 	open({root = {}, data = {}}) {

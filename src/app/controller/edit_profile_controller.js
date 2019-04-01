@@ -11,6 +11,7 @@ export default class EditProfileController extends EventEmitterMixin(Controller)
 		this._model.on('getEditProfile', ({root = {}, data = {}} = {}) => { this.render({root: root, data: data}); });
 		this._model.on('getEditProfileError', () => { this.onNavigate({path: '/signin'}); });
 		this._view.on('avatarUpload', ({ root = '', avatar = {} }) => { this.avatarUpload({root: root, avatar: avatar});});
+		this._model.on('avatarUploaded', () => { this.onNavigate({path: '/editme'}); });
 		this._view.on('userUpdate', ({root = '', email = '', name = ''}) => { this.userUpdate({root, email, name}); });
 		this._model.on('userUpdated', () => { this.onNavigate({path: '/me'}); });
 		this._view.on('passwordUpdate', ({root = '', newPass = '', passConf = ''}) => { this.passwordUpdate(root, newPass, passConf); });

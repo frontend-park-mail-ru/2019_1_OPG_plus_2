@@ -35,7 +35,7 @@ export default class Router {
 			// this.routes['/not_found'].open(this.root);
 		  }
 
-		  this.routes[path].open({ root: this.root, data: data});
+		  this.routes[path].open({root: this.root, data: data});
 		} else {
 		  window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
 		}

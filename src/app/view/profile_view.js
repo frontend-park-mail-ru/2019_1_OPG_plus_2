@@ -14,26 +14,27 @@ import settingsIconTemplate from '../../blocks/html/body/application/container/h
 
 import {genericBeforeEnd} from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixin } from '../navigate';
 import View from './view';
 
-export default class ProfileView extends EventEmitterMixin(View) {
+export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) {
 	constructor() {
 		super();
-		this.onLogoutEvent = this.onLogoutEvent.bind(this);
+		// this.onLogoutEvent = this.onLogoutEvent.bind(this);
 	}
 
-	onLogoutEvent(event) {
-		event.preventDefault();
-		this.emit('logout');
-	}
+	// onLogoutEvent(event) {
+	// 	event.preventDefault();
+	// 	this.emit('logout');
+	// }
 
-	_createLogoutListener() {
-		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
-	}
+	// _createLogoutListener() {
+	// 	document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
+	// }
 
-	_removeLogoutListener() {
-		document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
-	}
+	// _removeLogoutListener() {
+	// 	document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
+	// }
 
 	_renderProfilePage(data) {
 		genericBeforeEnd(this._root, 
@@ -129,8 +130,9 @@ export default class ProfileView extends EventEmitterMixin(View) {
 			})
 		);
 
-		this._removeLogoutListener();
-		this._createLogoutListener();
+		// this._removeLogoutListener();
+		// this._createLogoutListener();
+		this._createOnLinkListener();
 	}
 
 	open({root = {}, data = {}}) {

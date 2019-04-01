@@ -21,15 +21,15 @@ import editIconTemplate
 import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
 import submitTemplate from '../../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 
-import {genericBeforeEnd} from '../../modules/helpers.js';
 import View from './view';
-import { EventEmitterMixin } from '../event_emitter';
 import User from '../../modules/user.js';
+import { genericBeforeEnd } from '../../modules/helpers.js';
+import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixin } from '../navigate';
 
-export default class EditProfileView extends EventEmitterMixin(View) {
+export default class EditProfileView extends NavigateMixin(EventEmitterMixin(View)) {
 	constructor() {
 		super();
-		this.onLogoutEvent = this.onLogoutEvent.bind(this);
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.onLoadEvent = this.onLoadEvent.bind(this);
 	}
@@ -39,11 +39,6 @@ export default class EditProfileView extends EventEmitterMixin(View) {
 		let form = new FormData();
 		form.append('avatar', photo[0]);
 		this.emit('avatarUpload', { root: this._root, avatar: form});
-	}
-
-	onLogoutEvent(event) {
-		event.preventDefault();
-		this.emit('logout');
 	}
 
 	onFormSubmit(event) {
@@ -61,14 +56,6 @@ export default class EditProfileView extends EventEmitterMixin(View) {
 		} else if(newPassword != '' && newPassword === repeatNewPassword) {
 			this.emit('passwordUpdate', { root: this._root, newPassword, repeatNewPassword });
 		}
-	}
-
-	_createLogoutListener() {
-		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
-	}
-
-	_removeLogoutListener() {
-		document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
 	}
 
 	_createEventListener() {
@@ -209,12 +196,11 @@ export default class EditProfileView extends EventEmitterMixin(View) {
 			}),
 		);
 		
-		this._removeLogoutListener();
 		this._removeEventListener();
 		this._removeLoadListener();
 		this._createLoadListener();
-		this._createLogoutListener();
 		this._createEventListener();
+		this._createOnLinkListener();
 	}
 
 	open({root = {}, data = {}}) {

@@ -9,9 +9,10 @@ import pagesTemplate from '../../blocks/html/body/application/container/content/
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixin } from '../navigate';
 import View from './view';
 
-export default class ScoreBoardView extends EventEmitterMixin(View) {
+export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		// this.onClick = this.onClick.bind(this);
@@ -111,6 +112,7 @@ export default class ScoreBoardView extends EventEmitterMixin(View) {
 
 		// this._removeEventListener();
 		// this._createEventListener();
+		this._createOnLinkListener();
 	}
 
 	open({root = {}, data = {}}) {
