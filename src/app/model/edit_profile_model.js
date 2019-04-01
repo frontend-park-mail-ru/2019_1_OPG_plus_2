@@ -4,49 +4,61 @@ import API from '../../modules/API';
 import User from '../../modules/user.js';
 
 export default class EditProfileModel extends EventEmitterMixin(Model) {
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    getData({root = {}, data = {}} = {}) {        
-        if (User.exist()) {
-			this.emit('getEditProfile', {root: root, data: User.get()});
-		} else {
-			API.getUser()
-				.then(() => this.emit('getEditProfile', {root: root, data: User.get()}))
-				.catch(() => this.emit('getEditProfileError'));
-		}
-    }
+	getData({root = {}} = {}) {        
+		if (User.exist()) {
+			  this.emit('getEditProfile', {root: root, data: User.get()});
+		  } else {
+			  API.getUser()
+				  .then((user) => {this.emit('getEditProfile', {root: root, data: user});})
+				  .catch(() => this.emit('getEditProfileError'));
+		  }
+	}
 
-    uploadAvatar({root = '', avatar = {}} = {}) {
-      API.uploadAvatar({
+	avatarUpload({avatar = {}} = {}) {
+		API.uploadAvatar({
 			    avatar: avatar,
 		  })
-		  .then(() => { this.emit('userUpdated') })
-		  .catch(() => { this.emit('getEditProfileError') });
-		}
+		  .then((data) => {
+				User.set({
+					avatar: data.data, 
+					username: User.get().username, 
+					email: User.get().email
+				});
 
-    userUpdate({ root = '', email = '', name = '' } = {}) {
-        API.updateUser({
-			email: email,
-			username: name,
-		})
-		.then(() =>  { this.emit('userUpdated') })
-		.catch(() => { this.emit('userUpdated') });
-    }
+				this.emit('userUpdated');
 
-    passwordUpdate({root = '', newPass = '', passConf = ''} = {}) {
-        API.updatePassword({
+			})
+		  .catch(() => { this.emit('getEditProfileError'); });
+	}
+
+	userUpdate({email = '', name = '' } = {}) {
+		API.updateUser({
+			    email: email,
+			    username: name,
+		  })
+		  .then((username) =>  { 
+				User.set({ username: username });
+				this.emit('userUpdated'); 
+			})
+		  .catch(() => { this.emit('userUpdated'); });
+	}
+
+	passwordUpdate({newPass = '', passConf = ''} = {}) {
+		API.updatePassword({
 			newPassword: newPass,
 			passwordConfirm: passConf
 		})
-		.then(() => { this.emit('userUpdated') })
-		.catch(() => { this.emit('userUpdated') });
-		}
+			.then(() => { this.emit('userUpdated'); })
+			.catch(() => { this.emit('userUpdated'); });
+	}
 		
-		logout() {
-			API.logout()
-			.then(() => { this.emit('logouted') })
-			.catch(() => { this.emit('logouted') })
+	logout() {
+		API.logout()
+			.then(() => { this.emit('logouted'); })
+			.catch(() => { this.emit('logouted'); });
 	  }
 }

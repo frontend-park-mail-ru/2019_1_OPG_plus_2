@@ -124,12 +124,13 @@ export default class SignInView extends EventEmitterMixin(View) {
 	}
 
 	open({root = {}, data = {}}) {
-        this._root = root;
+		this._root = root;
 		this._root.innerHTML = '';
-        if(data === false) {
-            this._renderSignIn({});
-        } else {
-			this._renderSignIn(data);
-		}
+		this._renderSignIn(data);
+		// if(data === false) {
+		//     this._renderSignIn({});
+		// } else {
+		// 	this._renderSignIn(data);
+		// }
 	}
 }

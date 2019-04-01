@@ -56,11 +56,10 @@ export default class EditProfileView extends EventEmitterMixin(View) {
 		const newPassword = formsBlock.elements[1].value;
 		const repeatNewPassword = formsBlock.elements[2].value;
 
-		debugger;
 		if (newUsername != username) {
-			this.emit('userUpdate', {root: this._root, email: email, name: newUsername});
+			this.emit('userUpdate', { root: this._root, email: email, name: newUsername });
 		} else if(newPassword != '' && newPassword === repeatNewPassword) {
-            this.emit('passwordUpdate', {root: this._root, newPassword, repeatNewPassword});
+			this.emit('passwordUpdate', { root: this._root, newPassword, repeatNewPassword });
 		}
 	}
 
@@ -116,7 +115,7 @@ export default class EditProfileView extends EventEmitterMixin(View) {
 		genericBeforeEnd(headBlock,
 			backArrowTemplate({
 				modifiers: [],
-				href: '/',
+				hr: '/',
 				dataset: '/',
 			}),
 		);
@@ -161,7 +160,7 @@ export default class EditProfileView extends EventEmitterMixin(View) {
 		genericBeforeEnd(photoEditBlock,
 			avatarTemplate({
 				modifiers: [],
-				url: `${data.photo ? HOST + data.photo : ''}`,
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
 			editIconTemplate({
 				modifiers: [],
@@ -219,8 +218,8 @@ export default class EditProfileView extends EventEmitterMixin(View) {
 	}
 
 	open({root = {}, data = {}}) {
-        this._root = root;
-        this._root.innerHTML = '';
-        this._renderEditProfilePage(data);
+		this._root = root;
+		this._root.innerHTML = '';
+		this._renderEditProfilePage(data);
 	}
 }

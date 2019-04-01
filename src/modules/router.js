@@ -8,12 +8,19 @@ export default class Router {
 	} = {}) {
 		this.routes = routes;
 		this.mode = mode == 'history' && !!(history.pushState) ? 'history' : 'hash';
-		this.root = root
+		this.root = root;
+		window.onpopstate = () => {
+			this.navigate({path: location.pathname});
+		};
+	}
+
+	back() {
+		history.back();
 	}
 
 	add(re, handler) {
 		if(re instanceof Controller) {
-	      this.routes["/"] = re;
+	      this.routes['/'] = re;
 		}
 		this.routes[re] = handler;
 	}
@@ -38,5 +45,5 @@ export default class Router {
 		if(this.mode === 'history') {
 		  this.navigate({path: location.pathname});
 		}
-	  }
+	}
 }

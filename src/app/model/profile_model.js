@@ -4,23 +4,26 @@ import API from '../../modules/API';
 import User from '../../modules/user.js';
 
 export default class ProfileModel extends EventEmitterMixin(Model) {
-    constructor() {
-        super();
-    }
+	constructor() {
+		super();
+	}
 
-    getData({root = {}, data = {}} = {}) {
-        if (User.exist()) {
-            this.emit('getProfile', {root: root, data: User.get()});
+	getData({root = {}} = {}) {
+		if (User.exist()) {
+			this.emit('getProfile', {root: root, data: User.get()});
 		} else {
 			API.getUser()
-				.then(() => this.emit('getProfile', {root: root, data: User.get()}) )
+				.then((user) => {
+					User.set(user);
+					this.emit('getProfile', { root: root, data: user });
+				})
 				.catch(() => this.emit('getProfileError'));
 		}
-    }
+	}
 
-    logout() {
-        API.logout()
-        .then(() => { this.emit('logouted') })
-        .catch(() => { this.emit('logouted') })
-    }
+	logout() {
+		API.logout()
+			.then(() => { this.emit('logouted'); })
+			.catch(() => { this.emit('logouted'); });
+	}
 }

@@ -76,9 +76,8 @@ export default class SignUpView extends EventEmitterMixin(View) {
 				email,
 			});
 			return;
-        }
-        debugger;
-        this.emit('signUpSubmit', {root: this._root, name: username, email: email, password: password});
+		}
+		this.emit('signUpSubmit', {root: this._root, name: username, email: email, password: password});
 	}
 
 	_createEventListener() {
@@ -183,8 +182,8 @@ export default class SignUpView extends EventEmitterMixin(View) {
 	}
 
 	open({root = {}, data = {}}) {
-        this._root = root;
-        this._root.innerHTML = '';
+		this._root = root;
+		this._root.innerHTML = '';
 		this._renderSignUp(data);
 	}
 }

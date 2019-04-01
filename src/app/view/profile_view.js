@@ -61,7 +61,7 @@ export default class ProfileView extends EventEmitterMixin(View) {
 		genericBeforeEnd(headBlock, 
 			backArrowTemplate({
 				modifiers: [],
-				href: '/',
+				hr: '/',
 				dataset: '/',
 			}),
 		);
@@ -86,7 +86,7 @@ export default class ProfileView extends EventEmitterMixin(View) {
 		genericBeforeEnd(profileHeadBlock, 
 			avatarTemplate({
 				modifiers: [],
-				url: `${data.photo ? HOST + data.photo : ''}`,
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
 			nameTemplate({
 				name: data.username,
@@ -123,7 +123,7 @@ export default class ProfileView extends EventEmitterMixin(View) {
 				dataset: '/logout',
 			}),
 			settingsIconTemplate({
-				href: '/editme',
+				hr: '/editme',
 				dataset: '/editme',
 				modifiers: [],
 			})
@@ -134,9 +134,9 @@ export default class ProfileView extends EventEmitterMixin(View) {
 	}
 
 	open({root = {}, data = {}}) {
-        this._root = root;
-        this._root.innerHTML = '';
-        this._renderProfilePage(data);
+		this._root = root;
+		this._root.innerHTML = '';
+		this._renderProfilePage(data);
 	}
 
 }

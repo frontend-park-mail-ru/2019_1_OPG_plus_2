@@ -16,29 +16,32 @@ import { EventEmitterMixin } from '../event_emitter';
 import { genericBeforeEnd } from '../../modules/helpers.js';
 
 export default class MainPageView extends EventEmitterMixin(View) {
-    constructor() {
-        super();
-        this.onLinkClick = this.onLinkClick.bind(this);
-    }
+	constructor() {
+		super();
+		this.onLinkClick = this.onLinkClick.bind(this);
+	}
 
-    onLinkClick(event) {
-			if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
-				return;
-			}
-			event.preventDefault();
-			// debugger;
+	onLinkClick(event) {
+		if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
+			return;
+		}
+		event.preventDefault();
+		if (event.target.classList.contains('back-arrow')) {
+			this.emit('onBackClick');
+		} else {
 			this.emit('onLinkClick', { path: event.target.dataset.href });
-    }
+		}
+	}
     
-    _createEventListener() {
-			this._root.addEventListener('click', this.onLinkClick, true);
-    }
+	_createEventListener() {
+		this._root.addEventListener('click', this.onLinkClick, true);
+	}
     
-    _removeEventListener() {
-			this._root.removeEventListener('click', this.onLinkClick, true);
-    }
+	_removeEventListener() {
+		this._root.removeEventListener('click', this.onLinkClick, true);
+	}
     
-    _renderMainPage(data) {
+	_renderMainPage(data) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_main'],
 		}));
@@ -125,11 +128,11 @@ export default class MainPageView extends EventEmitterMixin(View) {
 		
 		this._removeEventListener();
 		this._createEventListener();
-    }
+	}
     
-    open({root = {}, data = {}}) {
-			this._root = root;
-			this._root.innerHTML = '';
-			this._renderMainPage(data);
-    }
+	open({root = {}, data = {}}) {
+		this._root = root;
+		this._root.innerHTML = '';
+		this._renderMainPage(data);
+	}
 }

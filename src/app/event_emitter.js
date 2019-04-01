@@ -1,14 +1,14 @@
 export const EventEmitterMixin = (superclass) => class extends superclass {
-    constructor(data) {
-      super(data);
-      this._events = [];
-    }
+	constructor(data) {
+		super(data);
+		this._events = [];
+	}
       
-    on(evt, listener) {
-      (this._events[evt] || (this._events[evt] = [])).push(listener);
-    }
+	on(evt, listener) {
+		(this._events[evt] || (this._events[evt] = [])).push(listener);
+	}
     
-    emit(evt, arg) {
-      (this._events[evt] || []).slice().forEach(lsn => lsn(arg));
-    }
-}
+	emit(evt, arg) {
+		(this._events[evt] || []).slice().forEach(lsn => lsn(arg));
+	}
+};

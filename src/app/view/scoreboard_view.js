@@ -17,49 +17,49 @@ export default class ScoreBoardView extends EventEmitterMixin(View) {
 		this.onClick = this.onClick.bind(this);
 	}
 
-	onClick(event) {
-		if (event.target.classList.contains('pages__first')) {
-			API.getUsers({
-				limit: 5,
-				pages: 1,
-			})
-				.then(users => {
-					this._root.innerHTML = '';
-					this._renderScoreBoard(users.data, 1);
-				});
-		} else if (event.target.classList.contains('pages__back')) {
-			const pagesNum = parseInt(document.querySelector('.pages__num').textContent) - 1;
-			API.getUsers({
-				limit: 5,
-				page: pagesNum > 0 ? pagesNum : 1,
-			})
-				.then(users => {
-					this._root.innerHTML = '';
-					this._renderScoreBoard(users.data, pagesNum > 0 ? pagesNum : 1);
-				});
-		} else if (event.target.classList.contains('pages__next')) {
-			const pagesNum = parseInt(document.querySelector('.pages__num').textContent) + 1;
-			API.getUsers({
-				limit: 5,
-				page: pagesNum,
-			})
-				.then(users => {
-					this._root.innerHTML = '';
-					this._renderScoreBoard(users.data, pagesNum);
-				})
-				.catch(() => this._router.open('/leaders'));
-		}
-	}
+	// onClick(event) {
+	// 	if (event.target.classList.contains('pages__first')) {
+	// 		API.getUsers({
+	// 			limit: 5,
+	// 			pages: 1,
+	// 		})
+	// 			.then(users => {
+	// 				this._root.innerHTML = '';
+	// 				this._renderScoreBoard(users.data, 1);
+	// 			});
+	// 	} else if (event.target.classList.contains('pages__back')) {
+	// 		const pagesNum = parseInt(document.querySelector('.pages__num').textContent) - 1;
+	// 		API.getUsers({
+	// 			limit: 5,
+	// 			page: pagesNum > 0 ? pagesNum : 1,
+	// 		})
+	// 			.then(users => {
+	// 				this._root.innerHTML = '';
+	// 				this._renderScoreBoard(users.data, pagesNum > 0 ? pagesNum : 1);
+	// 			});
+	// 	} else if (event.target.classList.contains('pages__next')) {
+	// 		const pagesNum = parseInt(document.querySelector('.pages__num').textContent) + 1;
+	// 		API.getUsers({
+	// 			limit: 5,
+	// 			page: pagesNum,
+	// 		})
+	// 			.then(users => {
+	// 				this._root.innerHTML = '';
+	// 				this._renderScoreBoard(users.data, pagesNum);
+	// 			})
+	// 			.catch(() => this._router.open('/leaders'));
+	// 	}
+	// }
 
-	_createEventListener() {
-		const pages = this._root.querySelector('.pages');
-		pages.addEventListener('click', this.onClick, true);
-	}
+	// _createEventListener() {
+	// 	const pages = this._root.querySelector('.pages');
+	// 	pages.addEventListener('click', this.onClick, true);
+	// }
 
-	_removeEventListener() {
-		const pages = this._root.querySelector('.pages');
-		pages.removeEventListener('click', this.onClick, true);
-	}
+	// _removeEventListener() {
+	// 	const pages = this._root.querySelector('.pages');
+	// 	pages.removeEventListener('click', this.onClick, true);
+	// }
 
 	_renderScoreBoard(data, pageNum) {
 		genericBeforeEnd(this._root, containerTemplate({
@@ -109,8 +109,8 @@ export default class ScoreBoardView extends EventEmitterMixin(View) {
 			}),
 		);
 
-		this._removeEventListener();
-		this._createEventListener();
+		// this._removeEventListener();
+		// this._createEventListener();
 	}
 
 	open({root = {}, data = {}}) {
