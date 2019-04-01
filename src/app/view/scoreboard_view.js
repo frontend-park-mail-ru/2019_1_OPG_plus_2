@@ -14,7 +14,7 @@ import View from './view';
 export default class ScoreBoardView extends EventEmitterMixin(View) {
 	constructor() {
 		super();
-		this.onClick = this.onClick.bind(this);
+		// this.onClick = this.onClick.bind(this);
 	}
 
 	// onClick(event) {
