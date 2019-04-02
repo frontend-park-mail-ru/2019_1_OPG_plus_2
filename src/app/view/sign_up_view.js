@@ -1,30 +1,28 @@
-import containerTemplate from '../blocks/html/body/application/container/container.pug';
-import headTemplate from '../blocks/html/body/application/container/head/head.pug';
-import contentTemplate from '../blocks/html/body/application/container/content/content.pug';
-import titleTemplate from '../blocks/html/body/application/container/content/title/title.pug';
-import backArrowTemplate from '../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
-import formsTemplate from '../blocks/html/body/application/container/content/forms/forms.pug';
-import formTemplate from '../blocks/html/body/application/container/content/forms/form/form.pug';
-import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
-import sumbitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
-import errorTemplate from '../blocks/html/body/application/container/content/forms/error/error.pug';
+import containerTemplate from '../../blocks/html/body/application/container/container.pug';
+import headTemplate from '../../blocks/html/body/application/container/head/head.pug';
+import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
+import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
+import backArrowTemplate from '../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
+import formsTemplate from '../../blocks/html/body/application/container/content/forms/forms.pug';
+import formTemplate from '../../blocks/html/body/application/container/content/forms/form/form.pug';
+import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
+import sumbitTemplate from '../../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+import errorTemplate from '../../blocks/html/body/application/container/content/forms/error/error.pug';
 
-import {genericBeforeEnd} from '../modules/helpers.js';
-import Page from './page';
-import {validEmail, validLogin, validPassword} from '../modules/utils.js';
-import API from '../modules/API.js';
+import { genericBeforeEnd } from '../../modules/helpers.js';
+import { validEmail, validLogin, validPassword } from '../../modules/utils.js';
+import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixin } from '../navigate';
+import View from './view';
 
-export default class SignUpPage extends Page {
-	constructor({
-		router = {},
-	} = {}) {
+export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
+	constructor() {
 		super();
-		this._router = router;
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
 	onFormSubmit(event) {
-		const formsBlock = this._el.querySelector('.forms');
+		const formsBlock = this._root.querySelector('.forms');
 
 		event.preventDefault();
 
@@ -34,7 +32,7 @@ export default class SignUpPage extends Page {
 		const password_repeat = formsBlock.elements[3].value;
 
 		if (!validEmail(email) || !email) {
-			this._el.innerHTML = '';
+			this._root.innerHTML = '';
 			this._renderSignUp({
 				error: 'Invalid Email',
 				modifier: 'container_theme_error',
@@ -46,7 +44,7 @@ export default class SignUpPage extends Page {
 		}
 
 		if (!validLogin(username) || !username) {
-			this._el.innerHTML = '';
+			this._root.innerHTML = '';
 			this._renderSignUp({
 				error: 'Invalid Name',
 				modifier: 'container_theme_error',
@@ -58,7 +56,7 @@ export default class SignUpPage extends Page {
 		} 
 
 		if (password !== password_repeat || !password || !password_repeat) {
-			this._el.innerHTML = '';
+			this._root.innerHTML = '';
 			this._renderSignUp({
 				error: 'Passwords doesn\' not match',
 				modifier: 'container_theme_error',
@@ -70,7 +68,7 @@ export default class SignUpPage extends Page {
 		}
 
 		if (!validPassword(password)) {
-			this._el.innerHTML = '';
+			this._root.innerHTML = '';
 			this._renderSignUp({
 				error: 'Invalid password, must be more than 5 symbols',
 				modifier: 'container_theme_error',
@@ -80,35 +78,21 @@ export default class SignUpPage extends Page {
 			});
 			return;
 		}
-
-		API.signUp({
-			email: email,
-			password: password,
-			username: username,
-		})
-			.then(() => this._router.open('/me'))
-			.catch(err => {
-				this._el.innerHTML = '';
-				this._renderSignUp(err, {
-					username,
-					email,
-				}
-				);});
-
+		this.emit('signUpSubmit', {root: this._root, name: username, email: email, password: password});
 	}
 
 	_createEventListener() {
-		const formsBlock = this._el.querySelector('.forms');
+		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.addEventListener('submit', this.onFormSubmit, true);
 	}
 
 	_removeEventListener() {
-		const formsBlock = this._el.querySelector('.forms');
+		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.removeEventListener('submit', this.onFormSubmit, true);
 	}
 
 	_renderSignUp(data, fields) {
-		genericBeforeEnd(this._el, containerTemplate({
+		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: [`container_theme_signup ${data.modifier || ' '}`],
 		}));
 		const containerBlock = document.querySelector('.container.container_theme_signup');
@@ -196,10 +180,12 @@ export default class SignUpPage extends Page {
 		
 		this._removeEventListener();
 		this._createEventListener();
+		this._createOnLinkListener();
 	}
 
-	open(root) {
-		this._el = root;
-		this._renderSignUp({});
+	open({root = {}, data = {}}) {
+		this._root = root;
+		this._root.innerHTML = '';
+		this._renderSignUp(data);
 	}
 }

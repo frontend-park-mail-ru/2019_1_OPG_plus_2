@@ -1,65 +1,48 @@
-import containerTemplate from '../blocks/html/body/application/container/container.pug';
-import headTemplate from '../blocks/html/body/application/container/head/head.pug';
-import contentTemplate from '../blocks/html/body/application/container/content/content.pug';
-import backArrowTemplate from '../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
-import menuTemplate from '../blocks/html/body/application/container/head/menu/menu.pug';
-import profileCardTemplate from '../blocks/html/body/application/container/content/profile-card/profile-card.pug';
+import containerTemplate from '../../blocks/html/body/application/container/container.pug';
+import headTemplate from '../../blocks/html/body/application/container/head/head.pug';
+import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
+import backArrowTemplate from '../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
+import menuTemplate from '../../blocks/html/body/application/container/head/menu/menu.pug';
+import profileCardTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-card.pug';
 import profileHeadTemplate
-	from '../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
+	from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
 import settingsIconTemplate
-	from '../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.pug';
+	from '../../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.pug';
 import photoEditTemplate
-	from '../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.pug';
-import logoutIconTemplate from '../blocks/html/body/application/container/head/menu/logout/logout.pug';
-import formsTemplates from '../blocks/html/body/application/container/content/forms/forms.pug';
+	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.pug';
+import logoutIconTemplate from '../../blocks/html/body/application/container/head/menu/logout/logout.pug';
+import formsTemplates from '../../blocks/html/body/application/container/content/forms/forms.pug';
 import profileFormTemplate
-	from '../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
+	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
 import avatarTemplate
-	from '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
+	from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import editIconTemplate
-	from '../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.pug';
-import buttonsTemplate from '../blocks/html/body/application/container/content/buttons/buttons.pug';
-import submitTemplate from '../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.pug';
+import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
+import submitTemplate from '../../blocks/html/body/application/container/content/buttons/submit/submit.pug';
 
-import {genericBeforeEnd} from '../modules/helpers.js';
-import Page from './page';
-import User from '../modules/user.js';
-import API from '../modules/API.js';
+import View from './view';
+import User from '../../modules/user.js';
+import { genericBeforeEnd } from '../../modules/helpers.js';
+import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixin } from '../navigate';
 
-export default class EditProfilePage extends Page {
-	constructor({
-		router = {},
-	} = {}) {
+export default class EditProfileView extends NavigateMixin(EventEmitterMixin(View)) {
+	constructor() {
 		super();
-		this._router = router;
-		this.onLogoutEvent = this.onLogoutEvent.bind(this);
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.onLoadEvent = this.onLoadEvent.bind(this);
 	}
 
 	onLoadEvent() {
-		const photo = this._el.querySelector('#file-input').files;
+		const photo = this._root.querySelector('#file-input').files;
 		let form = new FormData();
 		form.append('avatar', photo[0]);
-		API.uploadAvatar({
-			avatar: form,
-		})
-			.then(() => {
-				this._el.innerHTML = '';
-				this._renderEditProfilePage(User.get());
-			})
-			.catch(() => this._router.open('/'));
-	}
-
-	onLogoutEvent(event) {
-		event.preventDefault();
-		API.logout()
-			.then(() => this._router.open('/'))
-			.catch(() => this._router.open('/'));
+		this.emit('avatarUpload', { root: this._root, avatar: form});
 	}
 
 	onFormSubmit(event) {
-		const formsBlock = this._el.querySelector('.forms');
+		const formsBlock = this._root.querySelector('.forms');
 		event.preventDefault();
 
 		const email = User.get().email;
@@ -69,52 +52,34 @@ export default class EditProfilePage extends Page {
 		const repeatNewPassword = formsBlock.elements[2].value;
 
 		if (newUsername != username) {
-			API.updateUser({
-				email: email,
-				username: newUsername,
-			})
-				.then(() => this._router.open('/me'))
-				.catch(() => this._router.open('/'));
+			this.emit('userUpdate', { root: this._root, email: email, name: newUsername });
 		} else if(newPassword != '' && newPassword === repeatNewPassword) {
-			API.updatePassword({
-				newPassword: newPassword,
-				passwordConfirm: repeatNewPassword,
-			})
-				.then(() => this._router.open('/me'))
-				.catch(() => this._router.open('/'));
+			this.emit('passwordUpdate', { root: this._root, newPassword, repeatNewPassword });
 		}
 	}
 
-	_createLogoutListener() {
-		document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
-	}
-
-	_removeLogoutListener() {
-		document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
-	}
-
 	_createEventListener() {
-		const formsBlock = this._el.querySelector('.forms');
+		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.addEventListener('submit', this.onFormSubmit, true);
 	}
 
 	_removeEventListener() {
-		const formsBlock = this._el.querySelector('.forms');
+		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.removeEventListener('submit', this.onFormSubmit, true);
 	}
 
 	_createLoadListener() {
-		const photoBlock = this._el.querySelector('#file-input');
+		const photoBlock = this._root.querySelector('#file-input');
 		photoBlock.addEventListener('change', this.onLoadEvent, true);
 	}
 
 	_removeLoadListener() {
-		const photoBlock = this._el.querySelector('#file-input');
+		const photoBlock = this._root.querySelector('#file-input');
 		photoBlock.removeEventListener('change', this.onLoadEvent, true);
 	}
 
 	_renderEditProfilePage(data) {
-		genericBeforeEnd(this._el, containerTemplate({
+		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_profile'],
 		}));
 		const containerBlock = document.querySelector('.container.container_theme_profile');
@@ -137,7 +102,7 @@ export default class EditProfilePage extends Page {
 		genericBeforeEnd(headBlock,
 			backArrowTemplate({
 				modifiers: [],
-				href: '/',
+				hr: '/',
 				dataset: '/',
 			}),
 		);
@@ -182,7 +147,7 @@ export default class EditProfilePage extends Page {
 		genericBeforeEnd(photoEditBlock,
 			avatarTemplate({
 				modifiers: [],
-				url: `${data.photo ? HOST + data.photo : ''}`,
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
 			editIconTemplate({
 				modifiers: [],
@@ -231,22 +196,16 @@ export default class EditProfilePage extends Page {
 			}),
 		);
 		
-		this._removeLogoutListener();
 		this._removeEventListener();
 		this._removeLoadListener();
 		this._createLoadListener();
-		this._createLogoutListener();
 		this._createEventListener();
+		this._createOnLinkListener();
 	}
 
-	open(root) {
-		if (User.exist()) {
-			this._el = root;
-			this._renderEditProfilePage(User.get());
-		} else {
-			API.getUser()
-				.then(() => this._router.open('/editme'))
-				.catch(() => this._router.open('/signin'));
-		}
+	open({root = {}, data = {}}) {
+		this._root = root;
+		this._root.innerHTML = '';
+		this._renderEditProfilePage(data);
 	}
 }

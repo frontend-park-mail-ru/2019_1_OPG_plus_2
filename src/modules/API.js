@@ -98,28 +98,22 @@ export default class API {
      * @param Object object with user avatar, email, password and username
      */
 	static updateUser({
-		// avatar = '',
 		email = '',
-		// password = '',
 		username = '', 
 	} = {}) {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doPut({
 				path: `${HOST}/api/user`,
 				body: {
-					// avatar: avatar,
 					email: email,
-					// password: password,
 					username: username,
 				}
 			}).then(response => {
 				if (response.status !== 200) {
-					response.json().then(error => {
-						reject(error);
-					});
+					response.json().then(error => reject(error));
 				} else {
-					User.set({username: username});
-					resolve();
+					// User.set({username: username});
+					resolve(username);
 				}
 			});
 		});
@@ -181,6 +175,7 @@ export default class API {
      * This method provides client with user data, matching required ID
      */
 	static getUser() {
+		// debugger;
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				path: `${HOST}/api/user`,
@@ -188,8 +183,7 @@ export default class API {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {
-					response.json().then(user => User.set(user.data));
-					resolve();
+					response.json().then(user => { resolve(user.data);});
 				}
 			});
 		});
@@ -218,12 +212,7 @@ export default class API {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {
-					response.json().then(data => User.set({
-						avatar: data.message, 
-						username: User.get().username, 
-						email: User.get().email
-					}));
-					resolve();
+					response.json().then(data => resolve(data));
 				}
 			});
 		});
