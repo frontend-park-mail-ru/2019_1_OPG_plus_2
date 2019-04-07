@@ -62,7 +62,11 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 	// 	pages.removeEventListener('click', this.onClick, true);
 	// }
 
-	_renderScoreBoard(data, pageNum) {
+	_createEventListeners() {
+		this._createOnLinkListener();
+	}
+
+	_render(data, pageNum) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_scoreboard'],
 		}));
@@ -109,15 +113,9 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 				host: HOST,
 			}),
 		);
-
-		// this._removeEventListener();
-		// this._createEventListener();
-		this._createOnLinkListener();
 	}
 
-	open({root = {}, data = {}}) {
-		this._root = root;
-		this._root.innerHTML = '';
-		this._renderScoreBoard(data.users, data.page);
+	open({ root = {}, data = {} }) {
+		super.open({root, data});
 	}
 }

@@ -3,6 +3,20 @@ export default class View {
 	constructor({} = {}) {
 	}
 
-	open({root = {}, data = {}}) {
+	_createEventListeners() {
+	}
+
+	_removeEventListeners() {
+	}
+
+	_render(data) {
+	}
+
+	open({ root = {}, data = {} }) {
+		this._root = root;
+		this._root.innerHTML = '';
+		this._render(data);
+		this._createEventListeners();
+		this._removeEventListeners();
 	}
 }

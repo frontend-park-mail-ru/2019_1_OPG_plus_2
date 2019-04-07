@@ -12,7 +12,7 @@ export const NavigateMixin = (superclass) => class extends superclass {
 		this._removeOnLinkListener();
 		if (event.target.classList.contains('back-arrow')) {
 			this.emit('onBackClick');
-		} else if (event.target.classList.contains('logout')){
+		} else if (event.target.classList.contains('logout')) {
 			this.emit('logout');
 		} else {
 			this.emit('onLinkClick', { path: event.target.dataset.href });

@@ -13,8 +13,11 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
 			  this.emit('getEditProfile', {root: root, data: User.get()});
 		  } else {
 			  API.getUser()
-				  .then((user) => {this.emit('getEditProfile', {root: root, data: user});})
-				  .catch(() => this.emit('getEditProfileError'));
+				  .then((user) => { 
+					  User.set(user); 
+					  this.emit('getEditProfile', {root: root, data: user}); 
+				})
+				.catch(() => this.emit('getEditProfileError'));
 		  }
 	}
 
@@ -25,8 +28,6 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
 		  .then((data) => {
 				User.set({
 					avatar: data.data, 
-					username: User.get().username, 
-					email: User.get().email
 				});
 
 				this.emit('avatarUploaded');

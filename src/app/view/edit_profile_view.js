@@ -34,6 +34,14 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 		this.onLoadEvent = this.onLoadEvent.bind(this);
 	}
 
+	_createEventListeners() {
+		this._removeEventListener();
+		this._removeLoadListener();
+		this._createLoadListener();
+		this._createEventListener();
+		this._createOnLinkListener();
+	}
+
 	onLoadEvent() {
 		const photo = this._root.querySelector('#file-input').files;
 		let form = new FormData();
@@ -78,7 +86,7 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 		photoBlock.removeEventListener('change', this.onLoadEvent, true);
 	}
 
-	_renderEditProfilePage(data) {
+	_render(data) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_profile'],
 		}));
@@ -195,17 +203,9 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				dataset: '/logout',
 			}),
 		);
-		
-		this._removeEventListener();
-		this._removeLoadListener();
-		this._createLoadListener();
-		this._createEventListener();
-		this._createOnLinkListener();
 	}
 
-	open({root = {}, data = {}}) {
-		this._root = root;
-		this._root.innerHTML = '';
-		this._renderEditProfilePage(data);
+	open({ root = {}, data = {} }) {
+		super.open({root, data});
 	}
 }

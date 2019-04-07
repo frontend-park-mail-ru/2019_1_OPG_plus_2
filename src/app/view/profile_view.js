@@ -20,23 +20,13 @@ import View from './view';
 export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) {
 	constructor() {
 		super();
-		// this.onLogoutEvent = this.onLogoutEvent.bind(this);
 	}
 
-	// onLogoutEvent(event) {
-	// 	event.preventDefault();
-	// 	this.emit('logout');
-	// }
+	_createEventListeners() {
+		this._createOnLinkListener();
+	}
 
-	// _createLogoutListener() {
-	// 	document.querySelector('.logout').addEventListener('click', this.onLogoutEvent, true);
-	// }
-
-	// _removeLogoutListener() {
-	// 	document.querySelector('.logout').removeEventListener('click', this.onLogoutEvent, true);
-	// }
-
-	_renderProfilePage(data) {
+	_render(data) {
 		genericBeforeEnd(this._root, 
 			containerTemplate({
 				modifiers: ['container_theme_profile']
@@ -130,15 +120,10 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 			})
 		);
 
-		// this._removeLogoutListener();
-		// this._createLogoutListener();
 		this._createOnLinkListener();
 	}
 
-	open({root = {}, data = {}}) {
-		this._root = root;
-		this._root.innerHTML = '';
-		this._renderProfilePage(data);
+	open({ root = {}, data = {} }) {
+		super.open({root, data});
 	}
-
 }

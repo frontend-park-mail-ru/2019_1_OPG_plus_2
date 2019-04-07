@@ -10,7 +10,7 @@ export default class Router {
 		this.mode = mode == 'history' && !!(history.pushState) ? 'history' : 'hash';
 		this.root = root;
 		window.onpopstate = () => {
-			this.navigate({path: location.pathname});
+			this.routes[location.pathname].open({root: this.root});
 		};
 	}
 
@@ -43,7 +43,7 @@ export default class Router {
 
 	start() {
 		if(this.mode === 'history') {
-		  this.navigate({path: location.pathname});
+		  this.navigate({ path: location.pathname });
 		}
 	}
 }

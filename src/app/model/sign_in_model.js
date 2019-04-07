@@ -10,10 +10,10 @@ export default class SignInModel extends EventEmitterMixin(Model) {
 	getData({root = {}} = {}) {
 		API.isAuth()
 			.then(() => {
-				this.emit('isAuthSignIn', {root: root, isAuth: true});
+				this.emit('alreadySignIn', { root: root });
 			})
 			.catch(() => {
-				this.emit('isAuthSignIn', {root: root, isAuth: false});
+				this.emit('notSignIn', {root: root, isAuth: true});
 			});
 	}
 
