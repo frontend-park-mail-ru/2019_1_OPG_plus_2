@@ -1,7 +1,6 @@
 import Controller from './controller';
-import { EventEmitterMixin } from '../event_emitter';
 
-export default class MainPageController extends EventEmitterMixin(Controller) {
+export default class MainPageController extends Controller {
 	constructor({
 		model = {},
 		view = {},

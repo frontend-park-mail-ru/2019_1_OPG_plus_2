@@ -7,6 +7,8 @@ let isEnded = false;
 let player1 = new ClientPlayer("user1", Game);
 let player2 = new BotPlayer("bot", Game);
 
+// пользователь подписывается на событие player on something
+
 [player1, player2].forEach(player => {
     player.on('notification', args => {
         console.group(player.name);

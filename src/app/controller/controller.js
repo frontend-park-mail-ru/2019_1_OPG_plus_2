@@ -13,7 +13,7 @@ export default class Controller {
 	}
 
 	onNavigate({ path = null, data = {} } = {}) {
-		if(path !== null) {
+		if(path !== null && typeof(path) === 'string') {
 			this._router.navigate({ path: path, data: data });
 		}
 	}

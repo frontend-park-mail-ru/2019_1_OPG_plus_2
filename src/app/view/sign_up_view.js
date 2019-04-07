@@ -91,7 +91,13 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 		formsBlock.removeEventListener('submit', this.onFormSubmit, true);
 	}
 
-	_renderSignUp(data, fields) {
+	_createEventListeners() {
+		this._removeEventListener();
+		this._createEventListener();
+		this._createOnLinkListener();
+	}
+
+	_render(data, fields) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: [`container_theme_signup ${data.modifier || ' '}`],
 		}));
@@ -177,15 +183,9 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 				modifiers: [],
 			}),
 		);
-		
-		this._removeEventListener();
-		this._createEventListener();
-		this._createOnLinkListener();
 	}
 
-	open({root = {}, data = {}}) {
-		this._root = root;
-		this._root.innerHTML = '';
-		this._renderSignUp(data);
+	open({ root = {}, data = {} }) {
+		super.open({root, data});
 	}
 }

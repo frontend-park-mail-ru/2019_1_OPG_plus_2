@@ -40,12 +40,17 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 		formsBlock.removeEventListener('submit', this.onFormSubmit, false);
 	}
 
-	_renderSignIn(data, email) {
+	_createEventListeners() {
+		this._removeEventListener();
+		this._createEventListener();
+		this._createOnLinkListener();
+	}
+
+	_render(data) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: [`container_theme_signin ${data.message ? 'container_theme_error' : ' '}`],
 		}));
 		const containerBlock = document.querySelector('.container.container_theme_signin');
-
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
 				modifiers: ['head_theme_signin'],
@@ -92,7 +97,7 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 				placeholder: 'E-mail',
 				type: 'email',
 				req: true,
-				value: `${email || ''}`,
+				value: `${''}`, // TODO проверка на наличие email
 			}),
 			formTemplate({
 				modifiers: [],
@@ -102,7 +107,7 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 				req: true,
 			}),
 		);
-
+		
 		genericBeforeEnd(buttonsBlock, 
 			sumbitTemplate({
 				value: 'SIGN IN',
@@ -117,15 +122,9 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 				modifiers: ['button_type_secondary'],
 			}),
 		);
-
-		this._removeEventListener();
-		this._createEventListener();
-		this._createOnLinkListener();
 	}
 
-	open({root = {}, data = {}}) {
-		this._root = root;
-		this._root.innerHTML = '';
-		this._renderSignIn(data);
+	open({ root = {}, data = {} }) {
+		super.open({root, data});
 	}
 }

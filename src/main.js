@@ -28,6 +28,10 @@ import EditProfileModel from './app/model/edit_profile_model';
 import EditProfileView from './app/view/edit_profile_view';
 import EditProfileController from './app/controller/edit_profile_controller';
 
+import GameModel from './app/model/game_model';
+import GameView from './app/view/game_view';
+import GameController from './app/controller/game_controller';
+
 document.addEventListener('DOMContentLoaded', function() {
 	const router = new Router({
 		mode: 'history',
@@ -58,12 +62,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	const editProfileView = new EditProfileView();
 	const editProfileController = new EditProfileController({model: editProfileModel, view: editProfileView, router: router});
 
+	const gameModel = new GameModel();
+	const gameView = new GameView();
+	const gameController = new GameController({model: gameModel, view: gameView, router: router});
+
 	router.add(mainController);
 	router.add('/leaders', scoreController);
 	router.add('/signin', signInController);
 	router.add('/me', profileController);
 	router.add('/signup', signUpController);
 	router.add('/editme', editProfileController);
+	router.add('/game', gameController);
 
 	router.start();
 });

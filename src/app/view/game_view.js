@@ -21,8 +21,8 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 		super();
 	}
 
-	_createEventListeners() {
-		this._createOnLinkListener();
+	createEventListener() {
+		
 	}
     
 	_render(data) {
@@ -50,7 +50,7 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 
 		genericBeforeEnd(menuBlock, 
 			profileIconTemplate({
-				modifiers: [`${data.isAuth ? '' : 'profile_theme_hidden'}`],
+				modifiers: [`${data ? '' : 'profile_theme_hidden'}`],
 				href: '/',
 				dataset: '/me',
 			}),
@@ -100,18 +100,16 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 				href: 'signin',
 				title: 'SING IN',
 				dataset: '/signin',
-				modifiers: [`${data.isAuth ? 'link_theme_hidden' : ''}`],
+				modifiers: [`${data ? 'link_theme_hidden' : ''}`],
 			}),
 			linkTemplate({
 				href: 'signup',
 				title: 'SIGN UP',
 				dataset: '/signup',
-				modifiers: [`${data.isAuth ? 'link_theme_hidden' : ''}`],
+				modifiers: [`${data ? 'link_theme_hidden' : ''}`],
 			}),
 		);
-	}
-
-	open({ root = {}, data = {} }) {
-		super.open({root, data});
+		
+		this._createOnLinkListener();
 	}
 }

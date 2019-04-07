@@ -20,7 +20,7 @@ class GameService {
         ];
         this.cellsCount = this.field.length * this.field[0].length;
         let bus = new EventBus();
-        bus.attachToObject(this);
+        bus.attachToObject(this); // вот это можно миксином сделать
     };
 
     check() {

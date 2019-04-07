@@ -1,7 +1,7 @@
 import Controller from './controller';
 import { EventEmitterMixin } from '../event_emitter';
 
-export default class EditProfileController extends EventEmitterMixin(Controller) {
+export default class EditProfileController extends Controller {
 	constructor({
 		model = {},
 		view = {},

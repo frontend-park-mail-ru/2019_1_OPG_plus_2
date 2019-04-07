@@ -1,5 +1,5 @@
 {
-  "username": "project",
+  "name": "project",
   "version": "1.0.0",
   "description": "test server",
   "main": "server/index.js",
