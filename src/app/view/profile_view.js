@@ -119,8 +119,6 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				modifiers: [],
 			})
 		);
-
-		this._createOnLinkListener();
 	}
 
 	open({ root = {}, data = {} }) {

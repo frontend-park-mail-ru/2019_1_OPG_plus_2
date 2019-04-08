@@ -16,7 +16,7 @@ export default class View {
 		this._root = root;
 		this._root.innerHTML = '';
 		this._render(data);
-		this._createEventListeners();
 		this._removeEventListeners();
+		this._createEventListeners();
 	}
 }

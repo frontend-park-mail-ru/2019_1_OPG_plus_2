@@ -35,11 +35,15 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 	}
 
 	_createEventListeners() {
-		this._removeEventListener();
-		this._removeLoadListener();
 		this._createLoadListener();
-		this._createEventListener();
+		this._createSubmitListener();
 		this._createOnLinkListener();
+	}
+
+	_removeEventListeners() {
+		this._removeSubmitListener();
+		this._removeLoadListener();
+		this._removeOnLinkListener();
 	}
 
 	onLoadEvent() {
@@ -66,12 +70,12 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 		}
 	}
 
-	_createEventListener() {
+	_createSubmitListener() {
 		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.addEventListener('submit', this.onFormSubmit, true);
 	}
 
-	_removeEventListener() {
+	_removeSubmitListener() {
 		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.removeEventListener('submit', this.onFormSubmit, true);
 	}

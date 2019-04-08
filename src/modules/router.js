@@ -18,10 +18,7 @@ export default class Router {
 		history.back();
 	}
 
-	add(re, handler) {
-		if(re instanceof Controller) {
-	      this.routes['/'] = re;
-		}
+	add({re = '/', handler} = {}) {
 		this.routes[re] = handler;
 	}
 

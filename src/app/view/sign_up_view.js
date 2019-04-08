@@ -31,75 +31,86 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 		const password = formsBlock.elements[2].value;
 		const password_repeat = formsBlock.elements[3].value;
 
-		if (!validEmail(email) || !email) {
-			this._root.innerHTML = '';
-			this._renderSignUp({
-				error: 'Invalid Email',
-				modifier: 'container_theme_error',
-			}, {
-				name: username,
-				email,
-			});
-			return;
-		}
+		// if (!validEmail(email) || !email) {
+		// 	this._root.innerHTML = '';
+		// 	this._renderSignUp({
+		// 		error: 'Invalid Email',
+		// 		modifier: 'container_theme_error',
+		// 	}, {
+		// 		name: username,
+		// 		email,
+		// 	});
+		// 	return;
+		// }
 
-		if (!validLogin(username) || !username) {
-			this._root.innerHTML = '';
-			this._renderSignUp({
-				error: 'Invalid Name',
-				modifier: 'container_theme_error',
-			}, {
-				username: username,
-				email,
-			});
-			return;
-		} 
+		// if (!validLogin(username) || !username) {
+		// 	this._root.innerHTML = '';
+		// 	this._renderSignUp({
+		// 		error: 'Invalid Name',
+		// 		modifier: 'container_theme_error',
+		// 	}, {
+		// 		username: username,
+		// 		email,
+		// 	});
+		// 	return;
+		// } 
 
-		if (password !== password_repeat || !password || !password_repeat) {
-			this._root.innerHTML = '';
-			this._renderSignUp({
-				error: 'Passwords doesn\' not match',
-				modifier: 'container_theme_error',
-			},{
-				username: username,
-				email,
-			});
-			return;
-		}
+		// if (password !== password_repeat || !password || !password_repeat) {
+		// 	this._root.innerHTML = '';
+		// 	this._renderSignUp({
+		// 		error: 'Passwords doesn\' not match',
+		// 		modifier: 'container_theme_error',
+		// 	},{
+		// 		username: username,
+		// 		email,
+		// 	});
+		// 	return;
+		// }
 
-		if (!validPassword(password)) {
-			this._root.innerHTML = '';
-			this._renderSignUp({
-				error: 'Invalid password, must be more than 5 symbols',
-				modifier: 'container_theme_error',
-			},{
-				username,
-				email,
-			});
-			return;
-		}
-		this.emit('signUpSubmit', {root: this._root, name: username, email: email, password: password});
+		// if (!validPassword(password)) {
+		// 	this._root.innerHTML = '';
+		// 	this._renderSignUp({
+		// 		error: 'Invalid password, must be more than 5 symbols',
+		// 		modifier: 'container_theme_error',
+		// 	},{
+		// 		username,
+		// 		email,
+		// 	});
+		// 	return;
+		// }
+
+		this.emit('signUpSubmit', {
+			root: this._root,
+			name: username, 
+			email: email, 
+			password: password, 
+			password_repeat: password_repeat,
+		});
 	}
 
-	_createEventListener() {
+	_createSubmitListener() {
 		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.addEventListener('submit', this.onFormSubmit, true);
 	}
 
-	_removeEventListener() {
+	_removeSubmitListener() {
 		const formsBlock = this._root.querySelector('.forms');
 		formsBlock.removeEventListener('submit', this.onFormSubmit, true);
 	}
 
 	_createEventListeners() {
-		this._removeEventListener();
-		this._createEventListener();
+		this._createSubmitListener();
 		this._createOnLinkListener();
 	}
 
-	_render(data, fields) {
+	_removeEventListeners() {
+		this._removeOnLinkListener();
+	}
+
+	_render(data) {
+		console.log(data);
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: [`container_theme_signup ${data.modifier || ' '}`],
+			modifiers: [`container_theme_signup ${data.error ? 'container_theme_error' : ' '}`],
 		}));
 		const containerBlock = document.querySelector('.container.container_theme_signup');
 
@@ -150,7 +161,7 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 				type: 'text',
 				placeholder: 'Name',
 				req: true,
-				value: `${fields ? fields.username : ''}`,
+				value: `${data.email ? data.email : ''}`,
 			}),
 			formTemplate({
 				modifiers: [],
@@ -158,7 +169,7 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 				type: 'email',
 				placeholder: 'E-mail',
 				req: true,
-				value: `${fields ? fields.email: ''}`,
+				value: `${data.name ? data.name: ''}`,
 			}),
 			formTemplate({
 				modifiers: [],

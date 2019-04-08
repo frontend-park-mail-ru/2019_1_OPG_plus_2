@@ -66,13 +66,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	const gameView = new GameView();
 	const gameController = new GameController({model: gameModel, view: gameView, router: router});
 
-	router.add(mainController);
-	router.add('/leaders', scoreController);
-	router.add('/signin', signInController);
-	router.add('/me', profileController);
-	router.add('/signup', signUpController);
-	router.add('/editme', editProfileController);
-	router.add('/game', gameController);
+	router.add({handler: mainController});
+	router.add({re: '/leaders', handler: scoreController});
+	router.add({re: '/signin', handler: signInController});
+	router.add({re: '/me', handler: profileController});
+	router.add({re: '/signup', handler: signUpController});
+	router.add({re: '/editme', handler: editProfileController});
+	router.add({re: '/game', handler: gameController});
 
 	router.start();
 });

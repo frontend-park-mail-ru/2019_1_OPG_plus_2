@@ -18,7 +18,8 @@ export default class API {
 					login: login,
 					password: password,
 				}),
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {
@@ -36,7 +37,8 @@ export default class API {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				path: `${HOST}/api/session`,
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {
@@ -54,7 +56,8 @@ export default class API {
 		return new Promise(function(resolve, reject) {
 			AjaxModule.doDelete({
 				path: `${HOST}/api/session`,
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => {
 						reject(error);
@@ -78,7 +81,8 @@ export default class API {
 		return new Promise(function(resolve, reject) {
 			AjaxModule.doGet({
 				path: `${HOST}/api/users?limit=${limit}&page=${page}`,
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => {
 						reject(error);
@@ -108,7 +112,8 @@ export default class API {
 					email: email,
 					username: username,
 				}
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {
@@ -148,7 +153,8 @@ export default class API {
 					password: password,
 					username: username,
 				}),
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => {
 						reject(error);
@@ -175,11 +181,11 @@ export default class API {
      * This method provides client with user data, matching required ID
      */
 	static getUser() {
-		// debugger;
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				path: `${HOST}/api/user`,
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {
@@ -208,7 +214,8 @@ export default class API {
 					'Origin': ORIGIN,
 				},
 				body: avatar,
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {
@@ -232,7 +239,8 @@ export default class API {
 					new_password: newPassword,
 					password_confirm: passwordConfirm,
 				},
-			}).then(response => {
+			})
+			.then(response => {
 				if (response.status !== 200) {
 					response.json().then(error => reject(error));
 				} else {

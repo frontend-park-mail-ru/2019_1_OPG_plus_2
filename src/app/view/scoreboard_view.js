@@ -66,7 +66,7 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 		this._createOnLinkListener();
 	}
 
-	_render(data, pageNum) {
+	_render(data) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_scoreboard'],
 		}));
@@ -99,17 +99,17 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 			mainTemplate({
 				modifiers: ['main_theme_scoreboard'],
 			}),
-			pagesTemplate({
-				modifiers: [],
-				page_num: pageNum,
-			})
+			// pagesTemplate({
+			// 	modifiers: [],
+			// 	page_num: data.page,
+			// })
 		);
 		const mainBlock = document.querySelector('.main.main_theme_scoreboard');
 
 		genericBeforeEnd(mainBlock, 
 			rowTemplate({
 				modifiers: [],
-				lst: [...data.users],
+				lst: [...data.users.users],
 				host: HOST,
 			}),
 		);
