@@ -1,0 +1,13 @@
+@keyframes active {
+    0% { box-shadow: 1px 1px 1px 1px orange; }
+    // 100% { box-shadow: 1px 1px 1px 10px orange; }
+    50% { box-shadow: 1px 1px 1px 10px orange; }
+    100% { box-shadow: 1px 1px 1px 1px orange; }
+}
+
+.block_theme_left-active {
+    background-color: orange;
+    box-shadow: 1px 1px 1px 1px orange;
+    z-index: 3;
+    animation: active 300ms forwards ease-in-out;
+}

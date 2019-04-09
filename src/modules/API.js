@@ -23,7 +23,6 @@ export default class API {
 					if (response.status !== 200) {
 						response.json().then(error => reject(error));
 					} else {
-						User.set({});
 						resolve();
 					}
 				});

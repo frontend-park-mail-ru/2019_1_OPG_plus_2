@@ -1,0 +1,7 @@
+.field {
+    display: grid;
+    grid-template: repeat(5, 14vh) / repeat(5, 14vh);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    grid-row: 1 / -2; 
+}

@@ -1,5 +1,4 @@
 import Controller from './controller';
-import { EventEmitterMixin } from '../event_emitter';
 
 export default class GameController extends Controller {
 	constructor({
@@ -8,5 +7,6 @@ export default class GameController extends Controller {
 		router = {},
 	} = {}) {
 		super({ model: model, view: view, router: router });
+		this._model.on('OK', ({ root = {} } = {}) => {this.render({root: root})});
 	}
 }

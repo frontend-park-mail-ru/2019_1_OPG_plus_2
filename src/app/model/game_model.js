@@ -9,5 +9,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 	}
 
 	getData({root = {}} = {}) {
+		this.emit('OK', {root: root});
 	}
 }
