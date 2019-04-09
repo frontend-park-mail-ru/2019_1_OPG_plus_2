@@ -108,6 +108,7 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 	}
 
 	_render(data) {
+		this._root.innerHTML = '';
 		console.log(data);
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: [`container_theme_signup ${data.error ? 'container_theme_error' : ' '}`],

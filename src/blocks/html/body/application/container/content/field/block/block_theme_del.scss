@@ -1,0 +1,10 @@
+// для блока
+@keyframes del {
+        0% { background-color: #EDEDED; }
+        100% { background-color: #ADADAD; }
+}
+
+.block_theme_del {
+    background-color: #EDEDED;
+    animation: del 300ms 300ms forwards linear;
+}

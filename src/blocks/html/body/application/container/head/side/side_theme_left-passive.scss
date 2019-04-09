@@ -1,8 +1,14 @@
+@keyframes passive {
+    0% { grid-column: 1 / 8; }
+    100% { grid-column: 1 / 4; }
+}
+
 .side_theme_left-passive {
     @media (min-width: $desktop-min-width) {
         grid-column: 1 / 4;
         grid-row: 2 / -2;
         border-radius: 0 10px 10px 0;
         background-color: orange;
+        animation: passive 300ms forwards ease-in-out;
     }
 }

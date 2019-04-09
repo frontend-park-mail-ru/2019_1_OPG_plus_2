@@ -23,7 +23,7 @@ export class PubSub {
         })
     }
 
-    getNotified(eventName, eventArgs) {
+    getNotified(eventName, eventArgs){
         this.handlers.forEach(topic => {
             if (topic.event === eventName) {
                 topic.handler(eventArgs)

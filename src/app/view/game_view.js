@@ -20,13 +20,6 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 		this.up = this.up.bind(this);
 		this.over = this.over.bind(this);
 		this.out = this.out.bind(this);
-
-		this._game = {
-			x: true,
-			y: true,
-			firstFlag: false,
-			points: [null, null],
-		};
 	}
 
 	_createEventListeners() {
@@ -43,7 +36,8 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 		if (event.target.classList.contains('block')) {
 			const filedBlock = this._root.querySelector('.field');
 			this._game.points[1] = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
-			event.target.classList.add('block_theme_left-active');
+			this._game.start = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+			this.data.player === 'Player1' ? event.target.classList.add('block_theme_left-active') : event.target.classList.add('block_theme_right-active');
 			filedBlock.addEventListener('mouseover', this.over, true); // появилась над элементов
 			filedBlock.addEventListener('mouseout', this.out, true); // ушла с элемента
 		}
@@ -54,6 +48,8 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 			const filedBlock = this._root.querySelector('.field');
 			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
 			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
+			this._game.end = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+			this.emit('turn', {root: this._root, user: this.data.player, start: this._game.start, end: this._game.end});
 		}
 	}
 
@@ -70,10 +66,18 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 				this._game.points[1][0] - this._game.points[0][0] ? this._game.x = false : this._game.y = false;
 			}
 
-			if (this._game.x === false) {
-				this._game.points[1][1] - this._game.points[0][1] ? console.log('you can\'t move on x') : event.target.classList.add('block_theme_left-active');
-			} else if (this._game.y === false) {
-				this._game.points[1][0] - this._game.points[0][0] ? console.log('you can\'t move on y') : event.target.classList.add('block_theme_left-active');
+			if (!this._game.x) {
+				if (this._game.points[1][1] - this._game.points[0][1]) { 
+					console.log('you can\'t move on x') 
+				} else {
+					this.data.player === 'Player1' ? event.target.classList.add('block_theme_left-active') : event.target.classList.add('block_theme_right-active');
+				}
+			} else if (!this._game.y) {
+				if (this._game.points[1][0] - this._game.points[0][0]) { 
+					console.log('you can\'t move on y')
+				 } else { 
+					this.data.player === 'Player1' ? event.target.classList.add('block_theme_left-active') : event.target.classList.add('block_theme_right-active');
+				 }
 			}
 		}
 	}
@@ -86,11 +90,24 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 
 	_createTurnListener() {
 		const filedBlock = this._root.querySelector('.field');
+		filedBlock.removeEventListener('mousedown', this.down);
+		filedBlock.removeEventListener('mouseup', this.up, true);
 		filedBlock.addEventListener('mousedown', this.down);
 		filedBlock.addEventListener('mouseup', this.up, true);
 	}
     
 	_render(data) {
+		this._game = {
+			start: [],
+			end: [],
+			x: true,
+			y: true,
+			firstFlag: false,
+			points: [null, null],
+		};
+		const secondFiledBlock = this._root.querySelector('.field');
+		this._root.innerHTML = '';
+		this.data = data;
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_game'],
 		}));
@@ -118,10 +135,10 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 		// чтобы поменять сторону просто поменять классы
 		genericBeforeEnd(headBlock, 
 			sideTemplate({
-				modifiers: ['side_theme_left-active'],
+				modifiers: [`${data.player === 'Player1' ? 'side_theme_left-active' : 'side_theme_left-passive'}`],
 			}),
 			sideTemplate({
-				modifiers: ['side_theme_right-passive'],
+				modifiers: [`${data.player === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
 			})
 		);
 
@@ -143,22 +160,36 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_right'],
-				nickname: 'BOT', // TODO передача никнейма пользователя
+				nickname: 'Player2', // TODO передача никнейма пользователя
 			}),
 		);
 
-		genericBeforeEnd(contentBlock, 
-			fieldTemplate({
-				modifiers: [],
-			})
-		);
-		const fieldBlock = this._root.querySelector('.field');
+		if(data.steps.length == 0) { // если уже ходили то не надо перендривать все поле
+			genericBeforeEnd(contentBlock, 
+				fieldTemplate({
+					modifiers: [],
+				})
+			);
+			const fieldBlock = this._root.querySelector('.field');
 		
-		const blocks = []; // TODO а вообще резонно рендерить 25 блоков???
-		[...Array(25)].forEach((_, i) => {
-			blocks.push(blockTemplate({ modifiers: [''], num: i }));
-		})
-		genericBeforeEnd(fieldBlock, ...blocks);
+			const blocks = []; // TODO а вообще резонно рендерить 25 блоков???
+			[...Array(25)].forEach((_, i) => {
+				// if (data.del.indexOf( i ) != -1) {
+					// blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
+				// } else {
+					blocks.push(blockTemplate({ modifiers: [''], num: i }));
+				// }
+			});
+			genericBeforeEnd(fieldBlock, ...blocks);
+
+			document.querySelectorAll('.block').forEach((el) => {
+				if (data.del.indexOf( parseInt(el.textContent,10) ) != -1) {
+					el.classList.add('block_theme_del');
+				}
+			});
+		} else {
+			contentBlock.appendChild(secondFiledBlock);
+		}
 
 		this._createTurnListener();
 
