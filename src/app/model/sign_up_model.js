@@ -44,7 +44,7 @@ export default class SignUpModel extends EventEmitterMixin(Model) {
 			password: password,
 			username: name,
 		})
-			.then(() => {this.emit('signUpOK')})
+			.then(() => {this.emit('signUpOK');})
 			.catch(err => {
 				this.emit('signUpError', {error: err});
 			});
