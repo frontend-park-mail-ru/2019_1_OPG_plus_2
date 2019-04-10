@@ -1,0 +1,8 @@
+.main-button {
+    @media (min-width: $desktop-min-width) {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 18vh;
+        grid-row: 3 / 5;
+    }
+}

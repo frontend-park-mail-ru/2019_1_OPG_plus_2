@@ -3,6 +3,9 @@
 
     @media (min-width: $desktop-min-width) {
         font-size: 15vh;
+        color: #005FF9;
+        grid-column: 2 / 4;
+        grid-row: 1 / 3;
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {

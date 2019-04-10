@@ -58,13 +58,13 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 		const containerBlock = document.querySelector('.container.container_theme_signin');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_signin'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_signin'],
 			})
 		);
-		const headBlock = document.querySelector('.head.head_theme_signin');
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		const contentBlock = document.querySelector('.content.content_theme_signin');
 
 		genericBeforeEnd(headBlock, 

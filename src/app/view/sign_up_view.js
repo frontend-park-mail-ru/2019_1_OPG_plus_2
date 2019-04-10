@@ -117,13 +117,13 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_signup'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_signup'],
 			})
 		);
-		const headBlock = document.querySelector('.head.head_theme_signup');
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		const contentBlock = document.querySelector('.content.content_theme_signup');
 
 		genericBeforeEnd(headBlock, 
