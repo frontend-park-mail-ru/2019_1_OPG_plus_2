@@ -1,0 +1,9 @@
+.content_theme_game {
+    @media (min-width: $desktop-min-width) {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        grid-column: 4 / 10;
+        grid-row: 3 / -1;
+    }
+}

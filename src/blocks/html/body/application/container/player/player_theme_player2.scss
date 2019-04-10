@@ -1,0 +1,6 @@
+.player_theme_player2 {
+    @media (min-width: $desktop-min-width) {
+        grid-column: 10 / -1;
+        grid-row: 3 / -1;
+    }
+}

@@ -1,0 +1,25 @@
+@keyframes active-left {
+    0% { box-shadow: 1px 1px 1px 1px orange; }
+    50% { box-shadow: 1px 1px 1px 10px orange; }
+    100% { box-shadow: 1px 1px 1px 1px orange; }
+}
+
+// для блока
+// @keyframes active {
+//         0% { box-shadow: 1px 1px 1px 10000px orange; }
+//         30% { box-shadow: 1px 1px 1px 5000px orange; }
+//         40% { box-shadow: 1px 1px 1px 2000px orange; }
+//         50% { box-shadow: 1px 1px 1px 1000px orange; }
+//         70% { box-shadow: 1px 1px 1px 500px orange; }
+//         75% { box-shadow: 1px 1px 1px 300px orange; }
+//         80% { box-shadow: 20px 0px 0px 1px orange; }
+//         90% { box-shadow: -20px 0px 0px 1px orange; }
+//         100% { box-shadow: 1px 1px 1px 1px orange; }
+// }
+
+.block_theme_left-active {
+    background-color: orange;
+    box-shadow: 1px 1px 1px 1px orange;
+    z-index: 3;
+    animation: active-left 300ms forwards linear;
+}

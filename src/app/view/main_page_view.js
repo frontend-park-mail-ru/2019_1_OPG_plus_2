@@ -26,6 +26,7 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 	}
     
 	_render(data) {
+		this._root.innerHTML = '';
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_main'],
 		}));

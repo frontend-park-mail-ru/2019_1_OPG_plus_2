@@ -1,5 +1,5 @@
 import Game from "./game";
-import {BotPlayer, ClientPlayer} from "./player";
+import { BotPlayer, ClientPlayer } from "./player";
 
 
 let isEnded = false;
@@ -32,7 +32,6 @@ let player2 = new BotPlayer("bot", Game);
 
 Game.addListener(player1);
 Game.addListener(player2);
-// Game.publish('notification', {qwe: "qwe"});
 
 Game.start();
 

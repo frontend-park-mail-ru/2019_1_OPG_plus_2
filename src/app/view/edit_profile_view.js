@@ -91,6 +91,7 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 	}
 
 	_render(data) {
+		this._root.innerHTML = '';
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_profile'],
 		}));

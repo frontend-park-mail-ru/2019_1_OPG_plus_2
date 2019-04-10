@@ -1,5 +1,5 @@
 import {PubSub} from "./eventBus";
-import Bot from "./bot";
+// import Bot from "./bot";
 
 
 class Player extends PubSub {
@@ -27,17 +27,17 @@ export class ClientPlayer extends Player {
     };
 }
 
-export class BotPlayer extends Player {
-    constructor(name, game) {
-        super("bot", game);
-        this.bot = new Bot();
-    }
+// export class BotPlayer extends Player {
+//     constructor(name, game) {
+//         super("bot", game);
+//         this.bot = new Bot();
+//     }
 
-    doTurn() {
-        let turn = this.bot.generateTurn();
-        this.publish('turn', {user: this, d1: turn[0], d2: turn[1]});
-    }
-}
+//     doTurn() {
+//         let turn = this.bot.generateTurn();
+//         this.publish('turn', {user: this, d1: turn[0], d2: turn[1]});
+//     }
+// }
 
 export class NetworkPlayer extends Player {
 

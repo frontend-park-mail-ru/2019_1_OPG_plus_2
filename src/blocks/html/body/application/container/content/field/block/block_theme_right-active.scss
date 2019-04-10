@@ -1,0 +1,12 @@
+@keyframes active-right {
+    0% { box-shadow: 1px 1px 1px 1px #005FF9; }
+    50% { box-shadow: 1px 1px 1px 10px #005FF9; }
+    100% { box-shadow: 1px 1px 1px 1px #005FF9; }
+}
+
+.block_theme_right-active {
+    background-color: #005FF9;
+    box-shadow: 1px 1px 1px 1px #005FF9;
+    z-index: 3;
+    animation: active-right 300ms forwards linear;
+}

@@ -1,15 +1,12 @@
 import containerTemplate from '../../blocks/html/body/application/container/container.pug';
-import headTemplate from '../../blocks/html/body/application/container/head/head.pug';
-import menuTemplate from '../../blocks/html/body/application/container/head/menu/menu.pug';
-import profileIconTemplate from '../../blocks/html/body/application/container/head/menu/profile/profile.pug';
-import scoreBoardTemplate from '../../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.pug';
-import rulesTemplate from '../../blocks/html/body/application/container/head/menu/rules/rules.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
-import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
-import mainTemplate from '../../blocks/html/body/application/container/content/main/main.pug';
-import playTemplate from '../../blocks/html/body/application/container/content/main/play/play.pug';
-import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
-import linkTemplate from '../../blocks/html/body/application/container/content/buttons/link/link.pug';
+import headTemplate from '../../blocks/html/body/application/container/head/head.pug';
+import playerTemplate from '../../blocks/html/body/application/container/player/player.pug';
+import sideTemplate from '../../blocks/html/body/application/container/head/side/side.pug';
+import nicknameTemplate from '../../blocks/html/body/application/container/player/nickname/nickname.pug';
+import avatarTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
+import fieldTemplate from '../../blocks/html/body/application/container/content/field/field.pug';
+import blockTemplate from '../../blocks/html/body/application/container/content/field/block/block.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
@@ -19,97 +16,186 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 export default class MainPageView extends NavigateMixin(EventEmitterMixin(View)) {
 	constructor() {
 		super();
+		this.down = this.down.bind(this);
+		this.up = this.up.bind(this);
+		this.over = this.over.bind(this);
+		this.out = this.out.bind(this);
 	}
 
-	createEventListener() {
-		
+	_createEventListeners() {
+		this._createOnLinkListener();
+	}
+
+	onTurnEvent(event) {
+		if (event.target.classList.contains('block')) {
+			event.target.classList.add('block_theme_left-active');
+		}
+	}
+
+	down(event) {
+		if (event.target.classList.contains('block')) {
+			const filedBlock = this._root.querySelector('.field');
+			this._game.points[1] = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+			this._game.start = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+			this.data.player === 'Player1' ? event.target.classList.add('block_theme_left-active') : event.target.classList.add('block_theme_right-active');
+			filedBlock.addEventListener('mouseover', this.over, true); // появилась над элементов
+			filedBlock.addEventListener('mouseout', this.out, true); // ушла с элемента
+		}
+	}
+
+	up(event) {
+		if (event.target.classList.contains('block')) {
+			const filedBlock = this._root.querySelector('.field');
+			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
+			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
+			this._game.end = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+			this.emit('turn', {root: this._root, user: this.data.player, start: this._game.start, end: this._game.end});
+		}
+	}
+
+	over(event) {
+		if (event.target.classList.contains('block')) {
+			this._game.points[1] = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+
+			if(this._game.firstFlag !== true && this._game.points[0] !== null) {
+				this._game.firstFlag = true;
+				if (this._game.points[1][0] - this._game.points[0][0] && this._game.points[1][1] - this._game.points[0][1]) {
+					return;
+				}
+
+				this._game.points[1][0] - this._game.points[0][0] ? this._game.x = false : this._game.y = false;
+			}
+
+			if (!this._game.x) {
+				if (this._game.points[1][1] - this._game.points[0][1]) { 
+					console.log('you can\'t move on x') 
+				} else {
+					this.data.player === 'Player1' ? event.target.classList.add('block_theme_left-active') : event.target.classList.add('block_theme_right-active');
+				}
+			} else if (!this._game.y) {
+				if (this._game.points[1][0] - this._game.points[0][0]) { 
+					console.log('you can\'t move on y')
+				 } else { 
+					this.data.player === 'Player1' ? event.target.classList.add('block_theme_left-active') : event.target.classList.add('block_theme_right-active');
+				 }
+			}
+		}
+	}
+
+	out(event) {
+		if (event.target.classList.contains('block')) {
+			this._game.points[0] = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+		}
+	}
+
+	_createTurnListener() {
+		const filedBlock = this._root.querySelector('.field');
+		filedBlock.removeEventListener('mousedown', this.down);
+		filedBlock.removeEventListener('mouseup', this.up, true);
+		filedBlock.addEventListener('mousedown', this.down);
+		filedBlock.addEventListener('mouseup', this.up, true);
 	}
     
 	_render(data) {
+		this._game = {
+			start: [],
+			end: [],
+			x: true,
+			y: true,
+			firstFlag: false,
+			points: [null, null],
+		};
+		const secondFiledBlock = this._root.querySelector('.field');
+		this._root.innerHTML = '';
+		this.data = data;
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: ['container_theme_main'],
+			modifiers: ['container_theme_game'],
 		}));
-		const containerBlock = this._root.querySelector('.container.container_theme_main');
+		const containerBlock = this._root.querySelector('.container.container_theme_game');
 
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_main'],
+				modifiers: ['head_theme_game'],
 			}),
 			contentTemplate({
-				modifiers: ['content_theme_main'],
-			})
+				modifiers: ['content_theme_game'],
+			}),
+			playerTemplate({
+				modifiers: ['player_theme_player1'],
+			}),
+			playerTemplate({
+				modifiers: ['player_theme_player2'],
+			}),
 		);
-		const headBlock = this._root.querySelector('.head.head_theme_main');
-		const contentBlock = this._root.querySelector('.content.content_theme_main');
+		const headBlock = this._root.querySelector('.head.head_theme_game');
+		const playerLeftBlock = this._root.querySelector('.player.player_theme_player1');
+		const playerRightBlock = this._root.querySelector('.player.player_theme_player2');
+		const contentBlock = this._root.querySelector('.content.content_theme_game');
+
+		// чтобы поменять сторону просто поменять классы
 		genericBeforeEnd(headBlock, 
-			menuTemplate({
-				modifiers: ['menu_theme_main'],
-			})
-		);
-		const menuBlock = this._root.querySelector('.menu.menu_theme_main');
-
-		genericBeforeEnd(menuBlock, 
-			profileIconTemplate({
-				modifiers: [`${data ? '' : 'profile_theme_hidden'}`],
-				href: '/',
-				dataset: '/me',
+			sideTemplate({
+				modifiers: [`${data.player === 'Player1' ? 'side_theme_left-active' : 'side_theme_left-passive'}`],
 			}),
-			scoreBoardTemplate({
-				modifiers: [],
-				href: 'score',
-				dataset: '/leaders',
-			}),
-			rulesTemplate({
-				modifiers: [],
-				href: '/',
-				dataset: '/rules',
+			sideTemplate({
+				modifiers: [`${data.player === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
 			})
 		);
 
-		genericBeforeEnd(contentBlock, 
-			titleTemplate({
-				title: 'colors',
-				modifiers: ['title_theme_main'],
+		genericBeforeEnd(playerLeftBlock, 
+			avatarTemplate({
+				modifiers: ['avatar_theme_game'],
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
-			mainTemplate({
-				modifiers: ['main_theme_index'],
+			nicknameTemplate({
+				modifiers: ['nickname_theme_left'],
+				nickname: 'Player1', // TODO передача никнейма пользователя
 			}),
-			buttonsTemplate({
-				modifiers: ['buttons_theme_main'],
-			})
 		);
-		const mainBlock = this._root.querySelector('.main.main_theme_index');
-		const buttonsBlock = this._root.querySelector('.buttons.buttons_theme_main');
 
-		genericBeforeEnd(mainBlock, 
-			playTemplate({
-				href: 'game',
-				dataset: '/game',
-				modifiers: [],
-			})
-		);
-      
-		genericBeforeEnd(buttonsBlock, 
-			linkTemplate({
-				href: 'multiplayer',
-				title: 'MULTIPLAYER',
-				dataset: 'multiplayer',
-				modifiers: [],
+		genericBeforeEnd(playerRightBlock, 
+			avatarTemplate({
+				modifiers: ['avatar_theme_game'],
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
-			linkTemplate({
-				href: 'signin',
-				title: 'SING IN',
-				dataset: '/signin',
-				modifiers: [`${data ? 'link_theme_hidden' : ''}`],
-			}),
-			linkTemplate({
-				href: 'signup',
-				title: 'SIGN UP',
-				dataset: '/signup',
-				modifiers: [`${data ? 'link_theme_hidden' : ''}`],
+			nicknameTemplate({
+				modifiers: ['nickname_theme_right'],
+				nickname: 'Player2', // TODO передача никнейма пользователя
 			}),
 		);
+
+		if(data.steps.length == 0) { // если уже ходили то не надо перендривать все поле
+			genericBeforeEnd(contentBlock, 
+				fieldTemplate({
+					modifiers: [],
+				})
+			);
+			const fieldBlock = this._root.querySelector('.field');
 		
-		this._createOnLinkListener();
+			const blocks = []; // TODO а вообще резонно рендерить 25 блоков???
+			[...Array(25)].forEach((_, i) => {
+				// if (data.del.indexOf( i ) != -1) {
+					// blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
+				// } else {
+					blocks.push(blockTemplate({ modifiers: [''], num: i }));
+				// }
+			});
+			genericBeforeEnd(fieldBlock, ...blocks);
+
+			document.querySelectorAll('.block').forEach((el) => {
+				if (data.del.indexOf( parseInt(el.textContent,10) ) != -1) {
+					el.classList.add('block_theme_del');
+				}
+			});
+		} else {
+			contentBlock.appendChild(secondFiledBlock);
+		}
+
+		this._createTurnListener();
+
+	}
+
+	open({ root = {}, data = {} }) {
+		super.open({root, data});
 	}
 }
