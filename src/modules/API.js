@@ -18,14 +18,15 @@ export default class API {
 					login: login,
 					password: password,
 				}),
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => reject(error));
-				} else {
-					User.set({});
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => reject(error));
+					} else {
+						User.set({});
+						resolve();
+					}
+				});
 		});
 	}
 
@@ -36,33 +37,34 @@ export default class API {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				path: `${HOST}/api/session`,
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => reject(error));
-				} else {
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => reject(error));
+					} else {
+						resolve();
+					}
+				});
 		});
 	}
 
 	/**
      * This method logs user out and deletes cookie
-     * @param Object object with user login or email
      */
 	static logout() {
 		return new Promise(function(resolve, reject) {
 			AjaxModule.doDelete({
 				path: `${HOST}/api/session`,
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => {
-						reject(error);
-					});
-				} else {
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => {
+							reject(error);
+						});
+					} else {
+						resolve();
+					}
+				});
 		});
 
 	} 
@@ -78,17 +80,18 @@ export default class API {
 		return new Promise(function(resolve, reject) {
 			AjaxModule.doGet({
 				path: `${HOST}/api/users?limit=${limit}&page=${page}`,
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => {
-						reject(error);
-					});
-				} else {
-					response.json().then(user => {
-						resolve(user);
-					});
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => {
+							reject(error);
+						});
+					} else {
+						response.json().then(user => {
+							resolve(user);
+						});
+					}
+				});
 		});
 	}
 
@@ -98,30 +101,25 @@ export default class API {
      * @param Object object with user avatar, email, password and username
      */
 	static updateUser({
-		// avatar = '',
 		email = '',
-		// password = '',
 		username = '', 
 	} = {}) {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doPut({
 				path: `${HOST}/api/user`,
 				body: {
-					// avatar: avatar,
 					email: email,
-					// password: password,
 					username: username,
 				}
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => {
-						reject(error);
-					});
-				} else {
-					User.set({username: username});
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => reject(error));
+					} else {
+					// User.set({username: username});
+						resolve(username);
+					}
+				});
 		});
 		// AjaxModule.doPut({
 		//     path: `${HOST}/api/score`,
@@ -154,16 +152,17 @@ export default class API {
 					password: password,
 					username: username,
 				}),
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => {
-						reject(error);
-					});
-				} else {
-					User.set({});
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => {
+							reject(error);
+						});
+					} else {
+						User.set({});
+						resolve();
+					}
+				});
 		});
 	}
 
@@ -184,14 +183,14 @@ export default class API {
 		return new Promise((resolve, reject) => {
 			AjaxModule.doGet({
 				path: `${HOST}/api/user`,
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => reject(error));
-				} else {
-					response.json().then(user => User.set(user.data));
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => reject(error));
+					} else {
+						response.json().then(user => { resolve(user.data);});
+					}
+				});
 		});
 	}
 
@@ -214,18 +213,14 @@ export default class API {
 					'Origin': ORIGIN,
 				},
 				body: avatar,
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => reject(error));
-				} else {
-					response.json().then(data => User.set({
-						avatar: data.message, 
-						username: User.get().username, 
-						email: User.get().email
-					}));
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => reject(error));
+					} else {
+						response.json().then(data => resolve(data));
+					}
+				});
 		});
 	}
 
@@ -243,13 +238,14 @@ export default class API {
 					new_password: newPassword,
 					password_confirm: passwordConfirm,
 				},
-			}).then(response => {
-				if (response.status !== 200) {
-					response.json().then(error => reject(error));
-				} else {
-					resolve();
-				}
-			});
+			})
+				.then(response => {
+					if (response.status !== 200) {
+						response.json().then(error => reject(error));
+					} else {
+						resolve();
+					}
+				});
 		});
 	}
 

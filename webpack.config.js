@@ -42,7 +42,6 @@ const devMode = {
     mode: 'development',
     plugins: [
         new webpack.DefinePlugin({
-            ORIGIN: JSON.stringify('http://localhost:8001'),
             HOST: JSON.stringify('http://localhost:8002'),
         }),
     ]
@@ -52,7 +51,6 @@ const prodMode = {
     mode: 'production',
     plugins: [
         new webpack.DefinePlugin({
-            ORIGIN: JSON.stringify('https://colors.hackallcode.ru'),
             HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
         }),
     ]

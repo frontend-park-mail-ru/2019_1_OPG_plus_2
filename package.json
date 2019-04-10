@@ -1,12 +1,13 @@
 {
-  "username": "project",
+  "name": "project",
   "version": "1.0.0",
   "description": "test server",
   "main": "server/index.js",
   "scripts": {
     "start": "webpack --env production && node server",
     "build": "webpack --watch --env development",
-    "serv": "node server"
+    "serv": "node server",
+    "lint": "eslint -c .eslintrc.json --fix src/"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "cookie": "0.3.1",
     "cookie-parser": "1.4.4",
     "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
     "express": "4.16.4",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "fs": "0.0.1-security",

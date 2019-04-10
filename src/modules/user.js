@@ -34,7 +34,7 @@ class UserS {
 	 */
 	get() {
 		return {
-			photo: this._avatar,
+			avatar: this._avatar,
 			username: this._username,
 			email: this._email,
 			score: this._score,

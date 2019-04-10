@@ -1,11 +1,8 @@
 /*eslint no-empty-pattern:0 no-unused-vars:0*/
-export default class Page {
+export default class Model {
 	constructor({} = {}) {
 	}
 
-	open(root = {}) {
-	}
-
-	close() {
-	}
+	getData({data = {}} = {}) {
+	} 
 }

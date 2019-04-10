@@ -1,56 +1,46 @@
+import Controller from '../app/controller/controller';
+
 export default class Router {
-	/**
-	 * @constructor
-	 * @param root
-	 */
 	constructor({
-		root = document.body,
+		routes = {},
+		mode = null,
+		root = document.getElementById('application'),
 	} = {}) {
-		this._root = root;
-		this._routes = {};
-		this._prevPath = '';
+		this.routes = routes;
+		this.mode = mode == 'history' && !!(history.pushState) ? 'history' : 'hash';
+		this.root = root;
+		window.onpopstate = () => {
+			this.routes[location.pathname].open({root: this.root});
+		};
 	}
 
-	/**
-	 * Adds controller to routing
-	 * @param {string} path Path on which controller is routed
-	 * @param {Page} view Controller served by route
-	 */
-	add(path, view) {
-		this._routes[path] = view;
+	back() {
+		history.back();
 	}
 
-	/**
-	 * Renders page routed by path
-	 * @param path Path to be rendered
-	 */
-	open(path) {
-		if (this._prevPath) {
-			this.close();
+	add({re = '/', handler} = {}) {
+		this.routes[re] = handler;
+	}
+
+	navigate({ path = null, data = {} } = {}) {
+		path = path ? path : '';
+		if(this.mode === 'history') {
+		  history.pushState(null, null, path);
+
+		  if (!this.routes[path]) {
+			  return;
+			// this.routes['/not_found'].open(this.root);
+		  }
+
+		  this.routes[path].open({root: this.root, data: data});
+		} else {
+		  window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
 		}
-
-
-		if (!this._routes[path]){
-			this._routes['/not_found'].open(this._root);
-			this._prevPath = path;
-			return;
-		}
-
-		this._routes[path].open(this._root);
-		this._prevPath = path;
 	}
 
-	/**
-	 * Starts routing
-	 */
 	start() {
-		this.open(window.location.pathname);
-	}
-
-	/**
-	 * Closes page
-	 */
-	close() {
-		this._root.innerHTML = '';
+		if(this.mode === 'history') {
+		  this.navigate({ path: location.pathname });
+		}
 	}
 }

@@ -9,9 +9,6 @@ export default class AjaxModule {
 	} = {}) {
 		return fetch(path, {
 			method: 'GET',
-			headers: {
-				'Origin' : ORIGIN,
-			},
 			mode: 'cors',
 			credentials: 'include',
 		});
@@ -27,7 +24,6 @@ export default class AjaxModule {
 		body = {},
 		headers = {
 			'Content-type' : 'application/json; charset=utf-8',
-			'Origin' : ORIGIN,
 		}
 	} = {}) {
 		return fetch(path, {
@@ -52,7 +48,6 @@ export default class AjaxModule {
 			method: 'PUT',
 			headers: {
 				'Content-type' : 'application/json; charset=utf-8',
-				'Origin' : ORIGIN,
 			},
 			mode: 'cors',
 			credentials: 'include',
@@ -70,9 +65,6 @@ export default class AjaxModule {
 	} = {}) {
 		return fetch(path, {
 			method: 'DELETE',
-			headers: {
-				'Origin' : ORIGIN,
-			},
 			mode: 'cors',
 			credentials: 'include',
 		});
