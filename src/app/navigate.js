@@ -15,7 +15,6 @@ export const NavigateMixin = (superclass) => class extends superclass {
 		} else if (event.target.classList.contains('logout')) {
 			this.emit('logout');
 		} else {
-			// debugger;
 			this.emit('onLinkClick', { path: event.target.dataset.href });
 		}
 	}

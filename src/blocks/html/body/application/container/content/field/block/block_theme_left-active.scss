@@ -1,7 +1,12 @@
 @keyframes active-left {
     0% { box-shadow: 1px 1px 1px 1px orange; }
-    50% { box-shadow: 1px 1px 1px 10px orange; }
-    100% { box-shadow: 1px 1px 1px 1px orange; }
+    50% { box-shadow: 1px 1px 1px 5px rgb(255, 173, 21); }
+    60% { box-shadow: 1px 1px 1px 5px rgb(255, 181, 42); }
+    70% { box-shadow: inset 1px 1px 0px 5px rgb(255, 186, 58); }
+    80% { box-shadow: inset 1px 1px 0px 5px rgb(255, 207, 118); }
+    90% { box-shadow: inset 1px 1px 0px 5px rgb(255, 225, 169); }
+    100% { box-shadow: inset 1px 1px 0px 5px #F7F9F9; }
+    // 100% { box-shadow: 1px 1px 1px 1px orange; }
 }
 
 // для блока

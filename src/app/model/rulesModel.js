@@ -6,4 +6,8 @@ export default class RulesModel extends EventEmitterMixin(Model){
         super();
     }
 
+    getData({root = {}} = {}) {
+        this.emit('OK', {root: root});
+    }
+
 }

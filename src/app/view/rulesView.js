@@ -28,7 +28,7 @@ export default class RulesView extends NavigateMixin(EventEmitterMixin(View)) {
                 modifiers: ['head_theme_back-arrow'],
             }),
             contentTemplate({
-                modifiers: ['content_theme_main'],
+                modifiers: ['content_theme_rules'],
             })
         );
 

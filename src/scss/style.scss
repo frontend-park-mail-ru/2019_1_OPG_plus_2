@@ -1,5 +1,5 @@
 @import 'variables.scss';
-@import url('https://fonts.googleapis.com/css?family=Roboto|Unica+One');
+// @import url('https://fonts.googleapis.com/css?family=Roboto|Unica+One');
 
 @import '../blocks/html/html.scss';
 @import '../blocks/html/body/body.scss';
@@ -126,3 +126,5 @@
 @import '../blocks/html/body/application/container/content/main-button/main-button_theme_signin.scss';
 @import '../blocks/html/body/application/container/content/main-button/main-button_theme_multiplayer.scss';
 
+/* rules */
+@import '../blocks/html/body/application/container/content/content_theme_rules.scss';
