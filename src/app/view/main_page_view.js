@@ -61,7 +61,7 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 			}),
 			rulesTemplate({
 				modifiers: [],
-				href: '/',
+				href: 'rules',
 				dataset: '/rules',
 			})
 		);

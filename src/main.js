@@ -31,6 +31,9 @@ import EditProfileController from './app/controller/edit_profile_controller';
 import GameModel from './app/model/game_model';
 import GameView from './app/view/game_view';
 import GameController from './app/controller/game_controller';
+import RulesView from "./app/view/rulesView";
+import RulesController from "./app/controller/rulesController";
+import RulesModel from "./app/model/rulesModel";
 
 document.addEventListener('DOMContentLoaded', function() {
 	const router = new Router({
@@ -62,6 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	const editProfileView = new EditProfileView();
 	const editProfileController = new EditProfileController({model: editProfileModel, view: editProfileView, router: router});
 
+	const rulesModel = new RulesModel();
+	const rulesView = new RulesView();
+	const rulesController = new RulesController({model: rulesModel, view: rulesView, router: router});
+
 	const gameModel = new GameModel();
 	const gameView = new GameView();
 	const gameController = new GameController({model: gameModel, view: gameView, router: router});
@@ -73,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	router.add({re: '/signup', handler: signUpController});
 	router.add({re: '/editme', handler: editProfileController});
 	router.add({re: '/game', handler: gameController});
+
+	router.add({re: '/rules', handler: rulesController});
 
 	router.start();
 });
