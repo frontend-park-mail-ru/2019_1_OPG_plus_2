@@ -22,8 +22,7 @@ export default class Router {
 		this.routes[re] = handler;
 	}
 
-	navigate({ path = null, data = {} } = {}) {
-		path = path ? path : '';
+	navigate({ path = '/', data = {} } = {}) {
 		if(this.mode === 'history') {
 		  history.pushState(null, null, path);
 
