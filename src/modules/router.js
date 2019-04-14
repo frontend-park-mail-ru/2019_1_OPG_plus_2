@@ -8,37 +8,42 @@ export default class Router {
         this.mode = mode === 'history' && !!(history.pushState) ? 'history' : 'hash';
         this.root = root;
         window.onpopstate = () => {
-            this.routes[location.pathname].open({root: this.root});
+				this.navigate({path: location.pathname});
         };
     }
 
     back() {
-        history.back();
+      history.back();
     }
 
     add({re = '/', handler} = {}) {
         this.routes[re] = handler;
     }
 
-    navigate({path = '/', data = {}} = {}) {
-        if (this.mode === 'history') {
-            if (window.location.pathname !== path) {
-                history.pushState(null, null, path);
-            }
-            if (!this.routes[path]) {
-                this.routes['/notfound'].open({root: this.root, data: data});
-                return;
-            }
+    navigate({path = '/', data = {}, noHistory = false} = {}) {
+      if (this.mode === 'history') {
+          if (window.location.pathname !== path && !noHistory) {
+              history.pushState(null, null, path);
+          }
+          
+          if (!this.routes[path]) {
+              this.routes['/notfound'].open({root: this.root, data: data});
+              return;
+      		}
 
-            this.routes[path].open({root: this.root, data: data});
-        } else {
-            window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
-        }
-    }
+					if (this.currentRoute) {
+						this.currentRoute.close();
+					}
+					this.currentRoute = this.routes[path];
+					this.currentRoute.open({root: this.root, data: data});
+		} else {
+		  window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
+		}
+	}
 
-    start() {
+  start() {
         if (this.mode === 'history') {
-            this.navigate({path: location.pathname});
+            this.navigate({path: location.pathname, noHistory: true});
         }
     }
 }

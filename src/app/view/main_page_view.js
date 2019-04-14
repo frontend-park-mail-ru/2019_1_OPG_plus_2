@@ -10,25 +10,30 @@ import mainButtonTemplate from '../../blocks/html/body/application/container/con
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import { genericBeforeEnd } from '../../modules/helpers.js';
 
-export default class MainPageView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class MainPageView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 	}
 
 	_createEventListeners() {
-		this._createOnLinkListener();
+		super._createEventListeners();
 	}
-    
-	_render(data) {
-		this._root.innerHTML = '';
+
+	_removeEventListeners() {
+		super._removeEventListeners();
+	}
+
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_main'],
 		}));
-		const containerBlock = this._root.querySelector('.container.container_theme_main');
+	}
 
+	_renderMain() {
+		const containerBlock = this._root.querySelector('.container.container_theme_main');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
 				modifiers: ['head_theme_main'],
@@ -37,30 +42,15 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 				modifiers: ['content_theme_main'],
 			})
 		);
+	}
+
+	_renderMenu(data) {
 		const headBlock = this._root.querySelector('.head.head_theme_main');
 		const contentBlock = this._root.querySelector('.content.content_theme_main');
+
 		genericBeforeEnd(headBlock, 
 			menuTemplate({
 				modifiers: ['menu_theme_main'],
-			})
-		);
-		const menuBlock = this._root.querySelector('.menu.menu_theme_main');
-
-		genericBeforeEnd(menuBlock, 
-			profileIconTemplate({
-				modifiers: [`${data.isAuth ? '' : 'profile_theme_hidden'}`],
-				href: '/',
-				dataset: '/me',
-			}),
-			scoreBoardTemplate({
-				modifiers: [],
-				href: 'score',
-				dataset: '/leaders',
-			}),
-			rulesTemplate({
-				modifiers: [],
-				href: 'rules',
-				dataset: '/rules',
 			})
 		);
 
@@ -80,6 +70,38 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 				dataset: `${data.isAuth ? '/multiplayer' : '/signin'}`,
 			}),
 		);
+
+	}
+
+	_renderHeadMenu(data) {
+		const menuBlock = this._root.querySelector('.menu.menu_theme_main');
+		genericBeforeEnd(menuBlock, 
+			profileIconTemplate({
+				modifiers: [`${data.isAuth ? '' : 'profile_theme_hidden'}`],
+				href: '/',
+				dataset: '/me',
+			}),
+			scoreBoardTemplate({
+				modifiers: [],
+				href: 'score',
+				dataset: '/leaders',
+			}),
+			rulesTemplate({
+				modifiers: [],
+				href: 'rules',
+				dataset: '/rules',
+			})
+		);
+
+	}
+	
+	// TODO вынести innerHTML = '' в базовый класс
+	_render(data) {
+		this._root.innerHTML = '';
+		this._renderContainer();
+		this._renderMain();
+		this._renderMenu(data);
+		this._renderHeadMenu(data);
 	}
 
 	open({ root = {}, data = {} }) {

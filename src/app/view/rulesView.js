@@ -1,27 +1,34 @@
 import {genericBeforeEnd} from '../../modules/helpers.js';
 import {EventEmitterMixin} from '../event_emitter';
-import {NavigateMixin} from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import View from './view';
 import containerTemplate from "../../blocks/html/body/application/container/container.pug";
 import headTemplate from "../../blocks/html/body/application/container/head/head.pug";
 import backArrowTemplate from "../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug";
 import contentTemplate from "../../blocks/html/body/application/container/content/content.pug";
-export default class RulesView extends NavigateMixin(EventEmitterMixin(View)) {
+
+export default class RulesView extends NavigateMixinView(EventEmitterMixin(View)) {
     constructor() {
         super();
     }
 
     _createEventListeners() {
-        this._createOnLinkListener();
+        super._createEventListeners();
     }
 
-    _render(data) {
-        this._root.innerHTML = '';
+    _removeEventListeners() {
+		super._removeEventListeners();
+    }
+
+    _renderContainer() {
         genericBeforeEnd(this._root,
             containerTemplate({
                 modifiers: ['container_theme_main']
             })
         );
+    }
+
+    _renderMain() {
         const containerBlock = document.querySelector('.container.container_theme_main');
         genericBeforeEnd(containerBlock,
             headTemplate({
@@ -31,7 +38,9 @@ export default class RulesView extends NavigateMixin(EventEmitterMixin(View)) {
                 modifiers: ['content_theme_rules'],
             })
         );
+    }
 
+    _renderHead() {
         const headBlock = document.querySelector('.head.head_theme_back-arrow');
         genericBeforeEnd(headBlock,
             backArrowTemplate({
@@ -40,6 +49,13 @@ export default class RulesView extends NavigateMixin(EventEmitterMixin(View)) {
                 dataset: '/',
             }),
         );
+    }
+
+    _render() {
+        this._root.innerHTML = '';
+        this._renderContainer();
+        this._renderMain();
+        this._renderHead();
     }
 
     open({root = {}, data = {}}) {

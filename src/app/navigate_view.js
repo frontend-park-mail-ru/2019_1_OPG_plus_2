@@ -1,4 +1,4 @@
-export const NavigateMixin = (superclass) => class extends superclass {
+export const NavigateMixinView = (superclass) => class extends superclass {
 	constructor(data) {
 		super(data);
 		this.onLinkClick = this.onLinkClick.bind(this);
@@ -9,7 +9,7 @@ export const NavigateMixin = (superclass) => class extends superclass {
 			return;
 		}
 		event.preventDefault();
-		// this._removeOnLinkListener();
+
 		if (event.target.classList.contains('back-arrow')) {
 			this.emit('onBackClick');
 		} else if (event.target.classList.contains('logout')) {
@@ -17,6 +17,14 @@ export const NavigateMixin = (superclass) => class extends superclass {
 		} else {
 			this.emit('onLinkClick', { path: event.target.dataset.href });
 		}
+	}
+
+	_createOnLinkListener() {
+		this._root.addEventListener('click', this.onLinkClick, true);
+	}
+    
+	_removeOnLinkListener() {
+		this._root.removeEventListener('click', this.onLinkClick, true);
 	}
 
 	_createEventListeners() {
@@ -28,12 +36,8 @@ export const NavigateMixin = (superclass) => class extends superclass {
 		super._removeEventListeners();
 		this._removeOnLinkListener();
 	}
-    
-	_createOnLinkListener() {
-		this._root.addEventListener('click', this.onLinkClick, true);
-	}
-    
-	_removeOnLinkListener() {
-		this._root.removeEventListener('click', this.onLinkClick, true);
+
+	close() {
+		this._removeEventListeners();
 	}
 };

@@ -1,4 +1,4 @@
-import {NavigateMixin} from "../navigate";
+import {NavigateMixinView} from "../navigate_view";
 import {EventEmitterMixin} from "../event_emitter";
 import View from "./view";
 import {genericBeforeEnd} from "../../modules/helpers";
@@ -9,7 +9,7 @@ import backArrowTemplate from "../../blocks/html/body/application/container/head
 import titleTemplate from "../../blocks/html/body/application/container/content/title/title.pug";
 
 
-export default class NotFoundView extends NavigateMixin(EventEmitterMixin(View)){
+export default class NotFoundView extends NavigateMixinView(EventEmitterMixin(View)){
     constructor() {
         super();
     }

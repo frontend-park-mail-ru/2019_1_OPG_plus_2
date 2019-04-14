@@ -1,7 +1,8 @@
 import Controller from './controller';
 import { SIGN_IN, EDIT_ME, PROFILE, ROOT } from '../paths';
+import { NavigateMixinController  } from '../navigate_controller';
 
-export default class EditProfileController extends Controller {
+export default class EditProfileController extends NavigateMixinController(Controller) {
 	constructor({
 		model = {},
 		view = {},
@@ -14,7 +15,7 @@ export default class EditProfileController extends Controller {
 		this._model.on('avatarUploaded', () => { this.onNavigate({path: EDIT_ME}); });
 		this._view.on('userUpdate', ({email = '', name = ''}) => { this.userUpdate({email, name}); });
 		this._model.on('userUpdated', () => { this.onNavigate({path: PROFILE}); });
-		this._view.on('passwordUpdate', ({newPass = '', passConf = ''}) => { this.passwordUpdate(newPass, passConf); });
+		this._view.on('passwordUpdate', ({newPass = '', passConf = ''}) => { this.passwordUpdate({newPass, passConf}); });
 		this._view.on('logout', () => { this.logout(); });
 		this._model.on('logouted', () => { this.onNavigate({path: ROOT}); });
 	}

@@ -1,6 +1,7 @@
 import Controller from './controller';
+import { NavigateMixinController  } from '../navigate_controller';
 
-export default class RulesController extends Controller {
+export default class RulesController extends NavigateMixinController(Controller) {
     constructor({
                     model = {},
                     view = {},

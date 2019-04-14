@@ -7,7 +7,7 @@ const devserver = require('./webpack/devserver');
 const sass = require('./webpack/sass');
 const extractCSS = require('./webpack/css.extract');
 const images = require('./webpack/images');
-const jsmodules = require('./webpack/js.modules');
+const babel = require('./webpack/babel');
 
 const PATHS = {
     source: path.join(__dirname, 'src'),
@@ -29,8 +29,6 @@ const common = merge([
     },
     pug(),
     images(),
-    jsmodules()
-
 ]);
 
 const dev = {
@@ -63,6 +61,7 @@ module.exports = function (env) {
         return merge([
             common,
             extractCSS(),
+            babel(),
             prodMode,
         ]);
     }

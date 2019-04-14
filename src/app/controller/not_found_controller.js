@@ -1,6 +1,7 @@
 import Controller from "./controller";
+import {NavigateMixinController} from '../navigate_controller';
 
-export default class NotFoundController extends Controller{
+export default class NotFoundController extends NavigateMixinController(Controller) {
     constructor({
                     model = {},
                     view = {},

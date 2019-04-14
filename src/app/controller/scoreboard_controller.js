@@ -1,6 +1,7 @@
 import Controller from './controller';
+import { NavigateMixinController  } from '../navigate_controller';
 
-export default class ScoreBoardController extends Controller {
+export default class ScoreBoardController extends NavigateMixinController(Controller) {
 	constructor({
 		model = {},
 		view = {},
