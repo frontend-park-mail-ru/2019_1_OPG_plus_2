@@ -1,0 +1,7 @@
+.avatar_theme_game {
+    @media (min-width: $desktop-min-width) {
+        grid-row: 3 / 4;
+        grid-column: 3;
+        border: none;
+    }
+}

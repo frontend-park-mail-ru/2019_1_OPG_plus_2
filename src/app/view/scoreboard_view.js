@@ -67,6 +67,7 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 	}
 
 	_render(data) {
+		this._root.innerHTML = '';
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_scoreboard'],
 		}));

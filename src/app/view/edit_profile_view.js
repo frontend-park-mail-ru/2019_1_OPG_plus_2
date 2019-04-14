@@ -91,6 +91,7 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 	}
 
 	_render(data) {
+		this._root.innerHTML = '';
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_profile'],
 		}));
@@ -98,7 +99,7 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 
 		genericBeforeEnd(containerBlock,
 			headTemplate({
-				modifiers: ['head_theme_profile'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_edit-profile'],
@@ -107,7 +108,7 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				modifiers: ['menu_theme_profile'],
 			}),
 		);
-		const headBlock = document.querySelector('.head.head_theme_profile');
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		const contentBlock = document.querySelector('.content.content_theme_edit-profile');
 		const menuBlock = document.querySelector('.menu.menu_theme_profile');
 
@@ -169,21 +170,21 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 
 		genericBeforeEnd(formsBlock,
 			profileFormTemplate({
-				modifiers: [],
+				modifiers: ['form_theme_profile '],
 				name: 'username',
 				type: 'text',
 				title: 'Name',
 				val: data.username,
 			}),
 			profileFormTemplate({
-				modifiers: [],
+				modifiers: ['form_theme_profile '],
 				name: 'password',
 				type: 'password',
 				title: 'Password',
 				val: '',
 			}),
 			profileFormTemplate({
-				modifiers: [],
+				modifiers: ['form_theme_profile '],
 				name: 'repeat-password',
 				type: 'password',
 				title: 'Repeat password',

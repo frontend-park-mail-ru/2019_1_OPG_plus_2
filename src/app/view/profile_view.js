@@ -27,6 +27,7 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 	}
 
 	_render(data) {
+		this._root.innerHTML = '';
 		genericBeforeEnd(this._root, 
 			containerTemplate({
 				modifiers: ['container_theme_profile']
@@ -36,7 +37,7 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_profile'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_profile'],
@@ -45,7 +46,7 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				modifiers: ['menu_theme_profile'],
 			}),
 		);
-		const headBlock = document.querySelector('.head.head_theme_profile');
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		const contentBlock = document.querySelector('.content.content_theme_profile');
 		const menuBlock = document.querySelector('.menu.menu_theme_profile');
 

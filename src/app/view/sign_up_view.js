@@ -108,6 +108,7 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 	}
 
 	_render(data) {
+		this._root.innerHTML = '';
 		console.log(data);
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: [`container_theme_signup ${data.error ? 'container_theme_error' : ' '}`],
@@ -116,13 +117,13 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_signup'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_signup'],
 			})
 		);
-		const headBlock = document.querySelector('.head.head_theme_signup');
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		const contentBlock = document.querySelector('.content.content_theme_signup');
 
 		genericBeforeEnd(headBlock, 

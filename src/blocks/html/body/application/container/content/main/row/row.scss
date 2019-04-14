@@ -3,8 +3,8 @@
     padding: 13px;
     font-family: "Roboto";
     font-size: 4vh;
-    color: white;
-    background: #b68b8f;
+    color: black;
+    background: white;
     border-radius: 35px 0px 0px 0px;
     width: 100%;
     align-items: center;
@@ -17,7 +17,7 @@
     &__photo {
         overflow: hidden;
         margin: 0 7vh 0 0;
-        width: 8vh;
+        max-width: 5vh;
         border-radius: 300px;
         
         &__icon {
