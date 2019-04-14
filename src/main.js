@@ -2,7 +2,6 @@ import 'normalize.css';
 import './scss/style.scss';
 
 import Router from './modules/router.js';
-// import NotFound from './pages/404.js';
 
 import MainPageModel from './app/model/main_page_model';
 import MainPageView from './app/view/main_page_view';
@@ -32,8 +31,9 @@ import GameModel from './app/model/game_model';
 import GameView from './app/view/game_view';
 import GameController from './app/controller/game_controller';
 import RulesView from "./app/view/rulesView";
-import RulesController from "./app/controller/rulesController";
-import RulesModel from "./app/model/rulesModel";
+import RulesController from "./app/controller/rules_controller";
+import NotFoundView from "./app/view/not_found_view";
+import NotFoundController from "./app/controller/not_found_controller";
 
 document.addEventListener('DOMContentLoaded', function() {
 	const router = new Router({
@@ -65,13 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	const editProfileView = new EditProfileView();
 	const editProfileController = new EditProfileController({model: editProfileModel, view: editProfileView, router: router});
 
-	const rulesModel = new RulesModel();
+	const rulesModel = {};
 	const rulesView = new RulesView();
 	const rulesController = new RulesController({model: rulesModel, view: rulesView, router: router});
 
 	const gameModel = new GameModel();
 	const gameView = new GameView();
 	const gameController = new GameController({model: gameModel, view: gameView, router: router});
+
+	const nfModel = {};
+	const nfView = new NotFoundView();
+	const nfController = new NotFoundController({model: nfModel, view: nfView, router: router});
 
 	router.add({handler: mainController});
 	router.add({re: '/leaders', handler: scoreController});
@@ -82,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	router.add({re: '/game', handler: gameController});
 
 	router.add({re: '/rules', handler: rulesController});
+	router.add({re: '/notfound', handler: nfController});
 
 	router.start();
 });

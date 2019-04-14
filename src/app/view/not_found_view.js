@@ -1,12 +1,15 @@
-import {genericBeforeEnd} from '../../modules/helpers.js';
-import {EventEmitterMixin} from '../event_emitter';
-import {NavigateMixin} from '../navigate';
-import View from './view';
+import {NavigateMixin} from "../navigate";
+import {EventEmitterMixin} from "../event_emitter";
+import View from "./view";
+import {genericBeforeEnd} from "../../modules/helpers";
 import containerTemplate from "../../blocks/html/body/application/container/container.pug";
 import headTemplate from "../../blocks/html/body/application/container/head/head.pug";
-import backArrowTemplate from "../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug";
 import contentTemplate from "../../blocks/html/body/application/container/content/content.pug";
-export default class RulesView extends NavigateMixin(EventEmitterMixin(View)) {
+import backArrowTemplate from "../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug";
+import titleTemplate from "../../blocks/html/body/application/container/content/title/title.pug";
+
+
+export default class NotFoundView extends NavigateMixin(EventEmitterMixin(View)){
     constructor() {
         super();
     }
@@ -22,22 +25,21 @@ export default class RulesView extends NavigateMixin(EventEmitterMixin(View)) {
                 modifiers: ['container_theme_main']
             })
         );
+        //////////////////////////////////////////////////////////////////////////////////////
+
+
         const containerBlock = document.querySelector('.container.container_theme_main');
         genericBeforeEnd(containerBlock,
-            headTemplate({
-                modifiers: ['head_theme_back-arrow'],
-            }),
             contentTemplate({
-                modifiers: ['content_theme_rules'],
+                modifiers: ['content_theme_main'],
             })
         );
+        const contentBlock = document.querySelector('.content.content_theme_main');
 
-        const headBlock = document.querySelector('.head.head_theme_back-arrow');
-        genericBeforeEnd(headBlock,
-            backArrowTemplate({
-                modifiers: [],
-                hr: '/',
-                dataset: '/',
+        genericBeforeEnd(contentBlock,
+            titleTemplate({
+                title: '404 Page not found',
+                modifiers: ['title_theme_main'],
             }),
         );
     }
