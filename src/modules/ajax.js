@@ -55,6 +55,21 @@ export default class AjaxModule {
 		});
 	}
 
+	static doFormPut({
+		path = '/',
+		body = {}
+	} = {}) {
+		return fetch(path, {
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				'Content-type' : 'multipart/form-data',
+			},
+			credentials: 'include',
+			body: body,
+		});
+	}
+
 	/**
      * Performs asynchronous DELETE request with body
      * @param Object with path and body of the request
