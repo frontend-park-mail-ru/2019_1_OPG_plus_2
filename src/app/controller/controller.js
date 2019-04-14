@@ -1,32 +1,24 @@
 export default class Controller {
-	constructor({
-		model = {},
-		view = {},
-		router = {},
-	} = {}) {
-		this._model = model;
-		this._view = view;
-		this._router = router;
-		this.onNavigate = this.onNavigate.bind(this);
-		this._view.on('onLinkClick', ({ path = '' }) => { this.onNavigate({ path: path }); });
-		this._view.on('onBackClick', () => { this.back(); });
-	}
+    constructor({
+                    model = {},
+                    view = {},
+                    router = {},
+                } = {}) {
+        this._model = model;
+        this._view = view;
+        this._router = router;
+        this.onNavigate = this.onNavigate.bind(this);
+    }
 
-	onNavigate({ path = null, data = {} } = {}) {
-		if(path !== null && typeof(path) === 'string') {
-			this._router.navigate({ path: path, data: data });
-		}
-	}
+    render({root = {}, data = {}} = {}) {
+        this._view.open({root, data});
+    }
 
-	back() {
-		this._router.back();
-	}
+    open({root = {}, data = {}} = {}) {
+        this._model.getData({root, data});
+    }
 
-	render({root = {}, data = {}} = {}) {
-		this._view.open({ root, data });
-	}
-
-	open({ root = {}, data = {} } = {}) {
-		this._model.getData({ root, data });
-	}
+    close() {
+        this._view.close();
+    }
 }

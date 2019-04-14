@@ -1,0 +1,7 @@
+.container_theme_game {
+    @media (min-width: $desktop-min-width) {
+        grid-template: repeat(12, 1fr) / repeat(12, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+    }
+}

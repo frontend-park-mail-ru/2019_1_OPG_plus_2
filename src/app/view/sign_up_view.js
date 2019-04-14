@@ -12,10 +12,10 @@ import errorTemplate from '../../blocks/html/body/application/container/content/
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { validEmail, validLogin, validPassword } from '../../modules/utils.js';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import View from './view';
 
-export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -30,54 +30,6 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 		const email = formsBlock.elements[1].value;
 		const password = formsBlock.elements[2].value;
 		const password_repeat = formsBlock.elements[3].value;
-
-		// if (!validEmail(email) || !email) {
-		// 	this._root.innerHTML = '';
-		// 	this._renderSignUp({
-		// 		error: 'Invalid Email',
-		// 		modifier: 'container_theme_error',
-		// 	}, {
-		// 		name: username,
-		// 		email,
-		// 	});
-		// 	return;
-		// }
-
-		// if (!validLogin(username) || !username) {
-		// 	this._root.innerHTML = '';
-		// 	this._renderSignUp({
-		// 		error: 'Invalid Name',
-		// 		modifier: 'container_theme_error',
-		// 	}, {
-		// 		username: username,
-		// 		email,
-		// 	});
-		// 	return;
-		// } 
-
-		// if (password !== password_repeat || !password || !password_repeat) {
-		// 	this._root.innerHTML = '';
-		// 	this._renderSignUp({
-		// 		error: 'Passwords doesn\' not match',
-		// 		modifier: 'container_theme_error',
-		// 	},{
-		// 		username: username,
-		// 		email,
-		// 	});
-		// 	return;
-		// }
-
-		// if (!validPassword(password)) {
-		// 	this._root.innerHTML = '';
-		// 	this._renderSignUp({
-		// 		error: 'Invalid password, must be more than 5 symbols',
-		// 		modifier: 'container_theme_error',
-		// 	},{
-		// 		username,
-		// 		email,
-		// 	});
-		// 	return;
-		// }
 
 		this.emit('signUpSubmit', {
 			root: this._root,
@@ -99,32 +51,35 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 	}
 
 	_createEventListeners() {
+		super._createEventListeners();
 		this._createSubmitListener();
-		this._createOnLinkListener();
 	}
 
 	_removeEventListeners() {
-		this._removeOnLinkListener();
+		super._removeEventListeners();
+		this._removeSubmitListener();
 	}
 
-	_render(data) {
-		console.log(data);
+	_renderContainer(data) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: [`container_theme_signup ${data.error ? 'container_theme_error' : ' '}`],
 		}));
-		const containerBlock = document.querySelector('.container.container_theme_signup');
+	}
 
+	_renderMain() {
+		const containerBlock = document.querySelector('.container.container_theme_signup');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_signup'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_signup'],
 			})
 		);
-		const headBlock = document.querySelector('.head.head_theme_signup');
-		const contentBlock = document.querySelector('.content.content_theme_signup');
+	}
 
+	_renderBack() {
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		genericBeforeEnd(headBlock, 
 			backArrowTemplate({
 				modifiers: [],
@@ -132,7 +87,10 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 				dataset: '/',
 			}),
 		);
+	}
 
+	_renderContent() {
+		const contentBlock = document.querySelector('.content.content_theme_signup');
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
 				title: 'SING UP',
@@ -147,9 +105,10 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 				modifiers: [],
 			}),
 		);
-		const formsBlock = document.querySelector('.forms');
-		const buttonsBlock = document.querySelector('.buttons');
+	}
 
+	_renderForms(data) {
+		const formsBlock = document.querySelector('.forms');
 		genericBeforeEnd(formsBlock,
 			errorTemplate({
 				modifiers: [],
@@ -186,7 +145,10 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 				req: true,
 			}),
 		);
+	}
 
+	_renderButtons() {
+		const buttonsBlock = document.querySelector('.buttons');
 		genericBeforeEnd(buttonsBlock, 
 			sumbitTemplate({
 				value: 'SIGN UP',
@@ -194,6 +156,16 @@ export default class SignUpView extends NavigateMixin(EventEmitterMixin(View)) {
 				modifiers: [],
 			}),
 		);
+	}
+
+	_render(data) {
+		this._root.innerHTML = '';
+		this._renderContainer(data);
+		this._renderMain();
+		this._renderBack();
+		this._renderContent();
+		this._renderForms(data);
+		this._renderButtons();
 	}
 
 	open({ root = {}, data = {} }) {

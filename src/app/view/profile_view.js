@@ -14,29 +14,36 @@ import settingsIconTemplate from '../../blocks/html/body/application/container/h
 
 import {genericBeforeEnd} from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import View from './view';
 
-export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class ProfileView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 	}
 
 	_createEventListeners() {
-		this._createOnLinkListener();
+		super._createEventListeners();
 	}
 
-	_render(data) {
+	_removeEventListeners() {
+		super._removeEventListeners();
+	}
+
+	_renderContainer() {
 		genericBeforeEnd(this._root, 
 			containerTemplate({
 				modifiers: ['container_theme_profile']
 			})
 		);
+	}
+
+	_renderMain() {
 		const containerBlock = document.querySelector('.container.container_theme_profile');
 
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_profile'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_profile'],
@@ -45,10 +52,10 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				modifiers: ['menu_theme_profile'],
 			}),
 		);
-		const headBlock = document.querySelector('.head.head_theme_profile');
-		const contentBlock = document.querySelector('.content.content_theme_profile');
-		const menuBlock = document.querySelector('.menu.menu_theme_profile');
+	}
 
+	_renderBack() {
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		genericBeforeEnd(headBlock, 
 			backArrowTemplate({
 				modifiers: [],
@@ -56,7 +63,10 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				dataset: '/',
 			}),
 		);
+	}
 
+	_renderProfileCard() {
+		const contentBlock = document.querySelector('.content.content_theme_profile');
 		genericBeforeEnd(contentBlock, 
 			profileCardTemplate({
 				modifiers: ['profile-card_theme_main'],
@@ -72,8 +82,10 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				modifiers: [],
 			}),
 		);
+	}
+
+	_renderProfileHead(data) {
 		const profileHeadBlock = document.querySelector('.profile-head.profile-card_theme_main');
-		const profileDataBlock = document.querySelector('.profile-data');
 		genericBeforeEnd(profileHeadBlock, 
 			avatarTemplate({
 				modifiers: [],
@@ -84,7 +96,10 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				modifiers: [],
 			}),
 		);
-        
+	}
+
+	_renderProfileData(data) {
+		const profileDataBlock = document.querySelector('.profile-data');
 		genericBeforeEnd(profileDataBlock, 
 			dataItemTemplate({
 				title: 'Score',
@@ -107,6 +122,10 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				modifiers: ['data-item_type_lose'],
 			}),
 		);
+	}
+
+	_renderMenu() {
+		const menuBlock = document.querySelector('.menu.menu_theme_profile');
 		genericBeforeEnd(menuBlock, 
 			logoutIconTemplate({
 				modifiers: [],
@@ -119,6 +138,17 @@ export default class ProfileView extends NavigateMixin(EventEmitterMixin(View)) 
 				modifiers: [],
 			})
 		);
+	}
+
+	_render(data) {
+		this._root.innerHTML = '';
+		this._renderContainer();
+		this._renderMain();
+		this._renderBack();
+		this._renderProfileCard();
+		this._renderProfileHead(data);
+		this._renderProfileData(data);
+		this._renderMenu();
 	}
 
 	open({ root = {}, data = {} }) {

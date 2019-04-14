@@ -14,9 +14,12 @@ export default class View {
 
 	open({ root = {}, data = {} }) {
 		this._root = root;
-		this._root.innerHTML = '';
+		// this._root.innerHTML = '';
 		this._render(data);
 		this._removeEventListeners();
 		this._createEventListeners();
+	}
+
+	close() {
 	}
 }

@@ -12,10 +12,10 @@ import errorTemplate from '../../blocks/html/body/application/container/content/
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import View from './view';
 
-export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class SignInView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -41,31 +41,35 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 	}
 
 	_createEventListeners() {
+		super._createEventListeners();
 		this._createSubmitListener();
-		this._createOnLinkListener();
 	}
 
 	_removeEventListeners() {
+		super._removeEventListeners();
 		this._removeSubmitListener();
 	}
 
-	_render(data) {
-		console.log(data.error);
+	_renderContainer(data) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
 		}));
+	}
+
+	_renderMain() {
 		const containerBlock = document.querySelector('.container.container_theme_signin');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_signin'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_signin'],
 			})
 		);
-		const headBlock = document.querySelector('.head.head_theme_signin');
-		const contentBlock = document.querySelector('.content.content_theme_signin');
+	}
 
+	_renderBack() {
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		genericBeforeEnd(headBlock, 
 			backArrowTemplate({
 				modifiers: [],
@@ -73,6 +77,10 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 				dataset: '/',
 			}),
 		);
+	}
+
+	_renderContent() {
+		const contentBlock = document.querySelector('.content.content_theme_signin');
 
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
@@ -87,8 +95,10 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 				modifiers: [],
 			}),
 		);
+	}
+
+	_renderForms(data) {
 		const formsBlock = document.querySelector('.forms');
-		const buttonsBlock = document.querySelector('.buttons');
 
 		genericBeforeEnd(formsBlock, 
 			errorTemplate({
@@ -111,7 +121,11 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 				req: true,
 			}),
 		);
-		
+
+	}
+
+	_renderButtons() {
+		const buttonsBlock = document.querySelector('.buttons');
 		genericBeforeEnd(buttonsBlock, 
 			sumbitTemplate({
 				value: 'SIGN IN',
@@ -126,6 +140,17 @@ export default class SignInView extends NavigateMixin(EventEmitterMixin(View)) {
 				modifiers: ['button_type_secondary'],
 			}),
 		);
+
+	}
+
+	_render(data) {
+		this._root.innerHTML = '';
+		this._renderContainer(data);
+		this._renderMain();
+		this._renderBack();
+		this._renderContent();
+		this._renderForms(data);
+		this._renderButtons();
 	}
 
 	open({ root = {}, data = {} }) {

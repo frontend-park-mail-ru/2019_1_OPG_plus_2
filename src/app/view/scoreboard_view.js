@@ -9,13 +9,12 @@ import pagesTemplate from '../../blocks/html/body/application/container/content/
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import View from './view';
 
-export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
-		// this.onClick = this.onClick.bind(this);
 	}
 
 	// onClick(event) {
@@ -63,16 +62,21 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 	// }
 
 	_createEventListeners() {
-		this._createOnLinkListener();
+		super._createEventListeners();
 	}
 
-	_render(data) {
+	_removeEventListeners() {
+		super._removeEventListeners();
+	}
+
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_scoreboard'],
 		}));
+	}
+
+	_renderMain() {
 		const containerBlock = document.querySelector('.container.container_theme_scoreboard');
-
-
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
 				modifiers: ['head_theme_back-arrow'],
@@ -81,9 +85,10 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 				modifiers: ['content_theme_scoreboard'],
 			})
 		);
-		const headBlock = document.querySelector('.head.head_theme_back-arrow');
-		const contentBlock = document.querySelector('.content.content_theme_scoreboard');
+	}
 
+	_renderBack() {
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		genericBeforeEnd(headBlock, 
 			backArrowTemplate({
 				modifiers: [],
@@ -91,6 +96,10 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 				dataset: '/',
 			}),
 		);
+	}
+
+	_renderContent() {
+		const contentBlock = document.querySelector('.content.content_theme_scoreboard');
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
 				title: 'SCOREBOARD',
@@ -104,6 +113,9 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 			// 	page_num: data.page,
 			// })
 		);
+	}
+
+	_renderUsers(data) {
 		const mainBlock = document.querySelector('.main.main_theme_scoreboard');
 
 		genericBeforeEnd(mainBlock, 
@@ -113,6 +125,15 @@ export default class ScoreBoardView extends NavigateMixin(EventEmitterMixin(View
 				host: HOST,
 			}),
 		);
+	}
+
+	_render(data) {
+		this._root.innerHTML = '';
+		this._renderContainer();
+		this._renderMain();
+		this._renderBack();
+		this._renderContent();
+		this._renderUsers(data);
 	}
 
 	open({ root = {}, data = {} }) {

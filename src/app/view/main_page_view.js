@@ -6,31 +6,34 @@ import scoreBoardTemplate from '../../blocks/html/body/application/container/hea
 import rulesTemplate from '../../blocks/html/body/application/container/head/menu/rules/rules.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
-import mainTemplate from '../../blocks/html/body/application/container/content/main/main.pug';
-import playTemplate from '../../blocks/html/body/application/container/content/main/play/play.pug';
-import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
-import linkTemplate from '../../blocks/html/body/application/container/content/buttons/link/link.pug';
+import mainButtonTemplate from '../../blocks/html/body/application/container/content/main-button/main-button.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import { genericBeforeEnd } from '../../modules/helpers.js';
 
-export default class MainPageView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class MainPageView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 	}
 
 	_createEventListeners() {
-		this._createOnLinkListener();
+		super._createEventListeners();
 	}
-    
-	_render(data) {
+
+	_removeEventListeners() {
+		super._removeEventListeners();
+	}
+
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_main'],
 		}));
-		const containerBlock = this._root.querySelector('.container.container_theme_main');
+	}
 
+	_renderMain() {
+		const containerBlock = this._root.querySelector('.container.container_theme_main');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
 				modifiers: ['head_theme_main'],
@@ -39,15 +42,39 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 				modifiers: ['content_theme_main'],
 			})
 		);
+	}
+
+	_renderMenu(data) {
 		const headBlock = this._root.querySelector('.head.head_theme_main');
 		const contentBlock = this._root.querySelector('.content.content_theme_main');
+
 		genericBeforeEnd(headBlock, 
 			menuTemplate({
 				modifiers: ['menu_theme_main'],
 			})
 		);
-		const menuBlock = this._root.querySelector('.menu.menu_theme_main');
 
+		genericBeforeEnd(contentBlock, 
+			titleTemplate({
+				title: 'colors',
+				modifiers: ['title_theme_main'],
+			}),
+			mainButtonTemplate({
+				hr: '/game',
+				modifier: ['main-button_theme_play'],
+				dataset: '/game',
+			}),
+			mainButtonTemplate({
+				hr: `${data.isAuth ? '/multiplayer' : '/signin'}`,
+				modifier: [`${data.isAuth ? 'main-button_theme_multiplayer' : 'main-button_theme_signin'}`],
+				dataset: `${data.isAuth ? '/multiplayer' : '/signin'}`,
+			}),
+		);
+
+	}
+
+	_renderHeadMenu(data) {
+		const menuBlock = this._root.querySelector('.menu.menu_theme_main');
 		genericBeforeEnd(menuBlock, 
 			profileIconTemplate({
 				modifiers: [`${data.isAuth ? '' : 'profile_theme_hidden'}`],
@@ -61,54 +88,20 @@ export default class MainPageView extends NavigateMixin(EventEmitterMixin(View))
 			}),
 			rulesTemplate({
 				modifiers: [],
-				href: '/',
+				href: 'rules',
 				dataset: '/rules',
 			})
 		);
 
-		genericBeforeEnd(contentBlock, 
-			titleTemplate({
-				title: 'colors',
-				modifiers: ['title_theme_main'],
-			}),
-			mainTemplate({
-				modifiers: ['main_theme_index'],
-			}),
-			buttonsTemplate({
-				modifiers: ['buttons_theme_main'],
-			})
-		);
-		const mainBlock = this._root.querySelector('.main.main_theme_index');
-		const buttonsBlock = this._root.querySelector('.buttons.buttons_theme_main');
-
-		genericBeforeEnd(mainBlock, 
-			playTemplate({
-				href: 'game',
-				dataset: '/game',
-				modifiers: [],
-			})
-		);
-      
-		genericBeforeEnd(buttonsBlock, 
-			linkTemplate({
-				href: 'multiplayer',
-				title: 'MULTIPLAYER',
-				dataset: 'multiplayer',
-				modifiers: [],
-			}),
-			linkTemplate({
-				href: 'signin',
-				title: 'SING IN',
-				dataset: '/signin',
-				modifiers: [`${data.isAuth ? 'link_theme_hidden' : ''}`],
-			}),
-			linkTemplate({
-				href: 'signup',
-				title: 'SIGN UP',
-				dataset: '/signup',
-				modifiers: [`${data.isAuth ? 'link_theme_hidden' : ''}`],
-			}),
-		);
+	}
+	
+	// TODO вынести innerHTML = '' в базовый класс
+	_render(data) {
+		this._root.innerHTML = '';
+		this._renderContainer();
+		this._renderMain();
+		this._renderMenu(data);
+		this._renderHeadMenu(data);
 	}
 
 	open({ root = {}, data = {} }) {

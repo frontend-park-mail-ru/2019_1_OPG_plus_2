@@ -25,9 +25,9 @@ import View from './view';
 import User from '../../modules/user.js';
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 
-export default class EditProfileView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class EditProfileView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -35,15 +35,15 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 	}
 
 	_createEventListeners() {
+		super._createEventListeners();
 		this._createLoadListener();
 		this._createSubmitListener();
-		this._createOnLinkListener();
 	}
 
 	_removeEventListeners() {
+		super._removeEventListeners();
 		this._removeSubmitListener();
 		this._removeLoadListener();
-		this._removeOnLinkListener();
 	}
 
 	onLoadEvent() {
@@ -90,15 +90,18 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 		photoBlock.removeEventListener('change', this.onLoadEvent, true);
 	}
 
-	_render(data) {
+
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_profile'],
 		}));
-		const containerBlock = document.querySelector('.container.container_theme_profile');
+	}
 
+	_renderMain() {
+		const containerBlock = document.querySelector('.container.container_theme_profile');
 		genericBeforeEnd(containerBlock,
 			headTemplate({
-				modifiers: ['head_theme_profile'],
+				modifiers: ['head_theme_back-arrow'],
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_edit-profile'],
@@ -107,10 +110,10 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				modifiers: ['menu_theme_profile'],
 			}),
 		);
-		const headBlock = document.querySelector('.head.head_theme_profile');
-		const contentBlock = document.querySelector('.content.content_theme_edit-profile');
-		const menuBlock = document.querySelector('.menu.menu_theme_profile');
+	}
 
+	_renderBack() {
+		const headBlock = document.querySelector('.head.head_theme_back-arrow');
 		genericBeforeEnd(headBlock,
 			backArrowTemplate({
 				modifiers: [],
@@ -118,7 +121,10 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				dataset: '/',
 			}),
 		);
+	}
 
+	_renderContent() {
+		const contentBlock = document.querySelector('.content.content_theme_edit-profile');
 		genericBeforeEnd(contentBlock,
 			profileCardTemplate({
 				modifiers: ['profile-card_theme_edit'],
@@ -127,22 +133,28 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				modifiers: ['buttons_theme_edit-profile'],
 			}),
 		);
-		const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
-		const buttonsBlock = document.querySelector('.buttons.buttons_theme_edit-profile');
+	}
 
+	_renderProfileCard() {
+		const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
 		genericBeforeEnd(profileCardBlock,
 			profileHeadTemplate({
 				modifiers: [],
 			}),
 		);
-		const profileHeadBlock = document.querySelector('.profile-head');
+	}
 
+	_renderProfileHead() {
+		const profileHeadBlock = document.querySelector('.profile-head');
 		genericBeforeEnd(profileHeadBlock,
 			settingsIconTemplate({
 				modifiers: [],
 			})
 		);
+	}
 
+	_renderProfileData() {
+		const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
 		genericBeforeEnd(profileCardBlock,
 			photoEditTemplate({
 				modifiers: [],
@@ -153,6 +165,9 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				name: 'profile-edit',
 			}),
 		);
+	}
+
+	_renderProfileForms(data) {
 		const photoEditBlock = document.querySelector('.photo-edit');
 		const formsBlock = document.querySelector('.profile-card_theme_forms');
 
@@ -169,28 +184,31 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 
 		genericBeforeEnd(formsBlock,
 			profileFormTemplate({
-				modifiers: [],
+				modifiers: ['form_theme_profile '],
 				name: 'username',
 				type: 'text',
 				title: 'Name',
 				val: data.username,
 			}),
 			profileFormTemplate({
-				modifiers: [],
+				modifiers: ['form_theme_profile '],
 				name: 'password',
 				type: 'password',
 				title: 'Password',
 				val: '',
 			}),
 			profileFormTemplate({
-				modifiers: [],
+				modifiers: ['form_theme_profile '],
 				name: 'repeat-password',
 				type: 'password',
 				title: 'Repeat password',
 				val: '',
 			}),
 		);
+	}
 
+	_renderProfileButtons() {
+		const buttonsBlock = document.querySelector('.buttons.buttons_theme_edit-profile');
 		genericBeforeEnd(buttonsBlock,
 			submitTemplate({
 				el: buttonsBlock,
@@ -199,7 +217,10 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				modifiers: ['submit_theme_edit-profile'],
 			}),
 		);
+	}
 
+	_renderMenu() {
+		const menuBlock = document.querySelector('.menu.menu_theme_profile');
 		genericBeforeEnd(menuBlock,
 			logoutIconTemplate({
 				modifiers: [],
@@ -207,6 +228,19 @@ export default class EditProfileView extends NavigateMixin(EventEmitterMixin(Vie
 				dataset: '/logout',
 			}),
 		);
+	}
+
+	_render(data) {
+		this._root.innerHTML = '';
+		this._renderContainer();
+		this._renderMain();
+		this._renderBack();
+		this._renderContent();
+		this._renderProfileCard();
+		this._renderProfileData();
+		this._renderProfileForms(data);
+		this._renderProfileButtons();
+		this._renderMenu();
 	}
 
 	open({ root = {}, data = {} }) {

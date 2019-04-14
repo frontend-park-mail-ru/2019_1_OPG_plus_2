@@ -22,17 +22,19 @@ export default class Router {
 		this.routes[re] = handler;
 	}
 
-	navigate({ path = null, data = {} } = {}) {
-		path = path ? path : '';
+	navigate({ path = '/', data = {} } = {}) {
 		if(this.mode === 'history') {
 		  history.pushState(null, null, path);
 
 		  if (!this.routes[path]) {
 			  return;
-			// this.routes['/not_found'].open(this.root);
 		  }
 
-		  this.routes[path].open({root: this.root, data: data});
+			if (this.currentRoute) {
+				this.currentRoute.close();
+			}
+			this.currentRoute = this.routes[path];
+			this.currentRoute.open({root: this.root, data: data});
 		} else {
 		  window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
 		}
