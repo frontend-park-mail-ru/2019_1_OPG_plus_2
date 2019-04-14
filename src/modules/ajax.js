@@ -55,16 +55,13 @@ export default class AjaxModule {
 		});
 	}
 
-	static doFormPut({
+	static doFormPost({
 		path = '/',
 		body = {}
 	} = {}) {
 		return fetch(path, {
 			method: 'POST',
 			mode: 'cors',
-			headers: {
-				'Content-type' : 'multipart/form-data',
-			},
 			credentials: 'include',
 			body: body,
 		});

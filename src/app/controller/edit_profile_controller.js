@@ -15,7 +15,7 @@ export default class EditProfileController extends NavigateMixinController(Contr
 		this._model.on('avatarUploaded', () => { this.onNavigate({path: EDIT_ME}); });
 		this._view.on('userUpdate', ({email = '', name = ''}) => { this.userUpdate({email, name}); });
 		this._model.on('userUpdated', () => { this.onNavigate({path: PROFILE}); });
-		this._view.on('passwordUpdate', ({newPass = '', passConf = ''}) => { this.passwordUpdate(newPass, passConf); });
+		this._view.on('passwordUpdate', ({newPass = '', passConf = ''}) => { this.passwordUpdate({newPass, passConf}); });
 		this._view.on('logout', () => { this.logout(); });
 		this._model.on('logouted', () => { this.onNavigate({path: ROOT}); });
 	}

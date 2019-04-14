@@ -201,7 +201,7 @@ export default class API {
 		avatar = {},
 	} = {}) {
 		return new Promise((resolve, reject) => {
-			AjaxModule.doFormPut({
+			AjaxModule.doFormPost({
 				path: `${HOST}/api/avatar`,
 				body: avatar,
 			})
