@@ -1,10 +1,5 @@
 import Model from './model';
 import { EventEmitterMixin } from '../event_emitter';
-import API from '../../modules/API';
-import User from '../../modules/user.js';
-
-import Game from "../game";
-import { ClientPlayer } from "../player";
 
 // TODO сделать без перерендринга страницы при одном ходе, для этого надо разсепарэйтить компоненты странички
 // TODO сделать запрещенные шаги

@@ -28,7 +28,6 @@ export default class Router {
 
 		  if (!this.routes[path]) {
 			  return;
-			// this.routes['/not_found'].open(this.root);
 		  }
 
 		  this.routes[path].open({root: this.root, data: data});
