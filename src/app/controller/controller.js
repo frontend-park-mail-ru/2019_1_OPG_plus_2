@@ -8,22 +8,6 @@ export default class Controller {
         this._view = view;
         this._router = router;
         this.onNavigate = this.onNavigate.bind(this);
-        this._view.on('onLinkClick', ({path = ''}) => {
-            this.onNavigate({path: path});
-        });
-        this._view.on('onBackClick', () => {
-            this.back();
-        });
-    }
-
-    onNavigate({path = null, data = {}} = {}) {
-        if (path !== null && typeof (path) === 'string') {
-            this._router.navigate({path: path, data: data});
-        }
-    }
-
-    back() {
-        this._router.back();
     }
 
     render({root = {}, data = {}} = {}) {
@@ -32,5 +16,9 @@ export default class Controller {
 
     open({root = {}, data = {}} = {}) {
         this._model.getData({root, data});
+    }
+
+    close() {
+        this._view.close();
     }
 }

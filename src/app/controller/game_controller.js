@@ -1,7 +1,8 @@
 import Controller from './controller';
 import { ROOT } from '../paths';
+import { NavigateMixinController  } from '../navigate_controller';
 
-export default class GameController extends Controller {
+export default class GameController extends NavigateMixinController(Controller) {
 	constructor({
 		model = {},
 		view = {},

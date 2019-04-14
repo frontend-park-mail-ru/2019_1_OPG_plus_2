@@ -10,10 +10,10 @@ import blockTemplate from '../../blocks/html/body/application/container/content/
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
-import { NavigateMixin } from '../navigate';
+import { NavigateMixinView } from '../navigate_view';
 import { genericBeforeEnd } from '../../modules/helpers.js';
 
-export default class GameView extends NavigateMixin(EventEmitterMixin(View)) {
+export default class GameView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		this.down = this.down.bind(this);
@@ -56,7 +56,6 @@ export default class GameView extends NavigateMixin(EventEmitterMixin(View)) {
 		}
 	}
 
-
 	_createTurnListener() {
 		const filedBlock = document.querySelector('.field');
 		filedBlock.removeEventListener('mousedown', this.down);
@@ -64,88 +63,116 @@ export default class GameView extends NavigateMixin(EventEmitterMixin(View)) {
 		filedBlock.addEventListener('mousedown', this.down);
 		filedBlock.addEventListener('mouseup', this.up, true);
 	}
-    
+
+	_createEventListeners() {
+		// super._createEventListeners();
+		this._createTurnListener();
+	}
+
+	_removeEventListeners() {
+		// super._removeEventListener();
+	}
+
+	_renderContainer() {
+		genericBeforeEnd(this._root, containerTemplate({
+			modifiers: ['container_theme_game'],
+		}));
+	}
+
+	_renderMain() {
+		const containerBlock = this._root.querySelector('.container.container_theme_game');
+		genericBeforeEnd(containerBlock, 
+			headTemplate({
+				modifiers: ['head_theme_game'],
+			}),
+			contentTemplate({
+				modifiers: ['content_theme_game'],
+			}),
+			playerTemplate({
+				modifiers: ['player_theme_player1'],
+			}),
+			playerTemplate({
+				modifiers: ['player_theme_player2'],
+			}),
+		);
+	}
+
+	_renderHead(data) {
+		const headBlock = this._root.querySelector('.head.head_theme_game');
+		// чтобы поменять сторону просто поменять классы
+		genericBeforeEnd(headBlock, 
+			sideTemplate({
+				modifiers: [`${data.whoseTurn === 'Player1' ? 'side_theme_left-active' : 'side_theme_left-passive'}`],
+			}),
+			sideTemplate({
+				modifiers: [`${data.whoseTurn === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
+			})
+		);
+	}
+
+	_renderLeftPlayer(data) {
+		const playerLeftBlock = this._root.querySelector('.player.player_theme_player1');
+		genericBeforeEnd(playerLeftBlock, 
+			avatarTemplate({
+				modifiers: ['avatar_theme_game'],
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
+			}),
+			nicknameTemplate({
+				modifiers: ['nickname_theme_left'],
+				nickname: 'Player1', // TODO передача никнейма пользователя
+			}),
+		);
+	}
+
+	_renderRightPlayer(data) {
+		const playerRightBlock = this._root.querySelector('.player.player_theme_player2');
+		genericBeforeEnd(playerRightBlock, 
+			avatarTemplate({
+				modifiers: ['avatar_theme_game'],
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
+			}),
+			nicknameTemplate({
+				modifiers: ['nickname_theme_right'],
+				nickname: 'Player2', // TODO передача никнейма пользователя
+			}),
+		);
+	}
+
+	_renderContent() {
+		const contentBlock = this._root.querySelector('.content.content_theme_game');
+		genericBeforeEnd(contentBlock, 
+			fieldTemplate({
+				modifiers: [],
+			})
+		);
+	}
+
+	_renderField(data) {
+		const fieldBlock = this._root.querySelector('.field');
+		const blocks = []; // TODO а вообще резонно рендерить 25 блоков???
+
+		[...Array(25)].forEach((_, i) => {
+			if (data.close.indexOf( i ) != -1) {
+				blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
+			} else {
+				blocks.push(blockTemplate({ modifiers: [''], num: i }));
+			}
+		});
+		genericBeforeEnd(fieldBlock, ...blocks);
+	}
+	
+	// TODO переделать else и вообще подумать насчет перендеринга
 	_render(data) {
-		// debugger;
 		if (!data.isStart) {
 			this._root.innerHTML = '';
-			genericBeforeEnd(this._root, containerTemplate({
-				modifiers: ['container_theme_game'],
-			}));
-			const containerBlock = this._root.querySelector('.container.container_theme_game');
-
-			genericBeforeEnd(containerBlock, 
-				headTemplate({
-					modifiers: ['head_theme_game'],
-				}),
-				contentTemplate({
-					modifiers: ['content_theme_game'],
-				}),
-				playerTemplate({
-					modifiers: ['player_theme_player1'],
-				}),
-				playerTemplate({
-					modifiers: ['player_theme_player2'],
-				}),
-			);
-			const headBlock = this._root.querySelector('.head.head_theme_game');
-			const playerLeftBlock = this._root.querySelector('.player.player_theme_player1');
-			const playerRightBlock = this._root.querySelector('.player.player_theme_player2');
-			const contentBlock = this._root.querySelector('.content.content_theme_game');
-
-			// чтобы поменять сторону просто поменять классы
-			genericBeforeEnd(headBlock, 
-				sideTemplate({
-					modifiers: [`${data.whoseTurn === 'Player1' ? 'side_theme_left-active' : 'side_theme_left-passive'}`],
-				}),
-				sideTemplate({
-					modifiers: [`${data.whoseTurn === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
-				})
-			);
-
-			genericBeforeEnd(playerLeftBlock, 
-				avatarTemplate({
-					modifiers: ['avatar_theme_game'],
-					url: `${data.avatar ? HOST + data.avatar : ''}`,
-				}),
-				nicknameTemplate({
-					modifiers: ['nickname_theme_left'],
-					nickname: 'Player1', // TODO передача никнейма пользователя
-				}),
-			);
-
-			genericBeforeEnd(playerRightBlock, 
-				avatarTemplate({
-					modifiers: ['avatar_theme_game'],
-					url: `${data.avatar ? HOST + data.avatar : ''}`,
-				}),
-				nicknameTemplate({
-					modifiers: ['nickname_theme_right'],
-					nickname: 'Player2', // TODO передача никнейма пользователя
-				}),
-			);
-
-			genericBeforeEnd(contentBlock, 
-				fieldTemplate({
-					modifiers: [],
-				})
-			);
-
-			const fieldBlock = this._root.querySelector('.field');
-			const blocks = []; // TODO а вообще резонно рендерить 25 блоков???
-
-			[...Array(25)].forEach((_, i) => {
-				if (data.close.indexOf( i ) != -1) {
-					blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
-				} else {
-					blocks.push(blockTemplate({ modifiers: [''], num: i }));
-				}
-			});
-			genericBeforeEnd(fieldBlock, ...blocks);
-
-			this._createTurnListener();
+			this._renderContainer();
+			this._renderMain();
+			this._renderHead(data);
+			this._renderLeftPlayer(data);
+			this._renderRightPlayer(data);
+			this._renderContent();
+			this._renderField(data);
 		} else {
-			// console.log(data.whoseTurn);
 			const headBlock = document.querySelector('.head.head_theme_game');
 			headBlock.innerHTML = '';
 			genericBeforeEnd(headBlock, 

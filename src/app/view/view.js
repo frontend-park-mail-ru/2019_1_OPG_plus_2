@@ -19,4 +19,7 @@ export default class View {
 		this._removeEventListeners();
 		this._createEventListeners();
 	}
+
+	close() {
+	}
 }

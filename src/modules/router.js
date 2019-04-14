@@ -30,7 +30,11 @@ export default class Router {
 			  return;
 		  }
 
-		  this.routes[path].open({root: this.root, data: data});
+			if (this.currentRoute) {
+				this.currentRoute.close();
+			}
+			this.currentRoute = this.routes[path];
+			this.currentRoute.open({root: this.root, data: data});
 		} else {
 		  window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
 		}

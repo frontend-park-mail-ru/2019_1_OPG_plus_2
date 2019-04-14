@@ -1,7 +1,8 @@
 import Controller from './controller';
 import { PROFILE } from '../paths';
+import { NavigateMixinController  } from '../navigate_controller';
 
-export default class SignUpController extends Controller {
+export default class SignUpController extends NavigateMixinController(Controller) {
 	constructor({
 		model = {},
 		view = {},
