@@ -9,7 +9,7 @@ export const NavigateMixin = (superclass) => class extends superclass {
 			return;
 		}
 		event.preventDefault();
-		this._removeOnLinkListener();
+		// this._removeOnLinkListener();
 		if (event.target.classList.contains('back-arrow')) {
 			this.emit('onBackClick');
 		} else if (event.target.classList.contains('logout')) {
@@ -17,6 +17,16 @@ export const NavigateMixin = (superclass) => class extends superclass {
 		} else {
 			this.emit('onLinkClick', { path: event.target.dataset.href });
 		}
+	}
+
+	_createEventListeners() {
+		super._createEventListeners();
+		this._createOnLinkListener();
+	}
+
+	_removeEventListeners() {
+		super._removeEventListeners();
+		this._removeOnLinkListener();
 	}
     
 	_createOnLinkListener() {

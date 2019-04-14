@@ -115,20 +115,10 @@ export default class API {
 					if (response.status !== 200) {
 						response.json().then(error => reject(error));
 					} else {
-					// User.set({username: username});
 						resolve(username);
 					}
 				});
 		});
-		// AjaxModule.doPut({
-		//     path: `${HOST}/api/score`,
-		//     body: {
-		//         avatar: avatar,
-		//         email: email,
-		//         password: password,
-		//         username: username,
-		//     },
-		// });
 	}
 
 	/**

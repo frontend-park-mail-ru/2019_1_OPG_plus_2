@@ -6,8 +6,6 @@ import scoreBoardTemplate from '../../blocks/html/body/application/container/hea
 import rulesTemplate from '../../blocks/html/body/application/container/head/menu/rules/rules.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
-import mainTemplate from '../../blocks/html/body/application/container/content/main/main.pug';
-import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
 import mainButtonTemplate from '../../blocks/html/body/application/container/content/main-button/main-button.pug';
 
 import View from './view';

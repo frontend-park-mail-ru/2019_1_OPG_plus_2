@@ -82,10 +82,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		this.emit('endStartStep', {gameState: this._game});
 	}
 
-	// isConsist({firstPoint = [], secondPoint = [], checkPoint = []} = {}) {
-
-	// }
-
 	overBlockStep({block = []} = {}) {
 		if (block) {
 			this._game.points[1] = [parseInt(+block / 5, 10), parseInt(+block% 5, 10)]; // записали значение в over
