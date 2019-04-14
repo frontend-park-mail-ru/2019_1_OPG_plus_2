@@ -7,6 +7,7 @@ const devserver = require('./webpack/devserver');
 const sass = require('./webpack/sass');
 const extractCSS = require('./webpack/css.extract');
 const images = require('./webpack/images');
+const babel = require('./webpack/babel');
 
 const PATHS = {
     source: path.join(__dirname, 'src'),
@@ -28,7 +29,6 @@ const common = merge([
     },
     pug(),
     images(),
-
 ]);
 
 const dev = {
@@ -45,7 +45,7 @@ const devMode = {
             HOST: JSON.stringify('http://localhost:8002'),
         }),
     ]
-}
+};
 
 const prodMode = {
     mode: 'production',
@@ -54,13 +54,14 @@ const prodMode = {
             HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
         }),
     ]
-}
+};
 
-module.exports = function(env) {
+module.exports = function (env) {
     if (env === 'production') {
         return merge([
             common,
             extractCSS(),
+            babel(),
             prodMode,
         ]);
     }

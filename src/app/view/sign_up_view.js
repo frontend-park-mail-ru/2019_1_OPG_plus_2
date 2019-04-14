@@ -171,4 +171,10 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 	open({ root = {}, data = {} }) {
 		super.open({root, data});
 	}
+
+	close() {
+		if (!this._root) {
+			return;
+		}
+	}
 }

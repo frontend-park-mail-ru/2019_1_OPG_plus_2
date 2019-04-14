@@ -11,7 +11,7 @@ export default class SignUpModel extends EventEmitterMixin(Model) {
 	getData({root = {}} = {}) {
 		API.isAuth()
 			.then(() => {
-				this.emit('isAuthSignUp', {root: root, isAuth: true});
+				this.emit('alreadySignUp');
 			})
 			.catch(() => {
 				this.emit('isAuthSignUp', {root: root, isAuth: false});

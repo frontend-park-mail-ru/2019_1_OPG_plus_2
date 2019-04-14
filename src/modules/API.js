@@ -1,6 +1,8 @@
 import AjaxModule from './ajax.js';
 import User from './user.js';
 
+const ok = [200, 201, 203];
+
 export default class API {
 	/**
      * This method logs user in and sets cookie
@@ -33,18 +35,21 @@ export default class API {
      * Checks whether user is signed in or signed out
      */
 	static isAuth() {
-		return new Promise((resolve, reject) => {
-			AjaxModule.doGet({
+		// return new Promise((resolve, reject) => {
+			return AjaxModule.doGet({
 				path: `${HOST}/api/session`,
 			})
 				.then(response => {
-					if (response.status !== 200) {
-						response.json().then(error => reject(error));
+					if (!ok.includes(response.status)) {
+						throw response;
 					} else {
-						resolve();
+						return response;
 					}
+				})
+				.catch(resp => {
+					console.err(resp.json());
 				});
-		});
+		// });
 	}
 
 	/**

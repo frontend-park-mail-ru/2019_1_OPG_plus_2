@@ -8,6 +8,9 @@ export default class RulesController extends NavigateMixinController(Controller)
                     router = {},
                 } = {}) {
         super({model: model, view: view, router: router});
-        this._model.on('OK', ({root = {}} = {}) => { this.render({root: root})});
+    }
+
+    open({root = {}, data = {}} = {}) {
+        super.render({root, data})
     }
 }
