@@ -26,6 +26,7 @@ export default class Router {
                 history.pushState(null, null, path);
             }
             if (!this.routes[path]) {
+                this.routes['/notfound'].open({root: this.root, data: data});
                 return;
             }
 
