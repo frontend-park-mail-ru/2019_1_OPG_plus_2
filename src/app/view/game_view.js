@@ -58,8 +58,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_createTurnListener() {
 		const filedBlock = document.querySelector('.field');
+		const container = document.querySelector('.container');
 		filedBlock.addEventListener('mousedown', this.down);
-		filedBlock.addEventListener('mouseup', this.up, true);
+		container.addEventListener('mouseup', this.up, true);
 	}
 
 	_removeTurnListener() {
