@@ -65,6 +65,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		}
 
 		this._game.cellsCount -= difference;
+		console.log(this._game.cellsCount);
 	}
 
 	startStep({root = {}, block = []} = {}) {
@@ -223,8 +224,9 @@ export default class GameModel extends EventEmitterMixin(Model) {
 	}
 
 	finishStep({root = {}, block = []} = {}) {
-		if (block && !this._game.stopFlag) {
-			this._game.end = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
+		let intBlock = +block;
+		if (intBlock && !this._game.stopFlag) {
+			this._game.end = [parseInt(intBlock / 5, 10), parseInt(intBlock % 5, 10)];
 		} else {
 			let lastStep = this._game.steps[this._game.steps.length - 1];
 			this._game.end = [parseInt(lastStep / 5, 10), parseInt(lastStep % 5, 10)];
