@@ -6,8 +6,8 @@ class UserS {
 	 * @constructor
 	 */
 	constructor() {
-		this._photo = null;
-		this._name = null;
+		this._avatar = null;
+		this._username = null;
 		this._email = null;
 		this._score = null;
 		this._games = 0;
@@ -21,7 +21,7 @@ class UserS {
 	 * @return {boolean}
 	 */
 	exist() {
-		if (!this._name || !this._email || !this._score) {
+		if (!this._username || !this._email) {
 			return false;
 		}
 
@@ -30,12 +30,12 @@ class UserS {
 
 	/**
 	 * Returns User data
-	 * @return {{score: null, lose: number, name: null, games: number, win: number, email: null}}
+	 * @return {{score: null, lose: number, username: null, games: number, win: number, email: null}}
 	 */
 	get() {
 		return {
-			photo: this._photo,
-			name: this._name,
+			avatar: this._avatar,
+			username: this._username,
 			email: this._email,
 			score: this._score,
 			games: this._games,
@@ -49,8 +49,8 @@ class UserS {
 	 * @param data
 	 */
 	set(data) {
-		this._photo = data.photo;
-		this._name = data.name;
+		this._avatar = data.avatar;
+		this._username = data.username;
 		this._email = data.email;
 		this._score = data.score;
 		this._games = data.games;

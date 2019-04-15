@@ -1,113 +1,84 @@
-const noop = () => null;
-
-
 export default class AjaxModule {
 	/**
-	 * Performs asynchronous GET request
-	 * @param callback Function called as callback
-	 * @param path Path of the request
-	 */
+     * Performs asynchronous GET request
+     * @param Object with path of the request
+     * @returns {Promise} fetch promise
+     */
 	static doGet({
-					 callback = noop,
-					 path = '/',
-				 } = {}) {
-		fetch(path, {
+		path = '/',
+	} = {}) {
+		return fetch(path, {
 			method: 'GET',
 			mode: 'cors',
-			headers: {
-				'Origin':'https://colors.hackallcode.ru',
-			},
 			credentials: 'include',
-		}).then(function (response) {
-			if (response.status === 401) {
-				throw '';
-			}
-			return response.json();
-		}).then(json => callback(json))
-			.catch(err => callback(err));
+		});
 	}
 
 	/**
-	 * Performs asynchronous POST request with body
-	 * @param callback Function called as callback
-	 * @param path Path of the request
-	 * @param body Body of the request
-	 */
+     * Performs asynchronous POST request with body
+     * @param Object with path and body of the request
+     * @returns {Promise} fetch promise
+     */
 	static doPost({
-					  callback = noop,
-					  path = '/',
-					  body = {},
-				  } = {}) {
-		fetch(path, {
-			method: 'POST',
-			mode: 'cors',
-			headers: {
-				// 'Accept': 'application/json',
-				// 'Content-Type': 'application/json',
-				'Origin':'https://colors.hackallcode.ru',
-			},
-			credentials: 'include',
-			body: body,
-			// body: JSON.stringify(body),
-		}).then(function (response) {
-			return response.json();
-		}).then(json => callback(json));
-	}
-
-// 	fetch('http://https://api.colors.hackallcode.ru/api/session', {method: 'POST', mode: 'cors', credentials: 'include', headers: {
-// 	'Origin' : 'https://colors.hackallcode.ru',
-// }, body: {
-// 	login: 'test@mail.ru',
-// 	password: 'test',
-// }});
-
-	/**
-	 * Performs asynchronous PUT request with body
-	 * @param callback Function called as callback
-	 * @param path Path of the request
-	 * @param body Body of the request
-	 */
-	static doPut({
-					 callback = noop,
-					 path = '/',
-					 body = {},
-				 } = {}) {
-		fetch(path, {
-			method: 'PUT',
-			mode: 'cors',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			credentials: 'include',
-			body: JSON.stringify(body),
-		}).then(function (response) {
-			return response.json();
-		}).then(json => callback(json));
-	}
-
-	/**
-	 * Performs asynchronous DELETE request with body
-	 * @param callback Function called as callback
-	 * @param path Path of the request
-	 * @param body Body of the request
-	 */
-	static doDelete({
-		callback = noop,
 		path = '/',
 		body = {},
+		headers = {
+			'Content-type' : 'application/json; charset=utf-8',
+		}
 	} = {}) {
-		fetch(path, {
-			method: 'DELETE',
+		return fetch(path, {
+			method: 'POST',
+			headers: headers,
 			mode: 'cors',
+			credentials: 'include',
+			body: body,
+		});
+	}
+
+	/**
+     * Performs asynchronous PUT request with body
+     * @param Object with path and body of the request
+     * @returns {Promise} fetch promise
+     */
+	static doPut({
+		path = '/',
+		body = {}
+	} = {}) {
+		return fetch(path, {
+			method: 'PUT',
 			headers: {
-				'Origin':'https://colors.hackallcode.ru',
+				'Content-type' : 'application/json; charset=utf-8',
 			},
+			mode: 'cors',
 			credentials: 'include',
 			body: JSON.stringify(body),
-			// body: JSON.stringify(body),
-		}).then(function (response) {
-			return response.json();
-		}).then(json => callback(json));
+		});
+	}
+
+	static doFormPost({
+		path = '/',
+		body = {}
+	} = {}) {
+		return fetch(path, {
+			method: 'POST',
+			mode: 'cors',
+			credentials: 'include',
+			body: body,
+		});
+	}
+
+	/**
+     * Performs asynchronous DELETE request with body
+     * @param Object with path and body of the request
+     * @returns {Promise} fetch promise
+     */
+	static doDelete({
+		path = '/',
+	} = {}) {
+		return fetch(path, {
+			method: 'DELETE',
+			mode: 'cors',
+			credentials: 'include',
+		});
 	}
 }

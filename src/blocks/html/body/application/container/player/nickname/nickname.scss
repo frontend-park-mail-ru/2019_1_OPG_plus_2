@@ -1,0 +1,10 @@
+.nickname {
+    @media (min-width: $desktop-min-width) {
+        font-family: $secondary-font-family;
+        margin: 0;
+        text-align: center;
+        grid-row: 4 / 5;
+        grid-column: 1 / -1;
+        font-size: 4vh;
+    }
+}

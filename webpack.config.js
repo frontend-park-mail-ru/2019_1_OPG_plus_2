@@ -1,11 +1,14 @@
 const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const pug = require('./webpack/pug');
 const devserver = require('./webpack/devserver');
 const sass = require('./webpack/sass');
 const extractCSS = require('./webpack/css.extract');
 const images = require('./webpack/images');
+const babel = require('./webpack/babel');
 
 const PATHS = {
     source: path.join(__dirname, 'src'),
@@ -14,7 +17,10 @@ const PATHS = {
 
 const common = merge([
     {
-        entry: PATHS.source + '/main.js',
+        entry: {
+            "index": PATHS.source + '/main.js',
+            "sw":  PATHS.source + '/cache_serviceworker.js',
+        },
         output: {
             path: PATHS.build,
             filename: 'js/[name].js',
@@ -22,12 +28,11 @@ const common = merge([
         plugins: [
             new HtmlWebpackPlugin({
                 template: PATHS.source + '/index.pug',
-            })
+            }),
         ],
     },
     pug(),
     images(),
-
 ]);
 
 const dev = {
@@ -37,11 +42,31 @@ const dev = {
     devtool: "eval",
 };
 
-module.exports = function(env) {
+const devMode = {
+    mode: 'development',
+    plugins: [
+        new webpack.DefinePlugin({
+            HOST: JSON.stringify('http://localhost:8002'),
+        }),
+    ]
+};
+
+const prodMode = {
+    mode: 'production',
+    plugins: [
+        new webpack.DefinePlugin({
+            HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
+        }),
+    ]
+};
+
+module.exports = function (env) {
     if (env === 'production') {
         return merge([
             common,
             extractCSS(),
+            babel(),
+            prodMode,
         ]);
     }
     if (env === 'development') {
@@ -50,6 +75,7 @@ module.exports = function(env) {
             devserver(),
             sass(),
             dev,
+            devMode,
         ])
     }
 };

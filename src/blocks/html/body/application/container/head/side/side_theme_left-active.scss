@@ -1,0 +1,20 @@
+@keyframes act {
+    0% { grid-column: 0;}
+    50% { grid-column: 1 / 5; }
+    100% { grid-column: 1 / 8; }
+    // 0% { background: linear-gradient(to right, orange 20%, #F7F9F9 20%, #F7F9F9 80%); }
+    // 50% { background: linear-gradient(to right, orange 60%, #F7F9F9 60%, #F7F9F9 80%); }
+    // 100% { background: linear-gradient(to right, orange 100%, #F7F9F9 0%, #F7F9F9 0%); }
+}
+
+.side_theme_left-active {
+    @media (min-width: $desktop-min-width) {
+        grid-column: 1 / 8;
+        grid-row: 2 / -2;
+        border-radius: 0 10px 10px 0;
+        // background: linear-gradient(to right, orange 20%, #F7F9F9 20%, #F7F9F9 80%);
+        background-color: orange;
+        transition: grid-column 300ms linear;
+        // animation: act 300ms forwards linear;
+    }
+}

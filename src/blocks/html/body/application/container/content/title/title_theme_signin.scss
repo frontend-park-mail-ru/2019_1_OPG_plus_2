@@ -1,5 +1,6 @@
 .title_theme_signin {
     @media (min-width: $desktop-min-width) {
-        font-size: 4em;
+        font-size: 7vh;
+        color: $main-color;
     }
 }

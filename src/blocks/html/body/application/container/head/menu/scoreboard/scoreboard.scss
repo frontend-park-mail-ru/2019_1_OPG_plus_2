@@ -1,6 +1,7 @@
 .scoreboard {
-    border-bottom: 1px solid white;
-    background-image: url("data:image/svg+xml,%3Csvg width='67' height='63' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M33.273.552l7.796 23.643H66.3L45.888 38.807l7.797 23.643-20.412-14.612L12.86 62.45l7.797-23.643L.245 24.195h25.23L33.274.552z' fill='%23FAFF00' fill-opacity='.59'/%3E%3C/svg%3E");
+    cursor: pointer;
+    border-bottom: 1px solid #005FF9;
+    background-image: url("data:image/svg+xml,%3Csvg width='67' height='63' viewBox='0 0 67 63' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M33.7273 0.552246L41.524 24.1953H66.7549L46.3427 38.8076L54.1395 62.4506L33.7273 47.8384L13.3151 62.4506L21.1119 38.8076L0.699673 24.1953H25.9305L33.7273 0.552246Z' fill='%23005FF9'/%3E%3C/svg%3E%0A");
     background-repeat: no-repeat;
     background-position: center;
 

@@ -1,64 +1,49 @@
 export default class Router {
-	/**
-	 * @constructor
-	 * @param root
-	 */
-	constructor({
-		root = document.body,
-	} = {}) {
-		this._root = root;
-		this._routes = {};
-		this._prevPath = '';
-	}
+    constructor({
+                    routes = {},
+                    mode = null,
+                    root = document.getElementById('application'),
+                } = {}) {
+        this.routes = routes;
+        this.mode = mode === 'history' && !!(history.pushState) ? 'history' : 'hash';
+        this.root = root;
+        window.onpopstate = () => {
+				this.navigate({path: location.pathname});
+        };
+    }
 
-	/**
-	 * Adds controller to routing
-	 * @param {string} path Path on which controller is routed
-	 * @param {Page} view Controller served by route
-	 */
-	add(path, view) {
-		this._routes[path] = view;
-	}
+    back() {
+      history.back();
+    }
 
-	/**
-	 * Renders page routed by path
-	 * @param path Path to be rendered
-	 */
-	open(path) {
-		if (this._prevPath) {
-			this.close();
+    add({re = '/', handler} = {}) {
+        this.routes[re] = handler;
+    }
+
+    navigate({path = '/', data = {}, noHistory = false} = {}) {
+      if (this.mode === 'history') {
+          if (window.location.pathname !== path && !noHistory) {
+              history.pushState(null, null, path);
+          }
+          
+          if (!this.routes[path]) {
+              this.routes['/notfound'].open({root: this.root, data: data});
+              return;
+      		}
+
+					if (this.currentRoute) {
+						this.currentRoute.close();
+					}
+					this.currentRoute = this.routes[path];
+					this.currentRoute.open({root: this.root, data: data});
+		} else {
+		  window.location.href = window.location.href.replace(/#(.*)$/, '') + '#' + path;
 		}
-
-
-		if (!this._routes[path]){
-			this._routes['/not_found'].open(this._root);
-			this._prevPath = path;
-			return;
-		}
-
-		this._routes[path].open(this._root);
-		this._prevPath = path;
 	}
 
-	/**
-	 * Starts routing
-	 */
-	start() {
-		this.open(window.location.pathname);
-		this._root.addEventListener('click', function (event) {
-			if (!(event.target instanceof HTMLAnchorElement) || event.target.dataset.href === '/logout') {
-				return;
-			}
-			event.preventDefault();
-            
-			this.open(event.target.dataset.href);
-		}.bind(this));
-	}
-
-	/**
-	 * Closes page
-	 */
-	close() {
-		this._root.innerHTML = '';
-	}
+  start() {
+        if (this.mode === 'history') {
+            this.navigate({path: location.pathname, noHistory: true});
+        }
+    }
 }

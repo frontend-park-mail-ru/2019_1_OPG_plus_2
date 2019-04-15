@@ -9,14 +9,14 @@
             font-family: Roboto;
             font-size: 3vh;
             width: 100%;
-            color: white;
+            color: black;
             margin-bottom: 1vh;
         }
     
         &__text-form {
             font-family: Roboto;
-            border-radius: 10px;
-            border: none;
+            // border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
             width: 100%;
             font-size: 2rem;
             padding: 2vh 1vh 2vh;

@@ -3,6 +3,10 @@
 	// 	grid-template-columns: repeat(3, 1fr);
     // }
 
+    @media (min-width: $desktop-min-width) {
+		display: grid;
+    }
+
     @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
         grid-template-columns: repeat(12, 1fr);
     }
