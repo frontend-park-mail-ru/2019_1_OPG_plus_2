@@ -15,58 +15,36 @@ import View from './view';
 export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
+		this.onNextPageClick = this.onNextPageClick.bind(this);
 	}
 
-	// onClick(event) {
-	// 	if (event.target.classList.contains('pages__first')) {
-	// 		API.getUsers({
-	// 			limit: 5,
-	// 			pages: 1,
-	// 		})
-	// 			.then(users => {
-	// 				this._root.innerHTML = '';
-	// 				this._renderScoreBoard(users.data, 1);
-	// 			});
-	// 	} else if (event.target.classList.contains('pages__back')) {
-	// 		const pagesNum = parseInt(document.querySelector('.pages__num').textContent) - 1;
-	// 		API.getUsers({
-	// 			limit: 5,
-	// 			page: pagesNum > 0 ? pagesNum : 1,
-	// 		})
-	// 			.then(users => {
-	// 				this._root.innerHTML = '';
-	// 				this._renderScoreBoard(users.data, pagesNum > 0 ? pagesNum : 1);
-	// 			});
-	// 	} else if (event.target.classList.contains('pages__next')) {
-	// 		const pagesNum = parseInt(document.querySelector('.pages__num').textContent) + 1;
-	// 		API.getUsers({
-	// 			limit: 5,
-	// 			page: pagesNum,
-	// 		})
-	// 			.then(users => {
-	// 				this._root.innerHTML = '';
-	// 				this._renderScoreBoard(users.data, pagesNum);
-	// 			})
-	// 			.catch(() => this._router.open('/leaders'));
-	// 	}
-	// }
+	onNextPageClick(event) {
+		let pageNum = parseInt(document.querySelector('.pages__num').textContent)
+		if (event.target.classList.contains('pages__next')) {
+			this.emit('getNextPage', {root: this._root, page: pageNum + 1});
+		} else if (event.target.classList.contains('pages__back')) {
+			this.emit('getNextPage', {root: this._root, page: pageNum - 1});
+		}
+	}
 
-	// _createEventListener() {
-	// 	const pages = this._root.querySelector('.pages');
-	// 	pages.addEventListener('click', this.onClick, true);
-	// }
+	_createNextPListener() {
+		const pages = this._root.querySelector('.pages');
+		pages.addEventListener('click', this.onNextPageClick, true);
+	}
 
-	// _removeEventListener() {
-	// 	const pages = this._root.querySelector('.pages');
-	// 	pages.removeEventListener('click', this.onClick, true);
-	// }
+	_removeNextPListener() {
+		const pages = this._root.querySelector('.pages');
+		pages.removeEventListener('click', this.onNextPageClick, true);
+	}
 
 	_createEventListeners() {
 		super._createEventListeners();
+		this._createNextPListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
+		this._removeNextPListener();
 	}
 
 	_renderContainer() {
@@ -98,7 +76,7 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 		);
 	}
 
-	_renderContent() {
+	_renderContent(data) {
 		const contentBlock = document.querySelector('.content.content_theme_scoreboard');
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
@@ -108,10 +86,10 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 			mainTemplate({
 				modifiers: ['main_theme_scoreboard'],
 			}),
-			// pagesTemplate({
-			// 	modifiers: [],
-			// 	page_num: data.page,
-			// })
+			pagesTemplate({
+				modifiers: [],
+				page_num: data.page,
+			})
 		);
 	}
 
@@ -128,12 +106,21 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 	}
 
 	_render(data) {
-		this._root.innerHTML = '';
-		this._renderContainer();
-		this._renderMain();
-		this._renderBack();
-		this._renderContent();
-		this._renderUsers(data);
+		if(data.isRender) {
+			this._root.innerHTML = '';
+			this._renderContainer();
+			this._renderMain();
+			this._renderBack();
+			this._renderContent(data);
+			this._renderUsers(data);
+		} else if (data.users.users && data.page > 0) {
+			const contentBlock = document.querySelector('.content.content_theme_scoreboard');
+			contentBlock.innerHTML = '';
+			this._renderContent(data);
+			const mainBlock = document.querySelector('.main.main_theme_scoreboard');
+			mainBlock.innerHTML = '';
+			this._renderUsers(data);
+		}
 	}
 
 	open({ root = {}, data = {} }) {

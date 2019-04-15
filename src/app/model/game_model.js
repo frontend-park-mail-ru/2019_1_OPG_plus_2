@@ -36,6 +36,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 			secondPlayerSteps: [],
 			stopFlag: false,
 			isStart: false,
+			winner: false,
 		};
 
 		this.emit('start', { root: root, gameState: this._game });
@@ -50,22 +51,23 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		this._game.start = [];
 		this._game.end = [];
 		this._game.forward = null;
+		this._game.winner = false;
 	}
 
-	check() {
+	check(root) {
 		let difference = 0;
 		if (this._game.start.length) {
 			this._game.start[0] - this._game.end[0] ? difference = Math.abs(this._game.start[0] - this._game.end[0]) + 1 : difference = Math.abs(this._game.start[1] - this._game.end[1]) + 1;
 			if (this._game.cellsCount - difference <= 1) {
-				this.emit('endGame', {winner: this._game.whoseTurn});
+				this._game.winner = this._game.whoseTurn;
+				this.emit('endGame', {root: root, gameState: this._game});
 			}
 		}
 
 		this._game.cellsCount -= difference;
-		console.log(this._game.cellsCount);
 	}
 
-	startStep({block = []} = {}) {
+	startStep({root = {}, block = []} = {}) {
 		if (block) {
 			let point = [parseInt(+block / 5, 10), parseInt(+block % 5, 10)];
 			this._game.isStart = true;
@@ -74,15 +76,15 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				this._game.points[1] = point;
 				this._game.start = point;
 			} else if (this._game.close.indexOf( +block ) !== -1) {
-				this.emit('endFinishStep', {gameState: this._game});
+				this.emit('endFinishStep', {root: root, gameState: this._game});
 			}
 
 		}
 
-		this.emit('endStartStep', {gameState: this._game});
+		this.emit('endStartStep', {root: root, gameState: this._game});
 	}
 
-	overBlockStep({block = []} = {}) {
+	overBlockStep({root = {}, block = []} = {}) {
 		if (block) {
 			this._game.points[1] = [parseInt(+block / 5, 10), parseInt(+block% 5, 10)]; // записали значение в over
 
@@ -115,7 +117,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				if ((this._game.points[1][1] - this._game.points[0][1] > 0 && this._game.forward) 
 							|| (this._game.points[1][1] - this._game.points[0][1] < 0 
 								&& !this._game.forward)) { // шли вправо идем вправа
-					console.log('forward');
 
 					if (this._game.close.indexOf(parseInt(event.target.textContent, 10)) === -1 
 								&& !this._game.stopFlag 
@@ -130,7 +131,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 							delete this._game.del[this._game.del.indexOf(parseInt(block, 10))]
 						}
 
-						this.emit('endOverBlockStep', {gameState: this._game});
+						this.emit('endOverBlockStep', {root: root, gameState: this._game});
 					} else {
 						this._game.stopFlag = true;
 					}
@@ -138,7 +139,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				} else if ((this._game.points[1][1] - this._game.points[0][1] < 0 && this._game.forward) 
 							|| (this._game.points[1][1] - this._game.points[0][1] > 0 
 								&& !this._game.forward)) { // шли вправо идем влево
-					console.log('back');
 				
 					if (this._game.whoseTurn === 'Player1' 
 						&& this._game.firstPlayerSteps.indexOf( this._game.points[0][0] * 5 + this._game.points[0][1] ) != -1) {
@@ -169,7 +169,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 			} else if (!this._game.x) { // случаи для движения по y
 				if ((this._game.points[1][0] - this._game.points[0][0] > 0 && this._game.forward) 
 					|| (this._game.points[1][0] - this._game.points[0][0] < 0 && !this._game.forward)) { // шли вправо идем вперед
-					console.log('forward');
 
 					if (this._game.close.indexOf(parseInt(block, 10)) === -1 
 							&& !this._game.stopFlag 
@@ -184,14 +183,13 @@ export default class GameModel extends EventEmitterMixin(Model) {
 							delete this._game.del[this._game.del.indexOf(parseInt(block, 10))]
 						}
 
-						this.emit('endOverBlockStep', {gameState: this._game});
+						this.emit('endOverBlockStep', {root: root, gameState: this._game});
 					} else {
 						this._game.stopFlag = true;
 					}
 				} else if ((this._game.points[1][0] - this._game.points[0][0] < 0 && this._game.forward) 
 						|| (this._game.points[1][0] - this._game.points[0][0] > 0 
 							&& !this._game.forward)) { // шли вправо идем назад
-					console.log('back');
 
 					if (this._game.whoseTurn === 'Player1' 
 						&& this._game.firstPlayerSteps.indexOf( this._game.points[0][0] * 5 + this._game.points[0][1] ) != -1) {
@@ -213,7 +211,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 						this._game.stopFlag = false;
 					}
 
-					this.emit('endOverBlockStep', {gameState: this._game});
+					this.emit('endOverBlockStep', {root: root, gameState: this._game});
 				} else if (this._game.points[1][1] - this._game.points[0][1]) { // идем по x, чего делать нельзя
 					console.log('you can\'t move on x');
 				}
@@ -221,14 +219,14 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		}
 	}
 
-	outBlockStep({block = []} = {}) {
+	outBlockStep({root = {}, block = []} = {}) {
 		if (block) {
 			this._game.points[0] = [parseInt(+block / 5, 10), parseInt(+block % 5, 10)];
-			this.emit('endOutBlockStep', {gameState: this._game});
+			this.emit('endOutBlockStep', {root: root, gameState: this._game});
 		}
 	}
 
-	finishStep({block = []} = {}) {
+	finishStep({root = {}, block = []} = {}) {
 		if (block && !this._game.stopFlag) {
 			this._game.end = [parseInt(+event.target.textContent / 5, 10), parseInt(+event.target.textContent % 5, 10)];
 		} else {
@@ -236,7 +234,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 			this._game.end = [parseInt(lastStep / 5, 10), parseInt(lastStep % 5, 10)];
 		}
 
-		this.check();
+		this.check(root);
 		if (this._game.whoseTurn === this.listeners[0]) {
 			this._game.whoseTurn = this.listeners[1];
 		} else {
@@ -244,6 +242,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		}
 
 		this.reset();
-		this.emit('endFinishStep', {gameState: this._game});
+		this.emit('endFinishStep', {root: root, gameState: this._game});
 	}
 }

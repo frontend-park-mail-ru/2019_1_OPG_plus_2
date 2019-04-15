@@ -2,14 +2,14 @@
     font-family: Roboto;
     cursor: pointer;
     text-align: center;
-    color: black;
-    background-color: #EF9A9A;
+    color: white;
+    background-color: #005FF9;
     width: 100%;
     text-decoration: none;
     border: 1px solid black;
 
     @media (min-width: $desktop-min-width) {
-        font-size: 2.9vh;
+        font-size: 2.3em;
         padding: 2vh 0 2vh;
         margin-bottom: 3vh;
     }

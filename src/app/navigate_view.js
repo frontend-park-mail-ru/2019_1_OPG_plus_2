@@ -9,7 +9,7 @@ export const NavigateMixinView = (superclass) => class extends superclass {
 			return;
 		}
 		event.preventDefault();
-
+		// debugger;
 		if (event.target.classList.contains('back-arrow')) {
 			this.emit('onBackClick');
 		} else if (event.target.classList.contains('logout')) {
