@@ -189,7 +189,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				hr: '/',
 				modifiers: [],
 			}),
-		)
+		);
 	}
 	
 	// TODO переделать else и вообще подумать насчет перендеринга

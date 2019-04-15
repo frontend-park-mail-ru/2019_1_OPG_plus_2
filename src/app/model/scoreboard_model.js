@@ -22,8 +22,8 @@ export default class ScoreBoardModel extends EventEmitterMixin(Model) {
 			limit: 5,
 			page: page,
 		})
-		.then(users => {
-			this.emit('gotNextPage', { root: root, data: {page:page, isRender: false, users: users.data} });
-		})
+			.then(users => {
+				this.emit('gotNextPage', { root: root, data: {page:page, isRender: false, users: users.data} });
+			});
 	}
 }

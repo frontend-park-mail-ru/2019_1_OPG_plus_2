@@ -1,6 +1,6 @@
 each item, index in lst
     div(class='row ' + modifiers)
-        div(class='row__number')=index+1
+        div(class='row__number')=(index+1)+(page-1)*5
         div(class='row__photo')
             if item.avatar
                 img(class='row__photo__icon' src=host+item.avatar)

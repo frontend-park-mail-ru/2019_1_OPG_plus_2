@@ -8,9 +8,9 @@ export default class ScoreBoardController extends NavigateMixinController(Contro
 		router = {},
 	} = {}) {
 		super({model: model, view: view, router: router});
-		this._model.on('getScore', ({root = {}, data = {}} = {}) => { this.render({root: root, data: data}) });
-		this._view.on('getNextPage', ({root = {}, page = 1}) => { this.getNextPage({root, page} )});
-		this._model.on('gotNextPage', ({root = {}, data = {}} = {}) => {this.render({root: root, data: data}) });
+		this._model.on('getScore', ({root = {}, data = {}} = {}) => { this.render({root: root, data: data}); });
+		this._view.on('getNextPage', ({root = {}, page = 1}) => { this.getNextPage({root, page} );});
+		this._model.on('gotNextPage', ({root = {}, data = {}} = {}) => {this.render({root: root, data: data}); });
 	}
 
 	getNextPage({root = {}, page = 1} = {}) {
