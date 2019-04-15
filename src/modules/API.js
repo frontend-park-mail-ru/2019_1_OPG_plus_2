@@ -38,16 +38,13 @@ export default class API {
 		return AjaxModule.doGet({
 			path: `${HOST}/api/session`,
 		})
-		.then(response => {
-			if (!ok.includes(response.status)) {
-				throw response;
-			} else {
-				return response;
-			}
-		})
-		.catch(resp => {
-			console.err(resp.json());
-		});
+			.then(response => {
+				if (!ok.includes(response.status)) {
+					throw response;
+				} else {
+					return response;
+				}
+			});
 	}
 
 	/**

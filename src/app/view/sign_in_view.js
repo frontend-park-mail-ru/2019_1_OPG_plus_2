@@ -140,7 +140,6 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 				modifiers: ['button_type_secondary'],
 			}),
 		);
-
 	}
 
 	_render(data) {
@@ -159,7 +158,6 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 
 	close() {
 		if (!this._root) {
-			console.error('idi nahui');
 			return;
 		}
 	}

@@ -30,10 +30,10 @@ import EditProfileController from './app/controller/edit_profile_controller';
 import GameModel from './app/model/game_model';
 import GameView from './app/view/game_view';
 import GameController from './app/controller/game_controller';
-import RulesView from "./app/view/rulesView";
-import RulesController from "./app/controller/rules_controller";
-import NotFoundView from "./app/view/not_found_view";
-import NotFoundController from "./app/controller/not_found_controller";
+import RulesView from './app/view/rulesView';
+import RulesController from './app/controller/rules_controller';
+import NotFoundView from './app/view/not_found_view';
+import NotFoundController from './app/controller/not_found_controller';
 
 
 document.addEventListener('DOMContentLoaded', function() {

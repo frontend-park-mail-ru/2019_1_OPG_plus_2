@@ -31,7 +31,7 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
 				});
 				this.emit('avatarUploaded');
 			})
-		  .catch((error) => { console.log(error); this.emit('getEditProfileError')});
+		  .catch(() => {this.emit('getEditProfileError');});
 	}
 
 	userUpdate({email = '', name = '' } = {}) {
@@ -43,7 +43,7 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
 				User.set({ username: user });
 				this.emit('userUpdated'); 
 			})
-		  .catch(() => {this.emit('userUpdated')});
+		  .catch(() => {this.emit('userUpdated');});
 	}
 
 	passwordUpdate({newPass = '', passConf = ''} = {}) {
@@ -51,13 +51,13 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
 			newPassword: newPass,
 			passwordConfirm: passConf
 		})
-			.then(() => {this.emit('userUpdated')})
-			.catch(() => {this.emit('userUpdated')});
+			.then(() => {this.emit('userUpdated');})
+			.catch(() => {this.emit('userUpdated');});
 	}
 		
 	logout() {
 		API.logout()
-			.then(() => {this.emit('logouted')})
-			.catch(() => {sthis.emit('logouted')});
+			.then(() => {this.emit('logouted');})
+			.catch(() => {this.emit('logouted');});
 	  }
 }
