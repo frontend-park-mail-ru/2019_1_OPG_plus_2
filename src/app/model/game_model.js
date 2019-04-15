@@ -65,7 +65,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		}
 
 		this._game.cellsCount -= difference;
-		console.log(this._game.cellsCount);
 	}
 
 	startStep({root = {}, block = []} = {}) {
@@ -118,7 +117,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				if ((this._game.points[1][1] - this._game.points[0][1] > 0 && this._game.forward) 
 							|| (this._game.points[1][1] - this._game.points[0][1] < 0 
 								&& !this._game.forward)) { // шли вправо идем вправа
-					console.log('forward');
 
 					if (this._game.close.indexOf(parseInt(event.target.textContent, 10)) === -1 
 								&& !this._game.stopFlag 
@@ -141,7 +139,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				} else if ((this._game.points[1][1] - this._game.points[0][1] < 0 && this._game.forward) 
 							|| (this._game.points[1][1] - this._game.points[0][1] > 0 
 								&& !this._game.forward)) { // шли вправо идем влево
-					console.log('back');
 				
 					if (this._game.whoseTurn === 'Player1' 
 						&& this._game.firstPlayerSteps.indexOf( this._game.points[0][0] * 5 + this._game.points[0][1] ) != -1) {
@@ -172,7 +169,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 			} else if (!this._game.x) { // случаи для движения по y
 				if ((this._game.points[1][0] - this._game.points[0][0] > 0 && this._game.forward) 
 					|| (this._game.points[1][0] - this._game.points[0][0] < 0 && !this._game.forward)) { // шли вправо идем вперед
-					console.log('forward');
 
 					if (this._game.close.indexOf(parseInt(block, 10)) === -1 
 							&& !this._game.stopFlag 
@@ -194,7 +190,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				} else if ((this._game.points[1][0] - this._game.points[0][0] < 0 && this._game.forward) 
 						|| (this._game.points[1][0] - this._game.points[0][0] > 0 
 							&& !this._game.forward)) { // шли вправо идем назад
-					console.log('back');
 
 					if (this._game.whoseTurn === 'Player1' 
 						&& this._game.firstPlayerSteps.indexOf( this._game.points[0][0] * 5 + this._game.points[0][1] ) != -1) {

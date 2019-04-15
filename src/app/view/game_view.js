@@ -206,9 +206,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			this._renderContent();
 			this._renderField(data);
 		} else if (data.winner) {
-			// debugger;
 			this._renderModal(data);
-			// return;
 		} else {
 			const headBlock = document.querySelector('.head.head_theme_game');
 			headBlock.innerHTML = '';

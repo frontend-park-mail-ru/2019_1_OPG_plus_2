@@ -19,7 +19,6 @@ export default class GameController extends NavigateMixinController(Controller) 
 		this._view.on('finishStep', ({ root = {}, block = [] } = {}) => {this.finishStep({root: root, block})});
 		this._model.on('endFinishStep', ({ root = {}, gameState = {} } = {}) => {this.render({root: root, data: gameState})});
 		this._model.on('endGame', ({ root = {}, gameState = {}} = {}) => {this.render({root: root, data: gameState})});
-		// this._view.on('finish', () => {this.onNavigate({path: ROOT})});
 	}
 
 	startStep({root = {}, block = {}} = {}) {
