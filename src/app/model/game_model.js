@@ -65,7 +65,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		}
 
 		this._game.cellsCount -= difference;
-		console.log(this._game.cellsCount);
 	}
 
 	startStep({root = {}, block = []} = {}) {
