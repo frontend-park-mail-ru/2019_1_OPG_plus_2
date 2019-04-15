@@ -14,12 +14,12 @@ export const NavigateMixinController = (superclass) => class extends superclass 
 	}
 
 	back() {
-        this._router.back();
-    }
+		this._router.back();
+	}
 
 	onNavigate({path = null, data = {}, noHistory = false} = {}) {
-        if (path !== null && typeof (path) === 'string') {
-            this._router.navigate({path, data, noHistory});
-        }
-    }
+		if (path !== null && typeof (path) === 'string') {
+			this._router.navigate({path, data, noHistory});
+		}
+	}
 };

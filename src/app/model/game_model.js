@@ -95,8 +95,8 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				}
 
 				this._game.points[1][0] - this._game.points[0][0] 
-						? this._game.x = false 
-						: this._game.y = false;
+					? this._game.x = false 
+					: this._game.y = false;
 
 				if (!this._game.y) {
 					if (this._game.points[1][1] - this._game.points[0][1] > 0) {
@@ -124,11 +124,11 @@ export default class GameModel extends EventEmitterMixin(Model) {
 						this._game.steps.push(parseInt(block ,10));
 
 						this._game.whoseTurn === 'Player1' 
-								? this._game.firstPlayerSteps.push(parseInt(block ,10)) 
-								: this._game.secondPlayerSteps.push(parseInt(block ,10));
+							? this._game.firstPlayerSteps.push(parseInt(block ,10)) 
+							: this._game.secondPlayerSteps.push(parseInt(block ,10));
 						
 						if (this._game.del.indexOf(parseInt(block, 10)) != -1) { 
-							delete this._game.del[this._game.del.indexOf(parseInt(block, 10))]
+							delete this._game.del[this._game.del.indexOf(parseInt(block, 10))];
 						}
 
 						this.emit('endOverBlockStep', {root: root, gameState: this._game});
@@ -162,8 +162,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 						
 
 					this.emit('endOverBlockStep', {gameState: this._game});
-				} else if (this._game.points[1][0] - this._game.points[0][0]) {
-					console.log('you can\'t move on y');
 				}
 
 			} else if (!this._game.x) { // случаи для движения по y
@@ -176,11 +174,11 @@ export default class GameModel extends EventEmitterMixin(Model) {
 						this._game.steps.push(parseInt(block ,10));
 
 						this._game.whoseTurn === 'Player1' 
-								? this._game.firstPlayerSteps.push(parseInt(block ,10)) 
-								: this._game.secondPlayerSteps.push(parseInt(block ,10));
+							? this._game.firstPlayerSteps.push(parseInt(block ,10)) 
+							: this._game.secondPlayerSteps.push(parseInt(block ,10));
 
 						if (this._game.del.indexOf(parseInt(block, 10)) != -1) { 
-							delete this._game.del[this._game.del.indexOf(parseInt(block, 10))]
+							delete this._game.del[this._game.del.indexOf(parseInt(block, 10))];
 						}
 
 						this.emit('endOverBlockStep', {root: root, gameState: this._game});
@@ -212,8 +210,6 @@ export default class GameModel extends EventEmitterMixin(Model) {
 					}
 
 					this.emit('endOverBlockStep', {root: root, gameState: this._game});
-				} else if (this._game.points[1][1] - this._game.points[0][1]) { // идем по x, чего делать нельзя
-					console.log('you can\'t move on x');
 				}
 			}
 		}

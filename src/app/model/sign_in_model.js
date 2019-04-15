@@ -22,8 +22,8 @@ export default class SignInModel extends EventEmitterMixin(Model) {
 			login: email,
 			password: password,
 		})
-			.then(() => {this.emit('signInOK')})
-			.catch(err => {debugger;
+			.then(() => {this.emit('signInOK');})
+			.catch(err => {
 				this.emit('signInError', {root: root, error: err, email: email});
 			});
 	}

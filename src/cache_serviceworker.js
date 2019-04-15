@@ -1,4 +1,5 @@
 const urlsToCache = [
+
     '/img/arrow_up_big.svg',
     '/img/edit.svg',
     '/img/pers1.svg',
@@ -16,6 +17,7 @@ const CACHE_NAME = 'colors-game';
 
 // we'll version our cache (and learn how to delete caches in
 // some other post)
+
 
 self.addEventListener('install', event => {
     // once the SW is installed, go ahead and fetch the resources
