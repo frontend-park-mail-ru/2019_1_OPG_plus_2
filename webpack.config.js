@@ -1,4 +1,5 @@
 const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -16,7 +17,10 @@ const PATHS = {
 
 const common = merge([
     {
-        entry: PATHS.source + '/main.js',
+        entry: {
+            "index": PATHS.source + '/main.js',
+            "sw":  PATHS.source + '/cache_serviceworker.js',
+        },
         output: {
             path: PATHS.build,
             filename: 'js/[name].js',
