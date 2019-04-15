@@ -36,12 +36,10 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	// событие, возникающее при отпускании ЛКМ
 	up(event) {
-		if (event.target.classList.contains('block')) {
 			const filedBlock = document.querySelector('.field');
 			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
 			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
 			this.emit('finishStep', {root: this._root, block: event.target.textContent});
-		}
 	}
 
 	// событие, возникающее при наведении на блок (0: out, 1: over , 0: y, 1: x)
@@ -60,8 +58,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_createTurnListener() {
 		const filedBlock = document.querySelector('.field');
+		const container = document.querySelector('.container');
 		filedBlock.addEventListener('mousedown', this.down);
-		filedBlock.addEventListener('mouseup', this.up, true);
+		container.addEventListener('mouseup', this.up, true);
 	}
 
 	_removeTurnListener() {
