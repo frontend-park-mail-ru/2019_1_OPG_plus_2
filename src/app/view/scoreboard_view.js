@@ -19,7 +19,7 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 	}
 
 	onNextPageClick(event) {
-		let pageNum = parseInt(document.querySelector('.pages__num').textContent)
+		let pageNum = parseInt(document.querySelector('.pages__num').textContent);
 		if (event.target.classList.contains('pages__next')) {
 			this.emit('getNextPage', {root: this._root, page: pageNum + 1});
 		} else if (event.target.classList.contains('pages__back')) {

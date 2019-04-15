@@ -10,7 +10,6 @@ import sumbitTemplate from '../../blocks/html/body/application/container/content
 import errorTemplate from '../../blocks/html/body/application/container/content/forms/error/error.pug';
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
-import { validEmail, validLogin, validPassword } from '../../modules/utils.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';
