@@ -1,5 +1,4 @@
 const urlsToCache = [
-
     '/img/arrow_up_big.svg',
     '/img/edit.svg',
     '/img/pers1.svg',
