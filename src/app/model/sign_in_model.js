@@ -12,7 +12,7 @@ export default class SignInModel extends EventEmitterMixin(Model) {
 			.then(() => {
 				this.emit('alreadySignIn');
 			})
-			.catch((error) => { console.log(error);
+			.catch(() => {
 				this.emit('notSignIn', {root: root, isAuth: true});
 			});
 	}

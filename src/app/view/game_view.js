@@ -7,6 +7,8 @@ import nicknameTemplate from '../../blocks/html/body/application/container/playe
 import avatarTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import fieldTemplate from '../../blocks/html/body/application/container/content/field/field.pug';
 import blockTemplate from '../../blocks/html/body/application/container/content/field/block/block.pug';
+import modalTemplate from '../../blocks/html/body/application/container/modal/modal.pug';
+import linkTemplate from '../../blocks/html/body/application/container/content/buttons/link/link.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
@@ -28,7 +30,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			const filedBlock = document.querySelector('.field');
 			filedBlock.addEventListener('mouseover', this.over, true); // навесили событие, что курсор появился над элементом
 			filedBlock.addEventListener('mouseout', this.out, true); // навесили событие, что курсор ушел с элемента
-			this.emit('startStep', {block: event.target.textContent});
+			this.emit('startStep', {root: this._root, block: event.target.textContent});
 		}
 	}
 
@@ -38,39 +40,44 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			const filedBlock = document.querySelector('.field');
 			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
 			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
-			this.emit('finishStep', {block: event.target.textContent});
+			this.emit('finishStep', {root: this._root, block: event.target.textContent});
 		}
 	}
 
 	// событие, возникающее при наведении на блок (0: out, 1: over , 0: y, 1: x)
 	over(event) {
 		if (event.target.classList.contains('block')) { // если блок
-			this.emit('overBlockStep', {block: event.target.textContent});
+			this.emit('overBlockStep', {root: this._root, block: event.target.textContent});
 		}
 	}
 
 	// событие, возникающее при "уходе" мыши с блока
 	out(event) {
 		if (event.target.classList.contains('block')) {
-			this.emit('outBlockStep', {block: event.target.textContent});
+			this.emit('outBlockStep', {root: this._root, block: event.target.textContent});
 		}
 	}
 
 	_createTurnListener() {
 		const filedBlock = document.querySelector('.field');
-		filedBlock.removeEventListener('mousedown', this.down);
-		filedBlock.removeEventListener('mouseup', this.up, true);
 		filedBlock.addEventListener('mousedown', this.down);
 		filedBlock.addEventListener('mouseup', this.up, true);
 	}
 
+	_removeTurnListener() {
+		const filedBlock = document.querySelector('.field');
+		filedBlock.removeEventListener('mousedown', this.down);
+		filedBlock.removeEventListener('mouseup', this.up, true);
+	}
+
 	_createEventListeners() {
-		// super._createEventListeners();
+		super._createEventListeners();
 		this._createTurnListener();
 	}
 
 	_removeEventListeners() {
-		// super._removeEventListener();
+		super._removeEventListeners();
+		this._removeTurnListener();
 	}
 
 	_renderContainer() {
@@ -160,6 +167,32 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		});
 		genericBeforeEnd(fieldBlock, ...blocks);
 	}
+
+	_renderModal(data) {
+		const containerBlock = document.querySelector('.container.container_theme_game');
+		genericBeforeEnd(containerBlock, 
+			modalTemplate({
+				modifiers: [],
+				winner: data.winner,
+			}),
+		);
+
+		const modalBlock = document.querySelector('.modal__window');
+		genericBeforeEnd(modalBlock, 
+			linkTemplate({
+				title: 'PlAY AGAIN',
+				dataset: '/game',
+				hr: '/game',
+				modifiers: ['button_type_secondary'],
+			}),
+			linkTemplate({
+				title: 'EXIT',
+				dataset: '/',
+				hr: '/',
+				modifiers: [],
+			}),
+		)
+	}
 	
 	// TODO переделать else и вообще подумать насчет перендеринга
 	_render(data) {
@@ -172,6 +205,10 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			this._renderRightPlayer(data);
 			this._renderContent();
 			this._renderField(data);
+		} else if (data.winner) {
+			// debugger;
+			this._renderModal(data);
+			// return;
 		} else {
 			const headBlock = document.querySelector('.head.head_theme_game');
 			headBlock.innerHTML = '';

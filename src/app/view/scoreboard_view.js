@@ -113,7 +113,7 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 			this._renderBack();
 			this._renderContent(data);
 			this._renderUsers(data);
-		} else if (data.users.users && data.page > 0){
+		} else if (data.users.users && data.page > 0) {
 			const contentBlock = document.querySelector('.content.content_theme_scoreboard');
 			contentBlock.innerHTML = '';
 			this._renderContent(data);

@@ -1,6 +1,7 @@
 .button_type_secondary {
     background-color: white;
     transition: background-color 300ms ease;
+    color: black;
     @media (min-width: $desktop-min-width) {
         font-size: 2.3em;
     }

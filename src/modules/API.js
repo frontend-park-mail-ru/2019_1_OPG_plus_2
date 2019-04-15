@@ -35,21 +35,19 @@ export default class API {
      * Checks whether user is signed in or signed out
      */
 	static isAuth() {
-		// return new Promise((resolve, reject) => {
-			return AjaxModule.doGet({
-				path: `${HOST}/api/session`,
-			})
-				.then(response => {
-					if (!ok.includes(response.status)) {
-						throw response;
-					} else {
-						return response;
-					}
-				})
-				.catch(resp => {
-					console.err(resp.json());
-				});
-		// });
+		return AjaxModule.doGet({
+			path: `${HOST}/api/session`,
+		})
+		.then(response => {
+			if (!ok.includes(response.status)) {
+				throw response;
+			} else {
+				return response;
+			}
+		})
+		.catch(resp => {
+			console.err(resp.json());
+		});
 	}
 
 	/**
