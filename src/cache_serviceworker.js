@@ -8,18 +8,19 @@ const urlsToCache = [
     '/js/index.js',
     '/js/main.js',
     '/style.css',
-    '/sw.js'
+    '/rules',
+    '/game'
 ];
 
-const CACHE_NAME = 'my-site-cache-v1';
+const CACHE_NAME = 'colors-game';
 
 // we'll version our cache (and learn how to delete caches in
 // some other post)
 
-self.addEventListener('install', e => {
+self.addEventListener('install', event => {
     // once the SW is installed, go ahead and fetch the resources
     // to make this work offline
-    e.waitUntil(
+    event.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
             return cache.addAll(
                 urlsToCache
@@ -33,8 +34,15 @@ self.addEventListener('install', e => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         // ensure we check the *right* cache to match against
-        fetch(event.request).catch(() => {
-            return caches.match(event.request)
-        })
+        fetch(event.request)
+            .then((response) => {
+                caches.open(CACHE_NAME).then(cache => {
+                    return cache.add(event.request)
+                });
+                return Promise.resolve(response)
+            })
+            .catch(() => {
+                return caches.match(event.request)
+            })
     );
 });
