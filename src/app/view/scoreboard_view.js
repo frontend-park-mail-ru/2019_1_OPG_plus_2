@@ -98,6 +98,7 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 
 		genericBeforeEnd(mainBlock, 
 			rowTemplate({
+				page: data.page,
 				modifiers: [],
 				lst: [...data.users.users],
 				host: HOST,

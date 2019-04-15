@@ -120,7 +120,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 				type: 'text',
 				placeholder: 'Name',
 				req: true,
-				value: `${data.email ? data.email : ''}`,
+				value: `${data.name ? data.name : ''}`,
 			}),
 			formTemplate({
 				modifiers: [],
@@ -128,7 +128,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 				type: 'email',
 				placeholder: 'E-mail',
 				req: true,
-				value: `${data.name ? data.name: ''}`,
+				value: `${data.email ? data.email: ''}`,
 			}),
 			formTemplate({
 				modifiers: [],

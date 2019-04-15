@@ -58,8 +58,8 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		let difference = 0;
 		if (this._game.start.length) {
 			this._game.start[0] - this._game.end[0] ? difference = Math.abs(this._game.start[0] - this._game.end[0]) + 1 : difference = Math.abs(this._game.start[1] - this._game.end[1]) + 1;
-			if (this._game.cellsCount - difference <= 1) {
-				this._game.winner = this._game.whoseTurn;
+			if (this._game.cellsCount - difference === 0) {
+				this._game.whoseTurn === 'Player1' ? this._game.winner = 'Player2' : this._game.winner = 'Player1'; 
 				this.emit('endGame', {root: root, gameState: this._game});
 			}
 		}
