@@ -14,6 +14,10 @@ import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import { genericBeforeEnd } from '../../modules/helpers.js';
+import { DOWN_EVENT, 
+		UP_BLOCK_EVENT,
+		OVER_BLOCK_EVENT,
+		OUT_BLOCK_EVENT } from '../../modules/events';
 
 export default class GameView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -27,47 +31,61 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	// событие, возникающее при нажатии ЛКМ
 	down(event) {
 		if (event.target.classList.contains('block')) { // если данный элемент блок
+			console.log('down');
 			const filedBlock = document.querySelector('.field');
 			filedBlock.addEventListener('mouseover', this.over, true); // навесили событие, что курсор появился над элементом
 			filedBlock.addEventListener('mouseout', this.out, true); // навесили событие, что курсор ушел с элемента
-			this.emit('startStep', {root: this._root, block: event.target.textContent});
+			this._currentBlock = event.target; // запоминаем блок
+			this.emit(DOWN_EVENT, {block: event.target.textContent});
 		}
 	}
 
 	// событие, возникающее при отпускании ЛКМ
 	up(event) {
 		if (event.target.classList.contains('block')) {
+			console.log('up on field');
 			const filedBlock = document.querySelector('.field');
 			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
 			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
-			this.emit('finishStep', {root: this._root, block: event.target.textContent});
+			this._endBlock = event.target;
+			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
+		} else {
+			console.log('up not on field');
+			const filedBlock = document.querySelector('.field');
+			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
+			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
+			this._endBlock = event.target;
+			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 		}
 	}
 
 	// событие, возникающее при наведении на блок (0: out, 1: over , 0: y, 1: x)
 	over(event) {
 		if (event.target.classList.contains('block')) { // если блок
-			this.emit('overBlockStep', {root: this._root, block: event.target.textContent});
+			this._currentBlock = event.target; // запоминаем блок
+			this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
 		}
 	}
 
 	// событие, возникающее при "уходе" мыши с блока
 	out(event) {
 		if (event.target.classList.contains('block')) {
-			this.emit('outBlockStep', {root: this._root, block: event.target.textContent});
+			this.emit(OUT_BLOCK_EVENT, {block: event.target.textContent});
 		}
 	}
 
 	_createTurnListener() {
 		const filedBlock = document.querySelector('.field');
-		filedBlock.addEventListener('mousedown', this.down);
-		filedBlock.addEventListener('mouseup', this.up, true);
+		const appBlock = document.querySelector('#application');
+		filedBlock.addEventListener('mousedown', this.down, true);
+		appBlock.addEventListener('mouseup', this.up, true);
 	}
 
 	_removeTurnListener() {
 		const filedBlock = document.querySelector('.field');
+		const appBlock = document.querySelector('#application');
 		filedBlock.removeEventListener('mousedown', this.down);
-		filedBlock.removeEventListener('mouseup', this.up, true);
+		appBlock.removeEventListener('mouseup', this.up, true);
 	}
 
 	_createEventListeners() {
@@ -156,24 +174,26 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_renderField(data) {
 		const fieldBlock = this._root.querySelector('.field');
-		const blocks = []; // TODO а вообще резонно рендерить 25 блоков???
+		const numBlocks = 25;
+		const blocks = [];
 
-		[...Array(25)].forEach((_, i) => {
-			if (data.close.indexOf( i ) != -1) {
+		[...Array(numBlocks)].forEach((_, i) => {
+			if (data.disableBlocks.indexOf( i ) != -1) {
 				blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
 			} else {
 				blocks.push(blockTemplate({ modifiers: [''], num: i }));
 			}
 		});
+
 		genericBeforeEnd(fieldBlock, ...blocks);
 	}
 
-	_renderModal(data) {
+	_renderModal(winner) {
 		const containerBlock = document.querySelector('.container.container_theme_game');
 		genericBeforeEnd(containerBlock, 
 			modalTemplate({
 				modifiers: [],
-				winner: data.winner,
+				winner: winner,
 			}),
 		);
 
@@ -193,8 +213,25 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			}),
 		)
 	}
+
+	apply({player = 'Player1', ans = false}) {
+		if (ans) {
+			player === 'Player1' 
+				? this._currentBlock.classList.add('block_theme_left-active') 
+				: this._currentBlock.classList.add('block_theme_right-active');
+		}
+	}
+
+	endStep({winner = null, ans = false, player = 'Player1'} = {}) {
+		if (winner) {
+			this._renderModal(winner);
+		} else if (ans) {
+			const headBlock = this._root.querySelector('.head.head_theme_game');
+			headBlock.innerHTML = '';
+			this._renderHead({whoseTurn: player});
+		}
+	}
 	
-	// TODO переделать else и вообще подумать насчет перендеринга
 	_render(data) {
 		this._root.innerHTML = '';
 		this._renderContainer();
@@ -204,50 +241,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this._renderRightPlayer(data);
 		this._renderContent();
 		this._renderField(data);
-		// if (!data.isStart) {
-		// 	this._root.innerHTML = '';
-		// 	this._renderContainer();
-		// 	this._renderMain();
-		// 	this._renderHead(data);
-		// 	this._renderLeftPlayer(data);
-		// 	this._renderRightPlayer(data);
-		// 	this._renderContent();
-		// 	this._renderField(data);
-		// } else if (data.winner) {
-		// 	this._renderModal(data);
-		// } else {
-		// 	const headBlock = document.querySelector('.head.head_theme_game');
-		// 	headBlock.innerHTML = '';
-		// 	genericBeforeEnd(headBlock, 
-		// 		sideTemplate({
-		// 			modifiers: [`${data.whoseTurn === 'Player1' ? 'side_theme_left-active' : 'side_theme_left-passive'}`],
-		// 		}),
-		// 		sideTemplate({
-		// 			modifiers: [`${data.whoseTurn === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
-		// 		})
-		// 	);
-		// 	const blocks = document.querySelectorAll('.block');
-		// 	blocks.forEach((el, i) => {
-		// 		if (data.steps.indexOf( i ) != -1) {
-		// 			if (data.whoseTurn === 'Player1' && !el.classList.contains('block_theme_left-active') && !el.classList.contains('block_theme_right-active')) {
-		// 				el.classList.add('block_theme_left-active');
-		// 			} else if (data.whoseTurn === 'Player2' && !el.classList.contains('block_theme_right-active') && !el.classList.contains('block_theme_left-active')) {
-		// 				el.classList.add('block_theme_right-active');
-		// 			}
-		// 		} 
-		// 		if (data.del.indexOf( i ) != -1) {
-		// 			if (el.classList.contains('block_theme_left-active')) {
-		// 				el.classList.remove('block_theme_left-active');
-		// 			} else {
-		// 				el.classList.remove('block_theme_right-active'); 
-		// 			}
-		// 		}
-		// 	});
-		// }
-
 	}
 
-	open({ root = {}, data = {} }) {
+	open({root = {}, data = {}}) {
 		super.open({root, data});
 	}
 }

@@ -5,10 +5,10 @@
 
 .side_theme_left-passive {
     @media (min-width: $desktop-min-width) {
-        grid-column: 1 / 4;
+        grid-column: 1 / 6;
         grid-row: 2 / -2;
         border-radius: 0 10px 10px 0;
         background-color: orange;
-        animation: passive 300ms forwards ease-in-out;
+        // animation: passive 300ms forwards ease-in-out;
     }
 }

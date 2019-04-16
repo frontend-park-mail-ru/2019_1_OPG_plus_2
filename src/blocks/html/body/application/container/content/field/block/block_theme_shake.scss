@@ -1,0 +1,8 @@
+@keyframes shake {
+    0% { transform: rotate(45deg); }
+    100% { transform: rotate(45deg); }
+}
+
+.block_theme_shake {
+    animation: shake 300ms forwards linear;
+}
