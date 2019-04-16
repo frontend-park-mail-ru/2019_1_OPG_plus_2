@@ -127,17 +127,20 @@ export default class Game {
 
     getDisableBlocks() {
         if (!this._disableBlocks.length) {
-            const min = 2; // минимальное количество блоков, которое можно заблокировать на поле
-            const max = 8; // максимальное колчиество блоков, которое можно заблокировать на поле
-            const rand = min + Math.floor(Math.random() * (max + 1 - min)); // рандомим колчиество
-            this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
-                                     // в зависимости от количества заблокированных клеток
+            let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
 
             const numBlocks = 24; // количество блоков на поле для рандома
             [...Array(rand)].forEach(() => { // рандомим заблокированные блоки
                 let randomBlock = Math.floor(Math.random() * (numBlocks));
-                this._disableBlocks.push(randomBlock);
+                if (!this._disableBlocks.includes( randomBlock )) {
+                    this._disableBlocks.push(randomBlock);
+                } else {
+                    rand--;
+                }
             });
+
+            this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
+            // в зависимости от количества заблокированных клеток
         }
 
         return this._disableBlocks;
@@ -176,7 +179,7 @@ export default class Game {
             }
 
             this._cellsCount -= difference;
-
+            console.log(this._cellsCount);
             return false;
         }
     }
