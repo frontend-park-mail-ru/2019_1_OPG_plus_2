@@ -74,6 +74,8 @@ export default class Game {
         } else if (isDisable || isEnemyStep) {
             this._stopFlag = true;
         }
+
+        return false;
     }
 
     doFinishStep({block = null} = {}) {

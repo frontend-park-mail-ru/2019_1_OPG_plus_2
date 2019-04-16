@@ -33,13 +33,13 @@ export default class GameModel extends EventEmitterMixin(Model) {
 	}
 
 	doFinishStep({block = null} = {}) {
-		let ans = this._game.doFinishStep({block}); // вернет true, если ход можно закончить
+		this._game.doFinishStep({block}); // вернет true, если ход можно закончить
 		let isWinner = this._game.isWinner(); // возвращает true если был win condition
-		if (ans && isWinner) { // если ход можно закончить и победитель существует
+		if (isWinner) { // если ход можно закончить и победитель существует
 			// издать событие конца игры
 			this.emit(FINISH_GAME_EVENT, {
 				winner: this._game.getWinner()}); // по окончании игры нам надо знать победителя
-		} else if (ans) { // если ход можно закончить
+		} else { // если ход можно закончить
 			// издать событие конца хода
 			this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn(), ans: ans}); // по окончании хода, 
 																						// нам надо знать, 
