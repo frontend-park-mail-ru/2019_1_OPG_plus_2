@@ -31,7 +31,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	// событие, возникающее при нажатии ЛКМ
 	down(event) {
 		if (event.target.classList.contains('block')) { // если данный элемент блок
-			console.log('down');
 			const filedBlock = document.querySelector('.field');
 			filedBlock.addEventListener('mouseover', this.over, true); // навесили событие, что курсор появился над элементом
 			filedBlock.addEventListener('mouseout', this.out, true); // навесили событие, что курсор ушел с элемента
@@ -42,21 +41,11 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	// событие, возникающее при отпускании ЛКМ
 	up(event) {
-		if (event.target.classList.contains('block')) {
-			console.log('up on field');
-			const filedBlock = document.querySelector('.field');
-			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
-			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
-			this._endBlock = event.target;
-			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
-		} else {
-			console.log('up not on field');
-			const filedBlock = document.querySelector('.field');
-			filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
-			filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
-			this._endBlock = event.target;
-			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
-		}
+		const filedBlock = document.querySelector('.field');
+		filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
+		filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
+		this._endBlock = event.target;
+		this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 	}
 
 	// событие, возникающее при наведении на блок (0: out, 1: over , 0: y, 1: x)
@@ -222,10 +211,10 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		}
 	}
 
-	endStep({winner = null, ans = false, player = 'Player1'} = {}) {
+	endStep({winner = null, player = 'Player1'} = {}) {
 		if (winner) {
 			this._renderModal(winner);
-		} else if (ans) {
+		} else {
 			const headBlock = this._root.querySelector('.head.head_theme_game');
 			headBlock.innerHTML = '';
 			this._renderHead({whoseTurn: player});

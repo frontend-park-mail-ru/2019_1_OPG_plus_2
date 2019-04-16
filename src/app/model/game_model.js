@@ -41,7 +41,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 				winner: this._game.getWinner()}); // по окончании игры нам надо знать победителя
 		} else { // если ход можно закончить
 			// издать событие конца хода
-			this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn(), ans: ans}); // по окончании хода, 
+			this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn()}); // по окончании хода, 
 																						// нам надо знать, 
 																						// чей сейчас ход и можно ли его завершить
 		}
