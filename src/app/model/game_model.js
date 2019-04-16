@@ -1,5 +1,7 @@
 import Model from './model';
 import { EventEmitterMixin } from '../event_emitter';
+import Game from '../../modules/game';
+import { INIT_EVENT, INIT_ERROR_EVENT } from '../../modules/events';
 
 // TODO сделать без перерендринга страницы при одном ходе, для этого надо разсепарэйтить компоненты странички
 // TODO сделать запрещенные шаги
@@ -8,39 +10,49 @@ import { EventEmitterMixin } from '../event_emitter';
 export default class GameModel extends EventEmitterMixin(Model) {
 	constructor() {
 		super();
-		this.whoseTurn = null; // какой игрок ходит
-		this.cellsCount = 25; // TODO сделать так, чтобы это был не хардкод, 
-							  // а вообще это такая штука которая отвечает за заполненность клеток
-		this.listeners = ['Player1', 'Player2']; // игроки
-		this.steps = []; // сделанные шаги
+		// this.whoseTurn = null; // какой игрок ходит
+		// this.cellsCount = 25; // TODO сделать так, чтобы это был не хардкод, 
+		// 					  // а вообще это такая штука которая отвечает за заполненность клеток
+		// this.listeners = ['Player1', 'Player2']; // игроки
+		// this.steps = []; // сделанные шаги
 	}
 
-	getData({root = {}} = {}) {
-		this.cellsCount = 21;
-		this.whoseTurn = this.listeners[0];
-		// инициализируем игру
-		this._game = { // состояние игры
-			start: [], // начальная позиция
-			end: [], // конечная позиция
-			x: true, // можно ли ходить по x
-			y: true, // можно ли ходить по y
-			firstFlag: false, // данная клетка обрабатывается впервые
-			points: [null, null], // каретка, которая отслеживает предыдущую точку и последуюущую точку
-			forward: null, // направление движения (true - вверх или вправо, false - вниз или влево)
-			close: [1, 13, 15, 8], // заблокированные клетки TODO подумать как их генерировать
-			del: [], // удаленные клетки
-			whoseTurn: this.whoseTurn,
-			cellsCount: this.cellsCount,
-			steps: [],
-			firstPlayerSteps: [],
-			secondPlayerSteps: [],
-			stopFlag: false,
-			isStart: false,
-			winner: false,
-		};
 
-		this.emit('start', { root: root, gameState: this._game });
+	init({root = {}} = {}) {
+		this._game = new Game();
+
+		this.emit('startGame', {
+			root: root, 
+			firstPlayer: this._game.getFirstPlayer(), 
+			disableBlocks: this._game.getDisableBlocks(),
+		});
 	}
+	// getData({root = {}} = {}) {
+		// this.cellsCount = 21;
+		// this.whoseTurn = this.listeners[0];
+		// // инициализируем игру
+		// this._game = { // состояние игры
+		// 	start: [], // начальная позиция
+		// 	end: [], // конечная позиция
+		// 	x: true, // можно ли ходить по x
+		// 	y: true, // можно ли ходить по y
+		// 	firstFlag: false, // данная клетка обрабатывается впервые
+		// 	points: [null, null], // каретка, которая отслеживает предыдущую точку и последуюущую точку
+		// 	forward: null, // направление движения (true - вверх или вправо, false - вниз или влево)
+		// 	close: [1, 13, 15, 8], // заблокированные клетки TODO подумать как их генерировать
+		// 	del: [], // удаленные клетки
+		// 	whoseTurn: this.whoseTurn,
+		// 	cellsCount: this.cellsCount,
+		// 	steps: [],
+		// 	firstPlayerSteps: [],
+		// 	secondPlayerSteps: [],
+		// 	stopFlag: false,
+		// 	isStart: false,
+		// 	winner: false,
+		// };
+
+		// this.emit('start', { root: root, gameState: this._game });
+	// }
 
 	reset() {
 		this._game.stopFlag = false;

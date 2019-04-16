@@ -196,46 +196,54 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	
 	// TODO переделать else и вообще подумать насчет перендеринга
 	_render(data) {
-		if (!data.isStart) {
-			this._root.innerHTML = '';
-			this._renderContainer();
-			this._renderMain();
-			this._renderHead(data);
-			this._renderLeftPlayer(data);
-			this._renderRightPlayer(data);
-			this._renderContent();
-			this._renderField(data);
-		} else if (data.winner) {
-			this._renderModal(data);
-		} else {
-			const headBlock = document.querySelector('.head.head_theme_game');
-			headBlock.innerHTML = '';
-			genericBeforeEnd(headBlock, 
-				sideTemplate({
-					modifiers: [`${data.whoseTurn === 'Player1' ? 'side_theme_left-active' : 'side_theme_left-passive'}`],
-				}),
-				sideTemplate({
-					modifiers: [`${data.whoseTurn === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
-				})
-			);
-			const blocks = document.querySelectorAll('.block');
-			blocks.forEach((el, i) => {
-				if (data.steps.indexOf( i ) != -1) {
-					if (data.whoseTurn === 'Player1' && !el.classList.contains('block_theme_left-active') && !el.classList.contains('block_theme_right-active')) {
-						el.classList.add('block_theme_left-active');
-					} else if (data.whoseTurn === 'Player2' && !el.classList.contains('block_theme_right-active') && !el.classList.contains('block_theme_left-active')) {
-						el.classList.add('block_theme_right-active');
-					}
-				} 
-				if (data.del.indexOf( i ) != -1) {
-					if (el.classList.contains('block_theme_left-active')) {
-						el.classList.remove('block_theme_left-active');
-					} else {
-						el.classList.remove('block_theme_right-active'); 
-					}
-				}
-			});
-		}
+		this._root.innerHTML = '';
+		this._renderContainer();
+		this._renderMain();
+		this._renderHead(data);
+		this._renderLeftPlayer(data);
+		this._renderRightPlayer(data);
+		this._renderContent();
+		this._renderField(data);
+		// if (!data.isStart) {
+		// 	this._root.innerHTML = '';
+		// 	this._renderContainer();
+		// 	this._renderMain();
+		// 	this._renderHead(data);
+		// 	this._renderLeftPlayer(data);
+		// 	this._renderRightPlayer(data);
+		// 	this._renderContent();
+		// 	this._renderField(data);
+		// } else if (data.winner) {
+		// 	this._renderModal(data);
+		// } else {
+		// 	const headBlock = document.querySelector('.head.head_theme_game');
+		// 	headBlock.innerHTML = '';
+		// 	genericBeforeEnd(headBlock, 
+		// 		sideTemplate({
+		// 			modifiers: [`${data.whoseTurn === 'Player1' ? 'side_theme_left-active' : 'side_theme_left-passive'}`],
+		// 		}),
+		// 		sideTemplate({
+		// 			modifiers: [`${data.whoseTurn === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
+		// 		})
+		// 	);
+		// 	const blocks = document.querySelectorAll('.block');
+		// 	blocks.forEach((el, i) => {
+		// 		if (data.steps.indexOf( i ) != -1) {
+		// 			if (data.whoseTurn === 'Player1' && !el.classList.contains('block_theme_left-active') && !el.classList.contains('block_theme_right-active')) {
+		// 				el.classList.add('block_theme_left-active');
+		// 			} else if (data.whoseTurn === 'Player2' && !el.classList.contains('block_theme_right-active') && !el.classList.contains('block_theme_left-active')) {
+		// 				el.classList.add('block_theme_right-active');
+		// 			}
+		// 		} 
+		// 		if (data.del.indexOf( i ) != -1) {
+		// 			if (el.classList.contains('block_theme_left-active')) {
+		// 				el.classList.remove('block_theme_left-active');
+		// 			} else {
+		// 				el.classList.remove('block_theme_right-active'); 
+		// 			}
+		// 		}
+		// 	});
+		// }
 
 	}
 
