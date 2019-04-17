@@ -205,9 +205,15 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	apply({player = 'Player1', ans = false}) {
 		if (ans) {
-			player === 'Player1' 
-				? this._currentBlock.classList.add('block_theme_left-active') 
-				: this._currentBlock.classList.add('block_theme_right-active');
+			if (player === 'Player1') {
+				this._currentBlock.classList.contains('block_theme_left-active') 
+					? this._currentBlock.classList.remove('block_theme_left-active')
+					: this._currentBlock.classList.add('block_theme_left-active');
+			} else {
+				this._currentBlock.classList.contains('block_theme_right-active') 
+					? this._currentBlock.classList.remove('block_theme_right-active')
+					: this._currentBlock.classList.add('block_theme_right-active');
+			}
 		}
 	}
 

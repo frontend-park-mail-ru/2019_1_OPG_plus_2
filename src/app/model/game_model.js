@@ -5,7 +5,8 @@ import { INIT_EVENT,
 		 END_DOWN_EVENT, 
 		 FINISH_GAME_EVENT, 
 		 FINISH_STEP_EVENT,
-		 END_OVER_BLOCK_EVENT } from '../../modules/events';
+		 END_OVER_BLOCK_EVENT,
+		 END_OUT_BLOCK_EVENT } from '../../modules/events';
 
 export default class GameModel extends EventEmitterMixin(Model) {
 	constructor() {
@@ -30,6 +31,11 @@ export default class GameModel extends EventEmitterMixin(Model) {
 	doOverStep({block = null} = {}) {
 		let ans = this._game.doStep({block});
 		this.emit(END_OVER_BLOCK_EVENT, {player: this._game.getWhoseTurn(), ans: ans});
+	}
+
+	doOutStep({block = null} = {}) {
+		let ans = this._game.doOutStep({block});
+		this.emit(END_OUT_BLOCK_EVENT, {player: this._game.getWhoseTurn(), ans: ans});
 	}
 
 	doFinishStep({block = null} = {}) {

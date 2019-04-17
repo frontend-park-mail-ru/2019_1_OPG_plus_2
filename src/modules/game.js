@@ -7,9 +7,7 @@ export default class Game {
         this._listeners = listeners; // игроки
         this._whoseTurn = firstStep; // тот, кто будет ходить первым
         this._disableBlocks = disableBlocks; // заблокированные блоки
-        this._startPoint = []; // начальная позиция хода
-        this._secondPoint = []; // вторая точка, для инициализации хода TODO сбросить при наведении на startPoint
-        this._lastPoint = []; // последняя запоменная точка
+        this._steps = []; // шаги текущего игрока(в блоках)
         this._secondStepFlag = false; // флаг, есть ли второй шаг(это нужно для уравнения прямой)
         this._firstPlayerStep = 'x'; // обозначение хода первого игрока
         this._secondPlayerStep = 'o'; // обозначение хода второго игрока
@@ -21,6 +19,9 @@ export default class Game {
         this._cellsCount = 25; // количество оставшихся шагов
         this._winner = null; // победитель
         this._stopFlag = false; // флаг для остановки отрисовки
+        this._pastSteps = []; // массив учета всех шагов
+        this._forwards = true;
+        this._nextBlock = null;
     }
 
 
@@ -32,11 +33,10 @@ export default class Game {
         const isDiagonal = this.isDiagonal({coordinates});
         const isEnemyStep = this.isEnemyStep({coordinates});
         const isDisable = this.isDisable({block: intBlock});
-        this._startPoint = coordinates;
 
         if (!isDiagonal && !isEnemyStep && !isDisable) {
-            this._lastPoint = coordinates;
             let isSet = this.setStep({coordinates});
+            this._steps.push(intBlock);
 
             return isSet;
         } else if (isDisable || isEnemyStep) {
@@ -55,11 +55,12 @@ export default class Game {
         const isEnemyStep = this.isEnemyStep({coordinates});
         const isConsistStraight = this.isConsistStraight({point: coordinates});
 
+        this._nextBlock = this.isX() ? intBlock + 1: intBlock + 5;
+
         if (!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag) {
             this.setStep({coordinates});
-            this._lastPoint = coordinates;
-            this._secondPoint = coordinates;
             this._secondStepFlag = true;
+            this._steps.push(intBlock);
 
             return true;
         } else if (isDisable || isEnemyStep || !isStep) {
@@ -68,7 +69,7 @@ export default class Game {
 
         if (!isDisable && isConsistStraight && isStep && !this._stopFlag) {
             this.setStep({coordinates});
-            this._lastPoint = coordinates;
+            this._steps.push(intBlock);
 
             return true;
         } else if (isDisable || isEnemyStep) {
@@ -78,24 +79,80 @@ export default class Game {
         return false;
     }
 
+    doOutStep({block = null} = {}) {
+        // const intBlock = parseInt(block, 10);
+        // const coordinates = this.getCoordinates({block: intBlock});
+        // this.isForwards({coordinates});
+        // console.log(block, this._forwards);
+        // if (this._forwards) {
+        //     return false;
+        // }
+        // console.log(block, this._steps, this._nextBlock);
+        // if (this._nextBlock) {
+        //     (this._nextBlock - block) > 0 ? console.log('forward') : console.log('back');
+        // }
+        // console.log(this._stepsMatrix);
+        // return true;
+    }
+
     doFinishStep({block = null} = {}) {
         const intBlock = parseInt(block, 10);
-        const coordinates = this.getCoordinates({block: intBlock});
-        const firstBlock = this.getBlock({coordinates: this._startPoint});
-        const isFirstDisable = this.isDisable({block: firstBlock});
         const isDisable = this.isDisable({block: intBlock});
-        const isFirstEnemyStep = this.isEnemyStep({coordinates: this._startPoint});
-        const isPointsEqv = this.isPointsEqv({point1: this._startPoint, point2: coordinates});
+        const lastCoordinates = this.getCoordinates({block: this.getLastBlock()});
 
-        if ((isDisable && this._stopFlag && isPointsEqv) || isFirstDisable || isFirstEnemyStep) {
-            this._stopFlag = false;             
+        if ((isDisable && this._steps.length === 0)
+            || (this._steps.length === 0)
+            || (this._steps.length === 1 && this._pastSteps.includes( intBlock ))) {
+            this._stopFlag = false;
+            this.reset();
+
+            return false;
         } else {
-            if (!this.isEnd({finishPoint: this._lastPoint})) {
+            this.concatUnion({arr1: this._pastSteps, arr2: this._steps});
+            if (!this.isEnd({finishPoint: lastCoordinates})) {
                 this.changeSide();
             }
         }
 
         return true;
+    }
+
+    concatUnion({arr1 = [], arr2 = []} = {}) {
+        for (let i = 0; i < arr2.length; i++) {
+            if (!arr1.includes(arr2)) {
+                arr1.push(arr2[i]);
+            }
+        }
+    }
+
+    getLastBlock(){
+        return this._steps[this._steps.length - 1];
+    }
+
+    isX() {
+        const secondPoint = this.getCoordinates({block: this._steps[1]});
+        const startPoint = this.getCoordinates({block: this._steps[0]});
+        if (secondPoint && startPoint) {
+            return (secondPoint[0] - startPoint[0]) === 0;
+        }
+    }
+
+    isForwards({coordinates = []} = {}) {
+        if (this._secondPoint.length) {
+            if (this.isX()) {
+                if (coordinates[1] - this._lastPoint[1] > 0) {
+                    this._forwards = true;
+                } else {
+                    this._forwards = false;
+                }
+            } else {
+                if (coordinates[0] - this._lastPoint[0] > 0) {
+                    this._forwards = true;
+                } else {
+                    this._forwards = false;
+                }
+            }
+        }
     }
 
     getCoordinates({block = null} = {}) {
@@ -111,7 +168,9 @@ export default class Game {
     }
 
     reset() {
+        this._steps = [];
         this._secondPoint = [];
+        this._lastPoint = [];
         this._secondStepFlag = false;
         this._stopFlag = false;
     }
@@ -148,15 +207,19 @@ export default class Game {
 
     isConsistStraight({point = []} = {}) {
         if (point.length) {
-            let firstPart = point[0] * this._secondPoint[1] 
-                - this._secondPoint[1] * this._startPoint[0] 
-                - this._startPoint[1] * point[0]
-                + this._startPoint[1] * this._startPoint[0];
+            const startPoint = this.getCoordinates({block: this._steps[0]});
+            const secondPoint = this.getCoordinates({block: this._steps[1]});
 
-            let secondPart = point[1] * this._secondPoint[0] 
-                            - point[1] * this._startPoint[0] 
-                            - this._startPoint[1] * this._secondPoint[0] 
-                            + this._startPoint[1] * this._startPoint[0];
+            let firstPart = point[0] * secondPoint[1] 
+                - secondPoint[1] * startPoint[0] 
+                - startPoint[1] * point[0]
+                + startPoint[1] * startPoint[0];
+
+            let secondPart = point[1] * secondPoint[0] 
+                        - point[1] * startPoint[0] 
+                        - startPoint[1] * secondPoint[0] 
+                        + startPoint[1] * startPoint[0];
+
 
             return firstPart === secondPart;
         }
@@ -165,11 +228,12 @@ export default class Game {
     }
 
     isEnd({finishPoint = []} = {}) {
-        if (this._startPoint.length) {
-            let difference = this._startPoint[0] - finishPoint[0] 
-                    ? Math.abs(this._startPoint[0] - finishPoint[0]) + 1 
-                    : Math.abs(this._startPoint[1] - finishPoint[1]) + 1;
-            
+        const startPoint = this.getCoordinates({block: this._steps[0]});
+        if (startPoint.length) {
+            let difference = startPoint[0] - finishPoint[0] 
+                    ? Math.abs(startPoint[0] - finishPoint[0]) + 1 
+                    : Math.abs(startPoint[1] - finishPoint[1]) + 1;
+
             if (this._cellsCount - difference <= 1) {
                 this._winner = this._whoseTurn === this._listeners[0] 
                         ? this._listeners[1] 
@@ -177,9 +241,8 @@ export default class Game {
                 
                 return true;
             }
-
             this._cellsCount -= difference;
-            console.log(this._cellsCount);
+
             return false;
         }
     }
@@ -204,7 +267,8 @@ export default class Game {
     }
 
     isDiagonal({point = []} = {}) {
-        return Math.abs(this._startPoint[0] - point[0]) === Math.abs(this._startPoint[1] - point[1]);
+        let startPoint = this.getCoordinates({block: this._steps[0]});
+        return Math.abs(startPoint[0] - point[0]) === Math.abs(startPoint[1] - point[1]);
     }
 
     isDisable({block = null} = {}) {
@@ -215,7 +279,7 @@ export default class Game {
         return this._stepsMatrix[coordinates[0]][coordinates[1]] === '*';
     }
 
-    isEnemyStep({coordinates}) {
+    isEnemyStep({coordinates = []} = {}) {
         if (this._whoseTurn === this._listeners[0]) {
             return this._stepsMatrix[coordinates[0]][coordinates[1]] === this._secondPlayerStep;
         } else {
