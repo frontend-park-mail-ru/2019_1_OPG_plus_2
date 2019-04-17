@@ -1,24 +1,24 @@
 export default class Controller {
-    constructor({
-                    model = {},
-                    view = {},
-                    router = {},
-                } = {}) {
-        this._model = model;
-        this._view = view;
-        this._router = router;
-        this.onNavigate = this.onNavigate.bind(this);
-    }
+	constructor({
+		model = {},
+		view = {},
+		router = {},
+	} = {}) {
+		this._model = model;
+		this._view = view;
+		this._router = router;
+		this.onNavigate = this.onNavigate.bind(this);
+	}
 
-    render({root = {}, data = {}} = {}) {
-        this._view.open({root, data});
-    }
+	render({root = {}, data = {}} = {}) {
+		this._view.open({root, data});
+	}
 
     open({root = {}, data = {}} = {}) {
         this._model.init({root, data});
     }
 
-    close() {
-        this._view.close();
-    }
+	close() {
+		this._view.close();
+	}
 }

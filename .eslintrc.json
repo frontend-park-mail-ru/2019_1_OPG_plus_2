@@ -5,7 +5,7 @@
   },
   "extends": "eslint:recommended",
   "globals": {
-    "ORIGIN": true
+    "HOST": true
   },
   "parserOptions": {
     "ecmaVersion": 2018,

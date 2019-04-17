@@ -191,7 +191,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				hr: '/',
 				modifiers: [],
 			}),
-		)
+		);
 	}
 
 	apply({player = 'Player1', ans = false}) {

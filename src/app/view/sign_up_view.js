@@ -10,7 +10,6 @@ import sumbitTemplate from '../../blocks/html/body/application/container/content
 import errorTemplate from '../../blocks/html/body/application/container/content/forms/error/error.pug';
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
-import { validEmail, validLogin, validPassword } from '../../modules/utils.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';
@@ -120,7 +119,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 				type: 'text',
 				placeholder: 'Name',
 				req: true,
-				value: `${data.email ? data.email : ''}`,
+				value: `${data.name ? data.name : ''}`,
 			}),
 			formTemplate({
 				modifiers: [],
@@ -128,7 +127,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 				type: 'email',
 				placeholder: 'E-mail',
 				req: true,
-				value: `${data.name ? data.name: ''}`,
+				value: `${data.email ? data.email: ''}`,
 			}),
 			formTemplate({
 				modifiers: [],
