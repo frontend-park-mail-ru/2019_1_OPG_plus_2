@@ -20,65 +20,79 @@ export default class Game {
         this._winner = null; // победитель
         this._stopFlag = false; // флаг для остановки отрисовки
         this._pastSteps = []; // массив учета всех шагов
-        this._forwards = true;
-        this._nextBlock = null;
     }
 
-
-    // TODO документаци для функций игры
-
+    /**
+     * Handles the first step
+     * @param Object Object with block
+     * @returns {bool} Return true if you can set the block
+     */
     doStartStep({block = null} = {}) {
-        const intBlock = parseInt(block, 10);
-        const coordinates = this.getCoordinates({block: intBlock});
-        const isDiagonal = this.isDiagonal({coordinates});
-        const isEnemyStep = this.isEnemyStep({coordinates});
-        const isDisable = this.isDisable({block: intBlock});
+        if (this.isBlock({block})) {
+            const intBlock = parseInt(block, 10);
+            const coordinates = this.getCoordinates({block: intBlock});
+            const isDiagonal = this.isDiagonal({coordinates});
+            const isEnemyStep = this.isEnemyStep({coordinates});
+            const isDisable = this.isDisable({block: intBlock});
 
-        if (!isDiagonal && !isEnemyStep && !isDisable) {
-            let isSet = this.setStep({coordinates});
-            this._steps.push(intBlock);
+            if (!isDiagonal && !isEnemyStep && !isDisable) {
+                let isSet = this.setStep({coordinates});
+                this._steps.push(intBlock);
 
-            return isSet;
-        } else if (isDisable || isEnemyStep) {
-            this._stopFlag = true;
+                return isSet;
+            } else if (isDisable || isEnemyStep) {
+                this._stopFlag = true;
+            }
         }
 
         return false;
     }
 
+    /**
+     * Handles each step between first and finish steps
+     * @param Object Object with block
+     * @returns {bool} Return true if you can set the block
+     */
     doStep({block = null} = {}) {
-        const intBlock = parseInt(block, 10);
-        const coordinates = this.getCoordinates({block: intBlock});
-        const isDiagonal = this.isDiagonal({coordinates});
-        const isStep = this.isStep({coordinates});
-        const isDisable = this.isDisable({block: intBlock});
-        const isEnemyStep = this.isEnemyStep({coordinates});
-        const isConsistStraight = this.isConsistStraight({point: coordinates});
+        if (this.isBlock({block})) {
+            const intBlock = parseInt(block, 10);
+            const coordinates = this.getCoordinates({block: intBlock});
+            const isDiagonal = this.isDiagonal({coordinates});
+            const isStep = this.isStep({coordinates});
+            const isDisable = this.isDisable({block: intBlock});
+            const isEnemyStep = this.isEnemyStep({coordinates});
+            const isConsistStraight = this.isConsistStraight({point: coordinates});
 
-        if (!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag) {
-            this.setStep({coordinates});
-            this._secondStepFlag = true;
-            this._steps.push(intBlock);
+            if (!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag) {
+                this.setStep({coordinates});
+                this._secondStepFlag = true;
+                this._steps.push(intBlock);
 
-            return true;
-        } else if (isDisable || isEnemyStep || !isStep) {
-            this._stopFlag = true;
+                return true;
+            } else if (isDisable || isEnemyStep || !isStep) {
+                this._stopFlag = true;
+            }
+
+            if (!isDisable && isConsistStraight && isStep && !this._stopFlag) {
+                this.setStep({coordinates});
+                this._steps.push(intBlock);
+
+                return true;
+            } else if (isDisable || isEnemyStep) {
+                this._stopFlag = true;
+            } else if (!isConsistStraight) {
+                this._stopFlag = true;
+            }
+
+            return false;
         }
-
-        if (!isDisable && isConsistStraight && isStep && !this._stopFlag) {
-            this.setStep({coordinates});
-            this._steps.push(intBlock);
-
-            return true;
-        } else if (isDisable || isEnemyStep) {
-            this._stopFlag = true;
-        } else if (!isConsistStraight) {
-            this._stopFlag = true;
-        }
-
-        return false;
     }
 
+    /**
+     * Handles the finish step
+     * @param Object Object with block
+     * @returns {bool} Return true if you can set the block
+     */
     doFinishStep({block = null} = {}) {
         const intBlock = parseInt(block, 10);
         const isDisable = this.isDisable({block: intBlock});
@@ -102,10 +116,19 @@ export default class Game {
         return true;
     }
 
+    /**
+     * Checks if an item is a block
+     * @param Object Object with block
+     * @returns {bool} True if managed to convert into int
+     */
     isBlock({block = null} = {}) {
         return !isNaN(+block);
     }
 
+    /**
+     * Concatenate two array and make union
+     * @param Object Object with two arrays
+     */
     concatUnion({arr1 = [], arr2 = []} = {}) {
         for (let i = 0; i < arr2.length; i++) {
             if (!arr1.includes(arr2)) {
@@ -114,22 +137,44 @@ export default class Game {
         }
     }
 
-    getLastBlock(){
+    /**
+     * Get last step from user array steps
+     * @returns {int} Returns int block
+     */
+    getLastBlock() {
         return this._steps[this._steps.length - 1];
     }
 
+    /**
+     * Convert block in coordinates for 5 to 5 field
+     * @param Object Object with block
+     * @returns {Array} Returns array of coordinates [y, x]
+     */
     getCoordinates({block = null} = {}) {
         return [parseInt(block / 5, 10), parseInt(block % 5, 10)];
     }
 
+    /**
+     * Convert coordinates to block for 5 to 5 field
+     * @param Object Object with array of coordinates [y, x]
+     * @returns {int} Returns int number
+     */
     getBlock({coordinates = []} = {}) {
         return coordinates[0] * 5 + coordinates[1];
     }
 
+    /**
+     * Compares two points
+     * @param Object Object with two points
+     * @returns {bool} Returns true if x1 = x1 and y1 = y2
+     */
     isPointsEqv({point1 = [], point2 = []} = {}) {
         return point1[0] === point2[0] && point1[1] === point2[1];
     }
 
+    /**
+     * Reset user game state
+     */
     reset() {
         this._steps = [];
         this._secondPoint = [];
@@ -138,6 +183,10 @@ export default class Game {
         this._stopFlag = false;
     }
 
+    /**
+     * Get palyer what start the game
+     * @returns {int} Returns true if x1 == x1 and y1 == y2
+     */
     getFirstPlayer() {
         if (!this._whoseTurn) {
             const rand = Math.floor(Math.random() *  this._listeners.length);
@@ -147,6 +196,10 @@ export default class Game {
         return this._whoseTurn;
     }
 
+    /**
+     * Get disabled blocks for field
+     * @returns {Array} Returns array of blocks
+     */
     getDisableBlocks() {
         if (!this._disableBlocks.length) {
             let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
@@ -168,6 +221,11 @@ export default class Game {
         return this._disableBlocks;
     }
 
+    /**
+     * Check is point consist to straight(need in two init point)
+     * @param Object Object with point
+     * @returns {bool} Returns true consist else false
+     */
     isConsistStraight({point = []} = {}) {
         if (point.length) {
             const startPoint = this.getCoordinates({block: this._steps[0]});
@@ -190,6 +248,11 @@ export default class Game {
         return false;
     }
 
+    /**
+     * Check is win condition happend and if not reduces stepsCount
+     * @param Object Object with point
+     * @returns {bool} Returns true if happend
+     */
     isEnd({finishPoint = []} = {}) {
         const startPoint = this.getCoordinates({block: this._steps[0]});
         if (startPoint.length) {
@@ -210,6 +273,9 @@ export default class Game {
         }
     }
 
+    /**
+     * Change side for turn
+     */
     changeSide() {
         this._whoseTurn === this._listeners[0] 
             ? this._whoseTurn = this._listeners[1] 
@@ -217,31 +283,63 @@ export default class Game {
         this.reset();
     }
 
+    /**
+     * Check is winner set
+     * @returns {bool} Returns true if set
+     */
     isWinner() {
         return this._winner ? true : false;
     }
 
+    /**
+     * Get winner
+     * @returns {string} Returns nick of winner
+     */
     getWinner() {
         return this._winner;
     }
 
+    /**
+     * Get whose turn is now
+     * @returns {string} Returns nickname of player who turn now
+     */
     getWhoseTurn() {
         return this._whoseTurn;
     }
 
+    /**
+     * Check is point consist diagonal
+     * @param Object Object with point
+     * @returns {bool} Returns true if consists
+     */
     isDiagonal({point = []} = {}) {
         let startPoint = this.getCoordinates({block: this._steps[0]});
         return Math.abs(startPoint[0] - point[0]) === Math.abs(startPoint[1] - point[1]);
     }
 
+    /**
+     * Check is block disabled
+     * @param Object Object with block
+     * @returns {bool} Returns true if disable
+     */
     isDisable({block = null} = {}) {
         return this._disableBlocks.includes(block);
     }
 
+    /**
+     * Check state of point
+     * @param Object Object with point
+     * @returns {bool} Returns true if point is empty
+     */
     isStep({coordinates = []} = {}) {
         return this._stepsMatrix[coordinates[0]][coordinates[1]] === '*';
     }
 
+    /**
+     * Check is step consists to enemy
+     * @param Object Object with point
+     * @returns {bool} Returns true if it is point consists enemy
+     */
     isEnemyStep({coordinates = []} = {}) {
         if (this._whoseTurn === this._listeners[0]) {
             return this._stepsMatrix[coordinates[0]][coordinates[1]] === this._secondPlayerStep;
@@ -250,6 +348,11 @@ export default class Game {
         }
     }
 
+    /**
+     * Set point to field
+     * @param Object Object with point
+     * @returns {bool} Returns true if managed to set the point
+     */
     setStep({coordinates = []} = {}) {
         if (this.isStep({coordinates})) {
             this._whoseTurn === this._listeners[0] 
