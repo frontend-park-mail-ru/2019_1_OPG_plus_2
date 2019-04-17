@@ -15,9 +15,8 @@ import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { DOWN_EVENT, 
-		UP_BLOCK_EVENT,
-		OVER_BLOCK_EVENT,
-		OUT_BLOCK_EVENT } from '../../modules/events';
+		 UP_BLOCK_EVENT,
+		 OVER_BLOCK_EVENT } from '../../modules/events';
 
 export default class GameView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -25,41 +24,33 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this.down = this.down.bind(this);
 		this.up = this.up.bind(this);
 		this.over = this.over.bind(this);
-		this.out = this.out.bind(this);
 	}
 
-	// событие, возникающее при нажатии ЛКМ
 	down(event) {
-		if (event.target.classList.contains('block')) { // если данный элемент блок
-			const filedBlock = document.querySelector('.field');
-			filedBlock.addEventListener('mouseover', this.over, true); // навесили событие, что курсор появился над элементом
-			filedBlock.addEventListener('mouseout', this.out, true); // навесили событие, что курсор ушел с элемента
-			this._currentBlock = event.target; // запоминаем блок
+		if (event.target.classList.contains('block')) {
+			const app = document.querySelector('#application');
+			app.addEventListener('mouseover', this.over, true);
+			this._currentBlock = event.target;
 			this.emit(DOWN_EVENT, {block: event.target.textContent});
 		}
 	}
 
-	// событие, возникающее при отпускании ЛКМ
 	up(event) {
-		const filedBlock = document.querySelector('.field');
-		filedBlock.removeEventListener('mouseover', this.over, true); // появилась над элементов
-		filedBlock.removeEventListener('mouseout', this.out, true); // ушла с элемента
+		const app = document.querySelector('#application');
+		app.removeEventListener('mouseover', this.over, true);
 		this._endBlock = event.target;
 		this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 	}
 
-	// событие, возникающее при наведении на блок (0: out, 1: over , 0: y, 1: x)
 	over(event) {
-		if (event.target.classList.contains('block')) { // если блок
-			this._currentBlock = event.target; // запоминаем блок
-			this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
-		}
-	}
-
-	// событие, возникающее при "уходе" мыши с блока
-	out(event) {
 		if (event.target.classList.contains('block')) {
-			this.emit(OUT_BLOCK_EVENT, {block: event.target.textContent});
+			this._currentBlock = event.target;
+			this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
+		} else {
+			const app = document.querySelector('#application');
+			app.removeEventListener('mouseover', this.over, true);
+			this._endBlock = event.target;
+			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 		}
 	}
 
@@ -205,15 +196,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	apply({player = 'Player1', ans = false}) {
 		if (ans) {
-			if (player === 'Player1') {
-				this._currentBlock.classList.contains('block_theme_left-active') 
-					? this._currentBlock.classList.remove('block_theme_left-active')
-					: this._currentBlock.classList.add('block_theme_left-active');
-			} else {
-				this._currentBlock.classList.contains('block_theme_right-active') 
-					? this._currentBlock.classList.remove('block_theme_right-active')
-					: this._currentBlock.classList.add('block_theme_right-active');
-			}
+			player === 'Player1' 
+				? this._currentBlock.classList.add('block_theme_left-active') 
+				: this._currentBlock.classList.add('block_theme_right-active');
 		}
 	}
 

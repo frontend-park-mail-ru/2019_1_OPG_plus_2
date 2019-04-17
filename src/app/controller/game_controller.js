@@ -1,5 +1,4 @@
 import Controller from './controller';
-import { ROOT } from '../paths';
 import { NavigateMixinController } from '../navigate_controller';
 import { INIT_EVENT, 
 		 DOWN_EVENT, 
@@ -8,9 +7,7 @@ import { INIT_EVENT,
 		 FINISH_STEP_EVENT, 
 		 FINISH_GAME_EVENT,
 		 OVER_BLOCK_EVENT,
-		 END_OVER_BLOCK_EVENT,
-		 OUT_BLOCK_EVENT,
-		 END_OUT_BLOCK_EVENT} from '../../modules/events';
+		 END_OVER_BLOCK_EVENT } from '../../modules/events';
 
 export default class GameController extends NavigateMixinController(Controller) {
 	constructor({
@@ -34,9 +31,6 @@ export default class GameController extends NavigateMixinController(Controller) 
 		this._view.on(OVER_BLOCK_EVENT, ({block = null} = {}) => {this.doOverBlock({block})});
 		this._model.on(END_OVER_BLOCK_EVENT, ({player = 'Player1', ans = false} = {}) => {this.apply({player, ans})});
 
-		this._view.on(OUT_BLOCK_EVENT, ({block = null} = {}) => {this.doOutBlock({block})});
-		this._model.on(END_OUT_BLOCK_EVENT, ({player = 'Player1', ans = false} = {}) => {this.apply({player, ans})});
-
 		this._view.on(UP_BLOCK_EVENT, ({block = null} = {}) => {this.doFinishStep({block})});
 		this._model.on(FINISH_STEP_EVENT, ({winner = null, player = 'Player1'} = {}) => {this.doEndStep({winner, player})});
 		this._model.on(FINISH_GAME_EVENT, ({winner = null, player = 'Player1'} = {}) => {this.doEndStep({winner, player})}); 
@@ -48,10 +42,6 @@ export default class GameController extends NavigateMixinController(Controller) 
 
 	doOverBlock({block = null} = {}) {
 		this._model.doOverStep({block}); 
-	}
-
-	doOutBlock({block = null} = {}) {
-		this._model.doOutStep({block}); 
 	}
 
 	doFinishStep({block = null} = {}) {
