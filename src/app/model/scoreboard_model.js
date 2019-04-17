@@ -1,7 +1,8 @@
 import Model from './model';
 import { EventEmitterMixin } from '../event_emitter'; 
 import API from '../../modules/API';
-import { INIT_EVENT } from '../../modules/events';
+import { INIT_EVENT,
+	     GOT_NEXT_PAGE_EVENT } from '../../modules/events';
 
 export default class ScoreBoardModel extends EventEmitterMixin(Model) {
 	constructor() {
@@ -24,7 +25,7 @@ export default class ScoreBoardModel extends EventEmitterMixin(Model) {
 			page: page,
 		})
 			.then(users => {
-				this.emit('gotNextPage', { root: root, data: {page:page, isRender: false, users: users.data} });
+				this.emit(GOT_NEXT_PAGE_EVENT, { root: root, data: {page:page, isRender: false, users: users.data} });
 			});
 	}
 }

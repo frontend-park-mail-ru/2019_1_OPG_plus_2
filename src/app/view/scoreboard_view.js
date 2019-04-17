@@ -10,6 +10,7 @@ import pagesTemplate from '../../blocks/html/body/application/container/content/
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
+import { GET_NEXT_PAGE_EVENT } from '../../modules/events';
 import View from './view';
 
 export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(View)) {
@@ -21,9 +22,9 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 	onNextPageClick(event) {
 		let pageNum = parseInt(document.querySelector('.pages__num').textContent);
 		if (event.target.classList.contains('pages__next')) {
-			this.emit('getNextPage', {root: this._root, page: pageNum + 1});
+			this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum + 1});
 		} else if (event.target.classList.contains('pages__back')) {
-			this.emit('getNextPage', {root: this._root, page: pageNum - 1});
+			this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum - 1});
 		}
 	}
 

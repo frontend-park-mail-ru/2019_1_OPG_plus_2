@@ -12,7 +12,7 @@ import avatarTemplate from '../../blocks/html/body/application/container/content
 import logoutIconTemplate from '../../blocks/html/body/application/container/head/menu/logout/logout.pug';
 import settingsIconTemplate from '../../blocks/html/body/application/container/head/menu/settings/settings.pug';
 
-import {genericBeforeEnd} from '../../modules/helpers.js';
+import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';

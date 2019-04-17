@@ -1,7 +1,7 @@
-import {NavigateMixinView} from '../navigate_view';
-import {EventEmitterMixin} from '../event_emitter';
+import { NavigateMixinView } from '../navigate_view';
+import { EventEmitterMixin } from '../event_emitter';
 import View from './view';
-import {genericBeforeEnd} from '../../modules/helpers';
+import { genericBeforeEnd } from '../../modules/helpers';
 import containerTemplate from '../../blocks/html/body/application/container/container.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';

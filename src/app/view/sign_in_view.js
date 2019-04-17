@@ -14,6 +14,7 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';
+import { SIGN_IN_SUBMIT_EVENT } from '../../modules/events';
 
 export default class SignInView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -27,7 +28,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
             	
 		const email = formsBlock.elements[0].value;
 		const password = formsBlock.elements[1].value;
-		this.emit('signInSubmit', {root: this._root, email: email, password: password });
+		this.emit(SIGN_IN_SUBMIT_EVENT, {root: this._root, email: email, password: password });
 	}
 
 	_createSubmitListener() {
