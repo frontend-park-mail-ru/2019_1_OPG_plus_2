@@ -3,6 +3,6 @@ export default class Model {
 	constructor({} = {}) {
 	}
 
-	getData({data = {}} = {}) {
+	init({data = {}} = {}) {
 	} 
 }

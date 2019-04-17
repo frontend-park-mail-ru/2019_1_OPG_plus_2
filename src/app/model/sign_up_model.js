@@ -2,19 +2,20 @@ import Model from './model';
 import { EventEmitterMixin } from '../event_emitter'; 
 import API from '../../modules/API';
 import { validEmail, validLogin, validPassword } from '../../modules/utils.js';
+import { INIT_EVENT, INIT_ERROR_EVENT } from '../../modules/events';
 
 export default class SignUpModel extends EventEmitterMixin(Model) {
 	constructor() {
 		super();
 	}
 
-	getData({root = {}} = {}) {
+	init({root = {}} = {}) {
 		API.isAuth()
 			.then(() => {
-				this.emit('alreadySignUp');
+				this.emit(INIT_ERROR_EVENT);
 			})
 			.catch(() => {
-				this.emit('isAuthSignUp', {root: root, isAuth: false});
+				this.emit(INIT_EVENT, {root: root, isAuth: false});
 			});
 	}
 

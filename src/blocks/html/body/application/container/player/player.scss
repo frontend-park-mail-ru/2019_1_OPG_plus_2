@@ -3,4 +3,5 @@
     grid-template: repeat(7, 1fr) / repeat(5, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 20px;
+    user-select: none;
 }
