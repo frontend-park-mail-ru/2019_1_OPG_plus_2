@@ -1,8 +1,30 @@
 .main-button {
-    @media (min-width: $desktop-min-width) {
+    display: grid;
+    grid-row: 3 / 6;
+    grid-template: repeat(4, 1fr)/1fr;
+    text-decoration: none;
+    transition: all 250ms ease-out;
+
+    &:hover, &:focus {
+        transform: scale(1.1);
+    }
+
+    .icon {
+        grid-row: 1 / 4;
         background-position: center;
         background-repeat: no-repeat;
         background-size: 18vh;
-        grid-row: 3 / 5;
+    }
+
+    .label {
+        grid-row: 4 / 5;
+        font-family: "Unica One", cursive;
+        font-size: 7vh;
+        text-align: center;
+        color: $secondary-color;
+    }
+
+    @media (min-width: $desktop-min-width) {
+
     }
 }
