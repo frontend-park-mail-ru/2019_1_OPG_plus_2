@@ -7,6 +7,9 @@ import rulesTemplate from '../../blocks/html/body/application/container/head/men
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
 import mainButtonTemplate from '../../blocks/html/body/application/container/content/main-button/main-button.pug';
+import linesUpTemplate from '../../blocks/html/body/application/container/lines/lines-up/lines-up.pug';
+import linesDownLeftTemplate from '../../blocks/html/body/application/container/lines/lines-down-left/lines-down-left.pug';
+import linesDownRightTemplate from '../../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
@@ -40,6 +43,15 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_main'],
+			}),
+			linesUpTemplate({
+				modifiers: ['lines-up_theme_right'],
+			}),
+			linesDownLeftTemplate({
+				modifiers: [],
+			}),
+			linesDownRightTemplate({
+				modifiers: [],
 			})
 		);
 	}

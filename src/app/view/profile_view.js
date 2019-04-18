@@ -11,6 +11,8 @@ import dataItemTemplate from '../../blocks/html/body/application/container/conte
 import avatarTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import logoutIconTemplate from '../../blocks/html/body/application/container/head/menu/logout/logout.pug';
 import settingsIconTemplate from '../../blocks/html/body/application/container/head/menu/settings/settings.pug';
+import linesDownLeftTemplate from '../../blocks/html/body/application/container/lines/lines-down-left/lines-down-left.pug';
+import linesDownRightTemplate from '../../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.pug';
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
@@ -51,6 +53,12 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 			menuTemplate({
 				modifiers: ['menu_theme_profile'],
 			}),
+			linesDownLeftTemplate({
+				modifiers: [],
+			}),
+			linesDownRightTemplate({
+				modifiers: [],
+			})
 		);
 	}
 

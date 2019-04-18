@@ -44,9 +44,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	over(event) {
 		if (event.target.classList.contains('block')) {
-			// if (event.target.dataset.isSet) {
-			// 	return;
-			// }
 			this._currentBlock = event.target;
 			this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
 		} else {
