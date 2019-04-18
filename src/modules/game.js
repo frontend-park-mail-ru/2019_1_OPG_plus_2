@@ -95,13 +95,12 @@ export default class Game {
      */
     doFinishStep({block = null} = {}) {
         const intBlock = parseInt(block, 10);
+        const coordinates = this.getCoordinates({block: intBlock});
         const isDisable = this.isDisable({block: intBlock});
         const lastCoordinates = this.getCoordinates({block: this.getLastBlock()});
-        const isBlock = this.isBlock({block: block});
 
         if ((isDisable && this._steps.length === 0)
-            || (this._steps.length === 0)
-            || (this._steps.length === 1 && this._pastSteps.includes( intBlock ) && isBlock)) {
+            || (this._steps.length === 0)) {
             this._stopFlag = false;
             this.reset();
 
