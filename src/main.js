@@ -34,6 +34,8 @@ import RulesView from './app/view/rulesView';
 import RulesController from './app/controller/rules_controller';
 import NotFoundView from './app/view/not_found_view';
 import NotFoundController from './app/controller/not_found_controller';
+import InDevelopmentView from "./app/view/in_development_view";
+import InDevelopmentController from "./app/controller/in_development_controller";
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -90,6 +92,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	const nfView = new NotFoundView();
 	const nfController = new NotFoundController({model: nfModel, view: nfView, router: router});
 
+	const multiplaterModel = {};
+	const multiplayerView = new InDevelopmentView();
+	const multiplayerController = new InDevelopmentController({model: multiplaterModel, view: multiplayerView, router:router});
+
 	router.add({handler: mainController});
 	router.add({re: '/leaders', handler: scoreController});
 	router.add({re: '/signin', handler: signInController});
@@ -97,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	router.add({re: '/signup', handler: signUpController});
 	router.add({re: '/editme', handler: editProfileController});
 	router.add({re: '/game', handler: gameController});
+	router.add({re: '/multiplayer', handler:multiplayerController });
 
 	router.add({re: '/rules', handler: rulesController});
 	router.add({re: '/notfound', handler: nfController});

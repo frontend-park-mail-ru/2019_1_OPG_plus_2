@@ -1,0 +1,7 @@
+.title_theme_service {
+  font-family: $main-font-family;
+  @media (min-width: $desktop-min-width) {
+    font-size: 10vh;
+    color: #005FF9;
+  }
+}
