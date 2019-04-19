@@ -3,17 +3,17 @@
     grid-row: 3 / 6;
     grid-template: repeat(4, 1fr)/1fr;
     text-decoration: none;
-    transition: all 250ms ease-out;
-
-    &:hover, &:focus {
-        transform: scale(1.1);
-    }
 
     .icon {
         grid-row: 1 / 4;
         background-position: center;
         background-repeat: no-repeat;
         background-size: 18vh;
+        transition: all 250ms ease-out;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     .label {
