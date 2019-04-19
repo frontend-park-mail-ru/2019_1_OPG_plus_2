@@ -1,10 +1,14 @@
 .content_theme_signup {
     @media (min-width: $desktop-min-width) {
-        grid-column: 3/-1;
-        grid-template: 1fr 6fr 1fr/repeat(14, 1fr);
-        grid-template-areas: 
-                            "t t t t t t t t t t . . . ." 
-                            ". . f f f f f f . . . . . ." 
-                            ". . b b b b b b . . . . . .";
+        grid-column: 4/10;
+        grid-template-columns: repeat(10, 1fr);
+        grid-column-gap: 10px;
+        grid-template-rows: repeat(12, 1fr);
+        grid-row-gap: 10px;
+        // grid-template: 1fr 6fr 1fr/repeat(14, 1fr);
+        // grid-template-areas: 
+        //                     "t t t t t t t t t t . . . ." 
+        //                     ". . f f f f f f . . . . . ." 
+        //                     ". . b b b b b b . . . . . .";
     }
 }

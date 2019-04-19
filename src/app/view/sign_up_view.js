@@ -52,12 +52,12 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 
 	_createEventListeners() {
 		super._createEventListeners();
-		this._createSubmitListener();
+		// this._createSubmitListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
-		this._removeSubmitListener();
+		// this._removeSubmitListener();
 	}
 
 	_renderContainer(data) {
@@ -97,12 +97,12 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 				modifiers: ['title_theme_signup'],
 			}),
 			formsTemplate({
-				modifiers: [],
+				modifiers: ['forms_theme_signup'],
 				action: 'POST',
 				name: 'signup',
 			}),
 			buttonsTemplate({
-				modifiers: [],
+				modifiers: ['buttons_theme_signup'],
 			}),
 		);
 	}

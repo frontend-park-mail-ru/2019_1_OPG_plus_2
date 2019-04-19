@@ -1,7 +1,12 @@
 .forms {
+    grid-row: 3/8;
+    grid-column: 2/-2;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    grid-area: f;
+    justify-content: space-evenly;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // flex-direction: column;
+    // grid-area: f;
 }

@@ -1,11 +1,16 @@
 .content_theme_signin {
 
     @media (min-width: $desktop-min-width) {
-        grid-column: 3/-1;
-        grid-template: 1fr 1.6fr 1.2fr/repeat(14, 1fr);
-        grid-template-areas: 
-                            "t t t t t t t t t t . . . ." 
-                            ". . f f f f f f . . . . . ." 
-                            ". . b b b b b b . . . . . .";
+        // grid-column: 3/-1;
+        grid-column: 4/10;
+        grid-template-rows: repeat(12, 1fr);
+        grid-template-columns: repeat(10, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        // grid-template: 1fr 1.6fr 1.2fr/repeat(14, 1fr);
+        // grid-template-areas: 
+                            // "t t t t t t t t t t . . . ." 
+                            // ". . f f f f f f . . . . . ." 
+                            // ". . b b b b b b . . . . . .";
     }
 }
