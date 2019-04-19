@@ -1,14 +1,12 @@
 .profile-data {
     @media (min-width: $desktop-min-width) {
-        grid-column: 3/8;
+        grid-column: 2/-2;
         border-radius: 0px 0px 30px 30px;
         border: 1px solid rgba(0, 0, 0, 0.3);
         background-color: white;
         position: relative;
-        top: -15vh;
+        top: -11vh;
+        padding: 12vh 3vh 3vh 6vh;
         z-index: -2;
-        display: grid;
-        grid-template: repeat(6, 1fr)/repeat(6, 1fr);
-        grid-gap: 15px;
     }
 }
