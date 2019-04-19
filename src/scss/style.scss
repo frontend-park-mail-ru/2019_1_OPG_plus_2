@@ -12,6 +12,7 @@
 @import '../blocks/html/body/application/container/content/buttons/link/link_theme_hidden.scss';
 @import '../blocks/html/body/application/container/content/buttons/submit/submit.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_type_secondary.scss';
+@import '../blocks/html/body/application/container/content/buttons/button/button_type_primary.scss';
 @import '../blocks/html/body/application/container/content/forms/forms.scss';
 @import '../blocks/html/body/application/container/content/forms/form/form.scss';
 @import '../blocks/html/body/application/container/content/forms/error/error.scss';
@@ -133,3 +134,10 @@
 
 /* rules */
 @import '../blocks/html/body/application/container/content/content_theme_rules.scss';
+
+
+/* service */
+@import '../blocks/html/body/application/container/container_theme_service.scss';
+@import '../blocks/html/body/application/container/content/content_theme_service.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_service.scss';
+@import '../blocks/html/body/application/container/content/buttons/button/button_type_primary.scss';
