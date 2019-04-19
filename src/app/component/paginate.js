@@ -12,14 +12,14 @@ export default class Paginate extends Component {
 
     _createEventListeners() {
         super._createEventListeners();
-        const pages = document.querySelector('.pages');
+        const pages = this._root.querySelector('.pages');
         pages.addEventListener('click', this._callback, true);
     }
 
     _removeEventListener() {
         super._removeEventListeners();
-        const pages = document.querySelector('.pages');
-        pages.removeEventListener('click', this.onNextPageClick, true);
+        const pages = this._root.querySelector('.pages');
+        pages.removeEventListener('click', this._callback, true);
     }
 
     _render(data) {
