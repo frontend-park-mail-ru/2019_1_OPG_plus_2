@@ -106,9 +106,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			contentTemplate({
 				modifiers: ['content_theme_edit-profile'],
 			}),
-			menuTemplate({
-				modifiers: ['menu_theme_profile'],
-			}),
 		);
 	}
 
