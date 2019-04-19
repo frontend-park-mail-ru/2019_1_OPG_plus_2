@@ -9,6 +9,7 @@
 @import '../blocks/html/body/application/container/content/content.scss';
 @import '../blocks/html/body/application/container/content/buttons/buttons.scss';
 @import '../blocks/html/body/application/container/content/buttons/link/link.scss';
+@import '../blocks/html/body/application/container/content/buttons/link/link_theme_hidden.scss';
 @import '../blocks/html/body/application/container/content/buttons/submit/submit.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_type_secondary.scss';
 @import '../blocks/html/body/application/container/content/forms/forms.scss';
@@ -25,11 +26,11 @@
 @import '../blocks/html/body/application/container/head/lines/lines.scss';
 @import '../blocks/html/body/application/container/head/menu/menu.scss';
 @import '../blocks/html/body/application/container/head/menu/separator/separator.scss';
+@import '../blocks/html/body/application/container/head/menu/separator/separator_theme_hidden.scss';
 @import '../blocks/html/body/application/container/head/menu/rules/rules.scss';
 @import '../blocks/html/body/application/container/head/menu/profile/profile.scss';
-@import '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.scss';
-@import '../blocks/html/body/application/container/content/buttons/link/link_theme_hidden.scss';
 @import '../blocks/html/body/application/container/head/menu/profile/profile_theme_hidden.scss';
+@import '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.scss';
 
 /* sign up */
 
