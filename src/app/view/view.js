@@ -20,5 +20,10 @@ export default class View {
 	}
 
 	close() {
+		if (this._components) {
+			this._components.forEach(component => {
+				component.delete();
+			});
+		}
 	}
 }

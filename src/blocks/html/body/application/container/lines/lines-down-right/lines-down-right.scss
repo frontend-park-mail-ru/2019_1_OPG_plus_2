@@ -1,0 +1,59 @@
+@keyframes lines-down-right-line1 {
+    0% { height: 10vh; }
+    70% { height: 35vh; }
+    100% { height: 10vh; }
+}
+
+@keyframes lines-down-right-line2 {
+    0% { height: 20vh; }
+    30% { height: 40vh; }
+    100% { height: 20vh; }
+    // 100% { height: 40vh; }
+}
+
+@keyframes lines-down-right-line3 {
+    0% { height: 20vh; }
+    30% { height: 40vh; }
+    55% { height: 30vh; }
+    100% { height: 40vh; }
+}
+
+.lines-down-right {
+    @media (min-width: $desktop-min-width) {
+        position: absolute;
+        bottom: 0px;
+        right: 10vw;
+
+        &__line1 {
+            position: absolute;
+            width: 3px;
+            height: 35vh;
+            background-color: $main-color;
+            animation: lines-down-right-line1 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+            transform: rotate(180deg);
+            bottom: 0vh;
+        }
+
+        &__line2 {
+            position: absolute;
+            width: 3px;
+            height: 40vh;
+            background-color: $main-color;
+            right: 40px;
+            animation: lines-down-right-line2 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+            transform: rotate(180deg);
+            bottom: 0vh;
+        }
+
+        &__line3 {
+            position: absolute;
+            width: 3px;
+            height: 40vh;
+            background-color: $secondary-color;
+            right: 80px;
+            animation: lines-down-right-line3 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+            transform: rotate(180deg);
+            bottom: 0vh;
+        }
+    }
+}

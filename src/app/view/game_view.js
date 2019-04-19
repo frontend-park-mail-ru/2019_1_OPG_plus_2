@@ -27,7 +27,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	down(event) {
-		if (event.target.classList.contains('block')) {
+		if (event.target.classList.contains('block') && !Boolean(+event.target.dataset.isSet)) {
 			const app = document.querySelector('#application');
 			app.addEventListener('mouseover', this.over, true);
 			this._currentBlock = event.target;
@@ -198,7 +198,8 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		if (ans) {
 			player === 'Player1' 
 				? this._currentBlock.classList.add('block_theme_left-active') 
-				: this._currentBlock.classList.add('block_theme_right-active');
+				: this._currentBlock.classList.add('block_theme_right-active'); 
+				this._currentBlock.dataset.isSet = 1;
 		}
 	}
 
