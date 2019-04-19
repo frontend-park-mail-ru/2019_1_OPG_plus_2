@@ -98,8 +98,6 @@ export default class Game {
         const isDisable = this.isDisable({block: intBlock});
         const lastCoordinates = this.getCoordinates({block: this.getLastBlock()});
 
-        console.log(this._stepsMatrix);
-
         if ((isDisable && this._steps.length === 0)
             || (this._steps.length === 0)) {
             this._stopFlag = false;

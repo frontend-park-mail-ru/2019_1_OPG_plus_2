@@ -1,6 +1,8 @@
 import Model from './model';
 import { EventEmitterMixin } from '../event_emitter';
 import Game from '../../modules/game';
+import User from '../../modules/user.js';
+import API from '../../modules/API';
 import { INIT_EVENT, 
 		 END_DOWN_EVENT, 
 		 FINISH_GAME_EVENT, 
@@ -15,11 +17,33 @@ export default class GameModel extends EventEmitterMixin(Model) {
 	init({root = {}} = {}) {
 		this._game = new Game();
 
-		this.emit(INIT_EVENT, {
-			root: root, 
-			firstPlayer: this._game.getFirstPlayer(), 
-			disableBlocks: this._game.getDisableBlocks(),
-		});
+		if (User.exist()) {
+			this.emit(INIT_EVENT, {
+				root: root, 
+				username: User.get(),
+				firstPlayer: this._game.getFirstPlayer(), 
+				disableBlocks: this._game.getDisableBlocks(),
+			});
+		} else {
+			API.getUser()
+				.then((user) => {
+					User.set(user);
+					this.emit(INIT_EVENT, {
+						root: root, 
+						username: User._username,
+						firstPlayer: this._game.getFirstPlayer(), 
+						disableBlocks: this._game.getDisableBlocks(),
+					});
+				})
+				.catch(() => {
+					this.emit(INIT_EVENT, {
+						root: root, 
+						username: 'Player1',
+						firstPlayer: this._game.getFirstPlayer(), 
+						disableBlocks: this._game.getDisableBlocks(),
+					});
+				});
+		}
 	}
 
 	doStartStep({block = null} = {}) {

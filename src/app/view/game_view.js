@@ -124,7 +124,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_left'],
-				nickname: 'Player1', // TODO передача никнейма пользователя
+				nickname: data.username, // TODO передача никнейма пользователя
 			}),
 		);
 	}
@@ -205,6 +205,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	endStep({winner = null, player = 'Player1'} = {}) {
 		if (winner) {
+			this._removeTurnListener();
 			this._renderModal(winner);
 		} else {
 			const headBlock = this._root.querySelector('.head.head_theme_game');
