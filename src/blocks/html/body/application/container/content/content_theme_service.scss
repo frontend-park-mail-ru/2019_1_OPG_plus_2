@@ -1,0 +1,11 @@
+.content_theme_service {
+
+  @media (min-width: $desktop-min-width) {
+    grid-column: 3/-1;
+    grid-template: 1fr 1.6fr 1.2fr/repeat(14, 1fr);
+    grid-template-areas:
+            ". . t t t t t t . ."
+            ". . f f f f f f . ."
+            ". . b b b b b b . .";
+  }
+}

@@ -1,0 +1,14 @@
+.separator {
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px solid $secondary-color;
+
+    @media (min-width: $desktop-min-width) {
+        width: 9vh;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        width: 70px;
+    }
+}
+

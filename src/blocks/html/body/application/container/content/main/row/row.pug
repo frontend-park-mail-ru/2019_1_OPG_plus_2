@@ -5,6 +5,6 @@ each item, index in lst
             if item.avatar
                 img(class='row__photo__icon' src=host+item.avatar)
             else
-                img(class='row__photo__icon' src=require('./pers1.svg'))
+                img(class='row__photo__icon' src=require('./default_row_icon.svg'))
         div(class='row__name')=item.username
         div(class='row__score')=item.score
