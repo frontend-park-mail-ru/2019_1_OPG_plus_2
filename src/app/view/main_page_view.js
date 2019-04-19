@@ -4,9 +4,13 @@ import menuTemplate from '../../blocks/html/body/application/container/head/menu
 import profileIconTemplate from '../../blocks/html/body/application/container/head/menu/profile/profile.pug';
 import scoreBoardTemplate from '../../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.pug';
 import rulesTemplate from '../../blocks/html/body/application/container/head/menu/rules/rules.pug';
+import separatorTemplate from '../../blocks/html/body/application/container/head/menu/separator/separator.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
 import mainButtonTemplate from '../../blocks/html/body/application/container/content/main-button/main-button.pug';
+import linesUpTemplate from '../../blocks/html/body/application/container/lines/lines-up/lines-up.pug';
+import linesDownLeftTemplate from '../../blocks/html/body/application/container/lines/lines-down-left/lines-down-left.pug';
+import linesDownRightTemplate from '../../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
@@ -40,6 +44,15 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_main'],
+			}),
+			linesUpTemplate({
+				modifiers: ['lines-up_theme_right'],
+			}),
+			linesDownLeftTemplate({
+				modifiers: [],
+			}),
+			linesDownRightTemplate({
+				modifiers: [],
 			})
 		);
 	}
@@ -63,11 +76,13 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 				hr: '/game',
 				modifier: ['main-button_theme_play'],
 				dataset: '/game',
+				label: 'Singleplayer',
 			}),
 			mainButtonTemplate({
 				hr: `${data.isAuth ? '/multiplayer' : '/signin'}`,
 				modifier: [`${data.isAuth ? 'main-button_theme_multiplayer' : 'main-button_theme_signin'}`],
 				dataset: `${data.isAuth ? '/multiplayer' : '/signin'}`,
+				label: `${data.isAuth ? 'Multiplayer' : 'Sign In'}`,
 			}),
 		);
 
@@ -81,10 +96,16 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 				href: '/',
 				dataset: '/me',
 			}),
+			separatorTemplate({
+				modifiers: [`${data.isAuth ? '' : 'separator_theme_hidden'}`],
+			}),
 			scoreBoardTemplate({
 				modifiers: [],
 				href: 'score',
 				dataset: '/leaders',
+			}),
+			separatorTemplate({
+				modifiers: [],
 			}),
 			rulesTemplate({
 				modifiers: [],

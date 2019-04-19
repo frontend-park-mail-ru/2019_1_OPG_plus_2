@@ -1,5 +1,5 @@
-import {genericBeforeEnd} from '../../modules/helpers.js';
-import {EventEmitterMixin} from '../event_emitter';
+import { genericBeforeEnd } from '../../modules/helpers.js';
+import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';
 import containerTemplate from '../../blocks/html/body/application/container/container.pug';
