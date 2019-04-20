@@ -110,11 +110,14 @@
 /* game */
 
 @import '../blocks/html/body/application/container/container_theme_game.scss';
+@import '../blocks/html/body/application/container/intro-modal/intro-modal.scss';
 @import '../blocks/html/body/application/container/content/content_theme_game.scss';
 @import '../blocks/html/body/application/container/head/head_theme_game.scss';
 @import '../blocks/html/body/application/container/player/player.scss';
 @import '../blocks/html/body/application/container/player/player_theme_player1.scss';
+@import '../blocks/html/body/application/container/player/player_theme_player1-active.scss';
 @import '../blocks/html/body/application/container/player/player_theme_player2.scss';
+@import '../blocks/html/body/application/container/player/player_theme_player2-active.scss';
 @import '../blocks/html/body/application/container/head/side/side.scss';
 @import '../blocks/html/body/application/container/head/side/side_theme_left-active.scss';
 @import '../blocks/html/body/application/container/head/side/side_theme_left-passive.scss';

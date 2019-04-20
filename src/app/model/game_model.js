@@ -20,7 +20,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 		if (User.exist()) {
 			this.emit(INIT_EVENT, {
 				root: root, 
-				username: User.get(),
+				username: User._username,
 				firstPlayer: this._game.getFirstPlayer(), 
 				disableBlocks: this._game.getDisableBlocks(),
 			});

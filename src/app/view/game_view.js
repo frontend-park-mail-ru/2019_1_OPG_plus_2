@@ -84,7 +84,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		}));
 	}
 
-	_renderMain() {
+	_renderMain(data) {
 		const containerBlock = this._root.querySelector('.container.container_theme_game');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
@@ -217,7 +217,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	_render(data) {
 		this._root.innerHTML = '';
 		this._renderContainer();
-		this._renderMain();
+		this._renderMain(data);
 		this._renderHead(data);
 		this._renderLeftPlayer(data);
 		this._renderRightPlayer(data);
