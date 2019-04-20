@@ -63,7 +63,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		// appBlock.addEventListener('mouseup', this.up, true);
 		// const app = document.querySelector('#application');
 		// debugger;
-		appBlock.addEventListener('pointerdown', this.down, true);
+		// appBlock.addEventListener('pointerdown', this.down, true);
 		appBlock.removeEventListener('pointerover', this.over, true);
 		appBlock.removeEventListener('pointerup', this.up, true);
 	}
