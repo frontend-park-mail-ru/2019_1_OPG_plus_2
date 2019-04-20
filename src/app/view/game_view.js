@@ -26,39 +26,46 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this.over = this.over.bind(this);
 	}
 
-	down(event) {
-		if (event.target.classList.contains('block') && !Boolean(+event.target.dataset.isSet)) {
-			const app = document.querySelector('#application');
-			app.addEventListener('mouseover', this.over, true);
-			this._currentBlock = event.target;
-			this.emit(DOWN_EVENT, {block: event.target.textContent});
-		}
+	down(event) {console.log('down');
+		// if (event.target.classList.contains('block') && !Boolean(+event.target.dataset.isSet)) {
+		// 	const app = document.querySelector('#application');
+		// 	app.addEventListener('pointerdown', this.over, true);
+		// 	this._currentBlock = event.target;
+		// 	this.emit(DOWN_EVENT, {block: event.target.textContent});
+		// }
 	}
 
 	up(event) {
-		const app = document.querySelector('#application');
-		app.removeEventListener('mouseover', this.over, true);
-		this._endBlock = event.target;
-		this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
+		console.log('up')
+		// const app = document.querySelector('#application');
+		// app.removeEventListener('mouseover', this.over, true);
+		// this._endBlock = event.target;
+		// this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 	}
 
 	over(event) {
-		if (event.target.classList.contains('block')) {
-			this._currentBlock = event.target;
-			this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
-		} else {
-			const app = document.querySelector('#application');
-			app.removeEventListener('mouseover', this.over, true);
-			this._endBlock = event.target;
-			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
-		}
+		console.log('over');
+		// if (event.target.classList.contains('block')) {
+		// 	this._currentBlock = event.target;
+		// 	this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
+		// } else {
+		// 	const app = document.querySelector('#application');
+		// 	app.removeEventListener('mouseover', this.over, true);
+		// 	this._endBlock = event.target;
+		// 	this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
+		// }
 	}
 
 	_createTurnListener() {
 		const filedBlock = document.querySelector('.field');
 		const appBlock = document.querySelector('#application');
-		filedBlock.addEventListener('mousedown', this.down, true);
-		appBlock.addEventListener('mouseup', this.up, true);
+		// filedBlock.addEventListener('mousedown', this.down, true);
+		// appBlock.addEventListener('mouseup', this.up, true);
+		// const app = document.querySelector('#application');
+		// debugger;
+		appBlock.addEventListener('pointerdown', this.down, true);
+		appBlock.removeEventListener('pointerover', this.over, true);
+		appBlock.removeEventListener('pointerup', this.up, true);
 	}
 
 	_removeTurnListener() {
