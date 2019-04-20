@@ -10,7 +10,6 @@ import settingsIconTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.pug';
 import photoEditTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.pug';
-import logoutIconTemplate from '../../blocks/html/body/application/container/head/menu/logout/logout.pug';
 import formsTemplates from '../../blocks/html/body/application/container/content/forms/forms.pug';
 import profileFormTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
@@ -66,7 +65,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		if (newUsername != username) {
 			this.emit('userUpdate', { root: this._root, email: email, name: newUsername });
 		} else if(newPassword != '' && newPassword === repeatNewPassword) {
-			// debugger;
 			this.emit('passwordUpdate', {newPass: newPassword, passConf: repeatNewPassword });
 		}
 	}
@@ -106,9 +104,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_edit-profile'],
-			}),
-			menuTemplate({
-				modifiers: ['menu_theme_profile'],
 			}),
 		);
 	}
@@ -220,17 +215,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		);
 	}
 
-	_renderMenu() {
-		const menuBlock = document.querySelector('.menu.menu_theme_profile');
-		genericBeforeEnd(menuBlock,
-			logoutIconTemplate({
-				modifiers: [],
-				href: '/logout',
-				dataset: '/logout',
-			}),
-		);
-	}
-
 	_render(data) {
 		this._root.innerHTML = '';
 		this._renderContainer();
@@ -238,10 +222,10 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		this._renderBack();
 		this._renderContent();
 		this._renderProfileCard();
+		this._renderProfileHead();
 		this._renderProfileData();
 		this._renderProfileForms(data);
 		this._renderProfileButtons();
-		this._renderMenu();
 	}
 
 	open({ root = {}, data = {} }) {

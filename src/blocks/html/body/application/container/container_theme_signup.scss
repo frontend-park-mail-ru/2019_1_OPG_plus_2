@@ -1,5 +1,6 @@
 .container_theme_signup {
     @media (min-width: $desktop-min-width) {
         grid-template-columns: repeat(12, 1fr);
+        grid-column-gap: 20px;
     }
 }

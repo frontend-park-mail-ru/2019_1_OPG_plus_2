@@ -53,7 +53,8 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 
 	_renderContainer(data) {
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
+			// modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
+			modifiers: [`container_theme_signin`],
 		}));
 	}
 
@@ -85,7 +86,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
-				title: 'SING IN',
+				title: 'SIGN IN',
 				modifiers: ['title_theme_signin'],
 			}),
 			formsTemplate({
@@ -93,7 +94,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 				name: 'signin',
 			}),
 			buttonsTemplate({
-				modifiers: [],
+				modifiers: ['buttons_theme_signin'],
 			}),
 		);
 	}
@@ -104,7 +105,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 		genericBeforeEnd(formsBlock, 
 			errorTemplate({
 				modifiers: [],
-				text:  data.error ? `${data.error.message}: ${data.error.data[0]}` : '',
+				text:  data.error ? `Incorrect ${data.error.data[0]}` : '',
 			}),
 			formTemplate({
 				modifiers: [],
@@ -139,6 +140,17 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 				dataset: '/signup',
 				hr: '/signup',
 				modifiers: ['button_type_secondary'],
+			}),
+		);
+	}
+
+	_renderError(data) {
+		const titleBlock = this._root.querySelector('.title');
+
+		genericBeforeEnd(titleBlock, 
+			errorTemplate({
+				modifiers: [],
+				text:  data.error ? `Incorrect : ${data.error.data[0]}` : '',
 			}),
 		);
 	}

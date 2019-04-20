@@ -1,7 +1,5 @@
 .profile-card_theme_main {
-    grid-column: 2/12;
-    grid-row: 2;
-    grid-template: 1fr 2fr/repeat(8, 1fr);
-    grid-template-areas: "h h h h h h h h" 
-                         ". . i i i i i i";
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 10px;
 }

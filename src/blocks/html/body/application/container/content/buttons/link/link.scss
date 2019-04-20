@@ -1,4 +1,5 @@
 .link {
+    display: inline-block;
     font-family: Roboto;
     cursor: pointer;
     text-align: center;
@@ -6,7 +7,7 @@
     background-color: #005FF9;
     width: 100%;
     text-decoration: none;
-    border: 1px solid black;
+    box-shadow: inset 0px 0px 0px 1px black;
 
     @media (min-width: $desktop-min-width) {
         font-size: 2.3em;

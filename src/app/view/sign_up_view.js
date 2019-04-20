@@ -62,7 +62,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 
 	_renderContainer(data) {
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: [`container_theme_signup ${data.error ? 'container_theme_error' : ' '}`],
+			modifiers: [`container_theme_signup`],
 		}));
 	}
 
@@ -93,16 +93,16 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 		const contentBlock = document.querySelector('.content.content_theme_signup');
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
-				title: 'SING UP',
+				title: 'SIGN UP',
 				modifiers: ['title_theme_signup'],
 			}),
 			formsTemplate({
-				modifiers: [],
+				modifiers: ['forms_theme_signup'],
 				action: 'POST',
 				name: 'signup',
 			}),
 			buttonsTemplate({
-				modifiers: [],
+				modifiers: ['buttons_theme_signup'],
 			}),
 		);
 	}
