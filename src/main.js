@@ -115,20 +115,20 @@ document.addEventListener('DOMContentLoaded', function () {
     router.add({re: '/rules', handler: rulesController});
     router.add({re: '/notfound', handler: nfController});
 
-    const root = document.querySelector('#application');
-    if (window.innerWidth < 1250) {
-        root.innerHTML = '';
-        root.innerHTML = '<div class="mock"><div class=\'text\'>Development for this screen size in progress...</div></div>'
-        return;
-    }
-    window.onresize = function(event) {
-        if (window.innerWidth < 1250) {
-            root.innerHTML = '';
-            root.innerHTML = '<div class="mock"><div class=\'text\'>Development for this screen size in progress...</div></div>'
-            return;
-        }
+    // const root = document.querySelector('#application');
+    // if (window.innerWidth < 1250) {
+    //     root.innerHTML = '';
+    //     root.innerHTML = '<div class="mock"><div class=\'text\'>Development for this screen size in progress...</div></div>'
+    //     return;
+    // }
+    // window.onresize = function(event) {
+    //     if (window.innerWidth < 1250) {
+    //         root.innerHTML = '';
+    //         root.innerHTML = '<div class="mock"><div class=\'text\'>Development for this screen size in progress...</div></div>'
+    //         return;
+    //     }
             
-    };
+    // };
 
     router.start();
 });
