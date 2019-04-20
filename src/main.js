@@ -115,5 +115,19 @@ document.addEventListener('DOMContentLoaded', function () {
     router.add({re: '/rules', handler: rulesController});
     router.add({re: '/notfound', handler: nfController});
 
+    const root = document.querySelector('#application');
+    if (window.innerWidth < 480) {
+        debugger;
+        root.innerHTML = '';
+        // root.innerHTML = '<div class="mock">LOL</div>'
+    }
+    window.onresize = function(event) {
+        console.log(window.innerWidth);
+        if (window.innerWidth < 480) {
+            router.navigate('/multiplayer');
+        }
+            
+    };
+
     router.start();
 });
