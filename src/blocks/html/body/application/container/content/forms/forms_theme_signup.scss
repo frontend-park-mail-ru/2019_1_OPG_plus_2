@@ -1,0 +1,5 @@
+.forms_theme_signup {
+    @media (min-width: $desktop-min-width) {
+        grid-row: 3 / -3;
+    }
+}

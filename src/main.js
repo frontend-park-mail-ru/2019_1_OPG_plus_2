@@ -34,72 +34,101 @@ import RulesView from './app/view/rulesView';
 import RulesController from './app/controller/rules_controller';
 import NotFoundView from './app/view/not_found_view';
 import NotFoundController from './app/controller/not_found_controller';
+import InDevelopmentView from "./app/view/in_development_view";
+import InDevelopmentController from "./app/controller/in_development_controller";
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // if ('serviceWorker' in navigator) {
+    //     navigator.serviceWorker.register('/sw.js')
+    //         .then(function (registration) {
+    //             console.log('Registration successful, scope is:', registration.scope);
+    //         })
+    //         .catch(function (error) {
+    //             console.log('Service worker registration failed, error:', error);
+    //         });
+    // }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+    const router = new Router({
+        mode: 'history',
+        root: document.getElementById('application'),
+    });
 
-	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('/sw.js')
-			.then(function(registration) {
-				console.log('Registration successful, scope is:', registration.scope);
-			})
-			.catch(function(error) {
-				console.log('Service worker registration failed, error:', error);
-			});
-	}
+    const mainModel = new MainPageModel();
+    const mainView = new MainPageView();
+    const mainController = new MainPageController({model: mainModel, view: mainView, router: router});
 
+    const scoreModel = new ScoreBoardModel();
+    const scoreView = new ScoreBoardView();
+    const scoreController = new ScoreBoardController({model: scoreModel, view: scoreView, router: router});
 
-	const router = new Router({
-		mode: 'history',
-		root: document.getElementById('application'),
-	});
+    const signInModel = new SignInModel();
+    const signInView = new SignInView();
+    const signInController = new SignInController({model: signInModel, view: signInView, router: router});
 
-	const mainModel = new MainPageModel();
-	const mainView = new MainPageView();
-	const mainController = new MainPageController({model: mainModel, view: mainView, router: router});
+    const profileModel = new ProfileModel();
+    const profileView = new ProfileView();
+    const profileController = new ProfileController({model: profileModel, view: profileView, router: router});
 
-	const scoreModel = new ScoreBoardModel();
-	const scoreView = new ScoreBoardView();
-	const scoreController = new ScoreBoardController({model: scoreModel, view: scoreView, router: router});
+    const signUpModel = new SignUpModel();
+    const signUpView = new SignUpView();
+    const signUpController = new SignUpController({model: signUpModel, view: signUpView, router: router});
 
-	const signInModel = new SignInModel();
-	const signInView = new SignInView();
-	const signInController = new SignInController({model: signInModel, view: signInView, router: router});
+    const editProfileModel = new EditProfileModel();
+    const editProfileView = new EditProfileView();
+    const editProfileController = new EditProfileController({
+        model: editProfileModel,
+        view: editProfileView,
+        router: router
+    });
 
-	const profileModel = new ProfileModel();
-	const profileView = new ProfileView();
-	const profileController = new ProfileController({model: profileModel, view: profileView, router: router});
+    const rulesModel = {};
+    const rulesView = new RulesView();
+    const rulesController = new RulesController({model: rulesModel, view: rulesView, router: router});
 
-	const signUpModel = new SignUpModel();
-	const signUpView = new SignUpView();
-	const signUpController = new SignUpController({model: signUpModel, view: signUpView, router: router});
+    const gameModel = new GameModel();
+    const gameView = new GameView();
+    const gameController = new GameController({model: gameModel, view: gameView, router: router});
 
-	const editProfileModel = new EditProfileModel();
-	const editProfileView = new EditProfileView();
-	const editProfileController = new EditProfileController({model: editProfileModel, view: editProfileView, router: router});
+    const nfModel = {};
+    const nfView = new NotFoundView();
+    const nfController = new NotFoundController({model: nfModel, view: nfView, router: router});
 
-	const rulesModel = {};
-	const rulesView = new RulesView();
-	const rulesController = new RulesController({model: rulesModel, view: rulesView, router: router});
+    const multiplaterModel = {};
+    const multiplayerView = new InDevelopmentView();
+    const multiplayerController = new InDevelopmentController({
+        model: multiplaterModel,
+        view: multiplayerView,
+        router: router
+    });
 
-	const gameModel = new GameModel();
-	const gameView = new GameView();
-	const gameController = new GameController({model: gameModel, view: gameView, router: router});
+    router.add({handler: mainController});
+    router.add({re: '/leaders', handler: scoreController});
+    router.add({re: '/signin', handler: signInController});
+    router.add({re: '/me', handler: profileController});
+    router.add({re: '/signup', handler: signUpController});
+    router.add({re: '/editme', handler: editProfileController});
+    router.add({re: '/game', handler: gameController});
+    router.add({re: '/multiplayer', handler: multiplayerController});
 
-	const nfModel = {};
-	const nfView = new NotFoundView();
-	const nfController = new NotFoundController({model: nfModel, view: nfView, router: router});
+    router.add({re: '/rules', handler: rulesController});
+    router.add({re: '/notfound', handler: nfController});
 
-	router.add({handler: mainController});
-	router.add({re: '/leaders', handler: scoreController});
-	router.add({re: '/signin', handler: signInController});
-	router.add({re: '/me', handler: profileController});
-	router.add({re: '/signup', handler: signUpController});
-	router.add({re: '/editme', handler: editProfileController});
-	router.add({re: '/game', handler: gameController});
+    const root = document.querySelector('#application');
+    if (window.innerWidth < 1250) {
+        root.innerHTML = '';
+        root.innerHTML = '<div class="mock"><div class=\'text\'>Development for this screen size in progress...</div></div>'
+        return;
+    }
+    window.onresize = function(event) {
+        if (window.innerWidth < 1250) {
+            root.innerHTML = '';
+            root.innerHTML = '<div class="mock"><div class=\'text\'>Development for this screen size in progress...</div></div>'
+            return;
+        }
+            
+    };
 
-	router.add({re: '/rules', handler: rulesController});
-	router.add({re: '/notfound', handler: nfController});
-
-	router.start();
+    router.start();
 });

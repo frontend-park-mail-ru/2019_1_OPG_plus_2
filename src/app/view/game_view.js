@@ -27,7 +27,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	down(event) {
-		if (event.target.classList.contains('block')) {
+		if (event.target.classList.contains('block') && !Boolean(+event.target.dataset.isSet)) {
 			const app = document.querySelector('#application');
 			app.addEventListener('mouseover', this.over, true);
 			this._currentBlock = event.target;
@@ -84,7 +84,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		}));
 	}
 
-	_renderMain() {
+	_renderMain(data) {
 		const containerBlock = this._root.querySelector('.container.container_theme_game');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
@@ -124,7 +124,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_left'],
-				nickname: 'Player1', // TODO передача никнейма пользователя
+				nickname: data.username, // TODO передача никнейма пользователя
 			}),
 		);
 	}
@@ -198,12 +198,14 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		if (ans) {
 			player === 'Player1' 
 				? this._currentBlock.classList.add('block_theme_left-active') 
-				: this._currentBlock.classList.add('block_theme_right-active');
+				: this._currentBlock.classList.add('block_theme_right-active'); 
+				this._currentBlock.dataset.isSet = 1;
 		}
 	}
 
 	endStep({winner = null, player = 'Player1'} = {}) {
 		if (winner) {
+			this._removeTurnListener();
 			this._renderModal(winner);
 		} else {
 			const headBlock = this._root.querySelector('.head.head_theme_game');
@@ -215,7 +217,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	_render(data) {
 		this._root.innerHTML = '';
 		this._renderContainer();
-		this._renderMain();
+		this._renderMain(data);
 		this._renderHead(data);
 		this._renderLeftPlayer(data);
 		this._renderRightPlayer(data);

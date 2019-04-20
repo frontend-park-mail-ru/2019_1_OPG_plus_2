@@ -1,9 +1,13 @@
 .profile {
     cursor: pointer;
-    border-bottom: 1px solid $secondary-color;
-    background-image: url("data:image/svg+xml,%3Csvg width='58' height='67' viewBox='0 0 58 67' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M29.0001 31.0725C37.7085 31.0725 44.7682 24.1167 44.7682 15.5362C44.7682 6.95581 37.7085 0 29.0001 0C20.2916 0 13.2319 6.95581 13.2319 15.5362C13.2319 24.1167 20.2916 31.0725 29.0001 31.0725Z' fill='%23005FF9'/%3E%3Cpath d='M29.0001 38.8406C13.2159 38.8406 0.420349 51.448 0.420349 67H57.5798C57.5798 51.448 44.7842 38.8406 29.0001 38.8406Z' fill='%23005FF9'/%3E%3C/svg%3E%0A");
+    transition: all 250ms ease-out;
     background-repeat: no-repeat;
     background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg width='58' height='67' viewBox='0 0 58 67' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M29.0001 31.0725C37.7085 31.0725 44.7682 24.1167 44.7682 15.5362C44.7682 6.95581 37.7085 0 29.0001 0C20.2916 0 13.2319 6.95581 13.2319 15.5362C13.2319 24.1167 20.2916 31.0725 29.0001 31.0725Z' fill='%23005FF9'/%3E%3Cpath d='M29.0001 38.8406C13.2159 38.8406 0.420349 51.448 0.420349 67H57.5798C57.5798 51.448 44.7842 38.8406 29.0001 38.8406Z' fill='%23005FF9'/%3E%3C/svg%3E%0A");
+
+    &:hover {
+        transform: scale(1.2);
+    }
 
     @media (min-width: $desktop-min-width) {
         padding: 7vh 4vh 4vh;

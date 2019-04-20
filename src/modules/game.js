@@ -57,7 +57,7 @@ export default class Game {
         if (this.isBlock({block})) {
             const intBlock = parseInt(block, 10);
             const coordinates = this.getCoordinates({block: intBlock});
-            const isDiagonal = this.isDiagonal({coordinates});
+            const isDiagonal = this.isDiagonal({point: coordinates});
             const isStep = this.isStep({coordinates});
             const isDisable = this.isDisable({block: intBlock});
             const isEnemyStep = this.isEnemyStep({coordinates});
@@ -73,7 +73,7 @@ export default class Game {
                 this._stopFlag = true;
             }
 
-            if (!isDisable && isConsistStraight && isStep && !this._stopFlag) {
+            if (!isDisable && isConsistStraight && isStep && !this._stopFlag && !isDiagonal) {
                 this.setStep({coordinates});
                 this._steps.push(intBlock);
 
@@ -97,11 +97,9 @@ export default class Game {
         const intBlock = parseInt(block, 10);
         const isDisable = this.isDisable({block: intBlock});
         const lastCoordinates = this.getCoordinates({block: this.getLastBlock()});
-        const isBlock = this.isBlock({block: block});
 
         if ((isDisable && this._steps.length === 0)
-            || (this._steps.length === 0)
-            || (this._steps.length === 1 && this._pastSteps.includes( intBlock ) && isBlock)) {
+            || (this._steps.length === 0)) {
             this._stopFlag = false;
             this.reset();
 

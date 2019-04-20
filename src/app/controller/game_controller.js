@@ -16,12 +16,13 @@ export default class GameController extends NavigateMixinController(Controller) 
 		router = {},
 	} = {}) {
 		super({model: model, view: view, router: router});
-		this._model.on(INIT_EVENT, ({root = {}, firstPlayer = 'Player1', disableBlocks = []} = {}) => {
+		this._model.on(INIT_EVENT, ({root = {}, username = 'Player1', firstPlayer = 'Player1', disableBlocks = []} = {}) => {
 			this.render({ 
 				root: root, 
 				data: {
 					whoseTurn: firstPlayer, 
-					disableBlocks: disableBlocks
+					disableBlocks: disableBlocks,
+					username: username,
 				}
 			})
 		});

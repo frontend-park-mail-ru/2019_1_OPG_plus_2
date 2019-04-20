@@ -13,6 +13,7 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';
+import { SIGN_UP_SUBMIT_EVENT } from '../../modules/events';
 
 export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -30,7 +31,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 		const password = formsBlock.elements[2].value;
 		const password_repeat = formsBlock.elements[3].value;
 
-		this.emit('signUpSubmit', {
+		this.emit(SIGN_UP_SUBMIT_EVENT, {
 			root: this._root,
 			name: username, 
 			email: email, 
@@ -61,7 +62,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 
 	_renderContainer(data) {
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: [`container_theme_signup ${data.error ? 'container_theme_error' : ' '}`],
+			modifiers: [`container_theme_signup`],
 		}));
 	}
 
@@ -92,16 +93,16 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 		const contentBlock = document.querySelector('.content.content_theme_signup');
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
-				title: 'SING UP',
+				title: 'SIGN UP',
 				modifiers: ['title_theme_signup'],
 			}),
 			formsTemplate({
-				modifiers: [],
+				modifiers: ['forms_theme_signup'],
 				action: 'POST',
 				name: 'signup',
 			}),
 			buttonsTemplate({
-				modifiers: [],
+				modifiers: ['buttons_theme_signup'],
 			}),
 		);
 	}

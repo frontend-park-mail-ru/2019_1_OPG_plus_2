@@ -1,5 +1,6 @@
 .buttons_theme_edit-profile {
     @media (min-width: $desktop-min-width) {
         justify-content: center;
+        grid-column: 3/-4;
     }
 }

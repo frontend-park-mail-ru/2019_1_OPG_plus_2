@@ -9,9 +9,12 @@
 @import '../blocks/html/body/application/container/content/content.scss';
 @import '../blocks/html/body/application/container/content/buttons/buttons.scss';
 @import '../blocks/html/body/application/container/content/buttons/link/link.scss';
+@import '../blocks/html/body/application/container/content/buttons/link/link_theme_hidden.scss';
 @import '../blocks/html/body/application/container/content/buttons/submit/submit.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_type_secondary.scss';
+@import '../blocks/html/body/application/container/content/buttons/button/button_type_primary.scss';
 @import '../blocks/html/body/application/container/content/forms/forms.scss';
+@import '../blocks/html/body/application/container/content/forms/forms_theme_signup.scss';
 @import '../blocks/html/body/application/container/content/forms/form/form.scss';
 @import '../blocks/html/body/application/container/content/forms/error/error.scss';
 @import '../blocks/html/body/application/container/content/main/main.scss';
@@ -24,11 +27,16 @@
 @import '../blocks/html/body/application/container/head/head_theme_back-arrow.scss';
 @import '../blocks/html/body/application/container/head/lines/lines.scss';
 @import '../blocks/html/body/application/container/head/menu/menu.scss';
-@import '../blocks/html/body/application/container/head/menu/rules/rules.scss';
+@import '../blocks/html/body/application/container/head/menu/separator/separator.scss';
+@import '../blocks/html/body/application/container/head/menu/separator/separator_theme_hidden.scss';
 @import '../blocks/html/body/application/container/head/menu/profile/profile.scss';
-@import '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.scss';
-@import '../blocks/html/body/application/container/content/buttons/link/link_theme_hidden.scss';
 @import '../blocks/html/body/application/container/head/menu/profile/profile_theme_hidden.scss';
+@import '../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.scss';
+@import '../blocks/html/body/application/container/head/menu/rules/rules.scss';
+@import '../blocks/html/body/application/container/lines/lines-up/lines-up.scss';
+@import '../blocks/html/body/application/container/lines/lines-up/lines-up_theme_right.scss';
+@import '../blocks/html/body/application/container/lines/lines-down-left/lines-down-left.scss';
+@import '../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.scss';
 
 /* sign up */
 
@@ -102,11 +110,14 @@
 /* game */
 
 @import '../blocks/html/body/application/container/container_theme_game.scss';
+@import '../blocks/html/body/application/container/intro-modal/intro-modal.scss';
 @import '../blocks/html/body/application/container/content/content_theme_game.scss';
 @import '../blocks/html/body/application/container/head/head_theme_game.scss';
 @import '../blocks/html/body/application/container/player/player.scss';
 @import '../blocks/html/body/application/container/player/player_theme_player1.scss';
+@import '../blocks/html/body/application/container/player/player_theme_player1-active.scss';
 @import '../blocks/html/body/application/container/player/player_theme_player2.scss';
+@import '../blocks/html/body/application/container/player/player_theme_player2-active.scss';
 @import '../blocks/html/body/application/container/head/side/side.scss';
 @import '../blocks/html/body/application/container/head/side/side_theme_left-active.scss';
 @import '../blocks/html/body/application/container/head/side/side_theme_left-passive.scss';
@@ -127,7 +138,31 @@
 @import '../blocks/html/body/application/container/content/main-button/main-button_theme_signin.scss';
 @import '../blocks/html/body/application/container/content/main-button/main-button_theme_multiplayer.scss';
 @import '../blocks/html/body/application/container/modal/modal.scss';
+@import '../blocks/html/body/application/container/content/field/block/block_theme_close.scss';
 
 
 /* rules */
 @import '../blocks/html/body/application/container/content/content_theme_rules.scss';
+
+
+/* service */
+@import '../blocks/html/body/application/container/container_theme_service.scss';
+@import '../blocks/html/body/application/container/content/content_theme_service.scss';
+@import '../blocks/html/body/application/container/content/title/title_theme_service.scss';
+@import '../blocks/html/body/application/container/content/buttons/button/button_type_primary.scss';
+
+
+.mock {
+    font-family: 'Roboto';
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    height: 10%;
+    // font-family: $main-font-family;
+    color: $secondary-color;
+}
