@@ -3,4 +3,5 @@
     grid-template: repeat(5, 14vh) / repeat(5, 14vh);
     grid-row: 1 / -2; 
     user-select: none;
+    touch-action: none;
 }
