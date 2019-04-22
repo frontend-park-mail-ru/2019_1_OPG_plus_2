@@ -79,14 +79,7 @@ export default class Game {
                 this._stopFlag = true;
             }
 
-            console.log(isConsistStraight);
-
-            // if (!isConsistStraight) {
-            //     debugger;
-            // }
-
             if (!isDisable && isConsistStraight && isStep && !this._stopFlag && !isDiagonal) {
-                debugger;
                 this._steps.push(intBlock);
                 const ans = this.check();
                 if (ans) {
