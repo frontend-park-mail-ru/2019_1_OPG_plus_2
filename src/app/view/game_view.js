@@ -21,8 +21,8 @@ import { DOWN_EVENT,
 export default class GameView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
-		this.down = this.down.bind(this);
-		this.up = this.up.bind(this);
+		this.down = this.throttle(this.down.bind(this), 100);
+		this.up = this.throttle(this.up.bind(this), 100);
 		this.over = this.throttle(this.over.bind(this), 50);
 	}
 
@@ -66,6 +66,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	up(event) {
+		debugger;
 		const app = document.querySelector('#application');
 		app.removeEventListener('pointerover', this.over, true);
 		this._endBlock = event.target;
