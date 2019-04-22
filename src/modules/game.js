@@ -64,7 +64,6 @@ export default class Game {
             const isEnemyStep = this.isEnemyStep({coordinates});
             const isConsistStraight = this.isConsistStraight({point: coordinates});
 
-            console.log(!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag);
             if (!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag) {
                 this._steps.push(intBlock);
                 const ans = this.check();
@@ -80,7 +79,14 @@ export default class Game {
                 this._stopFlag = true;
             }
 
+            console.log(isConsistStraight);
+
+            // if (!isConsistStraight) {
+            //     debugger;
+            // }
+
             if (!isDisable && isConsistStraight && isStep && !this._stopFlag && !isDiagonal) {
+                debugger;
                 this._steps.push(intBlock);
                 const ans = this.check();
                 if (ans) {
@@ -364,22 +370,22 @@ export default class Game {
      * @returns {Array} Returns array of blocks
      */
     getDisableBlocks() {
-        if (!this._disableBlocks.length) {
-            let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
+        // if (!this._disableBlocks.length) {
+        //     let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
 
-            const numBlocks = 24; // количество блоков на поле для рандома
-            [...Array(rand)].forEach(() => { // рандомим заблокированные блоки
-                let randomBlock = Math.floor(Math.random() * (numBlocks));
-                if (!this._disableBlocks.includes( randomBlock )) {
-                    this._disableBlocks.push(randomBlock);
-                } else {
-                    rand--;
-                }
-            });
+        //     const numBlocks = 24; // количество блоков на поле для рандома
+        //     [...Array(rand)].forEach(() => { // рандомим заблокированные блоки
+        //         let randomBlock = Math.floor(Math.random() * (numBlocks));
+        //         if (!this._disableBlocks.includes( randomBlock )) {
+        //             this._disableBlocks.push(randomBlock);
+        //         } else {
+        //             rand--;
+        //         }
+        //     });
 
-            this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
-            // в зависимости от количества заблокированных клеток
-        }
+        //     this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
+        //     // в зависимости от количества заблокированных клеток
+        // }
 
         console.log('start cout: ', this._cellsCount);
 

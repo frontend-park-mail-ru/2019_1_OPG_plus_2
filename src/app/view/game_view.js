@@ -23,7 +23,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		super();
 		this.down = this.down.bind(this);
 		this.up = this.debounce(this.up.bind(this), 100);
-		this.over = this.throttle(this.over.bind(this), 100);
+		this.over = this.throttle(this.over.bind(this), 50);
 	}
 
 	debounce(func, wait, immediate) {
@@ -90,7 +90,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	over(event) {
 		const target = document.elementFromPoint(event.clientX, event.clientY);
 		if (target.classList.contains('block')) {
-			console.log(target);
 			this._currentBlock = target;
 			this.emit(OVER_BLOCK_EVENT, {block: target.textContent});
 		} else {
@@ -116,6 +115,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		const appBlock = document.querySelector('#application');
 		filedBlock.addEventListener('pointerdown', this.down, true);
 		appBlock.addEventListener('pointerup', this.up, true);
+		window.addEventListener('contextmenu', function (e) { 
+			e.preventDefault();
+		}, false);
 	}
 
 	_removeTurnListener() {
@@ -123,6 +125,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		const appBlock = document.querySelector('#application');
 		filedBlock.removeEventListener('pointerdown', this.down);
 		appBlock.removeEventListener('pointerup', this.up, true);
+		window.removeEventListener('contextmenu', function (e) {
+			e.preventDefault();
+		}, false);
 	}
 
 	_createEventListeners() {
