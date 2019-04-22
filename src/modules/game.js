@@ -72,8 +72,6 @@ export default class Game {
                 }
                 this._secondStepFlag = true;
 
-                console.log(this._stepsMatrix);
-
                 return ans;
             } else if (isDisable || isEnemyStep) {
                 this._stopFlag = true;
@@ -85,8 +83,6 @@ export default class Game {
                 if (ans) {
                     this.setStep({coordinates});
                 }
-
-                console.log(this._stepsMatrix);
 
                 return ans;
             } else if (isDisable || isEnemyStep) {
@@ -136,8 +132,6 @@ export default class Game {
                 }
             }
         }
-
-        // console.log(miss);
 
         return miss;
     }
@@ -363,24 +357,22 @@ export default class Game {
      * @returns {Array} Returns array of blocks
      */
     getDisableBlocks() {
-        // if (!this._disableBlocks.length) {
-        //     let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
+        if (!this._disableBlocks.length) {
+            let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
 
-        //     const numBlocks = 24; // количество блоков на поле для рандома
-        //     [...Array(rand)].forEach(() => { // рандомим заблокированные блоки
-        //         let randomBlock = Math.floor(Math.random() * (numBlocks));
-        //         if (!this._disableBlocks.includes( randomBlock )) {
-        //             this._disableBlocks.push(randomBlock);
-        //         } else {
-        //             rand--;
-        //         }
-        //     });
+            const numBlocks = 24; // количество блоков на поле для рандома
+            [...Array(rand)].forEach(() => { // рандомим заблокированные блоки
+                let randomBlock = Math.floor(Math.random() * (numBlocks));
+                if (!this._disableBlocks.includes( randomBlock )) {
+                    this._disableBlocks.push(randomBlock);
+                } else {
+                    rand--;
+                }
+            });
 
-        //     this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
-        //     // в зависимости от количества заблокированных клеток
-        // }
-
-        console.log('start cout: ', this._cellsCount);
+            this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
+            // в зависимости от количества заблокированных клеток
+        }
 
         return this._disableBlocks;
     }
@@ -433,7 +425,6 @@ export default class Game {
             }
             this._cellsCount -= difference;
 
-            console.log(startPoint, finishPoint, this._cellsCount);
 
             return false;
         }
