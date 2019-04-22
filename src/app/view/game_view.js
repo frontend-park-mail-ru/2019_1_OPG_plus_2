@@ -21,10 +21,25 @@ import { DOWN_EVENT,
 export default class GameView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
-		this.down = this.throttle(this.down.bind(this), 100);
-		this.up = this.throttle(this.up.bind(this), 100);
-		this.over = this.throttle(this.over.bind(this), 50);
+		this.down = this.down.bind(this);
+		this.up = this.debounce(this.up.bind(this), 100);
+		this.over = this.throttle(this.over.bind(this), 50)
 	}
+
+	debounce(func, wait, immediate) {
+		var timeout;
+		return function() {
+			var context = this, args = arguments;
+			var later = function() {
+				timeout = null;
+				if (!immediate) func.apply(context, args);
+			};
+			var callNow = immediate && !timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+			if (callNow) func.apply(context, args);
+		};
+	};
 
 	throttle(func, ms) {
 
@@ -66,7 +81,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	up(event) {
-		debugger;
 		const app = document.querySelector('#application');
 		app.removeEventListener('pointerover', this.over, true);
 		this._endBlock = event.target;
@@ -81,6 +95,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			const app = document.querySelector('#application');
 			app.removeEventListener('pointerover', this.over, true);
 			this._endBlock = event.target;
+			// setTimeout(this.emit(UP_BLOCK_EVENT, {block: event.target.textContent}), 10000);
 			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 		}
 	}

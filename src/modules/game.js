@@ -65,22 +65,30 @@ export default class Game {
             const isConsistStraight = this.isConsistStraight({point: coordinates});
 
             if (!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag) {
-                this.setStep({coordinates});
-                this._secondStepFlag = true;
                 this._steps.push(intBlock);
+                const ans = this.check();
+                if (ans) {
+                    this.setStep({coordinates});
+                }
+                this._secondStepFlag = true;
 
-                return true;
+                console.log(this._stepsMatrix);
+
+                return ans;
             } else if (isDisable || isEnemyStep || !isStep) {
                 this._stopFlag = true;
             }
 
             if (!isDisable && isConsistStraight && isStep && !this._stopFlag && !isDiagonal) {
-                this.setStep({coordinates});
                 this._steps.push(intBlock);
+                const ans = this.check();
+                if (ans) {
+                    this.setStep({coordinates});
+                }
 
-                // this.check();
+                console.log(this._stepsMatrix);
 
-                return this.check();
+                return ans;
             } else if (isDisable || isEnemyStep) {
                 this._stopFlag = true;
             } else if (!isConsistStraight) {
@@ -103,10 +111,13 @@ export default class Game {
      */
     getMissX(a, b) {
         let miss = [];
-        if (b) {
+        if (b !== void 0) {
             if (a < b) {
                 for (let i = a+1; i < b; i++) {
-                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
+                    if (!this._disableBlocks.includes(i) && !this.isSetBlock({block: i})) {
+                        if (this._ans) {
+                            this.setBlock({block: i});
+                        }
                         miss.push(i)
                     } else {
                         this._ans = false;
@@ -114,7 +125,10 @@ export default class Game {
                 }
             } else {
                 for (let i = a-1; i > b; i--) {
-                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
+                    if (!this._disableBlocks.includes(i) && !this.isSetBlock({block: i})) {
+                        if (this._ans) {
+                            this.setBlock({block: i});
+                        }
                         miss.push(i)
                     } else {
                         this._ans = false;
@@ -122,6 +136,8 @@ export default class Game {
                 }
             }
         }
+
+        // console.log(miss);
 
         return miss;
     }
@@ -134,18 +150,24 @@ export default class Game {
      */
     getMissY(a, b) {
         let miss = [];
-        if (b) {
+        if (b !== void 0) {
             if (a < b) {
                 for (let i = a+5; i < b; i+=5) {
-                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
-                        miss.push(i)
+                    if (!this._disableBlocks.includes(i) && !this.isSetBlock({block: i})) {
+                        if (this._ans) {
+                            this.setBlock({block: i});
+                        }
+                        miss.push(i);
                     } else {
                         this._ans = false;
                     }
                 }
             } else {
                 for (let i = a-5; i > b; i-=5) {
-                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
+                    if (!this._disableBlocks.includes(i) && !this.isSetBlock({block: i})) {
+                        if (this._ans) {
+                            this.setBlock({block: i});
+                        }
                         miss.push(i)
                     } else {
                         this._ans = false;
@@ -170,26 +192,38 @@ export default class Game {
         const begin = this._steps[0];
         const end = this._steps[this._steps.length - 1];
         const diff = Math.abs(end  - begin);
+        let newSteps = [];
 
         if (diff < 5) {
-
-            console.log("before: ", this._steps);
-
             this._steps.forEach((el, i) => {
+                if (this._ans) {
+                    newSteps.push(el);
+                }
+
                 if (Math.abs(el-this._steps[i+1]) != 1) {
                   this._steps.splice(i+1, 0, ...this.getMissX(el, this._steps[i+1]));
                 }
             });
 
-            console.log("after: ", this._steps, this._ans);
+            if (!this._ans) {
+                this._steps = newSteps;
+            }
 
             return this._ans;
         } else {
             this._steps.forEach((el, i) => {
+                if (this._ans) {
+                    newSteps.push(el);
+                }
+                
                 if (Math.abs(el-this._steps[i+1]) != 5) {
                   this._steps.splice(i+1, 0, ...this.getMissY(el, this._steps[i+1]))
                 }
             });
+
+            if (!this._ans) {
+                this._steps = newSteps;
+            }
 
             return this._ans;
         }
@@ -200,9 +234,21 @@ export default class Game {
      * @param Object Object with block 
      * @returns {bool} Return true if block doesn't set
      */
-    isSet({block = []} = {}) {
+    isSetBlock({block = []} = {}) {
         const coords = this.getCoordinates({block: block});
         return this._stepsMatrix[coords[0]][coords[1]] !== '*';
+    }
+
+    setBlock({block = []} = {}) {
+        let coords = this.getCoordinates({block: block});
+        this.setStep({coordinates: coords});
+    }
+
+    setBlocks({blocks = []} = {}) {
+        blocks.forEach(el => {
+            let coords = this.getCoordinates({block: el});
+            this.setStep({coordinates: coords});
+        });
     }
 
     /**
@@ -334,6 +380,8 @@ export default class Game {
             // в зависимости от количества заблокированных клеток
         }
 
+        console.log('start cout: ', this._cellsCount);
+
         return this._disableBlocks;
     }
 
@@ -384,6 +432,8 @@ export default class Game {
                 return true;
             }
             this._cellsCount -= difference;
+
+            console.log(startPoint, finishPoint, this._cellsCount);
 
             return false;
         }
