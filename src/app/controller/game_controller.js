@@ -30,7 +30,7 @@ export default class GameController extends NavigateMixinController(Controller) 
 		this._model.on(END_DOWN_EVENT, ({player = 'Player1', ans = false} = {}) => {this.apply({player, ans})});
 
 		this._view.on(OVER_BLOCK_EVENT, ({block = null} = {}) => {this.doOverBlock({block})});
-		this._model.on(END_OVER_BLOCK_EVENT, ({player = 'Player1', ans = false} = {}) => {this.apply({player, ans})});
+		this._model.on(END_OVER_BLOCK_EVENT, ({player = 'Player1', ans = false, steps = []} = {}) => {this.apply({player, ans, steps})});
 
 		this._view.on(UP_BLOCK_EVENT, ({block = null} = {}) => {this.doFinishStep({block})});
 		this._model.on(FINISH_STEP_EVENT, ({winner = null, player = 'Player1'} = {}) => {this.doEndStep({winner, player})});
@@ -49,8 +49,8 @@ export default class GameController extends NavigateMixinController(Controller) 
 		this._model.doFinishStep({block});
 	}
 
-	apply({player = 'Player1', ans = false} = {}) {
-		this._view.apply({player, ans});
+	apply({player = 'Player1', ans = false, steps = []} = {}) {
+		this._view.apply({player, ans, steps});
 	}
 
 	doEndStep({winner = null, player = 'Player1'} = {}) {

@@ -20,6 +20,7 @@ export default class Game {
         this._winner = null; // победитель
         this._stopFlag = false; // флаг для остановки отрисовки
         this._pastSteps = []; // массив учета всех шагов
+        this._ans = true;
     }
 
     /**
@@ -77,7 +78,9 @@ export default class Game {
                 this.setStep({coordinates});
                 this._steps.push(intBlock);
 
-                return true;
+                // this.check();
+
+                return this.check();
             } else if (isDisable || isEnemyStep) {
                 this._stopFlag = true;
             } else if (!isConsistStraight) {
@@ -86,6 +89,98 @@ export default class Game {
 
             return false;
         }
+    }
+
+    get steps() {
+        return this._steps;
+    }
+
+    getMissX(a, b) {
+        let miss = [];
+        if (b) {
+            if (a < b) {
+                for (let i = a+1; i < b; i++) {
+                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
+                        miss.push(i)
+                    } else {
+                        this._ans = false;
+                    }
+                }
+            } else {
+                for (let i = a-1; i > b; i--) {
+                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
+                        miss.push(i)
+                    } else {
+                        this._ans = false;
+                    }
+                }
+            }
+        }
+
+        return miss;
+    }
+
+    getMissY(a, b) {
+        let miss = [];
+        if (b) {
+            if (a < b) {
+                for (let i = a+5; i < b; i+=5) {
+                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
+                        miss.push(i)
+                    } else {
+                        this._ans = false;
+                    }
+                }
+            } else {
+                for (let i = a-5; i > b; i-=5) {
+                    if (!this._disableBlocks.includes(i) && !this.isSet({block: i})) {
+                        miss.push(i)
+                    } else {
+                        this._ans = false;
+                    }
+                }
+            }
+        }
+        
+        return miss;
+    }
+
+    check() {
+        if (this._steps.length === 1) {
+          return true;
+        }
+        
+        const begin = this._steps[0];
+        const end = this._steps[this._steps.length - 1];
+        const diff = Math.abs(end  - begin);
+
+        if (diff < 5) {
+
+            console.log("before: ", this._steps);
+
+            this._steps.forEach((el, i) => {
+                if (Math.abs(el-this._steps[i+1]) != 1) {
+                  this._steps.splice(i+1, 0, ...this.getMissX(el, this._steps[i+1]));
+                }
+            });
+
+            console.log("after: ", this._steps, this._ans);
+
+            return this._ans;
+        } else {
+            this._steps.forEach((el, i) => {
+                if (Math.abs(el-this._steps[i+1]) != 5) {
+                  this._steps.splice(i+1, 0, ...this.getMissY(el, this._steps[i+1]))
+                }
+            });
+
+            return this._ans;
+        }
+    }
+
+    isSet({block = []} = {}) {
+        const coords = this.getCoordinates({block: block});
+        return this._stepsMatrix[coords[0]][coords[1]] !== '*';
     }
 
     /**
@@ -174,6 +269,7 @@ export default class Game {
      * Reset user game state
      */
     reset() {
+        this._ans = true;
         this._steps = [];
         this._secondPoint = [];
         this._lastPoint = [];
@@ -199,22 +295,22 @@ export default class Game {
      * @returns {Array} Returns array of blocks
      */
     getDisableBlocks() {
-        // if (!this._disableBlocks.length) {
-        //     let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
+        if (!this._disableBlocks.length) {
+            let rand = 2 + Math.floor(Math.random() * 7); // рандомим колчиество заблокированных блоков
 
-        //     const numBlocks = 24; // количество блоков на поле для рандома
-        //     [...Array(rand)].forEach(() => { // рандомим заблокированные блоки
-        //         let randomBlock = Math.floor(Math.random() * (numBlocks));
-        //         if (!this._disableBlocks.includes( randomBlock )) {
-        //             this._disableBlocks.push(randomBlock);
-        //         } else {
-        //             rand--;
-        //         }
-        //     });
+            const numBlocks = 24; // количество блоков на поле для рандома
+            [...Array(rand)].forEach(() => { // рандомим заблокированные блоки
+                let randomBlock = Math.floor(Math.random() * (numBlocks));
+                if (!this._disableBlocks.includes( randomBlock )) {
+                    this._disableBlocks.push(randomBlock);
+                } else {
+                    rand--;
+                }
+            });
 
-        //     this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
-        //     // в зависимости от количества заблокированных клеток
-        // }
+            this._cellsCount -= rand; // устанавливаем количество ходов до выигрыша 
+            // в зависимости от количества заблокированных клеток
+        }
 
         return this._disableBlocks;
     }

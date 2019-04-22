@@ -226,6 +226,13 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	apply({player = 'Player1', ans = false, steps = []} = {}) {
 		if (ans) {
+			steps.forEach(el => {
+				player === 'Player1' 
+					? this._blocks[el].classList.add('block_theme_left-active') 
+					: this._blocks[el].classList.add('block_theme_right-active');
+				this._blocks[el].dataset.isSet = 1;
+			});
+
 			player === 'Player1' 
 				? this._currentBlock.classList.add('block_theme_left-active') 
 				: this._currentBlock.classList.add('block_theme_right-active'); 
@@ -243,6 +250,10 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			this._renderHead({whoseTurn: player});
 		}
 	}
+
+	_cacheBlocks() {
+		this._blocks = [...document.querySelectorAll('.block')]
+	}
 	
 	_render(data) {
 		this._root.innerHTML = '';
@@ -253,6 +264,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this._renderRightPlayer(data);
 		this._renderContent();
 		this._renderField(data);
+		this._cacheBlocks();
 	}
 
 	open({root = {}, data = {}}) {

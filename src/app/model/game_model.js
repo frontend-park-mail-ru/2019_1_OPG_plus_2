@@ -53,7 +53,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 
 	doOverStep({block = null} = {}) {
 		let ans = this._game.doStep({block});
-		this.emit(END_OVER_BLOCK_EVENT, {player: this._game.getWhoseTurn(), ans: ans});
+		this.emit(END_OVER_BLOCK_EVENT, {player: this._game.getWhoseTurn(), ans: ans, steps: this._game.steps});
 	}
 
 	doFinishStep({block = null} = {}) {
