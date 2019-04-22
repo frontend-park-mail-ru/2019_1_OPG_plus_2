@@ -1,7 +1,14 @@
 .field {
     display: grid;
-    grid-template: repeat(5, 14vh) / repeat(5, 14vh);
     grid-row: 1 / -2; 
     user-select: none;
     touch-action: none;
+
+    @media (min-width: $desktop-min-width) {
+        grid-template: repeat(5, 14vh) / repeat(5, 14vh);
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-template: repeat(5, 10vh) / repeat(5, 10vh);
+    }
 }
