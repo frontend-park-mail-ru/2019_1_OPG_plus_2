@@ -95,6 +95,12 @@ export default class Game {
         return this._steps;
     }
 
+    /**
+     * Return array of missing values
+     * @param {int} a start of slice
+     * @param {int} b finish of slice
+     * @returns {Array} Return array from a to b
+     */
     getMissX(a, b) {
         let miss = [];
         if (b) {
@@ -120,6 +126,12 @@ export default class Game {
         return miss;
     }
 
+    /**
+     * Return array of missing values
+     * @param {int} a start of slice
+     * @param {int} b finish of slice
+     * @returns {Array} Return array from a to b
+     */
     getMissY(a, b) {
         let miss = [];
         if (b) {
@@ -145,9 +157,14 @@ export default class Game {
         return miss;
     }
 
+
+    /**
+     * Check integrity of step
+     * @returns {bool} Return true if you can set this steps
+     */
     check() {
         if (this._steps.length === 1) {
-          return true;
+          return this._ans;
         }
         
         const begin = this._steps[0];
@@ -178,6 +195,11 @@ export default class Game {
         }
     }
 
+    /**
+     * Check is block set
+     * @param Object Object with block 
+     * @returns {bool} Return true if block doesn't set
+     */
     isSet({block = []} = {}) {
         const coords = this.getCoordinates({block: block});
         return this._stepsMatrix[coords[0]][coords[1]] !== '*';
