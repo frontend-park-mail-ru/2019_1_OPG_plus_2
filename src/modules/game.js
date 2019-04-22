@@ -64,6 +64,7 @@ export default class Game {
             const isEnemyStep = this.isEnemyStep({coordinates});
             const isConsistStraight = this.isConsistStraight({point: coordinates});
 
+            console.log(!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag);
             if (!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag) {
                 this._steps.push(intBlock);
                 const ans = this.check();
@@ -75,7 +76,7 @@ export default class Game {
                 console.log(this._stepsMatrix);
 
                 return ans;
-            } else if (isDisable || isEnemyStep || !isStep) {
+            } else if (isDisable || isEnemyStep) {
                 this._stopFlag = true;
             }
 

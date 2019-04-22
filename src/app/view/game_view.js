@@ -23,7 +23,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		super();
 		this.down = this.down.bind(this);
 		this.up = this.debounce(this.up.bind(this), 100);
-		this.over = this.throttle(this.over.bind(this), 50)
+		this.over = this.throttle(this.over.bind(this), 100);
 	}
 
 	debounce(func, wait, immediate) {
@@ -74,7 +74,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	down(event) {
 		if (event.target.classList.contains('block') && !Boolean(+event.target.dataset.isSet)) {
 			const app = document.querySelector('#application');
-			app.addEventListener('pointerover', this.over, true);
+			app.addEventListener('pointermove', this.over, true);
 			this._currentBlock = event.target;
 			this.emit(DOWN_EVENT, {block: event.target.textContent});
 		}
@@ -82,22 +82,33 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	up(event) {
 		const app = document.querySelector('#application');
-		app.removeEventListener('pointerover', this.over, true);
+		app.removeEventListener('pointermove', this.over, true);
 		this._endBlock = event.target;
 		this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 	}
 
 	over(event) {
-		if (event.target.classList.contains('block')) {
-			this._currentBlock = event.target;
-			this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
+		const target = document.elementFromPoint(event.clientX, event.clientY);
+		if (target.classList.contains('block')) {
+			console.log(target);
+			this._currentBlock = target;
+			this.emit(OVER_BLOCK_EVENT, {block: target.textContent});
 		} else {
 			const app = document.querySelector('#application');
-			app.removeEventListener('pointerover', this.over, true);
-			this._endBlock = event.target;
-			// setTimeout(this.emit(UP_BLOCK_EVENT, {block: event.target.textContent}), 10000);
-			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
+			app.removeEventListener('pointermove', this.over, true);
+			this._endBlock = target;
+			this.emit(UP_BLOCK_EVENT, {block: target.textContent});
 		}
+		// if (event.target.classList.contains('block')) {
+		// 	this._currentBlock = event.target;
+		// 	this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
+		// } else {
+		// 	const app = document.querySelector('#application');
+		// 	app.removeEventListener('pointerover', this.over, true);
+		// 	this._endBlock = event.target;
+		// 	// setTimeout(this.emit(UP_BLOCK_EVENT, {block: event.target.textContent}), 10000);
+		// 	this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
+		// }
 	}
 
 	_createTurnListener() {
