@@ -11,5 +11,6 @@
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         grid-column: 1 / -2;
         grid-row: 4/-2;
+        margin-left: -2vh;
     }
 }
