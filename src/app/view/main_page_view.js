@@ -96,17 +96,17 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 				href: '/',
 				dataset: '/me',
 			}),
-			// separatorTemplate({
-			// 	modifiers: [`${data.isAuth ? '' : 'separator_theme_hidden'}`],
-			// }),
+			separatorTemplate({
+				modifiers: [`${data.isAuth ? '' : 'separator_theme_hidden'}`],
+			}),
 			scoreBoardTemplate({
 				modifiers: [],
 				href: 'score',
 				dataset: '/leaders',
 			}),
-			// separatorTemplate({
-			// 	modifiers: [],
-			// }),
+			separatorTemplate({
+				modifiers: [],
+			}),
 			rulesTemplate({
 				modifiers: [],
 				href: 'rules',
