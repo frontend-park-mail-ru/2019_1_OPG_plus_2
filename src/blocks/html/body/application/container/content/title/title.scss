@@ -1,9 +1,16 @@
 .title {
-    // grid-area: t;
     font-family: Roboto;
     color: $color-text;
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 0;
+
+    @media (min-width: $desktop-min-width) {
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        align-items: center;
+        justify-content: center;
+    }
 }

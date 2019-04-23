@@ -56,4 +56,42 @@
             bottom: 0vh;
         }
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        position: absolute;
+        bottom: 0px;
+        right: 7vw;
+
+        &__line1 {
+            position: absolute;
+            width: 2px;
+            height: 35vh;
+            background-color: $main-color;
+            animation: lines-down-right-line1 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+            transform: rotate(180deg);
+            bottom: 0vh;
+        }
+
+        &__line2 {
+            position: absolute;
+            width: 2px;
+            height: 40vh;
+            background-color: $main-color;
+            right: 20px;
+            animation: lines-down-right-line2 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+            transform: rotate(180deg);
+            bottom: 0vh;
+        }
+
+        &__line3 {
+            position: absolute;
+            width: 2px;
+            height: 40vh;
+            background-color: $secondary-color;
+            right: 40px;
+            animation: lines-down-right-line3 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+            transform: rotate(180deg);
+            bottom: 0vh;
+        }
+    }
 }

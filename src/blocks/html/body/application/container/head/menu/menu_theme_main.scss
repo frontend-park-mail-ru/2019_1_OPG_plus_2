@@ -2,4 +2,8 @@
     @media (min-width: $desktop-min-width) {
         align-items: center;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1 / -1;
+    }
 }

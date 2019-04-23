@@ -2,4 +2,9 @@
     @media (min-width: $desktop-min-width) {
         grid-template-columns: repeat(12, 1fr);
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr 8fr;
+    }
 }

@@ -48,4 +48,35 @@
             animation: lines-up-line3 2s forwards cubic-bezier(0.76, 0.04, 0.25, 0.96);
         }
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        position: absolute;
+        top: 0px;
+
+        &__line1 {
+            position: absolute;
+            width: 2px;
+            height: 28vh;
+            background-color: $main-color;
+            animation: lines-up-line1 2s forwards cubic-bezier(0.76, 0.04, 0.25, 0.96);
+        }
+
+        &__line2 {
+            position: absolute;
+            width: 2px;
+            height: 28vh;
+            background-color: $secondary-color;
+            left: 20px;
+            animation: lines-up-line2 2s forwards cubic-bezier(0.76, 0.04, 0.25, 0.96);
+        }
+
+        &__line3 {
+            position: absolute;
+            width: 2px;
+            height: 15vh;
+            background-color: $main-color;
+            left: 40px;
+            animation: lines-up-line3 2s forwards cubic-bezier(0.76, 0.04, 0.25, 0.96);
+        }
+    }
 }
