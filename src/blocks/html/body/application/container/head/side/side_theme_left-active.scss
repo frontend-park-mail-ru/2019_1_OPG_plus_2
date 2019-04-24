@@ -13,9 +13,10 @@
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        grid-column: 1 / 8;
+        grid-column: 1/9;
         grid-row: 2 / -2;
         border-radius: 0 10px 10px 0;
+        font-size: 0;
         background-color: orange;
     }
 }
