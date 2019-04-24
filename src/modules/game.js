@@ -471,7 +471,8 @@ export default class Game {
      */
     isDiagonal({point = []} = {}) {
         let startPoint = this.getCoordinates({block: this._steps[0]});
-        return Math.abs(startPoint[0] - point[0]) === Math.abs(startPoint[1] - point[1]);
+        //return Math.abs(startPoint[0] - point[0]) === Math.abs(startPoint[1] - point[1]);
+        return (startPoint[0] - point[0]) && (startPoint[1] - point[1]);
     }
 
     /**
