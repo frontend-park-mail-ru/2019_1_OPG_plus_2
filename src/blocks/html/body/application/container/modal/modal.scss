@@ -25,4 +25,31 @@
             font-size: 5vh !important;
         }
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        background-color: rgba(0,0,0,0.5);
+
+        &__window {
+            width: 60%;
+            height: 30%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 6vh 7vh 9vh;
+        }
+
+        &__winner {
+            text-align: center;
+            font-family: Roboto;
+            margin-bottom: 4vh;
+            font-size: 5vh !important;
+        }
+    }
 }
