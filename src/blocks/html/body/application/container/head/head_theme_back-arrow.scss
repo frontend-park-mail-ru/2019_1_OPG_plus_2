@@ -18,4 +18,12 @@
     &:hover {
         animation: opacity 300ms forwards ease;
     }
+
+    // @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    //     grid-column: 1/4;
+    //     display: grid;
+    //     background: linear-gradient(279deg, $color-background 32%, $main-color 20%, transparent 28%), 
+    //                 linear-gradient(260deg, $color-background 33%, $main-color 14%);
+    //     opacity: 0.5;
+    // }
 }

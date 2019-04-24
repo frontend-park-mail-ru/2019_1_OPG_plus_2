@@ -1,12 +1,17 @@
 .forms {
-    grid-row: 3/8;
-    grid-column: 2/-2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // flex-direction: column;
-    // grid-area: f;
+    @media (min-width: $desktop-min-width) {
+        grid-row: 3/8;
+        grid-column: 2/-2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-row: 3/8;
+        grid-column: 2/-2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
 }
