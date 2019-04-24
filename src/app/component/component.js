@@ -1,6 +1,6 @@
 export default class Component {
 	constructor({
-		callback = () => {},
+		callback = () => null,
 	}) {
 		this._callback = callback;
 	}

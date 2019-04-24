@@ -4,12 +4,6 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 import Component from './component';
 
 export default class Paginate extends Component {
-	constructor({
-		callback = () => {},
-	} = {}) {
-		super({callback});
-	}
-
 	_createEventListeners() {
 		super._createEventListeners();
 		this._root.addEventListener('click', this._callback, true);
