@@ -98,16 +98,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			this._endBlock = target;
 			this.emit(UP_BLOCK_EVENT, {block: target.textContent});
 		}
-		// if (event.target.classList.contains('block')) {
-		// 	this._currentBlock = event.target;
-		// 	this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
-		// } else {
-		// 	const app = document.querySelector('#application');
-		// 	app.removeEventListener('pointerover', this.over, true);
-		// 	this._endBlock = event.target;
-		// 	// setTimeout(this.emit(UP_BLOCK_EVENT, {block: event.target.textContent}), 10000);
-		// 	this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
-		// }
 	}
 
 	_createTurnListener() {
@@ -155,12 +145,12 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			contentTemplate({
 				modifiers: ['content_theme_game'],
 			}),
-			playerTemplate({
-				modifiers: ['player_theme_player1'],
-			}),
-			playerTemplate({
-				modifiers: ['player_theme_player2'],
-			}),
+			// playerTemplate({
+			// 	modifiers: ['player_theme_player1'],
+			// }),
+			// playerTemplate({
+			// 	modifiers: ['player_theme_player2'],
+			// }),
 		);
 	}
 
@@ -292,8 +282,8 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this._renderContainer();
 		this._renderMain(data);
 		this._renderHead(data);
-		this._renderLeftPlayer(data);
-		this._renderRightPlayer(data);
+		// this._renderLeftPlayer(data);
+		// this._renderRightPlayer(data);
 		this._renderContent();
 		this._renderField(data);
 		this._cacheBlocks();

@@ -10,6 +10,12 @@
         grid-row: 2 / -2;
         border-radius: 0 10px 10px 0;
         background-color: orange;
-        // animation: act 300ms linear;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1 / 8;
+        grid-row: 2 / -2;
+        border-radius: 0 10px 10px 0;
+        background-color: orange;
     }
 }
