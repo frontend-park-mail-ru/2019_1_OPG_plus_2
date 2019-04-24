@@ -44,7 +44,7 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
 				User.set({ username: user });
 				this.emit('userUpdated'); 
 			})
-		  .catch(() => {this.emit('userUpdated')});
+		  .catch(() => {this.emit('userUpdated');});
 	}
 
 	passwordUpdate({newPass = '', passConf = ''} = {}) {

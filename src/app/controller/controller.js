@@ -14,9 +14,9 @@ export default class Controller {
 		this._view.open({root, data});
 	}
 
-    open({root = {}, data = {}} = {}) {
-        this._model.init({root, data});
-    }
+	open({root = {}, data = {}} = {}) {
+		this._model.init({root, data});
+	}
 
 	close() {
 		this._view.close();

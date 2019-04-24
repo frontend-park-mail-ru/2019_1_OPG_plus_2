@@ -9,4 +9,15 @@
         padding: 12vh 3vh 3vh 6vh;
         z-index: -2;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 2/-2;
+        border-radius: 0px 0px 30px 30px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        background-color: white;
+        position: relative;
+        top: -11vh;
+        padding: 12vh 3vh 3vh 6vh;
+        z-index: -2;
+    }
 }

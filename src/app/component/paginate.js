@@ -4,36 +4,36 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 import Component from './component';
 
 export default class Paginate extends Component {
-    constructor({
-        callback = () => {},
-    } = {}) {
-        super({callback});
-    }
+	constructor({
+		callback = () => {},
+	} = {}) {
+		super({callback});
+	}
 
-    _createEventListeners() {
-        super._createEventListeners();
-        this._root.addEventListener('click', this._callback, true);
-    }
+	_createEventListeners() {
+		super._createEventListeners();
+		this._root.addEventListener('click', this._callback, true);
+	}
 
-    _removeEventListener() {
-        super._removeEventListeners();
-        this._root.removeEventListener('click', this._callback, true);
-    }
+	_removeEventListener() {
+		super._removeEventListeners();
+		this._root.removeEventListener('click', this._callback, true);
+	}
 
-    _render(data) {
-        genericBeforeEnd(this._root, 
+	_render(data) {
+		genericBeforeEnd(this._root, 
 			pagesTemplate({
 				modifiers: [],
 				page_num: data.page,
 			})
 		);
-    }
+	}
 
-    create({root = {}, data = {}} = {}) {
-        super.create({root, data});
-    }
+	create({root = {}, data = {}} = {}) {
+		super.create({root, data});
+	}
 
-    delete() {
-        super.delete();
-    }
+	delete() {
+		super.delete();
+	}
 }

@@ -2,23 +2,35 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    // padding-bottom: 5vh;
 
     @media (min-width: $desktop-min-width) {
         &__form-title {
             font-family: Roboto;
             font-size: 3vh;
-            // width: 100%;
             color: black;
             margin-bottom: 1vh;
         }
     
         &__text-form {
             font-family: Roboto;
-            // border-radius: 10px;
             border: 1px solid rgba(0, 0, 0, 0.3);
-            // width: 100%;
             font-size: 2rem;
+            padding: 2vh 1vh 2vh;
+        }
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        &__form-title {
+            font-family: Roboto;
+            font-size: 3vh;
+            color: black;
+            margin-bottom: 1vh;
+        }
+    
+        &__text-form {
+            font-family: Roboto;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            font-size: 3vh;
             padding: 2vh 1vh 2vh;
         }
     }
