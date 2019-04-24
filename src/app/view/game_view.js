@@ -14,6 +14,7 @@ import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import { genericBeforeEnd } from '../../modules/helpers.js';
+import { debounce, throttle } from '../../modules/helpers.js';
 import { DOWN_EVENT, 
 		 UP_BLOCK_EVENT,
 		 OVER_BLOCK_EVENT } from '../../modules/events';
@@ -22,53 +23,8 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	constructor() {
 		super();
 		this.down = this.down.bind(this);
-		this.up = this.debounce(this.up.bind(this), 100);
-		this.over = this.throttle(this.over.bind(this), 20);
-	}
-
-	debounce(func, wait, immediate) {
-		var timeout;
-		return function() {
-			var context = this, args = arguments;
-			var later = function() {
-				timeout = null;
-				if (!immediate) func.apply(context, args);
-			};
-			var callNow = immediate && !timeout;
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-			if (callNow) func.apply(context, args);
-		};
-	}
-
-	throttle(func, ms) {
-
-		var isThrottled = false,
-		  savedArgs,
-		  savedThis;
-	  
-		function wrapper() {
-	  
-		  if (isThrottled) {
-				savedArgs = arguments;
-				savedThis = this;
-				return;
-		  }
-	  
-		  func.apply(this, arguments);
-	  
-		  isThrottled = true;
-	  
-		  setTimeout(function() {
-				isThrottled = false;
-				if (savedArgs) {
-			  wrapper.apply(savedThis, savedArgs);
-			  savedArgs = savedThis = null;
-				}
-		  }, ms);
-		}
-	  
-		return wrapper;
+		this.up = debounce(this.up.bind(this), 100);
+		this.over = throttle(this.over.bind(this), 20);
 	}
 
 	down(event) {
