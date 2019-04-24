@@ -30,7 +30,7 @@ export default class Game {
      * @returns {bool} Return true if you can set the block
      */
     doStartStep({block = null} = {}) {
-        if (this.isBlock({block})) {
+        if (this.isBlock({block}) && !this._startFlag) {
             const intBlock = parseInt(block, 10);
             const coordinates = this.getCoordinates({block: intBlock});
             const isDiagonal = this.isDiagonal({coordinates});
