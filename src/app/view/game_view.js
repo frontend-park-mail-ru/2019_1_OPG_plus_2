@@ -39,7 +39,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			timeout = setTimeout(later, wait);
 			if (callNow) func.apply(context, args);
 		};
-	};
+	}
 
 	throttle(func, ms) {
 
@@ -50,9 +50,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		function wrapper() {
 	  
 		  if (isThrottled) {
-			savedArgs = arguments;
-			savedThis = this;
-			return;
+				savedArgs = arguments;
+				savedThis = this;
+				return;
 		  }
 	  
 		  func.apply(this, arguments);
@@ -60,11 +60,11 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		  isThrottled = true;
 	  
 		  setTimeout(function() {
-			isThrottled = false;
-			if (savedArgs) {
+				isThrottled = false;
+				if (savedArgs) {
 			  wrapper.apply(savedThis, savedArgs);
 			  savedArgs = savedThis = null;
-			}
+				}
 		  }, ms);
 		}
 	  
@@ -72,7 +72,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	down(event) {
-		if (event.target.classList.contains('block') && !Boolean(+event.target.dataset.isSet)) {
+		if (event.target.classList.contains('block') && !+event.target.dataset.isSet) {
 			const app = document.querySelector('#application');
 			app.addEventListener('pointermove', this.over, true);
 			this._currentBlock = event.target;
@@ -258,7 +258,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			player === 'Player1' 
 				? this._currentBlock.classList.add('block_theme_left-active') 
 				: this._currentBlock.classList.add('block_theme_right-active'); 
-				this._currentBlock.dataset.isSet = 1;
+			this._currentBlock.dataset.isSet = 1;
 		}
 	}
 
@@ -274,7 +274,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	_cacheBlocks() {
-		this._blocks = [...document.querySelectorAll('.block')]
+		this._blocks = [...document.querySelectorAll('.block')];
 	}
 	
 	_render(data) {

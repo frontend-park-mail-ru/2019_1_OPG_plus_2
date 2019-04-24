@@ -8,7 +8,6 @@ export const NavigateMixinView = (superclass) => class extends superclass {
 		if (!(event.currentTarget instanceof HTMLAnchorElement)) {
 			return;
 		}
-		console.log('ok');
 		event.preventDefault();
 		if (event.currentTarget.classList.contains('back-arrow')) {
 			this.emit('onBackClick');

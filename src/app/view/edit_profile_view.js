@@ -2,7 +2,6 @@ import containerTemplate from '../../blocks/html/body/application/container/cont
 import headTemplate from '../../blocks/html/body/application/container/head/head.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import backArrowTemplate from '../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
-import menuTemplate from '../../blocks/html/body/application/container/head/menu/menu.pug';
 import profileCardTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-card.pug';
 import profileHeadTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';

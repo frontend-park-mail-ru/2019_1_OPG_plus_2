@@ -13,10 +13,10 @@ export default class ProfileController extends NavigateMixinController(Controlle
 		router = {},
 	} = {}) {
 		super({ model: model, view: view, router: router });
-		this._model.on(INIT_EVENT, ({root = {}, data = {}} = {}) => {this.render({root: root, data: data})});
-		this._model.on(INIT_ERROR_EVENT, () => {this.onNavigate({path: SIGN_IN})});
-		this._view.on(LOGOUT_EVENT, () => {this.logout()});
-		this._model.on(LOGOUTED_EVENT, () => {this.onNavigate({path: ROOT})});
+		this._model.on(INIT_EVENT, ({root = {}, data = {}} = {}) => {this.render({root: root, data: data});});
+		this._model.on(INIT_ERROR_EVENT, () => {this.onNavigate({path: SIGN_IN});});
+		this._view.on(LOGOUT_EVENT, () => {this.logout();});
+		this._model.on(LOGOUTED_EVENT, () => {this.onNavigate({path: ROOT});});
 	}
 
 	logout() {
