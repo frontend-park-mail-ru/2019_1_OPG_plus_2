@@ -22,14 +22,59 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	constructor() {
 		super();
 		this.down = this.down.bind(this);
-		this.up = this.up.bind(this);
-		this.over = this.over.bind(this);
+		this.up = this.debounce(this.up.bind(this), 100);
+		this.over = this.throttle(this.over.bind(this), 20);
+	}
+
+	debounce(func, wait, immediate) {
+		var timeout;
+		return function() {
+			var context = this, args = arguments;
+			var later = function() {
+				timeout = null;
+				if (!immediate) func.apply(context, args);
+			};
+			var callNow = immediate && !timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+			if (callNow) func.apply(context, args);
+		};
+	}
+
+	throttle(func, ms) {
+
+		var isThrottled = false,
+		  savedArgs,
+		  savedThis;
+	  
+		function wrapper() {
+	  
+		  if (isThrottled) {
+				savedArgs = arguments;
+				savedThis = this;
+				return;
+		  }
+	  
+		  func.apply(this, arguments);
+	  
+		  isThrottled = true;
+	  
+		  setTimeout(function() {
+				isThrottled = false;
+				if (savedArgs) {
+			  wrapper.apply(savedThis, savedArgs);
+			  savedArgs = savedThis = null;
+				}
+		  }, ms);
+		}
+	  
+		return wrapper;
 	}
 
 	down(event) {
-		if (event.target.classList.contains('block') && !Boolean(+event.target.dataset.isSet)) {
+		if (event.target.classList.contains('block') && !+event.target.dataset.isSet) {
 			const app = document.querySelector('#application');
-			app.addEventListener('mouseover', this.over, true);
+			app.addEventListener('pointermove', this.over, true);
 			this._currentBlock = event.target;
 			this.emit(DOWN_EVENT, {block: event.target.textContent});
 		}
@@ -37,35 +82,42 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	up(event) {
 		const app = document.querySelector('#application');
-		app.removeEventListener('mouseover', this.over, true);
+		app.removeEventListener('pointermove', this.over, true);
 		this._endBlock = event.target;
 		this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
 	}
 
 	over(event) {
-		if (event.target.classList.contains('block')) {
-			this._currentBlock = event.target;
-			this.emit(OVER_BLOCK_EVENT, {block: event.target.textContent});
+		const target = document.elementFromPoint(event.clientX, event.clientY);
+		if (target.classList.contains('block')) {
+			this._currentBlock = target;
+			this.emit(OVER_BLOCK_EVENT, {block: target.textContent});
 		} else {
 			const app = document.querySelector('#application');
-			app.removeEventListener('mouseover', this.over, true);
-			this._endBlock = event.target;
-			this.emit(UP_BLOCK_EVENT, {block: event.target.textContent});
+			app.removeEventListener('pointermove', this.over, true);
+			this._endBlock = target;
+			this.emit(UP_BLOCK_EVENT, {block: target.textContent});
 		}
 	}
 
 	_createTurnListener() {
 		const filedBlock = document.querySelector('.field');
 		const appBlock = document.querySelector('#application');
-		filedBlock.addEventListener('mousedown', this.down, true);
-		appBlock.addEventListener('mouseup', this.up, true);
+		filedBlock.addEventListener('pointerdown', this.down, true);
+		appBlock.addEventListener('pointerup', this.up, true);
+		window.addEventListener('contextmenu', function (e) { 
+			e.preventDefault();
+		}, false);
 	}
 
 	_removeTurnListener() {
 		const filedBlock = document.querySelector('.field');
 		const appBlock = document.querySelector('#application');
-		filedBlock.removeEventListener('mousedown', this.down);
-		appBlock.removeEventListener('mouseup', this.up, true);
+		filedBlock.removeEventListener('pointerdown', this.down);
+		appBlock.removeEventListener('pointerup', this.up, true);
+		window.removeEventListener('contextmenu', function (e) {
+			e.preventDefault();
+		}, false);
 	}
 
 	_createEventListeners() {
@@ -93,12 +145,12 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			contentTemplate({
 				modifiers: ['content_theme_game'],
 			}),
-			playerTemplate({
-				modifiers: ['player_theme_player1'],
-			}),
-			playerTemplate({
-				modifiers: ['player_theme_player2'],
-			}),
+			// playerTemplate({
+			// 	modifiers: ['player_theme_player1'],
+			// }),
+			// playerTemplate({
+			// 	modifiers: ['player_theme_player2'],
+			// }),
 		);
 	}
 
@@ -194,12 +246,19 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		);
 	}
 
-	apply({player = 'Player1', ans = false}) {
+	apply({player = 'Player1', ans = false, steps = []} = {}) {
 		if (ans) {
+			steps.forEach(el => {
+				player === 'Player1' 
+					? this._blocks[el].classList.add('block_theme_left-active') 
+					: this._blocks[el].classList.add('block_theme_right-active');
+				this._blocks[el].dataset.isSet = 1;
+			});
+
 			player === 'Player1' 
 				? this._currentBlock.classList.add('block_theme_left-active') 
 				: this._currentBlock.classList.add('block_theme_right-active'); 
-				this._currentBlock.dataset.isSet = 1;
+			this._currentBlock.dataset.isSet = 1;
 		}
 	}
 
@@ -213,16 +272,21 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			this._renderHead({whoseTurn: player});
 		}
 	}
+
+	_cacheBlocks() {
+		this._blocks = [...document.querySelectorAll('.block')];
+	}
 	
 	_render(data) {
 		this._root.innerHTML = '';
 		this._renderContainer();
 		this._renderMain(data);
 		this._renderHead(data);
-		this._renderLeftPlayer(data);
-		this._renderRightPlayer(data);
+		// this._renderLeftPlayer(data);
+		// this._renderRightPlayer(data);
 		this._renderContent();
 		this._renderField(data);
+		this._cacheBlocks();
 	}
 
 	open({root = {}, data = {}}) {

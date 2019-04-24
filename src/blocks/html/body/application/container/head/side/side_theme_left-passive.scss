@@ -9,6 +9,12 @@
         grid-row: 2 / -2;
         border-radius: 0 10px 10px 0;
         background-color: orange;
-        // animation: passive 300ms forwards ease-in-out;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1/5;
+        grid-row: 2 / -2;
+        border-radius: 0 10px 10px 0;
+        background-color: orange;
     }
 }

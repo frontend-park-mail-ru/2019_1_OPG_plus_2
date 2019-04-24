@@ -51,10 +51,9 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 		this._removeSubmitListener();
 	}
 
-	_renderContainer(data) {
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
-			// modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
-			modifiers: [`container_theme_signin`],
+			modifiers: ['container_theme_signin'],
 		}));
 	}
 

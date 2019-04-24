@@ -6,7 +6,7 @@ export const INIT_ERROR_EVENT = 'init_error';
 /* Профиль */
 
 export const LOGOUT_EVENT = 'logout';
-export const LOGOUTED_EVENT = 'logouted'
+export const LOGOUTED_EVENT = 'logouted';
 
 /* Таблица лидеров */
 

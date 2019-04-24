@@ -18,4 +18,8 @@
     &:hover {
         animation: opacity 300ms forwards ease;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        display: none;
+    }
 }

@@ -5,4 +5,11 @@
         border-radius: 10px 0 0 10px;
         background-color: #005FF9;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 9/-1;
+        grid-row: 2 / -2;
+        border-radius: 10px 0 0 10px;
+        background-color: #005FF9;
+    }
 }

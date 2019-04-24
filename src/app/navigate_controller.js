@@ -18,8 +18,8 @@ export const NavigateMixinController = (superclass) => class extends superclass 
 	}
 
 	onNavigate({path = '', data = {}, noHistory = false} = {}) {
-        if (path !== '' && typeof (path) === 'string') {
-            this._router.navigate({path, data, noHistory});
-        }
-    }
+		if (path !== '' && typeof (path) === 'string') {
+			this._router.navigate({path, data, noHistory});
+		}
+	}
 };

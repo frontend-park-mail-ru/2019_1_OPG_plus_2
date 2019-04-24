@@ -5,25 +5,33 @@ export const NavigateMixinView = (superclass) => class extends superclass {
 	}
     
 	onLinkClick(event) {
-		if (!(event.target instanceof HTMLAnchorElement)) {
+		if (!(event.currentTarget instanceof HTMLAnchorElement)) {
 			return;
 		}
 		event.preventDefault();
-		if (event.target.classList.contains('back-arrow')) {
+		if (event.currentTarget.classList.contains('back-arrow')) {
 			this.emit('onBackClick');
-		} else if (event.target.classList.contains('logout')) {
+		} else if (event.currentTarget.classList.contains('logout')) {
 			this.emit('logout');
 		} else {
-			this.emit('onLinkClick', { path: event.target.dataset.href });
+			this.emit('onLinkClick', { path: event.currentTarget.dataset.href });
 		}
 	}
 
 	_createOnLinkListener() {
-		this._root.addEventListener('click', this.onLinkClick, true);
+		const linksCollection = document.getElementsByTagName('a');
+		const links = [...linksCollection];
+		links.forEach(link => {
+			link.addEventListener('click', this.onLinkClick, false);
+		});
 	}
     
 	_removeOnLinkListener() {
-		this._root.removeEventListener('click', this.onLinkClick, true);
+		const linksCollection = document.getElementsByTagName('a');
+		const links = [...linksCollection];
+		links.forEach(link => {
+			link.removeEventListener('click', this.onLinkClick, false);
+		});
 	}
 
 	_createEventListeners() {

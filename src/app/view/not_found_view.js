@@ -5,8 +5,8 @@ import { genericBeforeEnd } from '../../modules/helpers';
 import containerTemplate from '../../blocks/html/body/application/container/container.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
-import buttonsTemplate from "../../blocks/html/body/application/container/content/buttons/buttons.pug";
-import linkTemplate from "../../blocks/html/body/application/container/content/buttons/link/link.pug";
+import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
+import linkTemplate from '../../blocks/html/body/application/container/content/buttons/link/link.pug';
 
 
 export default class NotFoundView extends NavigateMixinView(EventEmitterMixin(View)){
@@ -21,7 +21,7 @@ export default class NotFoundView extends NavigateMixinView(EventEmitterMixin(Vi
 	_render() {
 		this._renderMain();
 		this._renderContent();
-		this._renderButtons()
+		this._renderButtons();
 	}
 
 	_renderMain() {

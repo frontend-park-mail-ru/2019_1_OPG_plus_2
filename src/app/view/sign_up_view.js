@@ -60,9 +60,9 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 		this._removeSubmitListener();
 	}
 
-	_renderContainer(data) {
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: [`container_theme_signup`],
+			modifiers: ['container_theme_signup'],
 		}));
 	}
 

@@ -26,7 +26,7 @@ export default class ProfileModel extends EventEmitterMixin(Model) {
 
 	logout() {
 		API.logout()
-			.then(() => {this.emit(LOGOUTED_EVENT)})
-			.catch(() => {this.emit(LOGOUTED_EVENT)});
+			.then(() => {this.emit(LOGOUTED_EVENT);})
+			.catch(() => {this.emit(LOGOUTED_EVENT);});
 	}
 }

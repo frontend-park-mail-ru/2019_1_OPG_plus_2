@@ -1,7 +1,17 @@
 .player {
-    display: grid;
-    grid-template: repeat(7, 1fr) / repeat(5, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    user-select: none;
+    @media (min-width: $desktop-min-width) {
+        display: grid;
+        grid-template: repeat(7, 1fr) / repeat(5, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        user-select: none;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        display: grid;
+        grid-template: repeat(7, 1fr) / repeat(5, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        user-select: none;
+    }
 }
