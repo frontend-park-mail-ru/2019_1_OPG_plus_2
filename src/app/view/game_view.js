@@ -22,8 +22,8 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	constructor() {
 		super();
 		this.down = this.down.bind(this);
-		this.up = this.debounce(this.up.bind(this), 0);
-		this.over = this.throttle(this.over.bind(this), 50);
+		this.up = this.debounce(this.up.bind(this), 100);
+		this.over = this.throttle(this.over.bind(this), 10);
 	}
 
 	debounce(func, wait, immediate) {

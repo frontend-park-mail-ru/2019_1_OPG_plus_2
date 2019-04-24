@@ -98,6 +98,32 @@ export default class Game {
         }
     }
 
+    /**
+     * Handles the finish step
+     * @param Object Object with block
+     * @returns {bool} Return true if you can set the block
+     */
+    doFinishStep({block = null} = {}) {
+        const intBlock = parseInt(block, 10);
+        const isDisable = this.isDisable({block: intBlock});
+        const lastCoordinates = this.getCoordinates({block: this.getLastBlock()});
+
+        if ((isDisable && this._steps.length === 0)
+            || (this._steps.length === 0)) {
+            this._stopFlag = false;
+            this.reset();
+
+            return false;
+        } else {
+            this.concatUnion({arr1: this._pastSteps, arr2: this._steps});
+            if (!this.isEnd({finishPoint: lastCoordinates})) {
+                this.changeSide();
+            }
+        }
+
+        return true;
+    }
+
     get steps() {
         return this._steps;
     }
@@ -246,32 +272,6 @@ export default class Game {
             let coords = this.getCoordinates({block: el});
             this.setStep({coordinates: coords});
         });
-    }
-
-    /**
-     * Handles the finish step
-     * @param Object Object with block
-     * @returns {bool} Return true if you can set the block
-     */
-    doFinishStep({block = null} = {}) {
-        const intBlock = parseInt(block, 10);
-        const isDisable = this.isDisable({block: intBlock});
-        const lastCoordinates = this.getCoordinates({block: this.getLastBlock()});
-
-        if ((isDisable && this._steps.length === 0)
-            || (this._steps.length === 0)) {
-            this._stopFlag = false;
-            this.reset();
-
-            return false;
-        } else {
-            this.concatUnion({arr1: this._pastSteps, arr2: this._steps});
-            if (!this.isEnd({finishPoint: lastCoordinates})) {
-                this.changeSide();
-            }
-        }
-
-        return true;
     }
 
     /**
