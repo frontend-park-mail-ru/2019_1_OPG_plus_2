@@ -76,7 +76,7 @@ export default class Game {
                 this._secondStepFlag = true;
 
                 return ans;
-            } else if (isDisable || isEnemyStep) {
+            } else if (!this._secondStepFlag && isDisable || isEnemyStep) {
                 this._stopFlag = true;
             }
 
