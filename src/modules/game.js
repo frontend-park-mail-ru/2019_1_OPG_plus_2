@@ -21,6 +21,7 @@ export default class Game {
         this._stopFlag = false; // флаг для остановки отрисовки
         this._pastSteps = []; // массив учета всех шагов
         this._ans = true;
+        this._startFlag = false;
     }
 
     /**
@@ -40,6 +41,8 @@ export default class Game {
                 let isSet = this.setStep({coordinates});
                 this._steps.push(intBlock);
 
+                this._startFlag = true;
+
                 return isSet;
             } else if (isDisable || isEnemyStep) {
                 this._stopFlag = true;
@@ -55,7 +58,7 @@ export default class Game {
      * @returns {bool} Return true if you can set the block
      */
     doStep({block = null} = {}) {
-        if (this.isBlock({block})) {
+        if (this.isBlock({block}) && this._startFlag) {
             const intBlock = parseInt(block, 10);
             const coordinates = this.getCoordinates({block: intBlock});
             const isDiagonal = this.isDiagonal({point: coordinates});
@@ -337,6 +340,7 @@ export default class Game {
         this._lastPoint = [];
         this._secondStepFlag = false;
         this._stopFlag = false;
+        this._startFlag = false;
     }
 
     /**
