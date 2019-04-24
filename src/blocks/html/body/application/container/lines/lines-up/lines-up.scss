@@ -52,6 +52,7 @@
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         position: absolute;
         top: 0px;
+        z-index: -3;
 
         &__line1 {
             position: absolute;

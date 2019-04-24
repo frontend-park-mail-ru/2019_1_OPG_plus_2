@@ -43,12 +43,12 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 
 	_createEventListeners() {
 		super._createEventListeners();
-		// this._createSubmitListener();
+		this._createSubmitListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
-		// this._removeSubmitListener();
+		this._removeSubmitListener();
 	}
 
 	_renderContainer(data) {
