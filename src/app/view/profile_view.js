@@ -129,15 +129,15 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 	_renderMenu() {
 		const menuBlock = document.querySelector('.menu.menu_theme_profile');
 		genericBeforeEnd(menuBlock, 
-			logoutIconTemplate({
-				modifiers: [],
-				hr: '/logout',
-				dataset: '/logout',
-			}),
 			settingsIconTemplate({
 				hr: '/editme',
 				dataset: '/editme',
 				modifiers: [],
+			}),
+			logoutIconTemplate({
+				modifiers: [],
+				hr: '/logout',
+				dataset: '/logout',
 			})
 		);
 	}
