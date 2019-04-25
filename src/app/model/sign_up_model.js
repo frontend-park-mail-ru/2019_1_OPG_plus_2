@@ -24,33 +24,32 @@ export default class SignUpModel extends EventEmitterMixin(Model) {
 
 	signUp({root = {}, name='', email = '', password = '', password_repeat = ''} = {}) {
 		if (!validEmail(email) || !email) {
-			this.emit(SIGN_UP_ERROR_EVENT, {root: root, error: 'Invalid Email', name: name, email: email});
+			this.emit(SIGN_UP_ERROR_EVENT, {root: root, error: {data: ['email'], message: 'Invalid Email'}, name: name, email: email});
 			return;
 		}
 		
 		if (!validLogin(name) || !name) {
-			this.emit(SIGN_UP_ERROR_EVENT, {root: root, error: 'Invalid Name', name: name, email: email});
+			this.emit(SIGN_UP_ERROR_EVENT, {root, error: {data: ['name'], message: 'Invalid Name'}, name: name, email: email});
 			return;
 		} 
 
 		if (password !== password_repeat || !password || !password_repeat) {
-			this.emit(SIGN_UP_ERROR_EVENT, {root, error: 'Passwords doesn\'t match'});
+			this.emit(SIGN_UP_ERROR_EVENT, {root, error: { data: ['password'], message: 'Passwords doesn\'t match'}, name: name, email: email});
 			return;
 		}
 
 		if (!validPassword(password)) {
-			this.emit(SIGN_UP_ERROR_EVENT, {root, error: 'Invalid password, must be more than 5 symbols'});
+			this.emit(SIGN_UP_ERROR_EVENT, {root, error: { data: ['password'], message: 'Invalid password, must be more than 5 symbols' }, name: name, email: email});
 			return;
 		}
-
 		API.signUp({
 			email: email,
 			password: password,
 			username: name,
 		})
-			.then(() => {this.emit(SIGN_UP_OK_EVENT);})
+			.then(() => {this.emit(SIGN_UP_OK_EVENT)})
 			.catch(err => {
-				this.emit(SIGN_UP_ERROR_EVENT, {error: err});
+				this.emit(SIGN_UP_ERROR_EVENT, {root, error: err, name: name, email: email});
 			});
 	}
 }

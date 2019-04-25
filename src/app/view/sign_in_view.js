@@ -104,10 +104,11 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 		genericBeforeEnd(formsBlock, 
 			errorTemplate({
 				modifiers: [],
-				text:  data.error ? `Incorrect ${data.error.data[0]}` : '',
+				text:  data.error ? `Incorrect ${data.error.data[0]} or e-mail` : '',
 			}),
 			formTemplate({
 				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('email') ? 'form_theme_error' : ''}`] : [],
 				username: 'email',
 				placeholder: 'E-mail',
 				type: 'email',
@@ -116,6 +117,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 			}),
 			formTemplate({
 				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
 				username: 'password',
 				placeholder: 'Password',
 				type: 'password',
