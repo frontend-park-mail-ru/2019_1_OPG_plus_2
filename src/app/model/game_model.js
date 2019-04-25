@@ -7,7 +7,8 @@ import { INIT_EVENT,
 		 END_DOWN_EVENT, 
 		 FINISH_GAME_EVENT, 
 		 FINISH_STEP_EVENT,
-		 END_OVER_BLOCK_EVENT } from '../../modules/events';
+		 END_OVER_BLOCK_EVENT,
+		 CHANGE_TIME_EVENT } from '../../modules/events';
 
 export default class GameModel extends EventEmitterMixin(Model) {
 	constructor() {
@@ -44,6 +45,11 @@ export default class GameModel extends EventEmitterMixin(Model) {
 					});
 				});
 		}
+	}
+
+	time() {
+		let ans = this._game.changeTime();
+		this.emit(CHANGE_TIME_EVENT, {ans, player: this._game.getWhoseTurn(), time: this._game.time});
 	}
 
 	doStartStep({block = null} = {}) {

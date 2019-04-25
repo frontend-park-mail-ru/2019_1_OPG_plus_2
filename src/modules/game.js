@@ -22,6 +22,21 @@ export default class Game {
 		this._pastSteps = []; // массив учета всех шагов
 		this._ans = true;
 		this._startFlag = false;
+		this._time = 10;
+	}
+
+	changeTime() {
+		if(this._time > 0) {
+			this._time--;
+			return true;
+		} else {
+			this.changeSide();
+			return false;
+		}
+	}
+
+	get time() {
+		return this._time;
 	}
 
 	/**
@@ -341,6 +356,7 @@ export default class Game {
 		this._secondStepFlag = false;
 		this._stopFlag = false;
 		this._startFlag = false;
+		this._time = 10;
 	}
 
 	/**
@@ -475,7 +491,6 @@ export default class Game {
      */
 	isDiagonal({point = []} = {}) {
 		let startPoint = this.getCoordinates({block: this._steps[0]});
-		//return Math.abs(startPoint[0] - point[0]) === Math.abs(startPoint[1] - point[1]);
 		return (startPoint[0] - point[0]) && (startPoint[1] - point[1]);
 	}
 

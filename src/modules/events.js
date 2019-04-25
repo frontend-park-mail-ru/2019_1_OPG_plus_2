@@ -41,3 +41,6 @@ export const UP_OUT_FIELD_EVENT = 'finishStepOutField';
 
 export const FINISH_STEP_EVENT = 'finishStep';
 export const FINISH_GAME_EVENT = 'finishGame';
+
+export const TIME_EVENT = 'time';
+export const CHANGE_TIME_EVENT = 'changeTime';

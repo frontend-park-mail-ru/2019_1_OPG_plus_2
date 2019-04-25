@@ -7,7 +7,9 @@ import { INIT_EVENT,
 		 FINISH_STEP_EVENT, 
 		 FINISH_GAME_EVENT,
 		 OVER_BLOCK_EVENT,
-		 END_OVER_BLOCK_EVENT } from '../../modules/events';
+		 END_OVER_BLOCK_EVENT,
+		 TIME_EVENT,
+		 CHANGE_TIME_EVENT } from '../../modules/events';
 
 export default class GameController extends NavigateMixinController(Controller) {
 	constructor({
@@ -26,6 +28,10 @@ export default class GameController extends NavigateMixinController(Controller) 
 				}
 			});
 		});
+
+		this._view.on(TIME_EVENT, () => {this.time();});
+		this._model.on(CHANGE_TIME_EVENT, ({ans = false, player = 'Player1', time = 10} = {}) => {this.changeTime({ans, player, time});});
+
 		this._view.on(DOWN_EVENT, ({block = null} = {}) => {this.doStartStep({block});});
 		this._model.on(END_DOWN_EVENT, ({player = 'Player1', ans = false} = {}) => {this.apply({player, ans});});
 
@@ -33,6 +39,7 @@ export default class GameController extends NavigateMixinController(Controller) 
 		this._model.on(END_OVER_BLOCK_EVENT, ({player = 'Player1', ans = false, steps = []} = {}) => {this.apply({player, ans, steps});});
 
 		this._view.on(UP_BLOCK_EVENT, ({block = null} = {}) => {this.doFinishStep({block});});
+
 		this._model.on(FINISH_STEP_EVENT, ({winner = null, player = 'Player1'} = {}) => {this.doEndStep({winner, player});});
 		this._model.on(FINISH_GAME_EVENT, ({winner = null, player = 'Player1'} = {}) => {this.doEndStep({winner, player});}); 
 	}
@@ -55,5 +62,14 @@ export default class GameController extends NavigateMixinController(Controller) 
 
 	doEndStep({winner = null, player = 'Player1'} = {}) {
 		this._view.endStep({winner, player});
+	}
+
+	time() {
+		this._model.time();
+	}
+	
+	changeTime({ans = false, player = 'Player1', time = 10} = {}) {
+		// debugger;
+		this._view.time({ans, player, time});
 	}
 }

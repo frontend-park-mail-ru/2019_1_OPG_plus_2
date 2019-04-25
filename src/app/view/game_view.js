@@ -9,6 +9,7 @@ import fieldTemplate from '../../blocks/html/body/application/container/content/
 import blockTemplate from '../../blocks/html/body/application/container/content/field/block/block.pug';
 import modalTemplate from '../../blocks/html/body/application/container/modal/modal.pug';
 import linkTemplate from '../../blocks/html/body/application/container/content/buttons/link/link.pug';
+import timeTemplate from '../../blocks/html/body/application/container/head/time/time.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
@@ -17,7 +18,8 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 import { debounce, throttle } from '../../modules/helpers.js';
 import { DOWN_EVENT, 
 		 UP_BLOCK_EVENT,
-		 OVER_BLOCK_EVENT } from '../../modules/events';
+		 OVER_BLOCK_EVENT,
+		 TIME_EVENT } from '../../modules/events';
 
 export default class GameView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -25,6 +27,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this.down = this.down.bind(this);
 		this.up = debounce(this.up.bind(this), 100);
 		this.over = throttle(this.over.bind(this), 20);
+		// this.time = debounce(this.time.bind(this), 1000);
 	}
 
 	down(event) {
@@ -57,20 +60,20 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	_createTurnListener() {
-		const filedBlock = document.querySelector('.field');
-		const appBlock = document.querySelector('#application');
-		filedBlock.addEventListener('pointerdown', this.down, true);
-		appBlock.addEventListener('pointerup', this.up, true);
+		const fieldBlock = document.querySelector('.field');
+		// const appBlock = document.querySelector('#application');
+		fieldBlock.addEventListener('pointerdown', this.down, true);
+		fieldBlock.addEventListener('pointerup', this.up, true);
 		window.addEventListener('contextmenu', function (e) { 
 			e.preventDefault();
 		}, false);
 	}
 
 	_removeTurnListener() {
-		const filedBlock = document.querySelector('.field');
-		const appBlock = document.querySelector('#application');
-		filedBlock.removeEventListener('pointerdown', this.down);
-		appBlock.removeEventListener('pointerup', this.up, true);
+		const fieldBlock = document.querySelector('.field');
+		// const appBlock = document.querySelector('#application');
+		fieldBlock.removeEventListener('pointerdown', this.down);
+		fieldBlock.removeEventListener('pointerup', this.up, true);
 		window.removeEventListener('contextmenu', function (e) {
 			e.preventDefault();
 		}, false);
@@ -229,8 +232,34 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			const headBlock = this._root.querySelector('.head.head_theme_game');
 			headBlock.innerHTML = '';
 			this._renderHead({whoseTurn: player});
+			// this._renderTime({time: 10});
+			// this.time({ans: true, player: player, time: 10});
 		}
 	}
+
+	// time({ans = false, player = 'Player1', time = 10} = {}) {
+	// 	if (ans) {
+	// 		const number = this._root.querySelector('.number');
+	// 		number.textContent = time;
+	// 		this.emit(TIME_EVENT);
+	// 	} else {
+	// 		this.endStep({player: player});
+	// 	}
+	// }
+
+	// _renderTime({time = 10} = {}) {
+	// 	const headBlock = this._root.querySelector('.head.head_theme_game');
+	// 	const number = this._root.querySelector('.number');
+	// 	if (number) {
+	// 		number.innerHTML = '';
+	// 	}
+
+	// 	genericBeforeEnd(headBlock, 
+	// 		timeTemplate({
+	// 			number: time,
+	// 		}),
+	// 	);
+	// }
 
 	_cacheBlocks() {
 		this._blocks = [...document.querySelectorAll('.block')];
@@ -241,11 +270,13 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this._renderContainer();
 		this._renderMain(data);
 		this._renderHead(data);
+		// this._renderTime({time: 10});
 		// this._renderLeftPlayer(data);
 		// this._renderRightPlayer(data);
 		this._renderContent();
 		this._renderField(data);
 		this._cacheBlocks();
+		// this.time({ans: true, data: data.whoseTurn, time: 10}); //TODO сюда можно передавать данные с тем, сколько секунд дается
 	}
 
 	open({root = {}, data = {}}) {

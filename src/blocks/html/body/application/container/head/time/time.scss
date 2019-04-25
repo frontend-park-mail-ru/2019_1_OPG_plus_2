@@ -1,0 +1,17 @@
+@keyframes number {
+    from {transform: scale(1.5)}
+    to {transform: scale(1)}
+}
+
+.number {
+    @media (min-width: $desktop-min-width) {
+        font-family: 'Fredoka One', cursive;
+        font-size: 6vh;
+        color: white;
+        position: absolute;
+        left: 48%;
+        top: 4%;
+        text-align:center;
+        animation: number 300ms linear;
+    }
+}

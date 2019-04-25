@@ -1,5 +1,6 @@
 @import 'variables.scss';
 @import url('https://fonts.googleapis.com/css?family=Roboto|Unica+One');
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
 
 @import '../blocks/html/html.scss';
 @import '../blocks/html/body/body.scss';
@@ -139,6 +140,7 @@
 @import '../blocks/html/body/application/container/content/main-button/main-button_theme_signin.scss';
 @import '../blocks/html/body/application/container/content/main-button/main-button_theme_multiplayer.scss';
 @import '../blocks/html/body/application/container/modal/modal.scss';
+@import '../blocks/html/body/application/container/head/time/time.scss';
 @import '../blocks/html/body/application/container/content/field/block/block_theme_close.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_theme_game.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_theme_left.scss';
