@@ -18,6 +18,7 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 		super();
 		this.onNextPageClick = this.onNextPageClick.bind(this);
 		this.onPrevPageClick = this.onPrevPageClick.bind(this);
+		
 		this._paginate = new Paginate({onNextPage: this.onNextPageClick, onPrevPage: this.onPrevPageClick});
 		this._components = [];
 		this._components.push(this._paginate);

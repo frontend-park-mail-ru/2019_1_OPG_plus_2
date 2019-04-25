@@ -10,6 +10,7 @@ export default class Paginate extends Component {
 		onPrevPage = () => null,
 	}) {
 		super({callback});
+		
 		this._onNextPage = onNextPage;
 		this._onPrevPage = onPrevPage;
 
