@@ -1,5 +1,14 @@
 .main_theme_scoreboard {
-    display: flex;
-    flex-direction: column;
-    grid-column: 2/-4;
+    @media (min-width: $desktop-min-width) {
+        display: flex;
+        flex-direction: column;
+        grid-column: 2/-4;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        display: flex;
+        flex-direction: column;
+        grid-column: 1/-1;
+        grid-row: 2;
+    }
 }
