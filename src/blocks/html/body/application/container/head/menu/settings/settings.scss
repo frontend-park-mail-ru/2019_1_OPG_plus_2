@@ -16,8 +16,10 @@
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        padding: 10px 30px;
-        background-size: 30px;
-        height: 30px;
+        padding: 3vh 7vh;
+        background-size: 7vh;
+        // padding: 10px 30px;
+        // background-size: 30px;
+        // height: 30px;
     }
 }

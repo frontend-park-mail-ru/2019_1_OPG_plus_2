@@ -16,4 +16,12 @@
             color: black;
         }
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Roboto';
+        padding: 2vh;
+        border-bottom: 1px solid rgb(234, 234, 234);
+    }
 }

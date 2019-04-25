@@ -53,12 +53,6 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 			menuTemplate({
 				modifiers: ['menu_theme_profile'],
 			}),
-			linesDownLeftTemplate({
-				modifiers: [],
-			}),
-			linesDownRightTemplate({
-				modifiers: [],
-			})
 		);
 	}
 

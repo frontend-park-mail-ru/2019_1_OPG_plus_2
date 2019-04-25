@@ -2,4 +2,8 @@
     @media (min-width: $desktop-min-width) {
         grid-row: 5;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        box-shadow: 1px 20px 20px 0px #cacaca;
+    }
 }

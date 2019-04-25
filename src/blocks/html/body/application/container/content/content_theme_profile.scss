@@ -9,8 +9,10 @@
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         grid-column: 1/-1;
         grid-row: 2;
-        display: flex;
-        justify-content: center;
+        // grid-column: 1/-1;
+        // grid-row: 2;
+        // display: flex;
+        // justify-content: center;
         // align-items: center;
     }
 }
