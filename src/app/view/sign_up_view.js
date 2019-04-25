@@ -137,7 +137,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
 				username: 'password',
 				type: 'password',
-				placeholder: 'Password',
+				placeholder: 'Password (min 5 characters)',
 				req: true,
 			}),
 			formTemplate({

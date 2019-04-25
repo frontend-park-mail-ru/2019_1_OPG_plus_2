@@ -29,7 +29,7 @@ export default class SignUpModel extends EventEmitterMixin(Model) {
 		}
 		
 		if (!validLogin(name) || !name) {
-			this.emit(SIGN_UP_ERROR_EVENT, {root, error: {data: ['name'], message: 'Invalid Name'}, name: name, email: email});
+			this.emit(SIGN_UP_ERROR_EVENT, {root, error: {data: ['name'], message: 'Invalid Name (only Latin characters)'}, name: name, email: email});
 			return;
 		} 
 
@@ -39,7 +39,7 @@ export default class SignUpModel extends EventEmitterMixin(Model) {
 		}
 
 		if (!validPassword(password)) {
-			this.emit(SIGN_UP_ERROR_EVENT, {root, error: { data: ['password'], message: 'Invalid password, must be more than 5 symbols' }, name: name, email: email});
+			this.emit(SIGN_UP_ERROR_EVENT, {root, error: { data: ['password'], message: 'Invalid password, must be more than 5 characters' }, name: name, email: email});
 			return;
 		}
 		API.signUp({
