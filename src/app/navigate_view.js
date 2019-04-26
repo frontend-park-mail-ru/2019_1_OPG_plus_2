@@ -41,5 +41,6 @@ export const NavigateMixinView = (superclass) => class extends superclass {
             return;
         }
         this._removeEventListeners();
+        delete this._root;
     }
 };
