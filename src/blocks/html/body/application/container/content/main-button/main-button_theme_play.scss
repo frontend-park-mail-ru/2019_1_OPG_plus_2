@@ -1,11 +1,15 @@
 .main-button_theme_play {
-    grid-column: 1 / 3;
 
     .icon {
         background-image: url("data:image/svg+xml,%3Csvg width='150' height='200' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CclipPath id='clip0'%3E%3Crect id='svg_1' x='107' y='143' fill='white' height='40' width='40'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cpath id='svg_2' fill='%23FF9E00' d='m137.519,91.6795c5.938,3.9582 5.938,12.6825 0,16.6415l-121.972,81.314c-6.64553,4.431 -15.54701,-0.333 -15.54701,-8.32l0.00001,-162.6298c0,-7.987 8.90146,-12.7509 15.547,-8.3205l121.972,81.3148z'/%3E%3Cpath id='svg_4' fill='%23005FF9' d='m117,166.551c5.123,0 9.275,-4.153 9.275,-9.276c0,-5.122 -4.152,-9.275 -9.275,-9.275c-5.123,0 -9.275,4.153 -9.275,9.275c0,5.123 4.152,9.276 9.275,9.276z'/%3E%3Cpath id='svg_5' fill='%23005FF9' d='m117.294,170.09c-8.154,0 -15.192,3.263 -16.938,12.929c-0.491,2.718 1.824,4.981 4.585,4.981l12.059,0l12.059,0c2.761,0 5.073,-2.261 4.614,-4.984c-1.628,-9.663 -8.225,-12.926 -16.379,-12.926z'/%3E%3C/g%3E%3C/svg%3E");
     }
 
     @media (min-width: $desktop-min-width) {
+        grid-column: 1 / 3;
+    }
 
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1 / -2;
+        grid-row: 2 / 4;
     }
 }

@@ -3,4 +3,9 @@
         grid-template-columns: repeat(12, 1fr);
         grid-column-gap: 20px;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr 8fr;
+    }
 }

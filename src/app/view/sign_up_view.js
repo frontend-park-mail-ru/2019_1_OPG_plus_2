@@ -60,9 +60,9 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 		this._removeSubmitListener();
 	}
 
-	_renderContainer(data) {
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: [`container_theme_signup`],
+			modifiers: ['container_theme_signup'],
 		}));
 	}
 
@@ -112,10 +112,11 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 		genericBeforeEnd(formsBlock,
 			errorTemplate({
 				modifiers: [],
-				text: data.error,
+				text: data.error ? data.error.message : '',
 			}), 
 			formTemplate({
 				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('name') ? 'form_theme_error' : ''}`] : [],
 				username: 'username',
 				type: 'text',
 				placeholder: 'Name',
@@ -124,6 +125,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 			}),
 			formTemplate({
 				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('email') ? 'form_theme_error' : ''}`] : [],
 				username: 'email',
 				type: 'email',
 				placeholder: 'E-mail',
@@ -132,9 +134,10 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 			}),
 			formTemplate({
 				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
 				username: 'password',
 				type: 'password',
-				placeholder: 'Password',
+				placeholder: 'Password (min 5 characters)',
 				req: true,
 			}),
 			formTemplate({

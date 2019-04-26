@@ -1,27 +1,27 @@
 export default class Component {
-    constructor({
-        callback = () => {},
-    }) {
-        this._callback = callback;
-    }
+	constructor({
+		callback = () => null,
+	}) {
+		this._callback = callback;
+	}
 
-    _createEventListeners() {
-    }
+	_createEventListeners() {
+	}
 
-    _removeEventListeners() {
-    }
+	_removeEventListeners() {
+	}
 
-    _render(data) {
-    }
+	_render(data) {
+	}
 
-    create({root = {}, data = {}} = {}) {
-        this._root = root;
-        this._render(data);
-        this._createEventListeners();
-    }
+	create({root = {}, data = {}} = {}) {
+		this._root = root;
+		this._render(data);
+		this._createEventListeners();
+	}
 
-    delete() {
-        this.removeEventListeners();
-    }
+	delete() {
+		this.removeEventListeners();
+	}
     
 }

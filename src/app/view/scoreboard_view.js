@@ -17,18 +17,19 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 	constructor() {
 		super();
 		this.onNextPageClick = this.onNextPageClick.bind(this);
-		this._paginate = new Paginate({callback: this.onNextPageClick});
+		this.onPrevPageClick = this.onPrevPageClick.bind(this);
+		
+		this._paginate = new Paginate({onNextPage: this.onNextPageClick, onPrevPage: this.onPrevPageClick});
 		this._components = [];
 		this._components.push(this._paginate);
 	}
 
-	onNextPageClick(event) {
-		let pageNum = parseInt(document.querySelector('.pages__num').textContent);
-		if (event.target.classList.contains('pages__next')) {
-			this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum + 1});
-		} else if (event.target.classList.contains('pages__back')) {
-			this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum - 1});
-		}
+	onNextPageClick(event, pageNum) {
+		this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum + 1});
+	}
+
+	onPrevPageClick(event, pageNum) {
+		this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum - 1});
 	}
 
 	_createEventListeners() {

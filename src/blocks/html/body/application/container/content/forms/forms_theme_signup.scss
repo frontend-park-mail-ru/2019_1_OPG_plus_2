@@ -2,4 +2,8 @@
     @media (min-width: $desktop-min-width) {
         grid-row: 3 / -3;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-row: 3 / -3;
+    }
 }

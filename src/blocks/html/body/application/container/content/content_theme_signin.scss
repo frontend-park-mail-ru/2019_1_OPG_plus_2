@@ -7,4 +7,12 @@
         grid-column-gap: 10px;
         grid-row-gap: 10px;
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1/-1;
+        grid-template-rows: repeat(12, 1fr);
+        grid-template-columns: repeat(10, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
 }
