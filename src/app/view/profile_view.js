@@ -50,9 +50,9 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 			contentTemplate({
 				modifiers: ['content_theme_profile'],
 			}),
-			menuTemplate({
-				modifiers: ['menu_theme_profile'],
-			}),
+			// menuTemplate({
+			// 	modifiers: ['menu_theme_profile'],
+			// }),
 		);
 	}
 
@@ -88,7 +88,10 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 
 	_renderProfileHead(data) {
 		const profileHeadBlock = document.querySelector('.profile-head.profile-card_theme_main');
-		genericBeforeEnd(profileHeadBlock, 
+		genericBeforeEnd(profileHeadBlock,
+			menuTemplate({
+				modifiers: ['menu_theme_profile'],
+			}),
 			avatarTemplate({
 				modifiers: [],
 				url: `${data.avatar ? HOST + data.avatar : ''}`,

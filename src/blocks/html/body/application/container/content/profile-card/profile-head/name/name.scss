@@ -1,13 +1,9 @@
 .name {
-    // font-family: $secondary-font-family;
-    // color: $main-color;
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        // font-size: 7vh;
-        // padding-left: 3vh;
         font-family: "Roboto";
         color: white;
-        grid-row: 2;
+        grid-row: 3;
         grid-column: 3/6;
         text-align: center;
         font-size: 5vh;

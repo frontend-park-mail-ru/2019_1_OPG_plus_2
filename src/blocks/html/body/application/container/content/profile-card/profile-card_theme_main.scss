@@ -1,9 +1,15 @@
 .profile-card_theme_main {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-column-gap: 12px;
-    grid-row-gap: 40px;
-    // display: grid;
-    // grid-template-columns: repeat(7, 1fr);
-    // grid-column-gap: 10px;
+    
+    @media (min-width: $desktop-min-width) {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-column-gap: 10px;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-template-columns: repeat(7, 1fr);
+        grid-column-gap: 12px;
+        grid-row-gap: 20px;
+    }
 }
