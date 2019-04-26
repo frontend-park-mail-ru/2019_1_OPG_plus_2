@@ -77,11 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const editProfileModel = new EditProfileModel();
     const editProfileView = new EditProfileView();
-    const editProfileController = new EditProfileController({
-        model: editProfileModel,
-        view: editProfileView,
-        router: router
-    });
+    const editProfileController = new EditProfileController({model: editProfileModel, view: editProfileView, router: router});
 
     const rulesModel = {};
     const rulesView = new RulesView();
@@ -95,13 +91,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const nfView = new NotFoundView();
     const nfController = new NotFoundController({model: nfModel, view: nfView, router: router});
 
-    const multiplaterModel = {};
+    const multiplayerModel = {};
     const multiplayerView = new InDevelopmentView();
-    const multiplayerController = new InDevelopmentController({
-        model: multiplaterModel,
-        view: multiplayerView,
-        router: router
-    });
+    const multiplayerController = new InDevelopmentController({model: multiplayerModel, view: multiplayerView, router: router});
 
     router.add({handler: mainController});
     router.add({re: '/leaders', handler: scoreController});
