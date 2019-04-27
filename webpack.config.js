@@ -46,8 +46,8 @@ const devMode = {
     mode: 'development',
     plugins: [
         new webpack.DefinePlugin({
-            HOST: JSON.stringify('http://localhost:8002'),
-            HOST_CHAT: JSON.stringify('http://localhost:8003'),
+            HOST: JSON.stringify('http://127.0.0.1:8002'),
+            HOST_CHAT: JSON.stringify('http://127.0.0.1:8003'),
         }),
     ]
 };
@@ -57,6 +57,7 @@ const prodMode = {
     plugins: [
         new webpack.DefinePlugin({
             HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
+            HOST_CHAT: JSON.stringify('https://api.colors.hackallcode.ru'),
         }),
     ]
 };
