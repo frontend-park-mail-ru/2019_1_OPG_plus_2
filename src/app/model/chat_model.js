@@ -25,7 +25,7 @@ export default class ChatModel extends EventEmitterMixin(Model) {
 	}
 
 	init({root = {}} = {}) {
-		this.openConnection({path: `ws://${HOST_CHAT}/chat/0/room`});
+		this.openConnection({path: `${HOST_CHAT_WS}/chat/0/room`});
 
 		API.getMessages({
 			limit: 10,

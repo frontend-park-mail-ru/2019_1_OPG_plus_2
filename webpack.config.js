@@ -58,6 +58,7 @@ const prodMode = {
         new webpack.DefinePlugin({
             HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
             HOST_CHAT: JSON.stringify('https://api.colors.hackallcode.ru'),
+            HOST_CHAT_WS: JSON.stringify('ws://api.colors.hackallcode.ru'),
         }),
     ]
 };
