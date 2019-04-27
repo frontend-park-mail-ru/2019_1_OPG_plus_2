@@ -94,10 +94,12 @@ export default class ChatView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_renderChat(data) {
 		const contentBlock = this._root.querySelector('.content.content_theme_chat');
+		let dta = [];
+		data.messages.data ? dta = data.messages.data.messages : dta = data.messages.messages;
 		genericBeforeEnd(contentBlock,
 			chatTemplate({
 				modifiers: [],
-				lst: data.messages.data.messages ? [...data.messages.data.messages] : [],
+				lst: dta ? [...dta] : [],
 			})
 		);
 
@@ -107,13 +109,13 @@ export default class ChatView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_addMessage(data) {
 		const messages = this._root.querySelector('.chat__messages');
-		console.log(data);
 		debugger;
-		if (data.messages.messages) {
-			messages.innerHTML = '';
+		if (data.messages.messages && data.page > 0) {
+			const contentBlock = this._root.querySelector('.content.content_theme_chat');
+			contentBlock.innerHTML = '';
 			this._renderChat(data);
-		} else {
-			messages.insertAdjacentHTML('beforeend', `<span class="chat__mes">${data.data.content}</span></br>`);
+		} else if (data.data) {
+			messages.insertAdjacentHTML('beforeend', `<div class="chat__mes">${data.data.avatar ? '<img src=\`${HOST+data.data.avatar}\`/>' : '<img src=\'./default_row_icon.svg\'/>' }${data.data.content}</div>`);
 		}
 	}
 

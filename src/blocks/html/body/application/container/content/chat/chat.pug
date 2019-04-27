@@ -1,7 +1,13 @@
 div(class="chat " + modifiers)
     div(class="chat__messages")
         each item, index in lst
-            span(class="chat__mes")=item.content
+            //- span(class="chat__mes")=item.content
+            div(class="chat__mes")
+                if item.avatar
+                    img(class='chat__icon' src=host+item.avatar)
+                else
+                    img(class='chat__icon' src=require('./default_row_icon.svg'))
+                span()=item.content
     form(class="chat__form")
         input(type="text" class="chat__input" placeholder="input text here...")
         input(type="submit" class="chat__submit")
