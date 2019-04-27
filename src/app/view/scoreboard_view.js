@@ -81,7 +81,7 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 				modifiers: ['main_theme_scoreboard'],
 			}),
 		);
-
+		debugger;
 		this._paginate.create({root: contentBlock, data: data});
 	}
 

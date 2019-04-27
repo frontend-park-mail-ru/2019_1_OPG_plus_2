@@ -4,6 +4,28 @@ import User from './user.js';
 const ok = [200, 201, 203];
 
 export default class API {
+
+	static getMessages({
+		limit = 10,
+		page = 1
+	} = {}) {
+		return new Promise((resolve, reject) => {
+			AjaxModule.doGet({
+				path: `${HOST_CHAT}/chat/0?page=${page}&limit=${limit}`,
+			})
+				.then(response => {
+					if (!ok.includes(response.status)) {
+						response.json().then(error => {
+							reject(error);
+						});
+					} else {
+						response.json().then(messages => {
+							resolve(messages);
+						});
+					}
+				});
+		})
+	}
 	/**
      * This method logs user in and sets cookie
      * @param Object object with user login or email

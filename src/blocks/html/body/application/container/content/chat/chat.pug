@@ -1,5 +1,7 @@
 div(class="chat " + modifiers)
     div(class="chat__messages")
+        each item, index in lst
+            span(class="chat__mes")=item.content
     form(class="chat__form")
         input(type="text" class="chat__input" placeholder="input text here...")
         input(type="submit" class="chat__submit")

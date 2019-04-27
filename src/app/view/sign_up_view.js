@@ -116,7 +116,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 			}), 
 			formTemplate({
 				modifiers: [],
-				formModifiers: data.error ? [`${data.error.data.includes('name') ? 'form_theme_error' : ''}`] : [],
+				// formModifiers: data.error ? [`${data.error.data.includes('name') ? 'form_theme_error' : ''}`] : [],
 				username: 'username',
 				type: 'text',
 				placeholder: 'Name',
@@ -125,7 +125,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 			}),
 			formTemplate({
 				modifiers: [],
-				formModifiers: data.error ? [`${data.error.data.includes('email') ? 'form_theme_error' : ''}`] : [],
+				// formModifiers: data.error ? [`${data.error.data.includes('email') ? 'form_theme_error' : ''}`] : [],
 				username: 'email',
 				type: 'email',
 				placeholder: 'E-mail',
@@ -134,7 +134,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 			}),
 			formTemplate({
 				modifiers: [],
-				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
+				// formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
 				username: 'password',
 				type: 'password',
 				placeholder: 'Password (min 5 characters)',

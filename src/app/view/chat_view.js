@@ -9,6 +9,7 @@ import Paginate from '../component/paginate';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import { genericBeforeEnd } from '../../modules/helpers.js';
+import { POST_MESSAGE_EVENT, GET_NEXT_PAGE_EVENT } from '../../modules/events';
 
 export default class ChatView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -35,7 +36,11 @@ export default class ChatView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
     onSendListener(event) {
-        debugger;
+        const formsBlock = this._root.querySelector('.chat__form');
+		event.preventDefault();
+            	
+		const message = formsBlock.elements[0].value;
+		this.emit(POST_MESSAGE_EVENT, {message: message});
     }
     
     _createSendListener() {
@@ -89,16 +94,27 @@ export default class ChatView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_renderChat(data) {
 		const contentBlock = this._root.querySelector('.content.content_theme_chat');
-
 		genericBeforeEnd(contentBlock,
 			chatTemplate({
 				modifiers: [],
+				lst: data.messages.data.messages ? [...data.messages.data.messages] : [],
 			})
 		);
 
 		const chatBlock = this._root.querySelector('.chat');
-
 		this._paginate.create({root: chatBlock, data: data});
+	}
+
+	_addMessage(data) {
+		const messages = this._root.querySelector('.chat__messages');
+		console.log(data);
+		debugger;
+		if (data.messages.messages) {
+			messages.innerHTML = '';
+			this._renderChat(data);
+		} else {
+			messages.insertAdjacentHTML('beforeend', `<span class="chat__mes">${data.data.content}</span></br>`);
+		}
 	}
 
 
@@ -110,14 +126,8 @@ export default class ChatView extends NavigateMixinView(EventEmitterMixin(View))
 			this._renderMain();
 			this._renderBack();
 			this._renderChat(data);
-		} else if (data.users.users && data.page > 0) {
-			debugger;
-			// const contentBlock = document.querySelector('.content.content_theme_scoreboard');
-			// contentBlock.innerHTML = '';
-			// this._renderContent(data);
-			// const mainBlock = document.querySelector('.main.main_theme_scoreboard');
-			// mainBlock.innerHTML = '';
-			// this._renderUsers(data);
+		} else {
+			this._addMessage(data);
 		}
 	}
 

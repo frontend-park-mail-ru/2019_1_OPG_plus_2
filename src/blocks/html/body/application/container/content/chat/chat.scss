@@ -7,6 +7,12 @@
         grid-template-columns: 4fr 1fr;
         grid-template-rows: 5fr 1fr 1fr;
 
+        &__mes {
+            border-bottom: 1px solid gray;
+            padding: 2vh;
+            margin-bottom: 4px;
+        }
+
         &__form {
             grid-column: 1 / -1;
             display: grid;
@@ -16,6 +22,10 @@
             grid-row: 1;
             grid-column: 1 / -1;
             background-color: white;
+            display: flex;
+            flex-direction: column;
+            overflow: scroll;
+            height: 70vh;
         }
 
         &__input {

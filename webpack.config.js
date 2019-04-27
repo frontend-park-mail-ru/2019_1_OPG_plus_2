@@ -47,6 +47,7 @@ const devMode = {
     plugins: [
         new webpack.DefinePlugin({
             HOST: JSON.stringify('http://localhost:8002'),
+            HOST_CHAT: JSON.stringify('http://localhost:8003'),
         }),
     ]
 };

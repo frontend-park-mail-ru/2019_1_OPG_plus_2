@@ -41,3 +41,9 @@ export const UP_OUT_FIELD_EVENT = 'finishStepOutField';
 
 export const FINISH_STEP_EVENT = 'finishStep';
 export const FINISH_GAME_EVENT = 'finishGame';
+
+/* Чат */
+
+export const GET_MESSAGE_EVENT = 'getMessage';
+export const POST_MESSAGE_EVENT = 'postMessage';
+export const FINISH_MESSAGE_EVENT = 'finishPostMessage';
