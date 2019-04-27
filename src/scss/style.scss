@@ -63,6 +63,7 @@
 @import '../blocks/html/body/application/container/content/main/main_theme_index.scss';
 @import '../blocks/html/body/application/container/content/buttons/buttons_theme_main.scss';
 @import '../blocks/html/body/application/container/head/menu/menu_theme_main.scss';
+@import '../blocks/html/body/application/container/head/menu/chat/chat-icon.scss';
 
 
 /* scoreboard */
@@ -155,18 +156,24 @@
 @import '../blocks/html/body/application/container/content/title/title_theme_service.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_type_primary.scss';
 
+/* chat */
+@import '../blocks/html/body/application/container/container_theme_chat.scss';
+@import '../blocks/html/body/application/container/content/content_theme_chat.scss';
+@import '../blocks/html/body/application/container/content/chat/chat.scss';
+@import '../blocks/html/body/application/container/content/main/pages/pages_theme_chat.scss';
 
-.mock {
-    font-family: 'Roboto';
-    text-align: center;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.text {
-    height: 10%;
-    // font-family: $main-font-family;
-    color: $secondary-color;
-}
+// .mock {
+//     font-family: 'Roboto';
+//     text-align: center;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// .text {
+//     height: 10%;
+//     // font-family: $main-font-family;
+//     color: $secondary-color;
+// }

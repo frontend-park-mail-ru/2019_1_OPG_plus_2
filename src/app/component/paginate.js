@@ -8,6 +8,7 @@ export default class Paginate extends Component {
 		callback = () => null,
 		onNextPage = () => null,
 		onPrevPage = () => null,
+		modifiers = [],
 	}) {
 		super({callback});
 		
@@ -16,6 +17,8 @@ export default class Paginate extends Component {
 
 		this.onNextPage = this.onNextPage.bind(this);
 		this.onPrevPage = this.onPrevPage.bind(this);
+
+		this._modifiers = modifiers;
 	}
 
 	_createEventListeners() {
@@ -43,7 +46,7 @@ export default class Paginate extends Component {
 	_render(data) {
 		genericBeforeEnd(this._root, 
 			pagesTemplate({
-				modifiers: [],
+				modifiers: this._modifiers,
 				page_num: data.page,
 			})
 		);

@@ -27,6 +27,10 @@ import EditProfileModel from './app/model/edit_profile_model';
 import EditProfileView from './app/view/edit_profile_view';
 import EditProfileController from './app/controller/edit_profile_controller';
 
+import ChatModel from './app/model/chat_model';
+import ChatView from './app/view/chat_view';
+import ChatController from './app/controller/chat_controller';
+
 import GameModel from './app/model/game_model';
 import GameView from './app/view/game_view';
 import GameController from './app/controller/game_controller';
@@ -83,6 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		router: router
 	});
 
+	const chatModel = new ChatModel();
+	const chatView = new ChatView();
+	const chatController = new ChatController({
+		model: chatModel,
+		view: chatView,
+		router: router
+	});
+
 	const rulesModel = {};
 	const rulesView = new RulesView();
 	const rulesController = new RulesController({model: rulesModel, view: rulesView, router: router});
@@ -111,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	router.add({re: '/editme', handler: editProfileController});
 	router.add({re: '/game', handler: gameController});
 	router.add({re: '/multiplayer', handler: multiplayerController});
+	router.add({re: '/chat', handler: chatController});
 
 	router.add({re: '/rules', handler: rulesController});
 	router.add({re: '/notfound', handler: nfController});

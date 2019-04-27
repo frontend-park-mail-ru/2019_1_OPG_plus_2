@@ -11,6 +11,7 @@ import mainButtonTemplate from '../../blocks/html/body/application/container/con
 import linesUpTemplate from '../../blocks/html/body/application/container/lines/lines-up/lines-up.pug';
 import linesDownLeftTemplate from '../../blocks/html/body/application/container/lines/lines-down-left/lines-down-left.pug';
 import linesDownRightTemplate from '../../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.pug';
+import chatTemplate from '../../blocks/html/body/application/container/head/menu/chat/chat-icon.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
@@ -111,6 +112,14 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 				modifiers: [],
 				href: 'rules',
 				dataset: '/rules',
+			}),
+			separatorTemplate({
+				modifiers: [],
+			}),
+			chatTemplate({
+				modifiers: [],
+				href: 'chat',
+				dataset: '/chat',
 			})
 		);
 
