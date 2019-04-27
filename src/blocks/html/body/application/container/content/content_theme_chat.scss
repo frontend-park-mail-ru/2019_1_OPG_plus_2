@@ -1,6 +1,6 @@
 .content_theme_chat {
     @media (min-width: $desktop-min-width) {
-        grid-column: 3 / -3;
+        grid-column: 3 / -1;
         grid-template: repeat(6, 1fr) / repeat(5, 1fr);
         grid-column-gap: 20px;
         grid-row-gap: 20px;
@@ -9,7 +9,11 @@
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         grid-column: 3 / -1;
         grid-row: 2;
-        // grid-column-gap: 20px;
+        grid-template: repeat(6, 1fr) / repeat(5, 1fr);
+    }
+
+    @media (max-width: $mobile-min-width) {
+        grid-column: 1 / -1;
         grid-template: repeat(6, 1fr) / repeat(5, 1fr);
     }
 }

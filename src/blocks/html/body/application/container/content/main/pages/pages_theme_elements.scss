@@ -1,6 +1,15 @@
 .pages_theme_elements {
-    font-family: Roboto, serif;
-    font-size: 2vw;
-    padding: 2vw;
-    cursor: pointer;
+    @media (min-width: $desktop-min-width) {
+        font-family: Roboto, serif;
+        font-size: 2vw;
+        padding: 2vw;
+        cursor: pointer;
+    }
+
+    @media (max-width: $mobile-min-width) {
+        font-family: Roboto, serif;
+        font-size: 2vw;
+        padding: 0 8vh 0;
+        cursor: pointer;
+    }
 }

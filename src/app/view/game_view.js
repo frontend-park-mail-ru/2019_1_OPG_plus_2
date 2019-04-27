@@ -9,6 +9,7 @@ import fieldTemplate from '../../blocks/html/body/application/container/content/
 import blockTemplate from '../../blocks/html/body/application/container/content/field/block/block.pug';
 import modalTemplate from '../../blocks/html/body/application/container/modal/modal.pug';
 import linkTemplate from '../../blocks/html/body/application/container/content/buttons/link/link.pug';
+import frameTemplate from '../../blocks/html/body/application/container/frame/frame.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
@@ -101,6 +102,10 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			contentTemplate({
 				modifiers: ['content_theme_game'],
 			}),
+			frameTemplate({
+				modifiers: ['frame_theme_game'],
+				src: '/chat',
+			})
 			// playerTemplate({
 			// 	modifiers: ['player_theme_player1'],
 			// }),

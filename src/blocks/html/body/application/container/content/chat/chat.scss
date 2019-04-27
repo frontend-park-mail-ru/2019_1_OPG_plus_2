@@ -7,6 +7,11 @@
         grid-template-columns: 4fr 1fr;
         grid-template-rows: 5fr 1fr 1fr;
 
+        &__form {
+            grid-column: 1 / -1;
+            display: grid;
+        }
+
         &__messages {
             grid-row: 1;
             grid-column: 1 / -1;
@@ -14,17 +19,39 @@
         }
 
         &__input {
-            grid-row: 2;
             grid-column: 1;
             border-top: 1px solid black;
         }
 
         &__submit {
-            grid-row: 2;
             grid-column: 2;
         }
     }
+    
+    @media (max-width: $mobile-min-width) {
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
+        grid-template-columns: 4fr 1fr;
+        grid-template-rows: 5fr 1fr 1fr;
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        &__form {
+            grid-column: 1 / -1;
+            display: grid;
+        }
+
+        &__messages {
+            grid-row: 1;
+            grid-column: 1 / -1;
+            background-color: white;
+        }
+
+        &__input {
+            grid-column: 1;
+            border-top: 1px solid black;
+        }
+
+        &__submit {
+            grid-column: 2;
+        }
     }
 }

@@ -3,17 +3,6 @@ import headTemplate from '../../blocks/html/body/application/container/head/head
 import backArrowTemplate from '../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import chatTemplate from '../../blocks/html/body/application/container/content/chat/chat.pug';
-// import menuTemplate from '../../blocks/html/body/application/container/head/menu/menu.pug';
-// import profileIconTemplate from '../../blocks/html/body/application/container/head/menu/profile/profile.pug';
-// import scoreBoardTemplate from '../../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.pug';
-// import rulesTemplate from '../../blocks/html/body/application/container/head/menu/rules/rules.pug';
-// import separatorTemplate from '../../blocks/html/body/application/container/head/menu/separator/separator.pug';
-// import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
-// import mainButtonTemplate from '../../blocks/html/body/application/container/content/main-button/main-button.pug';
-// import linesUpTemplate from '../../blocks/html/body/application/container/lines/lines-up/lines-up.pug';
-// import linesDownLeftTemplate from '../../blocks/html/body/application/container/lines/lines-down-left/lines-down-left.pug';
-// import linesDownRightTemplate from '../../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.pug';
-// import chatTemplate from '../../blocks/html/body/application/container/head/menu/chat/chat.pug';
 
 import View from './view';
 import Paginate from '../component/paginate';
@@ -50,23 +39,23 @@ export default class ChatView extends NavigateMixinView(EventEmitterMixin(View))
     }
     
     _createSendListener() {
-        const sendButton = this._root.querySelector('.submit');
+        const sendButton = this._root.querySelector('.chat__form');
         sendButton.addEventListener('submit', this.onSendListener, true);
     }
 
     _removeSendListener() {
-        const sendButton = this._root.querySelector('.submit');
+        const sendButton = this._root.querySelector('.chat__form');
         sendButton.removeEventListener('submit', this.onSendListener, true);
     }
 
 	_createEventListeners() {
-        // super._createEventListeners();
-        // this._createSendListener();
+        super._createEventListeners();
+        this._createSendListener();
 	}
 
 	_removeEventListeners() {
-        // super._removeEventListeners();
-        // this._removeSendListener();
+        super._removeEventListeners();
+        this._removeSendListener();
 	}
 
 	_renderContainer() {
