@@ -48,6 +48,7 @@ const devMode = {
         new webpack.DefinePlugin({
             HOST: JSON.stringify('http://127.0.0.1:8002'),
             HOST_CHAT: JSON.stringify('http://127.0.0.1:8003'),
+            HOST_CHAT_WS: JSON.stringify('ws://127.0.0.1:8003'),
         }),
     ]
 };
