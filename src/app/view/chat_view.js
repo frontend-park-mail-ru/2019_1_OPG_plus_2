@@ -109,18 +109,17 @@ export default class ChatView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_addMessage(data) {
 		const messages = this._root.querySelector('.chat__messages');
-		debugger;
-		if (data.messages.messages && data.page > 0) {
-			const contentBlock = this._root.querySelector('.content.content_theme_chat');
-			contentBlock.innerHTML = '';
-			this._renderChat(data);
+		if (data.messages && data.page > 0) {
+			if (data.messages.messages) {
+				const contentBlock = this._root.querySelector('.content.content_theme_chat');
+				contentBlock.innerHTML = '';
+				this._renderChat(data);
+			}
 		} else if (data.data) {
-			messages.insertAdjacentHTML('beforeend', `<div class="chat__mes">${data.data.avatar ? '<img src=\`${HOST+data.data.avatar}\`/>' : '<img src=\'./default_row_icon.svg\'/>' }${data.data.content}</div>`);
+			messages.insertAdjacentHTML('beforeend', `<div class="chat__mes">${data.data.username ? data.data.username : 'anonymus'}: ${data.data.content}</div>`);
 		}
 	}
 
-
-	
 	_render(data) {
 		if(data.isRender) {
 			this._root.innerHTML = '';

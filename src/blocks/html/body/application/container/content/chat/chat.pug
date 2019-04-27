@@ -3,10 +3,10 @@ div(class="chat " + modifiers)
         each item, index in lst
             //- span(class="chat__mes")=item.content
             div(class="chat__mes")
-                if item.avatar
-                    img(class='chat__icon' src=host+item.avatar)
+                if item.username
+                    span()=item.username+': '
                 else
-                    img(class='chat__icon' src=require('./default_row_icon.svg'))
+                    span()='anonymus: '
                 span()=item.content
     form(class="chat__form")
         input(type="text" class="chat__input" placeholder="input text here...")

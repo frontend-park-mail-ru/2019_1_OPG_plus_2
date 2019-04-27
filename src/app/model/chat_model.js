@@ -38,38 +38,42 @@ export default class ChatModel extends EventEmitterMixin(Model) {
 	} 
 
 	sendMessage({message = ''} = {}) {
-		if (User.exist()) {
-			let msg = {
-				username: User._username,
-				content: message,
-				type: 'text',
-				// random_id: Math.random() * (max - min) + min,
-			};
 
-			// TODO закешировать рандомный id
-			this._ws.send(JSON.stringify(msg));
-		} else {
-			API.getUser()
-				.then((user) => {
-					User.set(user);
+		if (/^([^<]*<[^\/\s]*(i|br|p|b|[o|u]l|li|span)\s*(style\s*=\s*"\s*color:\s*[#A-Za-z0-9]*\s*;?\s*")?\s*>[^<]*<\/(i|br|p|b|[o|u]l|li|span)[^>]*>[^<]*)*[^<]*$/i.test(message)) {
 
-					let msg = {
-						username: User._username,
-						content: message,
-						type: 'text',
-					};
+			if (User.exist()) {
+				let msg = {
+					username: User._username,
+					content: message,
+					type: 'text',
+					// random_id: Math.random() * (max - min) + min,
+				};
 
-					this._ws.send(JSON.stringify(msg));
-				})
-				.catch(() => {
-					let msg = {
-						username: '',
-						content: message,
-						type: 'text',
-					};
+				// TODO закешировать рандомный id
+				this._ws.send(JSON.stringify(msg));
+			} else {
+				API.getUser()
+					.then((user) => {
+						User.set(user);
 
-					this._ws.send(JSON.stringify(msg));
-				});
+						let msg = {
+							username: User._username,
+							content: message,
+							type: 'text',
+						};
+
+						this._ws.send(JSON.stringify(msg));
+					})
+					.catch(() => {
+						let msg = {
+							username: '',
+							content: message,
+							type: 'text',
+						};
+
+						this._ws.send(JSON.stringify(msg));
+					});
+			}
 		}
 	}
 
