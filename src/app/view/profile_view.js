@@ -7,12 +7,11 @@ import profileCardTemplate from '../../blocks/html/body/application/container/co
 import profileHeadTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
 import nameTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-head/name/name.pug';
 import profileDataTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-data.pug';
+import profileFooterTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-footer/profile-footer.pug';
 import dataItemTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item.pug';
 import avatarTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import logoutIconTemplate from '../../blocks/html/body/application/container/head/menu/logout/logout.pug';
 import settingsIconTemplate from '../../blocks/html/body/application/container/head/menu/settings/settings.pug';
-import linesDownLeftTemplate from '../../blocks/html/body/application/container/lines/lines-down-left/lines-down-left.pug';
-import linesDownRightTemplate from '../../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.pug';
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
@@ -78,16 +77,21 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 
 		genericBeforeEnd(profileCardBlock, 
 			profileHeadTemplate({
-				modifiers: ['profile-card_theme_main'],
+				// modifiers: ['profile-card_theme_main'],
+				modifiers: [],
 			}),
 			profileDataTemplate({
 				modifiers: [],
 			}),
+			profileFooterTemplate({
+				modifiers: [],
+			})
 		);
 	}
 
 	_renderProfileHead(data) {
-		const profileHeadBlock = document.querySelector('.profile-head.profile-card_theme_main');
+		// const profileHeadBlock = document.querySelector('.profile-head.profile-card_theme_main');
+		const profileHeadBlock = document.querySelector('.profile-head');
 		genericBeforeEnd(profileHeadBlock,
 			menuTemplate({
 				modifiers: ['menu_theme_profile'],
@@ -129,6 +133,19 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 		);
 	}
 
+	_renderProfileFooter() {
+		const profileFooterBlock = document.querySelector('.profile-footer');
+		genericBeforeEnd(profileFooterBlock,
+			logoutIconTemplate({
+				modifiers: ['logout_theme_profile'],
+				hr: '/logout',
+				dataset: '/logout',
+				content: 'Exit',
+			})
+		) 
+
+	}
+
 	_renderMenu() {
 		const menuBlock = document.querySelector('.menu.menu_theme_profile');
 		genericBeforeEnd(menuBlock, 
@@ -137,11 +154,11 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 				dataset: '/editme',
 				modifiers: [],
 			}),
-			logoutIconTemplate({
-				modifiers: [],
-				hr: '/logout',
-				dataset: '/logout',
-			})
+			// logoutIconTemplate({
+			// 	modifiers: [],
+			// 	hr: '/logout',
+			// 	dataset: '/logout',
+			// })
 		);
 	}
 
@@ -153,6 +170,7 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 		this._renderProfileCard();
 		this._renderProfileHead(data);
 		this._renderProfileData(data);
+		this._renderProfileFooter();
 		this._renderMenu();
 	}
 

@@ -9,6 +9,7 @@
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 3fr 3fr 1fr;
         grid-column-gap: 12px;
         grid-row-gap: 20px;
     }

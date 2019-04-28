@@ -1,0 +1,8 @@
+.profile-footer {
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

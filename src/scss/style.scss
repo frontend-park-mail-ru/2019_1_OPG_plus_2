@@ -87,6 +87,8 @@
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/name/name.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/profile-data.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-footer/profile-footer.scss';
+@import '../blocks/html/body/application/container/head/menu/logout/logout_theme_profile.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_score.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_games.scss';
@@ -156,17 +158,17 @@
 @import '../blocks/html/body/application/container/content/buttons/button/button_type_primary.scss';
 
 
-.mock {
-    font-family: 'Roboto';
-    text-align: center;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+// .mock {
+//     font-family: 'Roboto';
+//     text-align: center;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
 
-.text {
-    height: 10%;
-    // font-family: $main-font-family;
-    color: $secondary-color;
-}
+// .text {
+//     height: 10%;
+//     // font-family: $main-font-family;
+//     color: $secondary-color;
+// }

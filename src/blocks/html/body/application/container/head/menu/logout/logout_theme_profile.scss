@@ -1,0 +1,12 @@
+.logout_theme_profile {
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        color: black;
+        font-family: "Roboto";
+        background: none !important;
+        grid-column: 1 / -1;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0px 0px 7px 0px #cacaca;
+        text-decoration: none;
+    }
+}
