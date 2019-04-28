@@ -116,7 +116,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 			}), 
 			formTemplate({
 				modifiers: [],
-				formModifiers: data.error.data ? [`${data.error.data.includes('name') ? 'form_theme_error' : ''}`] : [],
+				formModifiers: data.error ? [`${data.error.data.includes('name') ? 'form_theme_error' : ''}`] : [],
 				username: 'username',
 				type: 'text',
 				placeholder: 'Name',
