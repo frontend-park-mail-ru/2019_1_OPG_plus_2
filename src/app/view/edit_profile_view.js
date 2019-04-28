@@ -33,15 +33,15 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_createEventListeners() {
-		// super._createEventListeners();
-		// this._createLoadListener();
-		// this._createSubmitListener();
+		super._createEventListeners();
+		this._createLoadListener();
+		this._createSubmitListener();
 	}
 
 	_removeEventListeners() {
-		// super._removeEventListeners();
-		// this._removeSubmitListener();
-		// this._removeLoadListener();
+		super._removeEventListeners();
+		this._removeSubmitListener();
+		this._removeLoadListener();
 	}
 
 	onLoadEvent() {
