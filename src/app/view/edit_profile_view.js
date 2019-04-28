@@ -57,9 +57,9 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 
 		const email = User.get().email;
 		const username = User.get().username;
-		const newUsername = formsBlock.elements[0].value;
-		const newPassword = formsBlock.elements[1].value;
-		const repeatNewPassword = formsBlock.elements[2].value;
+		const newUsername = formsBlock.elements[1].value;
+		const newPassword = formsBlock.elements[2].value;
+		const repeatNewPassword = formsBlock.elements[3].value;
 
 		if (newUsername != username) {
 			this.emit('userUpdate', { root: this._root, email: email, name: newUsername });
