@@ -18,14 +18,11 @@
         grid-column: 1/-1;
         grid-row: 1;
         grid-row-gap: 6px;
-        box-shadow: 0px -600px 70px -120px #005ff9 inset, 
-                    0px -590px 70px -120px #ffc04d inset;
-        // background: linear-gradient(32deg, #005ff9 14%, #ffc04d 66%);
-        // box-shadow: 0px 7px 17px 3px #cacaca;
-        animation: bg 2s forwards cubic-bezier(0.64, 0, 0, 0.9);
-        // grid-column: 2/-2;
-        // grid-row: 1;
-        // grid-template-columns: repeat(3, 1fr);
-        // grid-column-gap: 10px;
+        background: linear-gradient(8deg, rgba(0,95,249,1) 21%, rgba(255,179,56,1) 69%);
+        // box-shadow: 0px -600px 70px -120px #005ff9 inset, 
+        //             0px -590px 70px -120px #ffc04d inset;
+        // box-shadow: 0px -600px 70px -120px #005ff9 inset, 
+        //             0px -590px 70px -120px #ffc04d inset;
+        // animation: bg 2s forwards cubic-bezier(0.64, 0, 0, 0.9);
     }
 }
