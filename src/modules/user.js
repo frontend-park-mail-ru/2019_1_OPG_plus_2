@@ -13,7 +13,6 @@ class UserS {
 		this._games = 0;
 		this._win = 0;
 		this._lose = 0;
-
 	}
 
 	/**
@@ -21,11 +20,7 @@ class UserS {
 	 * @return {boolean}
 	 */
 	exist() {
-		if (!this._username || !this._email) {
-			return false;
-		}
-
-		return true;
+		return this._username && this._email;
 	}
 
 	/**
@@ -56,6 +51,19 @@ class UserS {
 		this._games = data.games;
 		this._win = data.win;
 		this._lose = data.lose;
+	}
+
+	/**
+	 * Clear User data
+	 */
+	clear() {
+		this._avatar = null;
+		this._username = null;
+		this._email = null;
+		this._score = null;
+		this._games = 0;
+		this._win = 0;
+		this._lose = 0;
 	}
 }
 
