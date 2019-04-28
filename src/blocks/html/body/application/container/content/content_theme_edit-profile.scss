@@ -5,4 +5,8 @@
         grid-template-areas: ". . c c c c c c c c c . . ." 
                              ". . . b b b b b b b . . . .";
     }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1/-1;
+    }
 }

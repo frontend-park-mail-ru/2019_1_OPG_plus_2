@@ -1,3 +1,5 @@
 .profile-card_theme_forms {
-    grid-area: f;
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-row: 2;
+    }
 }

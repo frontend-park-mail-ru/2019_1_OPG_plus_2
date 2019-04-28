@@ -33,15 +33,15 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_createEventListeners() {
-		super._createEventListeners();
-		this._createLoadListener();
-		this._createSubmitListener();
+		// super._createEventListeners();
+		// this._createLoadListener();
+		// this._createSubmitListener();
 	}
 
 	_removeEventListeners() {
-		super._removeEventListeners();
-		this._removeSubmitListener();
-		this._removeLoadListener();
+		// super._removeEventListeners();
+		// this._removeSubmitListener();
+		// this._removeLoadListener();
 	}
 
 	onLoadEvent() {
@@ -124,9 +124,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			profileCardTemplate({
 				modifiers: ['profile-card_theme_edit'],
 			}),
-			buttonsTemplate({
-				modifiers: ['buttons_theme_edit-profile'],
-			}),
 		);
 	}
 
@@ -136,24 +133,35 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			profileHeadTemplate({
 				modifiers: [],
 			}),
+			buttonsTemplate({
+				modifiers: ['buttons_theme_edit-profile'],
+			}),
 		);
 	}
 
-	_renderProfileHead() {
+	_renderProfileHead(data) {
 		const profileHeadBlock = document.querySelector('.profile-head');
 		genericBeforeEnd(profileHeadBlock,
-			settingsIconTemplate({
+			avatarTemplate({
+				modifiers: ['avatar_theme_fade'],
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
+			}),
+			editIconTemplate({
 				modifiers: [],
-			})
+				name: 'photo-edit',
+			}),
+			// settingsIconTemplate({
+			// 	modifiers: [],
+			// })
 		);
 	}
 
 	_renderProfileData() {
 		const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
 		genericBeforeEnd(profileCardBlock,
-			photoEditTemplate({
-				modifiers: [],
-			}),
+			// photoEditTemplate({
+			// 	modifiers: [],
+			// }),
 			formsTemplates({
 				modifiers: ['profile-card_theme_forms'],
 				action: 'POST',
@@ -163,19 +171,19 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_renderProfileForms(data) {
-		const photoEditBlock = document.querySelector('.photo-edit');
+		// const photoEditBlock = document.querySelector('.photo-edit');
 		const formsBlock = document.querySelector('.profile-card_theme_forms');
 
-		genericBeforeEnd(photoEditBlock,
-			avatarTemplate({
-				modifiers: [],
-				url: `${data.avatar ? HOST + data.avatar : ''}`,
-			}),
-			editIconTemplate({
-				modifiers: [],
-				name: 'photo-edit',
-			}),
-		);
+		// genericBeforeEnd(photoEditBlock,
+		// 	avatarTemplate({
+		// 		modifiers: [],
+		// 		url: `${data.avatar ? HOST + data.avatar : ''}`,
+		// 	}),
+		// 	editIconTemplate({
+		// 		modifiers: [],
+		// 		name: 'photo-edit',
+		// 	}),
+		// );
 
 		genericBeforeEnd(formsBlock,
 			profileFormTemplate({
@@ -221,7 +229,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		this._renderBack();
 		this._renderContent();
 		this._renderProfileCard();
-		this._renderProfileHead();
+		this._renderProfileHead(data);
 		this._renderProfileData();
 		this._renderProfileForms(data);
 		this._renderProfileButtons();
