@@ -3,6 +3,10 @@
         border: none;
     }
 
+    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
+        border: none;
+    }
+
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         border: none;
     }

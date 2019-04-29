@@ -6,7 +6,17 @@
 
 .profile-head {
     display: grid;
+
     @media (min-width: $desktop-min-width) {
+        grid-column: 1/-1;
+        grid-row: 1;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 10px;
+        background: linear-gradient(8deg, #005ff9 21%, #ffb338 69%);
+        border-radius: 3vh 3vh 0 0;
+    }
+
+    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
         grid-column: 1/-1;
         grid-row: 1;
         grid-template-columns: repeat(3, 1fr);

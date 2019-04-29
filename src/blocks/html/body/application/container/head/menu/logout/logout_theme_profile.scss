@@ -12,6 +12,19 @@
         border-top: 1px solid rgb(234, 234, 234);
     }
 
+    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
+        padding: 3vh 1vh 3vh;
+        color: black;
+        font-size: 3vh;
+        font-family: "Roboto";  
+        background-image: none !important;
+        grid-column: 1 / -1;
+        text-align: center;
+        width: 100%;    
+        text-decoration: none;
+        border-top: 1px solid rgb(234, 234, 234);
+    }
+
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         color: black;
         font-family: "Roboto";

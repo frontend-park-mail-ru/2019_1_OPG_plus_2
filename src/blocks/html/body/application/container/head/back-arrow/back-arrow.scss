@@ -30,12 +30,16 @@
         }
     }
 
-    // @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-    //     &__icon {
-    //         background-size: 6vh;
-    //         background-repeat: no-repeat;
-    //         background-position-y: center;
-    //         background-position-x: 40%;
-    //     }
-    // }
+    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
+        &__icon {
+            background-size: 8vh;
+            background-repeat: no-repeat;
+            background-position-y: center;
+            background-position-x: 40%;
+        }
+
+        &:hover {
+            animation: move 300ms forwards ease;
+        }
+    }
 }
