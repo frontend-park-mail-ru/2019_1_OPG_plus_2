@@ -11,7 +11,7 @@ export default class EditProfileController extends NavigateMixinController(Contr
 	} = {}) {
 		super({ model: model, view: view, router: router });
 		this._model.on(INIT_EVENT, ({root = {}, data = {}} = {}) => { this.render({root: root, data: data}); });
-		this._model.on(INIT_ERROR_EVENT, () => { this.onNavigate({path: SIGN_IN}); });
+		this._model.on(INIT_ERROR_EVENT, () => { this.onNavigate({path: SIGN_IN, redirect: true}); });
 		this._view.on('avatarUpload', ({avatar = {} }) => { this.avatarUpload({avatar: avatar});});
 		this._model.on('avatarUploaded', () => { this.onNavigate({path: EDIT_ME}); });
 		this._view.on('userUpdate', ({email = '', name = ''}) => { this.userUpdate({email, name}); });
