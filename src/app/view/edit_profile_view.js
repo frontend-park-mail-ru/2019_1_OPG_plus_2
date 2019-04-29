@@ -150,18 +150,13 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 				modifiers: [],
 				name: 'photo-edit',
 			}),
-			// settingsIconTemplate({
-			// 	modifiers: [],
-			// })
 		);
 	}
 
 	_renderProfileData() {
 		const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
+		
 		genericBeforeEnd(profileCardBlock,
-			// photoEditTemplate({
-			// 	modifiers: [],
-			// }),
 			formsTemplates({
 				modifiers: ['profile-card_theme_forms'],
 				action: 'POST',
@@ -171,19 +166,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_renderProfileForms(data) {
-		// const photoEditBlock = document.querySelector('.photo-edit');
 		const formsBlock = document.querySelector('.profile-card_theme_forms');
-
-		// genericBeforeEnd(photoEditBlock,
-		// 	avatarTemplate({
-		// 		modifiers: [],
-		// 		url: `${data.avatar ? HOST + data.avatar : ''}`,
-		// 	}),
-		// 	editIconTemplate({
-		// 		modifiers: [],
-		// 		name: 'photo-edit',
-		// 	}),
-		// );
 
 		genericBeforeEnd(formsBlock,
 			profileFormTemplate({
