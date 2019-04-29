@@ -5,10 +5,6 @@ import backArrowTemplate from '../../blocks/html/body/application/container/head
 import profileCardTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-card.pug';
 import profileHeadTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
-import settingsIconTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.pug';
-import photoEditTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.pug';
 import formsTemplates from '../../blocks/html/body/application/container/content/forms/forms.pug';
 import profileFormTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';

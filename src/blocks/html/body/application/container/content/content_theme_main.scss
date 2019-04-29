@@ -9,7 +9,6 @@
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         grid-column: 3 / -1;
         grid-row: 2;
-        // grid-column-gap: 20px;
         grid-template: repeat(6, 1fr) / repeat(5, 1fr);
     }
 }
