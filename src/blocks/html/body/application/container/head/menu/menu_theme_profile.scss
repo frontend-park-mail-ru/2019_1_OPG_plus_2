@@ -1,7 +1,7 @@
 .menu_theme_profile {
     @media (min-width: $desktop-min-width) {
         align-items: flex-start;
-        grid-column: 12;
+        // grid-column: 12;
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {

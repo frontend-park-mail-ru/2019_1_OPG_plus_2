@@ -1,8 +1,14 @@
 .data-item {
     @media (min-width: $desktop-min-width) {
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Roboto';
+        font-size: 3vh;
+        padding: 3vh 4vh 2vh;
+        border-bottom: 1px solid rgb(234, 234, 234);
         grid-column: 3/-1;
-        color: $color-text;
-        font-family: $secondary-font-family;
+        color: white;
+        font-family: "Roboto";
         text-align: left;
         padding-bottom: 3vh;
 
@@ -12,7 +18,7 @@
         }
 
         &__data {
-            font-size: 2.5vh;
+            font-size: 3vh;
             color: black;
         }
     }
@@ -24,5 +30,15 @@
         font-size: 3vh;
         padding: 3vh 4vh 2vh;
         border-bottom: 1px solid rgb(234, 234, 234);
+
+        &__title {
+            font-size: 3.6vh;
+            color: black;
+        }
+
+        &__data {
+            font-size: 3vh;
+            color: black;
+        }
     }
 }
