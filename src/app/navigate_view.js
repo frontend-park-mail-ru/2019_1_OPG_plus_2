@@ -34,14 +34,6 @@ export const NavigateMixinView = (superclass) => class extends superclass {
 		});
 	}
 
-    _createOnLinkListener() {
-        this._root.addEventListener('click', this.onLinkClick, true);
-    }
-
-    _removeOnLinkListener() {
-        this._root.removeEventListener('click', this.onLinkClick, true);
-    }
-
     _createEventListeners() {
         super._createEventListeners();
         this._createOnLinkListener();
