@@ -169,10 +169,4 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 	open({ root = {}, data = {} }) {
 		super.open({root, data});
 	}
-
-	close() {
-		if (!this._root) {
-			return;
-		}
-	}
 }

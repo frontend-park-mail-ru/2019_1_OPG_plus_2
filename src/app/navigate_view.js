@@ -34,17 +34,21 @@ export const NavigateMixinView = (superclass) => class extends superclass {
 		});
 	}
 
-	_createEventListeners() {
-		super._createEventListeners();
-		this._createOnLinkListener();
-	}
+    _createEventListeners() {
+        super._createEventListeners();
+        this._createOnLinkListener();
+    }
 
-	_removeEventListeners() {
-		super._removeEventListeners();
-		this._removeOnLinkListener();
-	}
+    _removeEventListeners() {
+        super._removeEventListeners();
+        this._removeOnLinkListener();
+    }
 
-	close() {
-		this._removeEventListeners();
-	}
+    close() {
+        if (!this._root) {
+            return;
+        }
+        this._removeEventListeners();
+        delete this._root;
+    }
 };

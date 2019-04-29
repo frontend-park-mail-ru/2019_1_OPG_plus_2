@@ -40,26 +40,23 @@ export default class NotFoundView extends NavigateMixinView(EventEmitterMixin(Vi
 				modifiers: ['content_theme_service'],
 			})
 		);
-		const contentBlock = document.querySelector('.content.content_theme_service');
 
+		const contentBlock = document.querySelector('.content.content_theme_service');
 		genericBeforeEnd(contentBlock,
 			titleTemplate({
-				title: '404 not found',
+				title: '404 - Not Found',
 				modifiers: ['title_theme_service'],
 			}),
 		);
-
 		genericBeforeEnd(contentBlock,
 			buttonsTemplate({
-				modifiers: [],
+				modifiers: ['buttons_theme_service'],
 			}),
 		);
 	}
 
 	_renderButtons() {
-
-
-		const buttonsBlock = document.querySelector('.buttons');
+		const buttonsBlock = document.querySelector('.buttons.buttons_theme_service');
 		genericBeforeEnd(buttonsBlock,
 			linkTemplate({
 				href: '/',
@@ -70,7 +67,6 @@ export default class NotFoundView extends NavigateMixinView(EventEmitterMixin(Vi
 			}),
 		);
 	}
-
 
 	open({root = {}, data = {}}) {
 		super.open({root, data});
