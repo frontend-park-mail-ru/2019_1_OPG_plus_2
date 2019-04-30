@@ -1,12 +1,12 @@
 .content_theme_edit-profile {
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-column: 4/-3;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-column: 1/-1;
     }
 }

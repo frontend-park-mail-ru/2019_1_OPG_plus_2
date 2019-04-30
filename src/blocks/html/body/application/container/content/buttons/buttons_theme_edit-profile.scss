@@ -1,10 +1,10 @@
 .buttons_theme_edit-profile {
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-column: 3/-3;
         justify-content: end;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-row: 3;
     }
 }

@@ -3,35 +3,28 @@
     flex-direction: column;
     width: 100%;
 
-    @media (min-width: $desktop-min-width) {
-        &__form-title {
-            font-family: Roboto;
-            font-size: 3vh;
-            color: black;
-            margin-bottom: 1vh;
-        }
-    
+    &__form-title {
+        font-family: Roboto;
+        font-size: 3vh;
+        color: black;
+        margin-bottom: 1vh;
+    }
+
+    &__text-form {
+        font-family: "Roboto";
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        padding: 2vh 1vh 2vh;
+    }
+
+    @media (min-width: $desktop-layout) {
         &__text-form {
-            font-family: Roboto;
-            border: 1px solid rgba(0, 0, 0, 0.3);
             font-size: 3.5vh;
-            padding: 2vh 1vh 2vh;
         }
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        &__form-title {
-            font-family: Roboto;
-            font-size: 3vh;
-            color: black;
-            margin-bottom: 1vh;
-        }
-    
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         &__text-form {
-            font-family: Roboto;
-            border: 1px solid rgba(0, 0, 0, 0.3);
             font-size: 3vh;
-            padding: 2vh 1vh 2vh;
         }
     }
 }

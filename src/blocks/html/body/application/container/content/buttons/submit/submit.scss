@@ -1,29 +1,13 @@
 .submit {
-    @media (min-width: $desktop-min-width) {
-        font-family: Roboto;
-        font-size: 3vh;
-        text-align: center;
-        color: white;
-        background-color: $secondary-color;
-        display: block;
-        width: 100%;
-        padding: 2vh 8% 2vh;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        font-family: Roboto;
-        font-size: 3vh;
-        text-align: center;
-        color: white;
-        background-color: $secondary-color;
-        display: block;
-        width: 100%;
-        padding: 2vh 8% 2vh;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-    }
+    font-family: "Roboto";
+    font-size: 3vh;
+    text-align: center;
+    color: white;
+    background-color: $secondary-color;
+    display: block;
+    width: 100%;
+    padding: 2vh 8% 2vh;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
 }

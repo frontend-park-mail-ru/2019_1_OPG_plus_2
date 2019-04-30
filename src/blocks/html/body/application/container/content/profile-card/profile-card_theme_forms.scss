@@ -1,11 +1,11 @@
 .profile-card_theme_forms {
-    @media (min-width: $desktop-min-width) {
-        grid-row: 2;
+    grid-row: 2;
+
+    @media (min-width: $desktop-layout) {
         grid-column: 3/-3;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        grid-row: 2;
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-column: 2/-2;
     }
 }
