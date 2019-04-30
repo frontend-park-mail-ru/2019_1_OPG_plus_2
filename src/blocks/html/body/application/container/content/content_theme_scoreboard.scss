@@ -1,14 +1,14 @@
 .content_theme_scoreboard {
-    @media (min-width: $desktop-min-width) {
-        grid-column: 3/-1;
-        grid-template: 1.4fr 5fr 1fr/repeat(10, 1fr);
+    grid-template: 1.4fr 5fr 1fr/repeat(10, 1fr);
+
+    @media (min-width: $desktop-layout) {
+        grid-column: 3 / -1;
         grid-template-areas: "t t t t t t t t . ." 
                             ". m m m m m m . . ." 
                             ". . p p p p . . . .";
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        grid-column: 1/-1;
-        grid-template: 1.4fr 5fr 1fr / repeat(10, 1fr);
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-column: 1 / -1;
     }
 }

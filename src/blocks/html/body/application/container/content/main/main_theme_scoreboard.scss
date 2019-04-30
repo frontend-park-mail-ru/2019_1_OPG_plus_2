@@ -1,13 +1,12 @@
 .main_theme_scoreboard {
-    @media (min-width: $desktop-min-width) {
-        display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: $desktop-layout) {
         grid-column: 2/-4;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        display: flex;
-        flex-direction: column;
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-column: 1/-1;
         grid-row: 2;
     }
