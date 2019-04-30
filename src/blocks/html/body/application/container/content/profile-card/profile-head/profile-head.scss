@@ -6,31 +6,19 @@
 
 .profile-head {
     display: grid;
+    grid-column: 1/-1;
+    grid-row: 1;
+    background: linear-gradient(8deg, #005ff9 21%, #ffb338 69%);
 
-    @media (min-width: $desktop-min-width) {
-        grid-column: 1/-1;
-        grid-row: 1;
+    @media (min-width: $desktop-layout) {
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 10px;
-        background: linear-gradient(8deg, #005ff9 21%, #ffb338 69%);
         border-radius: 3vh 3vh 0 0;
     }
 
-    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
-        grid-column: 1/-1;
-        grid-row: 1;
-        grid-template-columns: repeat(3, 1fr);
-        grid-column-gap: 10px;
-        background: linear-gradient(8deg, #005ff9 21%, #ffb338 69%);
-        border-radius: 3vh 3vh 0 0;
-    }
-
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-template-columns: repeat(7, 1fr);
         grid-column-gap: 12px;
-        grid-column: 1/-1;
-        grid-row: 1;
         grid-row-gap: 6px;
-        background: linear-gradient(8deg, rgba(0,95,249,1) 21%, rgba(255,179,56,1) 69%);
     }
 }

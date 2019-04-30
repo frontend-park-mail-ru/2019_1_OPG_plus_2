@@ -1,17 +1,4 @@
 .menu {
     display: flex;
-
-    @media (min-width: $desktop-min-width) {
-        display: flex;
-        flex-direction: column;
-    }
-
-    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
-        grid-template-columns: repeat(12, 1fr);
-    }
-
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        display: flex;
-        justify-content: center;
-    }
+    flex-direction: column;
 }

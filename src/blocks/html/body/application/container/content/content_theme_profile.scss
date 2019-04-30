@@ -13,6 +13,10 @@
         align-items: center;
     }
 
+    @media (min-width: $ipdas-min-width) and (max-width: $ipads-max-width) {
+        grid-column: 1/-1;
+    }
+
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         grid-column: 1/-1;
     }

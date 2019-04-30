@@ -9,6 +9,10 @@
         grid-column-gap: 20px;
     }
 
+    @media (min-width: $ipdas-min-width) and (max-width: $ipads-max-width) {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
         grid-template-columns: repeat(12, 1fr);
     }

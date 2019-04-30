@@ -1,35 +1,15 @@
 .avatar {
-    @media (min-width: $desktop-min-width) {
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1/-1;
+    grid-row: 1/3;
+    
+    &__photo {
+        width: 18vh;
+        height: 18vh;
+        border: 1vh solid white;
         border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        grid-column: 1/-1;
-        grid-row: 1/3;
-
-        &__photo {
-            width: 18vh;
-            height: 18vh;
-            border: 1vh solid white;
-            border-radius: 100%;
-        }
-    }
-
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-size: 100%;
-        overflow: hidden;
-        grid-column: 1/-1;
-        grid-row: 1/3;
-
-        &__photo {
-            width: 18vh;
-            height: 18vh;
-            border: 3px solid white;
-            border-radius: 100%;
-        }
     }
 }
