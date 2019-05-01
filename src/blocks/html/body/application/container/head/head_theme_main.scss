@@ -1,12 +1,10 @@
 .head_theme_main {    
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-column: 1 / 3;
-        display: grid;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-column: 1 / -1;
         grid-row: 1;
-        display: grid;
     }
 }
