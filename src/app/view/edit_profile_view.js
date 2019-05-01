@@ -5,10 +5,6 @@ import backArrowTemplate from '../../blocks/html/body/application/container/head
 import profileCardTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-card.pug';
 import profileHeadTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
-import settingsIconTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.pug';
-import photoEditTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.pug';
 import formsTemplates from '../../blocks/html/body/application/container/content/forms/forms.pug';
 import profileFormTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
@@ -57,9 +53,9 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 
 		const email = User.get().email;
 		const username = User.get().username;
-		const newUsername = formsBlock.elements[0].value;
-		const newPassword = formsBlock.elements[1].value;
-		const repeatNewPassword = formsBlock.elements[2].value;
+		const newUsername = formsBlock.elements[1].value;
+		const newPassword = formsBlock.elements[2].value;
+		const repeatNewPassword = formsBlock.elements[3].value;
 
 		if (newUsername != username) {
 			this.emit('userUpdate', { root: this._root, email: email, name: newUsername });
@@ -124,9 +120,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			profileCardTemplate({
 				modifiers: ['profile-card_theme_edit'],
 			}),
-			buttonsTemplate({
-				modifiers: ['buttons_theme_edit-profile'],
-			}),
 		);
 	}
 
@@ -136,24 +129,30 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			profileHeadTemplate({
 				modifiers: [],
 			}),
+			buttonsTemplate({
+				modifiers: ['buttons_theme_edit-profile'],
+			}),
 		);
 	}
 
-	_renderProfileHead() {
+	_renderProfileHead(data) {
 		const profileHeadBlock = document.querySelector('.profile-head');
 		genericBeforeEnd(profileHeadBlock,
-			settingsIconTemplate({
+			avatarTemplate({
+				modifiers: ['avatar_theme_fade'],
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
+			}),
+			editIconTemplate({
 				modifiers: [],
-			})
+				name: 'photo-edit',
+			}),
 		);
 	}
 
 	_renderProfileData() {
 		const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
+		
 		genericBeforeEnd(profileCardBlock,
-			photoEditTemplate({
-				modifiers: [],
-			}),
 			formsTemplates({
 				modifiers: ['profile-card_theme_forms'],
 				action: 'POST',
@@ -163,19 +162,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_renderProfileForms(data) {
-		const photoEditBlock = document.querySelector('.photo-edit');
 		const formsBlock = document.querySelector('.profile-card_theme_forms');
-
-		genericBeforeEnd(photoEditBlock,
-			avatarTemplate({
-				modifiers: [],
-				url: `${data.avatar ? HOST + data.avatar : ''}`,
-			}),
-			editIconTemplate({
-				modifiers: [],
-				name: 'photo-edit',
-			}),
-		);
 
 		genericBeforeEnd(formsBlock,
 			profileFormTemplate({
@@ -221,7 +208,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		this._renderBack();
 		this._renderContent();
 		this._renderProfileCard();
-		this._renderProfileHead();
+		this._renderProfileHead(data);
 		this._renderProfileData();
 		this._renderProfileForms(data);
 		this._renderProfileButtons();

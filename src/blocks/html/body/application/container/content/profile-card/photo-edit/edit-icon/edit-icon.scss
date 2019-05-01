@@ -1,12 +1,14 @@
 .edit-icon {
-
     padding: 1vh;
+    grid-column: 1/-1;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
 
     &__icon {
         cursor: pointer;
 
         &__img {
-            width: 6vh;
             transition: all 250ms ease-out;
 
             &:hover {
@@ -17,5 +19,26 @@
 
     &__input {
         display: none;
+    }
+
+    @media (min-width: $desktop-layout) {
+        grid-row: 1/3;
+        align-items: center;
+
+        &__icon {
+            &__img {
+                width: 6vh;
+            }
+        }
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-row: 2;
+
+        &__icon {
+            &__img {
+                width: 5vh;
+            }
+        }
     }
 }

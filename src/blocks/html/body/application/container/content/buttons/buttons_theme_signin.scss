@@ -1,5 +1,5 @@
 .buttons_theme_signin {
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-row: 8/-1;
     }
 }

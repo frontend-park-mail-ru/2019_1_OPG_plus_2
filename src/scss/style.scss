@@ -1,5 +1,5 @@
 @import 'variables.scss';
-@import url('https://fonts.googleapis.com/css?family=Roboto|Unica+One');
+// @import url('https://fonts.googleapis.com/css?family=Roboto|Unica+One');
 
 @import '../blocks/html/html.scss';
 @import '../blocks/html/body/body.scss';
@@ -87,6 +87,8 @@
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/name/name.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/profile-data.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-footer/profile-footer.scss';
+@import '../blocks/html/body/application/container/head/menu/logout/logout_theme_profile.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_score.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/data-item/data-item_type_games.scss';
@@ -99,6 +101,7 @@
 /* edit profile */
 
 @import '../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar_theme_fade.scss';
 @import '../blocks/html/body/application/container/content/forms/form/form_theme_profile.scss';
 @import '../blocks/html/body/application/container/content/content_theme_edit-profile.scss';
 @import '../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.scss';
@@ -147,26 +150,28 @@
 
 /* rules */
 @import '../blocks/html/body/application/container/content/content_theme_rules.scss';
+@import '../blocks/html/body/application/container/content/rules-image/rules-image.scss';
 
 
 /* service */
 @import '../blocks/html/body/application/container/container_theme_service.scss';
 @import '../blocks/html/body/application/container/content/content_theme_service.scss';
 @import '../blocks/html/body/application/container/content/title/title_theme_service.scss';
+@import '../blocks/html/body/application/container/content/buttons/buttons_theme_service.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_type_primary.scss';
 
 
-.mock {
-    font-family: 'Roboto';
-    text-align: center;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+// .mock {
+//     font-family: 'Roboto';
+//     text-align: center;
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
 
-.text {
-    height: 10%;
-    // font-family: $main-font-family;
-    color: $secondary-color;
-}
+// .text {
+//     height: 10%;
+//     // font-family: $main-font-family;
+//     color: $secondary-color;
+// }

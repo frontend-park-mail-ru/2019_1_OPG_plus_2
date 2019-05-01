@@ -7,7 +7,12 @@
 }
 
 .head_theme_back-arrow {
-    @media (min-width: $desktop-min-width) {
+
+    &:hover {
+        animation: opacity 300ms forwards ease;
+    }
+
+    @media (min-width: $desktop-layout) {
         grid-column: 1/3;
         display: grid;
         background: linear-gradient(279deg, $color-background 32%, $main-color 20%, transparent 28%), 
@@ -15,11 +20,8 @@
         opacity: 0.5;
     }
 
-    &:hover {
-        animation: opacity 300ms forwards ease;
-    }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         display: none;
     }
 }

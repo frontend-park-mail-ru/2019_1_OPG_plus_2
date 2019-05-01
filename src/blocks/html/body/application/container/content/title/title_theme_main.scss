@@ -3,13 +3,13 @@
     color: $secondary-color;
     font-size: 15vh;
 
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         font-size: 15vh;
         grid-column: 2 / 4;
         grid-row: 1 / 3;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         font-size: 10vh;
         grid-column: 1 / -2;
         grid-row: 1 / 2;

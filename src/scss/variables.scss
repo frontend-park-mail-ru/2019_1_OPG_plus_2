@@ -15,7 +15,15 @@ $secondary-color: #005FF9;
 $mobile-min-width: 320px;
 $mobile-max-width: 480px;
 
+$ipdas-min-width: 768px;
+$ipads-max-width: 1024px;
+
 $laptop-min-width: 1025px;
 $laptop-max-width: 1279px;
 
 $desktop-min-width: 1280px;
+
+/* test variables */
+
+$desktop-layout: 1025px;
+$mobile-layout: 320px;

@@ -8,7 +8,6 @@
     0% { height: 20vh; }
     30% { height: 40vh; }
     100% { height: 20vh; }
-    // 100% { height: 40vh; }
 }
 
 @keyframes lines-down-right-line3 {
@@ -19,80 +18,73 @@
 }
 
 .lines-down-right {
-    @media (min-width: $desktop-min-width) {
+    position: absolute;
+    bottom: 0px;
+
+    &__line1 {
         position: absolute;
-        bottom: 0px;
+        background-color: $main-color;
+        animation: lines-down-right-line1 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+        transform: rotate(180deg);
+        bottom: 0vh;
+    }
+
+    &__line2 {
+        position: absolute;
+        background-color: $main-color;
+        animation: lines-down-right-line2 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+        transform: rotate(180deg);
+        bottom: 0vh;
+    }
+
+    &__line3 {
+        position: absolute;
+        background-color: $secondary-color;
+        animation: lines-down-right-line3 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
+        transform: rotate(180deg);
+        bottom: 0vh;
+    }
+
+    @media (min-width: $desktop-layout) {
         right: 10vw;
 
         &__line1 {
-            position: absolute;
             width: 3px;
             height: 35vh;
-            background-color: $main-color;
-            animation: lines-down-right-line1 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
-            transform: rotate(180deg);
-            bottom: 0vh;
         }
 
         &__line2 {
-            position: absolute;
             width: 3px;
             height: 40vh;
-            background-color: $main-color;
             right: 40px;
-            animation: lines-down-right-line2 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
-            transform: rotate(180deg);
-            bottom: 0vh;
         }
 
         &__line3 {
-            position: absolute;
             width: 3px;
             height: 40vh;
-            background-color: $secondary-color;
             right: 80px;
-            animation: lines-down-right-line3 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
-            transform: rotate(180deg);
-            bottom: 0vh;
         }
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        position: absolute;
-        bottom: 0px;
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         right: 7vw;
         z-index: -3;
 
         &__line1 {
-            position: absolute;
             width: 2px;
             height: 35vh;
-            background-color: $main-color;
-            animation: lines-down-right-line1 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
-            transform: rotate(180deg);
-            bottom: 0vh;
         }
 
         &__line2 {
-            position: absolute;
             width: 2px;
             height: 40vh;
-            background-color: $main-color;
             right: 20px;
-            animation: lines-down-right-line2 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
-            transform: rotate(180deg);
-            bottom: 0vh;
         }
 
         &__line3 {
-            position: absolute;
             width: 2px;
             height: 40vh;
-            background-color: $secondary-color;
             right: 40px;
-            animation: lines-down-right-line3 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
-            transform: rotate(180deg);
-            bottom: 0vh;
         }
     }
 }

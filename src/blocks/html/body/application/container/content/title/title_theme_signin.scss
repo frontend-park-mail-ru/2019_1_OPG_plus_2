@@ -1,17 +1,14 @@
 .title_theme_signin {
-    @media (min-width: $desktop-min-width) {
+    color: $main-color;
+    grid-column: 1 / -1;
+    grid-row: 1 / 3;
+    align-items: flex-end;
+
+    @media (min-width: $desktop-layout) {
         font-size: 9vh;
-        color: $main-color;
-        grid-column: 1 / -1;
-        grid-row: 1/3;
-        align-items: flex-end;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         font-size: 6vh;
-        color: $main-color;
-        grid-column: 1/-1;
-        grid-row: 1/3;
-        align-items: flex-end;
     }
 }

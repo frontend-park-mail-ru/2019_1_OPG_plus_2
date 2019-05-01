@@ -1,9 +1,10 @@
 .name {
-    font-family: $secondary-font-family;
-    color: $main-color;
-
-    @media (min-width: $desktop-min-width) {
-        font-size: 7vh;
-        padding-left: 3vh;
-    }
+    font-family: "Roboto";
+    color: white;
+    grid-column: 1/-1;
+    text-align: center;
+    font-size: 5vh;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }

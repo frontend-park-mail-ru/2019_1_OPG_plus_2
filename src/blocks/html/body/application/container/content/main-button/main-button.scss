@@ -1,10 +1,17 @@
 .main-button {
     display: grid;
+    grid-template: repeat(4, 1fr) / 1fr;
+    text-decoration: none;
 
     .icon {
+        grid-row: 1 / 4;
         background-position: center;
         background-repeat: no-repeat;
         transition: all 250ms ease-out;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     .label {
@@ -13,49 +20,29 @@
         color: $secondary-color;
     }
 
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-row: 3 / 6;
-        grid-template: repeat(4, 1fr)/1fr;
-        text-decoration: none;
 
         .icon {
-            grid-row: 1 / 4;
-            background-position: center;
-            background-repeat: no-repeat;
             background-size: 18vh;
-
-            &:hover {
-                transform: scale(1.1);
-            }
         }
 
         .label {
             grid-row: 4 / 5;
             font-size: 7vh;
-            color: $secondary-color;
         }
 
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-row: 3 / 5;
-        grid-template: repeat(4, 1fr)/1fr;
-        text-decoration: none;
 
         .icon {
-            grid-row: 1 / 4;
-            background-position: center;
-            background-repeat: no-repeat;
             background-size: 12vh;
-
-            &:hover {
-                transform: scale(1.1);
-            }
         }
 
         .label {
             font-size: 3.7vh;
-            color: $secondary-color;
         }
     }
 }

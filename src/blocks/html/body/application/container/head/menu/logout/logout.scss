@@ -6,18 +6,17 @@
     background-position: center;
 
     &:hover {
-        transform: scale(1.2);
+        background-color: #E5E5E5;
     }
 
-    @media (min-width: $desktop-min-width) {
-        padding: 70px 60px 24px 40px;
-        background-size: 70px;
-        height: 50px;
+    @media (min-width: $desktop-layout) {
+        border-radius: 0 0 3vh 3vh;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        padding: 10px 30px;
-        background-size: 30px;
-        height: 30px;
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        padding: 3vh 5vh;
+        background-size: 7vh;
+        font-size: 3vh;
+
     }
 }

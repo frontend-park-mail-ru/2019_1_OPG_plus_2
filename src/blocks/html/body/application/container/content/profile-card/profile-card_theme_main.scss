@@ -1,5 +1,25 @@
+@keyframes box {
+    from {box-shadow: 0px 0px 0px 0 grey;}
+    to {box-shadow: 0px 7px 19px 0 grey;}
+}
+
 .profile-card_theme_main {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-column-gap: 10px;
+    
+    @media (min-width: $desktop-layout) {
+        grid-template-columns: repeat(7, 1fr);
+        grid-column-gap: 10px;
+        grid-template-rows: 4fr 4fr 1fr;
+        flex-grow: 1;
+        box-shadow: 0px 7px 19px 0 grey;
+        border-radius: 3vh 3vh 3vh 3vh;
+        animation: box 300ms forwards linear;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 3fr 3fr 1fr;
+        grid-column-gap: 12px;
+        grid-row-gap: 20px;
+    }
 }

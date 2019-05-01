@@ -8,17 +8,7 @@
     width: 100%;
     text-decoration: none;
     box-shadow: inset 0px 0px 0px 1px black;
-
-    @media (min-width: $desktop-min-width) {
-        font-size: 2.3em;
-        padding: 2vh 0 2vh;
-        margin-bottom: 3vh;
-    }
-
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        padding: 2vh 0 2vh;
-        font-size: 3vh;
-        margin-bottom: 3vh;
-    }
-
+    font-size: 3vh;
+    padding: 2vh 0 2vh;
+    margin-bottom: 3vh;
 }
