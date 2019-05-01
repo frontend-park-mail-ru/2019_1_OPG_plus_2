@@ -1,10 +1,7 @@
 .container_theme_signup {
-    @media (min-width: $desktop-min-width) {
-        grid-template-columns: repeat(12, 1fr);
-        grid-column-gap: 20px;
-    }
+    grid-template-columns: repeat(12, 1fr);
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        grid-template-columns: repeat(12, 1fr);
+    @media (min-width: $desktop-layout) {
+        grid-column-gap: 20px;
     }
 }
