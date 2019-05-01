@@ -4,11 +4,11 @@
     user-select: none;
     touch-action: none;
 
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-template: repeat(5, 14vh) / repeat(5, 14vh);
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-template: repeat(5, 18vw)/repeat(5, 18vw);
     }
 }

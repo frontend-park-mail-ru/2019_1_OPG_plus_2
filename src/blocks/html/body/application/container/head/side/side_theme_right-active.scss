@@ -1,15 +1,13 @@
 .side_theme_right-active {
-    @media (min-width: $desktop-min-width) {
+    grid-row: 2 / -2;
+    border-radius: 10px 0 0 10px;
+    background-color: #005FF9;
+
+    @media (min-width: $desktop-layout) {
         grid-column: 6 / -1;
-        grid-row: 2 / -2;
-        border-radius: 10px 0 0 10px;
-        background-color: #005FF9;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-column: 5/-1;
-        grid-row: 2 / -2;
-        border-radius: 10px 0 0 10px;
-        background-color: #005FF9;
     }
 }

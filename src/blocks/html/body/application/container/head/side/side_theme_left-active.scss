@@ -1,22 +1,13 @@
-@keyframes act {
-    0% { grid-column: 0;}
-    50% { grid-column: 1 / 5; }
-    100% { grid-column: 1 / 8; }
-}
-
 .side_theme_left-active {
+    grid-row: 2 / -2;
+    border-radius: 0 10px 10px 0;
+    background-color: orange;
+
     @media (min-width: $desktop-min-width) {
         grid-column: 1 / 8;
-        grid-row: 2 / -2;
-        border-radius: 0 10px 10px 0;
-        background-color: orange;
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        grid-column: 1/9;
-        grid-row: 2 / -2;
-        border-radius: 0 10px 10px 0;
-        font-size: 0;
-        background-color: orange;
+        grid-column: 1 / 9;
     }
 }
