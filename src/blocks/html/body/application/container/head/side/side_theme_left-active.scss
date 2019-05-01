@@ -3,11 +3,11 @@
     border-radius: 0 10px 10px 0;
     background-color: orange;
 
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-column: 1 / 8;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-column: 1 / 9;
     }
 }
