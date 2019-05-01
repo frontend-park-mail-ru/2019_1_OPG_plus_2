@@ -1,18 +1,14 @@
 .content_theme_signin {
+    grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-column: 4/10;
-        grid-template-rows: repeat(12, 1fr);
-        grid-template-columns: repeat(10, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 10px;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-column: 1/-1;
-        grid-template-rows: repeat(12, 1fr);
-        grid-template-columns: repeat(10, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 10px;
     }
 }
