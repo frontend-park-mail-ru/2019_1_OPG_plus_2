@@ -30,8 +30,8 @@ const R_ATTRIBUTES = /(\w+\s*)=(\s*".*?")/g;
  * Regexp for validating email
  * @type {RegExp}
  */
-const emailRe = /[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-const nameRe = /[^.,-_'"@?!:$ А-Яа-я()]/;
+const emailRe = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gi;
+const nameRe = /^[\w.-_@$]+$/gi;
 
 /**
  * Makes passed string safe

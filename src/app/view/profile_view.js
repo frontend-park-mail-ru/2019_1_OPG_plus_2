@@ -49,9 +49,6 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 			contentTemplate({
 				modifiers: ['content_theme_profile'],
 			}),
-			// menuTemplate({
-			// 	modifiers: ['menu_theme_profile'],
-			// }),
 		);
 	}
 
@@ -154,11 +151,6 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 				dataset: '/editme',
 				modifiers: [],
 			}),
-			// logoutIconTemplate({
-			// 	modifiers: [],
-			// 	hr: '/logout',
-			// 	dataset: '/logout',
-			// })
 		);
 	}
 
