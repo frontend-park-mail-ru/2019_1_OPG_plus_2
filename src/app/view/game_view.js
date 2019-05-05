@@ -101,12 +101,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 			contentTemplate({
 				modifiers: ['content_theme_game'],
 			}),
-			// playerTemplate({
-			// 	modifiers: ['player_theme_player1'],
-			// }),
-			// playerTemplate({
-			// 	modifiers: ['player_theme_player2'],
-			// }),
 		);
 	}
 
@@ -200,9 +194,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				modifiers: [],
 			}),
 		);
-
-		this._removeEventListeners();
-		this._createEventListeners();
 	}
 
 	apply({player = 'Player1', ans = false, steps = []} = {}) {
