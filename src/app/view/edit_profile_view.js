@@ -28,18 +28,21 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		super();
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.onLoadEvent = this.onLoadEvent.bind(this);
+		this.onChangeEvent = this.onChangeEvent.bind(this);
 	}
 
 	_createEventListeners() {
 		super._createEventListeners();
 		this._createLoadListener();
 		this._createSubmitListener();
+		this._createChangeListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
 		this._removeSubmitListener();
 		this._removeLoadListener();
+		this._removeChangeListener();
 	}
 
 	onLoadEvent() {
@@ -47,6 +50,13 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		let form = new FormData();
 		form.append('avatar', photo[0]);
 		this.emit('avatarUpload', { root: this._root, avatar: form});
+	}
+
+	onChangeEvent() {
+		const button = this._root.querySelector('.submit');
+		if (!button) {
+			this._renderProfileButtons();
+		}
 	}
 
 	onFormSubmit(event) {
@@ -84,6 +94,20 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	_removeLoadListener() {
 		const photoBlock = this._root.querySelector('#file-input');
 		photoBlock.removeEventListener('change', this.onLoadEvent, true);
+	}
+
+	_createChangeListener() {
+		const fields = this._root.querySelectorAll('.form__text-form');
+		fields.forEach(field => {
+			field.addEventListener('input', this.onChangeEvent, true);
+		});
+	}
+
+	_removeChangeListener() {
+		const fields = this._root.querySelectorAll('.form__text-form');
+		fields.forEach(field => {
+			field.removeEventListener('input', this.onChangeEvent, true);
+		});
 	}
 
 
@@ -167,14 +191,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		const formsBlock = document.querySelector('.profile-card_theme_forms');
 
 		genericBeforeEnd(formsBlock,
-			// profileFormTemplate({
-			// 	modifiers: ['form_theme_profile '],
-			// 	name: 'username',
-			// 	type: 'text',
-			// 	title: 'Name',
-			// 	val: data.username,
-			// 	autofocus: true,
-			// }),
 			formTemplate({
 				modifiers: [],
 				formModifiers: data.error ? [`${data.error.data.includes('username') ? 'form_theme_error' : ''}`] : [],
@@ -222,7 +238,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		this._renderProfileHead(data);
 		this._renderProfileData();
 		this._renderProfileForms(data);
-		this._renderProfileButtons();
+		// this._renderProfileButtons();
 	}
 
 	open({ root = {}, data = {} }) {
