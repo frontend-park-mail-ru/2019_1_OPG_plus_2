@@ -61,8 +61,7 @@ const prodMode = {
     mode: 'production',
     plugins: [
         new webpack.DefinePlugin({
-            HOST: JSON.stringify('http://localhost:8002'),
-            // HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
+            HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
         }),
     ]
 };
