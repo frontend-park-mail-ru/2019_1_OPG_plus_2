@@ -11,7 +11,7 @@ module.exports = function() {
                     {loader: 'css-loader'},
                     {loader: 'sass-loader', options: {
                             implementation: require("sass")
-                    }},
+                    }}
                 ],
               }
             ]

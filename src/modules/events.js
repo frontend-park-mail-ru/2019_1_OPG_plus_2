@@ -3,6 +3,10 @@
 export const INIT_EVENT = 'init';
 export const INIT_ERROR_EVENT = 'init_error';
 
+/* Изменение профиля */
+
+export const USER_UPDATED_ERROR_EVENT = 'userUpadatedError';
+
 /* Профиль */
 
 export const LOGOUT_EVENT = 'logout';

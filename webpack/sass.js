@@ -12,7 +12,9 @@ module.exports = function(paths) {
                     options: {
                         implementation: require("sass")
                     }
-                }]
+                }, {
+                    loader: 'postcss-loader'
+                  }]
             }]
         }
     }

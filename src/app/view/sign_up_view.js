@@ -122,6 +122,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 				placeholder: 'Name',
 				req: true,
 				value: `${data.name ? data.name : ''}`,
+				autofocus: true,
 			}),
 			formTemplate({
 				modifiers: [],

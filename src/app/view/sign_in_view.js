@@ -114,6 +114,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 				type: 'email',
 				req: true,
 				value: `${data.email || ''}`,
+				autofocus: true,
 			}),
 			formTemplate({
 				modifiers: [],
