@@ -5,8 +5,6 @@ module.exports = function(paths) {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
                 {
-                    loader: 'postcss-loader'
-                }, {
                     loader: "style-loader"
                 }, {
                     loader: "css-loader",
