@@ -3,7 +3,10 @@ module.exports = function(paths) {
         module: {
             rules: [{
                 test: /\.(sa|sc|c)ss$/,
-                use: [{
+                use: [
+                {
+                    loader: 'postcss-loader'
+                }, {
                     loader: "style-loader"
                 }, {
                     loader: "css-loader",
@@ -12,9 +15,7 @@ module.exports = function(paths) {
                     options: {
                         implementation: require("sass")
                     }
-                }, {
-                    loader: 'postcss-loader'
-                  }]
+                }]
             }]
         }
     }

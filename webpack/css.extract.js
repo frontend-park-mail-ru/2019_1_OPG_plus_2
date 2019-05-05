@@ -7,11 +7,12 @@ module.exports = function() {
               {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
+                    {loader: 'postcss-loader'},
                     {loader: MiniCssExtractPlugin.loader},
                     {loader: 'css-loader'},
                     {loader: 'sass-loader', options: {
                             implementation: require("sass")
-                    }}, {loader: 'postcss-loader'}
+                    }}
                 ],
               }
             ]
