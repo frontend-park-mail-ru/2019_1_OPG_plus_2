@@ -2,7 +2,9 @@ import Model from './model';
 import {EventEmitterMixin} from '../event_emitter';
 import API from '../../modules/API';
 import User from '../../modules/user';
-import {INIT_ERROR_EVENT, INIT_EVENT} from '../../modules/events';
+import {INIT_ERROR_EVENT, 
+        INIT_EVENT,
+        USER_UPDATED_ERROR_EVENT} from '../../modules/events';
 
 export default class EditProfileModel extends EventEmitterMixin(Model) {
     constructor() {
@@ -46,8 +48,8 @@ export default class EditProfileModel extends EventEmitterMixin(Model) {
                 User.set({username: user});
                 this.emit('userUpdated');
             })
-            .catch(() => {
-                this.emit('userUpdated')
+            .catch(err => {
+                this.emit(USER_UPDATED_ERROR_EVENT, {data: err, isRender: false})
             });
     }
 

@@ -6,8 +6,6 @@ import profileCardTemplate from '../../blocks/html/body/application/container/co
 import profileHeadTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
 import formsTemplates from '../../blocks/html/body/application/container/content/forms/forms.pug';
-// import profileFormTemplate
-// 	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
 import avatarTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import editIconTemplate
@@ -47,6 +45,8 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 
 	onLoadEvent() {
 		const photo = this._root.querySelector('#file-input').files;
+		const buttons = this._root.querySelector('.buttons');
+		buttons.innerHTML = '';
 		let form = new FormData();
 		form.append('avatar', photo[0]);
 		this.emit('avatarUpload', { root: this._root, avatar: form});
@@ -196,6 +196,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 				formModifiers: data.error ? [`${data.error.data.includes('username') ? 'form_theme_error' : ''}`] : [],
 				placeholder: 'Nick',
 				type: 'text',
+				name: 'username',
 				value: `${data.username || ''}`,
 				autofocus: true,
 			}),
@@ -203,6 +204,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 				modifiers: [],
 				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
 				placeholder: 'Password',
+				name: 'password',
 				type: 'password',
 				value: '',
 			}),
@@ -210,6 +212,7 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 				modifiers: [],
 				formModifiers: data.error ? [`${data.error.data.includes('repeat-password') ? 'form_theme_error' : ''}`] : [],
 				placeholder: 'Repeat-password',
+				name: 'repeat-password',
 				type: 'password',
 				value: '',
 			}),
@@ -229,16 +232,25 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_render(data) {
-		this._root.innerHTML = '';
-		this._renderContainer();
-		this._renderMain();
-		this._renderBack();
-		this._renderContent();
-		this._renderProfileCard();
-		this._renderProfileHead(data);
-		this._renderProfileData();
-		this._renderProfileForms(data);
-		// this._renderProfileButtons();
+		if (data.isRender) {
+			this._root.innerHTML = '';
+			this._renderContainer();
+			this._renderMain();
+			this._renderBack();
+			this._renderContent();
+			this._renderProfileCard();
+			this._renderProfileHead(data.data);
+			this._renderProfileData();
+			this._renderProfileForms(data.data);
+		} else {
+			const fields = this._root.querySelectorAll('.form__text-form');
+			console.log(data.data, fields)
+			fields.forEach(field => {
+				if(data.data.data.includes(field.name)) {
+					field.classList.add('form_theme_error');
+				}
+			})
+		}
 	}
 
 	open({ root = {}, data = {} }) {
