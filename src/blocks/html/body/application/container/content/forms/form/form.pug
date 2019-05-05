@@ -1,8 +1,14 @@
 if req
     div(class='form ' + modifiers)
         label(class='form__form-title' for=name) #{placeholder}
-        input(type=type, id=id, class='form__text-form ' + formModifiers, value=value required)
+        if autofocus
+            input(type=type, id=id, class='form__text-form ' + formModifiers, value=value required autofocus)
+        else
+            input(type=type, id=id, class='form__text-form ' + formModifiers, value=value required)
 else 
     div(class='form ' + modifiers)
         label(class='form__form-title' for=name) #{placeholder}
-        input(type=type, id=id, class='form__text-form ' + formModifiers, value=value)
+        if autofocus
+            input(type=type, id=id, class='form__text-form ' + formModifiers, value=value autofocus)
+        else
+            input(type=type, id=id, class='form__text-form ' + formModifiers, value=value)

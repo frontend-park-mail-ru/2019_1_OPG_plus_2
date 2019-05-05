@@ -6,14 +6,16 @@ import profileCardTemplate from '../../blocks/html/body/application/container/co
 import profileHeadTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
 import formsTemplates from '../../blocks/html/body/application/container/content/forms/forms.pug';
-import profileFormTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
+// import profileFormTemplate
+// 	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
 import avatarTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import editIconTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.pug';
 import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
 import submitTemplate from '../../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+
+import formTemplate from '../../blocks/html/body/application/container/content/forms/form/form.pug';
 
 import View from './view';
 import User from '../../modules/user.js';
@@ -165,26 +167,35 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		const formsBlock = document.querySelector('.profile-card_theme_forms');
 
 		genericBeforeEnd(formsBlock,
-			profileFormTemplate({
-				modifiers: ['form_theme_profile '],
-				name: 'username',
+			// profileFormTemplate({
+			// 	modifiers: ['form_theme_profile '],
+			// 	name: 'username',
+			// 	type: 'text',
+			// 	title: 'Name',
+			// 	val: data.username,
+			// 	autofocus: true,
+			// }),
+			formTemplate({
+				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('username') ? 'form_theme_error' : ''}`] : [],
+				placeholder: 'Nick',
 				type: 'text',
-				title: 'Name',
-				val: data.username,
+				value: `${data.username || ''}`,
+				autofocus: true,
 			}),
-			profileFormTemplate({
-				modifiers: ['form_theme_profile '],
-				name: 'password',
+			formTemplate({
+				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
+				placeholder: 'Password',
 				type: 'password',
-				title: 'Password',
-				val: '',
+				value: '',
 			}),
-			profileFormTemplate({
-				modifiers: ['form_theme_profile '],
-				name: 'repeat-password',
+			formTemplate({
+				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('repeat-password') ? 'form_theme_error' : ''}`] : [],
+				placeholder: 'Repeat-password',
 				type: 'password',
-				title: 'Repeat password',
-				val: '',
+				value: '',
 			}),
 		);
 	}
