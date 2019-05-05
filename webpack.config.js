@@ -37,10 +37,16 @@ const common = merge([
 
 const dev = {
     optimization: {
-        minimize: false
+        minimize: true,
     },
     devtool: "eval",
 };
+
+const prod = {
+    optimization: {
+        minimize: true,
+    },
+}
 
 const devMode = {
     mode: 'development',
@@ -55,7 +61,8 @@ const prodMode = {
     mode: 'production',
     plugins: [
         new webpack.DefinePlugin({
-            HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
+            HOST: JSON.stringify('http://localhost:8002'),
+            // HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
         }),
     ]
 };
@@ -66,6 +73,7 @@ module.exports = function (env) {
             common,
             extractCSS(),
             babel(),
+            prod,
             prodMode,
         ]);
     }
