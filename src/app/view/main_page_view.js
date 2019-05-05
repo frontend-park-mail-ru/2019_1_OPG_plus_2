@@ -101,7 +101,7 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 			}),
 			scoreBoardTemplate({
 				modifiers: [],
-				href: 'score',
+				hr: '/score',
 				dataset: '/leaders',
 			}),
 			separatorTemplate({
@@ -109,7 +109,7 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 			}),
 			rulesTemplate({
 				modifiers: [],
-				href: 'rules',
+				hr: '/rules',
 				dataset: '/rules',
 			})
 		);
