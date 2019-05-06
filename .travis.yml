@@ -9,7 +9,7 @@ deploy:
     skip_cleanup: true
     script: sh deploy_production.sh
     on:
-      branch: travis-ci-cd
+      branch: production
 
 #cache: npm
 
