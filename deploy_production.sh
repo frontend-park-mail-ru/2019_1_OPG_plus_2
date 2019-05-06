@@ -6,8 +6,10 @@ ssh -i ./deploy_key_production $PRODUCTION_MACHINE_USERNAME@$PRODUCTION_MACHINE_
 
 cd front
 git pull
-git checkout travis-ci-cd
-git pull
-sudo systemctl restart colors-front
+echo Aquiring fresh version of repo...
+git checkout travis-ci-cd && \
+echo Pulling changes... && git pull && \
+echo Restarting service...
+sudo systemctl restart colors-front && echo Successfully deployed!!!
 exit
 EOF
