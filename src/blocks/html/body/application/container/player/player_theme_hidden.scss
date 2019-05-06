@@ -1,0 +1,5 @@
+.player_theme_hidden {
+    @media (max-width: $player-layout) {
+        display: none;
+    }
+}

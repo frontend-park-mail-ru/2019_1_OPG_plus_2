@@ -1,3 +1,13 @@
+@keyframes p1_active {
+    from {box-shadow: 0 0 0 0 $main-color;}
+    to {box-shadow: 0px 0px 19px 8px $main-color;}
+}
+
+@keyframes p2_active {
+    from {box-shadow: 0 0 0 0 $secondary-color;}
+    to {box-shadow: 0px 0px 19px 8px $secondary-color;}
+}
+
 .avatar {
     border-radius: 100%;
     display: flex;

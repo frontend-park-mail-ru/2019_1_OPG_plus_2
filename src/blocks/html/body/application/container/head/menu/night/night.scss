@@ -1,0 +1,22 @@
+.night {
+    cursor: pointer;
+    height: 4vh;
+    transition: all 250ms ease-out;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M45.9782 34.7328C45.5494 34.2048 44.8294 34.0096 44.1958 34.2368C42.4198 34.8736 40.4934 35.2 38.4646 35.2C28.759 35.2 20.8646 27.3024 20.8646 17.6C20.8646 11.76 23.7478 6.3232 28.5766 3.0528C29.1238 2.6816 29.3862 2.0128 29.239 1.3696C29.0918 0.7264 28.5638 0.24 27.9078 0.144C27.159 0.0352 26.4134 0 25.6646 0C12.4294 0 1.66461 10.7648 1.66461 24C1.66461 37.2352 12.4294 48 25.6646 48C34.0646 48 41.7062 43.7312 46.0998 36.5824C46.455 36.0032 46.4038 35.264 45.9782 34.7328Z' fill='%23005FF9'/%3E%3C/svg%3E%0A");
+
+    &:hover {
+        transform: scale(1.2);
+    }
+
+    @media (min-width: $desktop-layout) {
+        padding: 4vh;
+        background-size: 7vh;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        padding: 8vh 6vh 2vh;
+        background-size: 5vh;
+    }
+}

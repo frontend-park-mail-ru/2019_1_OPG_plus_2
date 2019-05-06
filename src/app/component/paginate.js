@@ -31,12 +31,12 @@ export default class Paginate extends Component {
 	}
 
 	onNextPage(event) {
-		const pageNum = parseInt(this._root.querySelector('.pages__num').textContent);
+		const pageNum = parseInt(this._root.querySelector('.pages__num').textContent, 10);
 		this._onNextPage(event, pageNum);
 	}
 
 	onPrevPage(event) {
-		const pageNum = parseInt(this._root.querySelector('.pages__num').textContent);
+		const pageNum = parseInt(this._root.querySelector('.pages__num').textContent, 10);
 		this._onPrevPage(event, pageNum);
 	}
 

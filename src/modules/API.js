@@ -179,6 +179,9 @@ export default class API {
 					} else {
 						response.json().then(user => { resolve(user.data);});
 					}
+				})
+				.catch(error => {
+					reject(error);
 				});
 		});
 	}

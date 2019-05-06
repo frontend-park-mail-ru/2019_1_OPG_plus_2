@@ -9,6 +9,6 @@
     }
 
     @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
-        grid-template: repeat(5, 18vw)/repeat(5, 18vw);
+        grid-template: repeat(5, 16vw)/repeat(5, 16vw);
     }
 }

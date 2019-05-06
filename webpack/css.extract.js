@@ -23,13 +23,15 @@ module.exports = function() {
                 filename: "style.css",
             }),
             new OptimizeCssAssetsPlugin({
-              assetNameRegExp: /\.optimize\.css$/g,
-              cssProcessor: require('cssnano'),
               cssProcessorPluginOptions: {
-                preset: ['default', { discardComments: { removeAll: true } }],
+                  preset: ['advanced', {
+                      autoprefixer: true,
+                      discardComments: {
+                          removeAll: true
+                      },
+                  }],
               },
-              canPrint: true
-            })
+          })
           ]
     }
 };
