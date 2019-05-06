@@ -1,11 +1,13 @@
-import {genericBeforeEnd} from '../../modules/helpers.js';
-import {EventEmitterMixin} from '../event_emitter';
-import { NavigateMixinView } from '../navigate_view';
-import View from './view';
 import containerTemplate from '../../blocks/html/body/application/container/container.pug';
 import headTemplate from '../../blocks/html/body/application/container/head/head.pug';
 import backArrowTemplate from '../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
+import rulesImageTemplate from '../../blocks/html/body/application/container/content/rules-image/rules-image.pug';
+
+import View from './view';
+import { genericBeforeEnd } from '../../modules/helpers.js';
+import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixinView } from '../navigate_view';
 
 export default class RulesView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -51,10 +53,20 @@ export default class RulesView extends NavigateMixinView(EventEmitterMixin(View)
 		);
 	}
 
+	_renderRules() {
+		const contentBlock = document.querySelector('.content.content_theme_rules');
+
+		genericBeforeEnd(contentBlock,
+			rulesImageTemplate(),
+		)
+
+	}
+
 	_render() {
 		this._root.innerHTML = '';
 		this._renderContainer();
 		this._renderMain();
+		this._renderRules();
 		this._renderHead();
 	}
 

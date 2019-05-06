@@ -37,10 +37,16 @@ const common = merge([
 
 const dev = {
     optimization: {
-        minimize: false
+        minimize: true,
     },
     devtool: "eval",
 };
+
+const prod = {
+    optimization: {
+        minimize: true,
+    },
+}
 
 const devMode = {
     mode: 'development',
@@ -66,6 +72,7 @@ module.exports = function (env) {
             common,
             extractCSS(),
             babel(),
+            prod,
             prodMode,
         ]);
     }

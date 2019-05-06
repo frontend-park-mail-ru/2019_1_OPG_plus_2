@@ -1,0 +1,8 @@
+@keyframes side1 {
+    0% { background: linear-gradient(to right, orange 0%, $color-main 0%); }
+    100% { background: linear-gradient(to right, orange -48%, #F7F9F9 38%); }
+}
+
+.player_theme_player1-active {
+    animation: side1 300ms forwards linear;
+}

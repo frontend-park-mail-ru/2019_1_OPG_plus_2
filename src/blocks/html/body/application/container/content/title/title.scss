@@ -1,9 +1,8 @@
 .title {
-    grid-area: t;
-    font-family: Roboto;
+    font-family: "Roboto";
     color: $color-text;
     display: flex;
+    margin: 0;
     align-items: center;
     justify-content: center;
-    margin: 0;
 }

@@ -8,7 +8,7 @@
 
 .back-arrow {
     cursor: pointer;
-    grid-column: 1 / 1;
+    grid-column: 1 / -1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,6 +20,7 @@
         background-position-y: center;
         background-position-x: 40%;
     }
+
 
     &:hover {
         animation: move 300ms forwards ease;

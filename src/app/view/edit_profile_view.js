@@ -2,24 +2,18 @@ import containerTemplate from '../../blocks/html/body/application/container/cont
 import headTemplate from '../../blocks/html/body/application/container/head/head.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import backArrowTemplate from '../../blocks/html/body/application/container/head/back-arrow/back_arrow.pug';
-import menuTemplate from '../../blocks/html/body/application/container/head/menu/menu.pug';
 import profileCardTemplate from '../../blocks/html/body/application/container/content/profile-card/profile-card.pug';
 import profileHeadTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/profile-head.pug';
-import settingsIconTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/profile-head/settings-icon/settings-icon.pug';
-import photoEditTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/photo-edit.pug';
-import logoutIconTemplate from '../../blocks/html/body/application/container/head/menu/logout/logout.pug';
 import formsTemplates from '../../blocks/html/body/application/container/content/forms/forms.pug';
-import profileFormTemplate
-	from '../../blocks/html/body/application/container/content/profile-card/profile-data/profile-form/profile-form.pug';
 import avatarTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar.pug';
 import editIconTemplate
 	from '../../blocks/html/body/application/container/content/profile-card/photo-edit/edit-icon/edit-icon.pug';
 import buttonsTemplate from '../../blocks/html/body/application/container/content/buttons/buttons.pug';
 import submitTemplate from '../../blocks/html/body/application/container/content/buttons/submit/submit.pug';
+
+import formTemplate from '../../blocks/html/body/application/container/content/forms/form/form.pug';
 
 import View from './view';
 import User from '../../modules/user.js';
@@ -32,25 +26,37 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		super();
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.onLoadEvent = this.onLoadEvent.bind(this);
+		this.onChangeEvent = this.onChangeEvent.bind(this);
 	}
 
 	_createEventListeners() {
 		super._createEventListeners();
 		this._createLoadListener();
 		this._createSubmitListener();
+		this._createChangeListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
 		this._removeSubmitListener();
 		this._removeLoadListener();
+		this._removeChangeListener();
 	}
 
 	onLoadEvent() {
 		const photo = this._root.querySelector('#file-input').files;
+		const buttons = this._root.querySelector('.buttons');
+		buttons.innerHTML = '';
 		let form = new FormData();
 		form.append('avatar', photo[0]);
 		this.emit('avatarUpload', { root: this._root, avatar: form});
+	}
+
+	onChangeEvent() {
+		const button = this._root.querySelector('.submit');
+		if (!button) {
+			this._renderProfileButtons();
+		}
 	}
 
 	onFormSubmit(event) {
@@ -59,14 +65,13 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 
 		const email = User.get().email;
 		const username = User.get().username;
-		const newUsername = formsBlock.elements[0].value;
-		const newPassword = formsBlock.elements[1].value;
-		const repeatNewPassword = formsBlock.elements[2].value;
+		const newUsername = formsBlock.elements[1].value;
+		const newPassword = formsBlock.elements[2].value;
+		const repeatNewPassword = formsBlock.elements[3].value;
 
 		if (newUsername != username) {
 			this.emit('userUpdate', { root: this._root, email: email, name: newUsername });
 		} else if(newPassword != '' && newPassword === repeatNewPassword) {
-			// debugger;
 			this.emit('passwordUpdate', {newPass: newPassword, passConf: repeatNewPassword });
 		}
 	}
@@ -91,6 +96,20 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		photoBlock.removeEventListener('change', this.onLoadEvent, true);
 	}
 
+	_createChangeListener() {
+		const fields = this._root.querySelectorAll('.form__text-form');
+		fields.forEach(field => {
+			field.addEventListener('input', this.onChangeEvent, true);
+		});
+	}
+
+	_removeChangeListener() {
+		const fields = this._root.querySelectorAll('.form__text-form');
+		fields.forEach(field => {
+			field.removeEventListener('input', this.onChangeEvent, true);
+		});
+	}
+
 
 	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
@@ -106,9 +125,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_edit-profile'],
-			}),
-			menuTemplate({
-				modifiers: ['menu_theme_profile'],
 			}),
 		);
 	}
@@ -130,9 +146,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			profileCardTemplate({
 				modifiers: ['profile-card_theme_edit'],
 			}),
-			buttonsTemplate({
-				modifiers: ['buttons_theme_edit-profile'],
-			}),
 		);
 	}
 
@@ -142,24 +155,30 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			profileHeadTemplate({
 				modifiers: [],
 			}),
+			buttonsTemplate({
+				modifiers: ['buttons_theme_edit-profile'],
+			}),
 		);
 	}
 
-	_renderProfileHead() {
+	_renderProfileHead(data) {
 		const profileHeadBlock = document.querySelector('.profile-head');
 		genericBeforeEnd(profileHeadBlock,
-			settingsIconTemplate({
+			avatarTemplate({
+				modifiers: ['avatar_theme_fade'],
+				url: `${data.avatar ? HOST + data.avatar : ''}`,
+			}),
+			editIconTemplate({
 				modifiers: [],
-			})
+				name: 'photo-edit',
+			}),
 		);
 	}
 
 	_renderProfileData() {
 		const profileCardBlock = document.querySelector('.profile-card.profile-card_theme_edit');
+		
 		genericBeforeEnd(profileCardBlock,
-			photoEditTemplate({
-				modifiers: [],
-			}),
 			formsTemplates({
 				modifiers: ['profile-card_theme_forms'],
 				action: 'POST',
@@ -169,41 +188,33 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_renderProfileForms(data) {
-		const photoEditBlock = document.querySelector('.photo-edit');
 		const formsBlock = document.querySelector('.profile-card_theme_forms');
 
-		genericBeforeEnd(photoEditBlock,
-			avatarTemplate({
-				modifiers: [],
-				url: `${data.avatar ? HOST + data.avatar : ''}`,
-			}),
-			editIconTemplate({
-				modifiers: [],
-				name: 'photo-edit',
-			}),
-		);
-
 		genericBeforeEnd(formsBlock,
-			profileFormTemplate({
-				modifiers: ['form_theme_profile '],
-				name: 'username',
+			formTemplate({
+				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('username') ? 'form_theme_error' : ''}`] : [],
+				placeholder: 'Nick',
 				type: 'text',
-				title: 'Name',
-				val: data.username,
+				name: 'username',
+				value: `${data.username || ''}`,
+				autofocus: true,
 			}),
-			profileFormTemplate({
-				modifiers: ['form_theme_profile '],
+			formTemplate({
+				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
+				placeholder: 'Password',
 				name: 'password',
 				type: 'password',
-				title: 'Password',
-				val: '',
+				value: '',
 			}),
-			profileFormTemplate({
-				modifiers: ['form_theme_profile '],
+			formTemplate({
+				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('repeat-password') ? 'form_theme_error' : ''}`] : [],
+				placeholder: 'Repeat-password',
 				name: 'repeat-password',
 				type: 'password',
-				title: 'Repeat password',
-				val: '',
+				value: '',
 			}),
 		);
 	}
@@ -220,28 +231,26 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 		);
 	}
 
-	_renderMenu() {
-		const menuBlock = document.querySelector('.menu.menu_theme_profile');
-		genericBeforeEnd(menuBlock,
-			logoutIconTemplate({
-				modifiers: [],
-				href: '/logout',
-				dataset: '/logout',
-			}),
-		);
-	}
-
 	_render(data) {
-		this._root.innerHTML = '';
-		this._renderContainer();
-		this._renderMain();
-		this._renderBack();
-		this._renderContent();
-		this._renderProfileCard();
-		this._renderProfileData();
-		this._renderProfileForms(data);
-		this._renderProfileButtons();
-		this._renderMenu();
+		if (data.isRender) {
+			this._root.innerHTML = '';
+			this._renderContainer();
+			this._renderMain();
+			this._renderBack();
+			this._renderContent();
+			this._renderProfileCard();
+			this._renderProfileHead(data.data);
+			this._renderProfileData();
+			this._renderProfileForms(data.data);
+		} else {
+			const fields = this._root.querySelectorAll('.form__text-form');
+			console.log(data.data, fields)
+			fields.forEach(field => {
+				if(data.data.data.includes(field.name)) {
+					field.classList.add('form_theme_error');
+				}
+			})
+		}
 	}
 
 	open({ root = {}, data = {} }) {

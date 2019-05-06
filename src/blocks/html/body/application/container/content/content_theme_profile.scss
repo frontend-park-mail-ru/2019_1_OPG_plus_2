@@ -1,6 +1,23 @@
 .content_theme_profile {
     @media (min-width: $desktop-min-width) {
-        grid-column: 3/-2;
-        grid-template-columns: repeat(14, 1fr);
+        grid-column: 4/-3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (min-width: $laptop-min-width) and (max-width: $laptop-max-width) {
+        grid-column: 4/-3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media (min-width: $ipdas-min-width) and (max-width: $ipads-max-width) {
+        grid-column: 1/-1;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 1/-1;
     }
 }

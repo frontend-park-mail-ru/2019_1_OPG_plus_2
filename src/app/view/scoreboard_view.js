@@ -5,46 +5,39 @@ import contentTemplate from '../../blocks/html/body/application/container/conten
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
 import mainTemplate from '../../blocks/html/body/application/container/content/main/main.pug';
 import rowTemplate from '../../blocks/html/body/application/container/content/main/row/row.pug';
-import pagesTemplate from '../../blocks/html/body/application/container/content/main/pages/pages.pug';
 
 import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
+import { GET_NEXT_PAGE_EVENT } from '../../modules/events';
+import Paginate from '../component/paginate';
 import View from './view';
 
 export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		this.onNextPageClick = this.onNextPageClick.bind(this);
+		this.onPrevPageClick = this.onPrevPageClick.bind(this);
+		
+		this._paginate = new Paginate({onNextPage: this.onNextPageClick, onPrevPage: this.onPrevPageClick});
+		this._components = [];
+		this._components.push(this._paginate);
 	}
 
-	onNextPageClick(event) {
-		let pageNum = parseInt(document.querySelector('.pages__num').textContent);
-		if (event.target.classList.contains('pages__next')) {
-			this.emit('getNextPage', {root: this._root, page: pageNum + 1});
-		} else if (event.target.classList.contains('pages__back')) {
-			this.emit('getNextPage', {root: this._root, page: pageNum - 1});
-		}
+	onNextPageClick(event, pageNum) {
+		this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum + 1});
 	}
 
-	_createNextPListener() {
-		const pages = this._root.querySelector('.pages');
-		pages.addEventListener('click', this.onNextPageClick, true);
-	}
-
-	_removeNextPListener() {
-		const pages = this._root.querySelector('.pages');
-		pages.removeEventListener('click', this.onNextPageClick, true);
+	onPrevPageClick(event, pageNum) {
+		this.emit(GET_NEXT_PAGE_EVENT, {root: this._root, page: pageNum - 1});
 	}
 
 	_createEventListeners() {
 		super._createEventListeners();
-		this._createNextPListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
-		this._removeNextPListener();
 	}
 
 	_renderContainer() {
@@ -78,6 +71,7 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 
 	_renderContent(data) {
 		const contentBlock = document.querySelector('.content.content_theme_scoreboard');
+		
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
 				title: 'SCOREBOARD',
@@ -86,11 +80,9 @@ export default class ScoreBoardView extends NavigateMixinView(EventEmitterMixin(
 			mainTemplate({
 				modifiers: ['main_theme_scoreboard'],
 			}),
-			pagesTemplate({
-				modifiers: [],
-				page_num: data.page,
-			})
 		);
+
+		this._paginate.create({root: contentBlock, data: data});
 	}
 
 	_renderUsers(data) {

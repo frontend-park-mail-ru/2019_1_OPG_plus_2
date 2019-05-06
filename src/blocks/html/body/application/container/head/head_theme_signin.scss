@@ -7,8 +7,8 @@
 }
 
 .head_theme_signin {
-    @media (min-width: $desktop-min-width) {
-        grid-column: 1/3;
+    @media (min-width: $desktop-layout) {
+        grid-column: 1/4;
         display: grid;
         background: linear-gradient(279deg, $color-background 32%, $main-color 20%, transparent 28%), 
                     linear-gradient(260deg, $color-background 33%, $main-color 14%);

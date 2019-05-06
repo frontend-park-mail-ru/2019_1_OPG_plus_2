@@ -1,8 +1,14 @@
 .pages_theme_elements {
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 2vw;
-    font-family: Roboto;
-    font-size: 2vw;
+    font-family: "Roboto", serif;
     cursor: pointer;
+
+    @media (min-width: $desktop-layout) {
+        font-size: 2vw;
+        padding: 2vw;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        font-size: 4vh;
+        padding: 0 10vw 0;
+    }
 }

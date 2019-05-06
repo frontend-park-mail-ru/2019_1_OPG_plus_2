@@ -1,9 +1,15 @@
 .content_theme_game {
-    @media (min-width: $desktop-min-width) {
-        display: flex;
-        justify-content: center;
-        align-content: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    @media (min-width: $desktop-layout) {
         grid-column: 4 / 10;
+        grid-row: 3 / -1;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-column: 1 / -1;
         grid-row: 3 / -1;
     }
 }

@@ -1,0 +1,10 @@
+.lines-up_theme_right {
+    @media (min-width: $desktop-layout) {
+        right: 23vw;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        right: 16vw;
+    }
+
+}

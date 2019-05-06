@@ -1,28 +1,26 @@
 .row {
     display: flex;
-    padding: 13px;
-    font-family: "Roboto";
-    font-size: 4vh;
     color: black;
     background: white;
-    border-radius: 35px 0px 0px 0px;
+    font-family: "Roboto";
+    padding: 13px;
     width: 100%;
     align-items: center;
-    margin-bottom: 3vh;
+    box-sizing: border-box;
 
     &__number {
-        padding: 0 5vw 0 4vw;
+        width: 3vh;
+        padding: 0 3vw 0 2vw;
+        text-align: center;
     }
 
     &__photo {
         overflow: hidden;
-        margin: 0 7vh 0 0;
         max-width: 5vh;
-        border-radius: 100%;
         
         &__icon {
-            width: 100%;
-            height: 100%;
+            object-fit: cover;
+            object-position: top;
             border-radius: 100%;
         }
     }
@@ -30,5 +28,43 @@
     &__score {
         padding-right: 2vw;
         margin-left: auto;
+    }
+
+    @media (min-width: $desktop-layout) {
+        font-size: 4vh;
+        border-radius: 35px 0px 0px 0px;
+        margin-bottom: 3vh;
+
+        &__photo {
+            overflow: hidden;
+            margin: 0 7vh 0 0;
+            max-width: 5vh;
+            
+            &__icon {
+                object-fit: cover;
+                object-position: top;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        font-size: 3vh;
+        margin-bottom: 2vh;
+
+        &__photo {
+            overflow: hidden;
+            margin: 0 5vh 0 0;
+            max-width: 5vh;
+            
+            &__icon {
+                object-fit: cover;
+                object-position: top;
+                width: 5vh;
+                height: 5vh;
+                overflow: hidden;
+            }
+        }
     }
 }

@@ -1,0 +1,12 @@
+.button_theme_left {
+    color: $main-color;
+    border: 1px solid $main-color;
+    transition: background-color 300ms linear;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+        color: $color-main;
+        background-color: $main-color;
+    }
+}

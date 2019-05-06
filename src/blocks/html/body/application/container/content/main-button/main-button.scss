@@ -1,8 +1,48 @@
 .main-button {
-    @media (min-width: $desktop-min-width) {
+    display: grid;
+    grid-template: repeat(4, 1fr) / 1fr;
+    text-decoration: none;
+
+    .icon {
+        grid-row: 1 / 4;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 18vh;
+        transition: all 250ms ease-out;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    .label {
+        font-family: "Unica One", cursive;
+        text-align: center;
+        color: $secondary-color;
+    }
+
+    @media (min-width: $desktop-layout) {
+        grid-row: 3 / 6;
+
+        .icon {
+            background-size: 18vh;
+        }
+
+        .label {
+            grid-row: 4 / 5;
+            font-size: 7vh;
+        }
+
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         grid-row: 3 / 5;
+
+        .icon {
+            background-size: 12vh;
+        }
+
+        .label {
+            font-size: 3.7vh;
+        }
     }
 }

@@ -1,6 +1,14 @@
 .title_theme_signin {
-    @media (min-width: $desktop-min-width) {
-        font-size: 7vh;
-        color: $main-color;
+    color: $main-color;
+    grid-column: 1 / -1;
+    grid-row: 1 / 3;
+    align-items: flex-end;
+
+    @media (min-width: $desktop-layout) {
+        font-size: 9vh;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        font-size: 6vh;
     }
 }

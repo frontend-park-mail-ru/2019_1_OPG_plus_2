@@ -14,6 +14,7 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';
+import { SIGN_IN_SUBMIT_EVENT } from '../../modules/events';
 
 export default class SignInView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -27,7 +28,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
             	
 		const email = formsBlock.elements[0].value;
 		const password = formsBlock.elements[1].value;
-		this.emit('signInSubmit', {root: this._root, email: email, password: password });
+		this.emit(SIGN_IN_SUBMIT_EVENT, {root: this._root, email: email, password: password });
 	}
 
 	_createSubmitListener() {
@@ -50,9 +51,9 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 		this._removeSubmitListener();
 	}
 
-	_renderContainer(data) {
+	_renderContainer() {
 		genericBeforeEnd(this._root, containerTemplate({
-			modifiers: [`container_theme_signin ${data.error ? 'container_theme_error' : ' '}`],
+			modifiers: ['container_theme_signin'],
 		}));
 	}
 
@@ -84,7 +85,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
-				title: 'SING IN',
+				title: 'SIGN IN',
 				modifiers: ['title_theme_signin'],
 			}),
 			formsTemplate({
@@ -92,7 +93,7 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 				name: 'signin',
 			}),
 			buttonsTemplate({
-				modifiers: [],
+				modifiers: ['buttons_theme_signin'],
 			}),
 		);
 	}
@@ -103,18 +104,21 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 		genericBeforeEnd(formsBlock, 
 			errorTemplate({
 				modifiers: [],
-				text:  data.error ? `${data.error.message}: ${data.error.data[0]}` : '',
+				text:  data.error ? `Incorrect ${data.error.data[0]} or e-mail` : '',
 			}),
 			formTemplate({
 				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('email') ? 'form_theme_error' : ''}`] : [],
 				username: 'email',
 				placeholder: 'E-mail',
 				type: 'email',
 				req: true,
 				value: `${data.email || ''}`,
+				autofocus: true,
 			}),
 			formTemplate({
 				modifiers: [],
+				formModifiers: data.error ? [`${data.error.data.includes('password') ? 'form_theme_error' : ''}`] : [],
 				username: 'password',
 				placeholder: 'Password',
 				type: 'password',
@@ -142,6 +146,17 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 		);
 	}
 
+	_renderError(data) {
+		const titleBlock = this._root.querySelector('.title');
+
+		genericBeforeEnd(titleBlock, 
+			errorTemplate({
+				modifiers: [],
+				text:  data.error ? `Incorrect : ${data.error.data[0]}` : '',
+			}),
+		);
+	}
+
 	_render(data) {
 		this._root.innerHTML = '';
 		this._renderContainer(data);
@@ -154,11 +169,5 @@ export default class SignInView extends NavigateMixinView(EventEmitterMixin(View
 
 	open({ root = {}, data = {} }) {
 		super.open({root, data});
-	}
-
-	close() {
-		if (!this._root) {
-			return;
-		}
 	}
 }

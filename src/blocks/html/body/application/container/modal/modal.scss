@@ -1,28 +1,53 @@
-.modal {
-    @media (min-width: $desktop-min-width) {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 100;
-        background-color: rgba(0,0,0,0.5);
+@keyframes shadow {
+    from {background-color: rgba(0,0,0,0);}
+    to {background-color: rgba(0,0,0,0.5);}
+}
 
+@keyframes modal {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.modal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.5);
+    animation: shadow 300ms forwards linear;
+
+    &__window {
+        background-color: rgba(255,255,255,1);
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        animation: modal 300ms forwards linear 400ms;
+    }
+
+    &__winner {
+        text-align: center;
+        font-family: "Roboto";
+        margin-bottom: 4vh;
+        font-size: 5vh !important;
+        animation: modal 300ms forwards linear 400ms;
+    }
+
+    @media (min-width: $desktop-layout) {
         &__window {
             width: 30%;
             height: 30%;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
             padding: 6vh 11vh 11vh;
         }
+    }
 
-        &__winner {
-            text-align: center;
-            font-family: Roboto;
-            margin-bottom: 4vh;
-            font-size: 5vh !important;
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        &__window {
+            width: 60%;
+            height: 30%;
+            padding: 6vh 7vh 9vh;
         }
     }
 }

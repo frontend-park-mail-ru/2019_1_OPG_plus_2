@@ -1,8 +1,10 @@
 .buttons {
-    cursor: pointer;
-    grid-area: b;
+    grid-column: 2 / -2;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-row: 8 / -2;
+    }
 }

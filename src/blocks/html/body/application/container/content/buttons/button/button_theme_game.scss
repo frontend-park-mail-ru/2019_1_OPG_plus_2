@@ -1,0 +1,21 @@
+@keyframes show {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.button_theme_game {
+    font-family: "Roboto";
+    font-size: 4vh;
+    background: none;
+    border-radius: 40px;
+    grid-column: 2/-2;
+    grid-row: 5;
+}
+
+.vis {
+    animation: show 300ms forwards linear;
+}
+
+.hidden {
+    display: none;
+}

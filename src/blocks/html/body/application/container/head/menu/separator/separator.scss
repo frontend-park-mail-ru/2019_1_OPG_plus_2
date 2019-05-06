@@ -1,0 +1,9 @@
+.separator {
+    @media (min-width: $desktop-layout) {
+        height: 1px;
+        width: 100%;
+        border-bottom: 1px solid $secondary-color;
+        width: 9vh;
+    }
+}
+

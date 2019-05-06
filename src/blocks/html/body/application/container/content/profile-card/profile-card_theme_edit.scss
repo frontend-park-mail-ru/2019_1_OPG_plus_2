@@ -1,9 +1,20 @@
 .profile-card_theme_edit {
-    grid-column: 3/12;
-    background: linear-gradient(to top, white 80%, $color-main 10%);
-    border-radius: 0px 0px 30px 30px;
-    display: grid;
-    grid-template: 1fr 2fr / repeat(12, 1fr);
-    grid-template-areas: "h h h h h h h h h h h h" 
-                         "p p p p p p f f f f f f";
+    grid-row-gap: 20px;
+
+    @media (min-width: $desktop-layout) {
+        grid-template-columns: repeat(10, 1fr);
+        grid-column-gap: 10px;
+        grid-template-rows: 3fr 3fr 1fr;
+        flex-grow: 1;
+        box-shadow: 0px 7px 19px 0 grey;
+        border-radius: 3vh 3vh 3vh 3vh;
+        background-color: white;
+        animation: box 300ms forwards linear;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: 3fr 3fr 1fr;
+        grid-column-gap: 12px;
+    }
 }

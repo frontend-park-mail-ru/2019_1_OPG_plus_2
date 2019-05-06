@@ -1,0 +1,12 @@
+.content_theme_service {
+
+    @media (min-width: $desktop-min-width) {
+        grid-column: 3/-3;
+        grid-template: repeat(4, 1fr)/repeat(5, 1fr);
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        grid-column: 2/-2;
+        grid-template: repeat(4, 1fr)/repeat(5, 1fr);
+    }
+}
