@@ -117,6 +117,7 @@
 @import '../blocks/html/body/application/container/content/content_theme_game.scss';
 @import '../blocks/html/body/application/container/head/head_theme_game.scss';
 @import '../blocks/html/body/application/container/player/player.scss';
+@import '../blocks/html/body/application/container/player/player_theme_hidden.scss';
 @import '../blocks/html/body/application/container/player/player_theme_player1.scss';
 @import '../blocks/html/body/application/container/player/player_theme_player1-active.scss';
 @import '../blocks/html/body/application/container/player/player_theme_player2.scss';
@@ -145,6 +146,8 @@
 @import '../blocks/html/body/application/container/content/buttons/button/button_theme_game.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_theme_left.scss';
 @import '../blocks/html/body/application/container/content/buttons/button/button_theme_right.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar_theme_p1_active.scss';
+@import '../blocks/html/body/application/container/content/profile-card/profile-head/avatar/avatar_theme_p2_active.scss';
 
 
 /* rules */
