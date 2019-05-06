@@ -9,7 +9,7 @@ git pull
 echo Aquiring fresh version of repo...
 git checkout travis-ci-cd && \
 echo Pulling changes... && git pull && \
-echo Restarting service...
+echo Restarting service... && \
 sudo systemctl restart colors-front && echo Successfully deployed!!!
 exit
 EOF
