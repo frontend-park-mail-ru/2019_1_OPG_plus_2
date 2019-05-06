@@ -1,0 +1,23 @@
+sudo: false
+
+language: node_js
+node_js:
+  - node
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: sh deploy_production.sh
+    on:
+      branch: production
+
+#cache: npm
+
+#install:
+#  - npm install
+
+script: true
+
+before_install:
+  openssl aes-256-cbc -K $encrypted_4d501252f38a_key -iv $encrypted_4d501252f38a_iv -in deploy_key_production.enc -out deploy_key_production -d
+
