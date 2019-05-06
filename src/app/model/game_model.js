@@ -21,6 +21,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 			this.emit(INIT_EVENT, {
 				root: root, 
 				username: User._username,
+				avatar: User._avatar,
 				firstPlayer: this._game.getFirstPlayer(), 
 				disableBlocks: this._game.getDisableBlocks(),
 			});
@@ -31,6 +32,7 @@ export default class GameModel extends EventEmitterMixin(Model) {
 					this.emit(INIT_EVENT, {
 						root: root, 
 						username: User._username,
+						avatar: User._avatar,
 						firstPlayer: this._game.getFirstPlayer(), 
 						disableBlocks: this._game.getDisableBlocks(),
 					});

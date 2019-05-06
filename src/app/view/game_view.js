@@ -128,7 +128,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		genericBeforeEnd(playerLeftBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				// modifiers: [`avatar_theme_game ${data.whoseTurn === 'Player1' ? 'avatar_theme_p1_active' : ''}`],
 				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
 			nicknameTemplate({
@@ -143,8 +142,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		genericBeforeEnd(playerRightBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				// modifiers: [`avatar_theme_game ${data.whoseTurn === 'Player2' ? 'avatar_theme_p2_active' : ''}`],
-				url: `${data.avatar ? HOST + data.avatar : ''}`,
+				url: '',
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_right'],
@@ -179,6 +177,10 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	_renderModal(winner) {
+		if (document.querySelector('.modal__window')) {
+			return;
+		}
+
 		const containerBlock = document.querySelector('.container.container_theme_game');
 		genericBeforeEnd(containerBlock, 
 			modalTemplate({
@@ -202,6 +204,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				modifiers: [],
 			}),
 		);
+
+		this._removeEventListeners();
+		this._createEventListeners();
 	}
 
 	apply({player = 'Player1', ans = false, steps = []} = {}) {

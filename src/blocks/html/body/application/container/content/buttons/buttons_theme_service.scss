@@ -5,7 +5,7 @@
         align-items: center;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-min-width) {
         grid-row: 3/3;
         grid-column: 2/-2;
         align-items: center;
