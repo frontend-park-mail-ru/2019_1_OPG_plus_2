@@ -139,7 +139,7 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 				dataset: '/logout',
 				content: 'Exit',
 			})
-		) 
+		); 
 
 	}
 

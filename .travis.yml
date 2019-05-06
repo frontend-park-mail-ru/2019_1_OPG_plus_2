@@ -2,13 +2,22 @@ sudo: false
 
 language: node_js
 node_js:
-  - stable
+  - node
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: sh deploy_production.sh
+    on:
+      branch: travis-ci-cd
 
 cache: npm
 
-install:
-  - npm install
+#install:
+#  - npm install
 
-script:
-  - npm run lint
+script: true
+
+before_install:
+  openssl aes-256-cbc -K $encrypted_4d501252f38a_key -iv $encrypted_4d501252f38a_iv -in deploy_key_production.enc -out deploy_key_production -d
 
