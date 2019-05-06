@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = function() {
     return {
         module: {
@@ -7,6 +9,7 @@ module.exports = function() {
                     loader: 'pug-loader',
                     options: {
                         pretty: true,
+                        root: path.join(__dirname, '../src'),
                     }
                 }
             ]

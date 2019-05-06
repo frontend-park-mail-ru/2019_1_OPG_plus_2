@@ -1,0 +1,62 @@
+.multiplayer-button {
+    display: grid;
+    text-decoration: none;
+
+    #singleicon {
+        grid-row: 1;
+        width: 100%;
+        transition: all 250ms ease-out;
+
+        &__play {
+            fill: var(--first-color);
+        }
+
+        &__userhead {
+            fill: var(--second-color);
+        }
+
+        &__userbody {
+            fill: var(--second-color);
+        }
+
+        @media (min-width: $desktop-layout) {
+            height: 25vh;
+        }
+
+        @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+            height: 18vh;
+            padding: 5vh 0 5vh;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    .label {
+        grid-column: 1 / -1;
+        font-family: "Unica One", cursive;
+        text-align: center;
+        color: var(--second-color);
+    }
+
+    @media (min-width: $desktop-layout) {
+        grid-row: 3 / 6;
+
+        .label {
+            grid-row: 2;
+            font-size: 7vh;
+        }
+
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-row: 3 / 5;
+
+        .label {
+            font-size: 4.7vh !important;
+            grid-row: 2;
+            font-size: 7vh;
+        }
+    }
+}

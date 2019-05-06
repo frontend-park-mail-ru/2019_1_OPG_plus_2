@@ -244,7 +244,6 @@ export default class EditProfileView extends NavigateMixinView(EventEmitterMixin
 			this._renderProfileForms(data.data);
 		} else {
 			const fields = this._root.querySelectorAll('.form__text-form');
-			console.log(data.data, fields);
 			fields.forEach(field => {
 				if(data.data.data.includes(field.name)) {
 					field.classList.add('form_theme_error');

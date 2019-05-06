@@ -1,16 +1,15 @@
 .title_theme_service {
+    color: var(--first-color);
     @media (min-width: $desktop-min-width) {
         font-size: 9vh;
-        color: $main-color;
         grid-row: 2/2;
         grid-column: 1/-1;
         align-items: center;
         text-align: center;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-min-width) {
         font-size: 6vh;
-        color: $main-color;
         grid-row: 2/2;
         grid-column: 1/-1;
         align-items: center;

@@ -8,14 +8,15 @@ export default class Game {
 		this._whoseTurn = firstStep; // тот, кто будет ходить первым
 		this._disableBlocks = disableBlocks; // заблокированные блоки
 		this._steps = []; // шаги текущего игрока(в блоках)
+		this._multSteps = [];
 		this._secondStepFlag = false; // флаг, есть ли второй шаг(это нужно для уравнения прямой)
 		this._firstPlayerStep = 'x'; // обозначение хода первого игрока
 		this._secondPlayerStep = 'o'; // обозначение хода второго игрока
 		this._stepsMatrix = [['*', '*', '*', '*', '*'], // матрица ходов
-			['*', '*', '*', '*', '*'],
-			['*', '*', '*', '*', '*'],
-			['*', '*', '*', '*', '*'],
-			['*', '*', '*', '*', '*']];
+						 ['*', '*', '*', '*', '*'],
+						 ['*', '*', '*', '*', '*'],
+						 ['*', '*', '*', '*', '*'],
+						 ['*', '*', '*', '*', '*']];
 		this._cellsCount = 25; // количество оставшихся шагов
 		this._winner = null; // победитель
 		this._stopFlag = false; // флаг для остановки отрисовки
@@ -40,6 +41,7 @@ export default class Game {
 			if (!isDiagonal && !isEnemyStep && !isDisable) {
 				let isSet = this.setStep({coordinates});
 				this._steps.push(intBlock);
+				this._multSteps.push(intBlock);
 
 				this._startFlag = true;
 
@@ -69,6 +71,7 @@ export default class Game {
 
 			if (!this._secondStepFlag && !isDiagonal && isStep && !isDisable && !this._stopFlag) {
 				this._steps.push(intBlock);
+				this._multSteps.push(intBlock);
 				const ans = this.check();
 				if (ans) {
 					this.setStep({coordinates});
@@ -82,6 +85,7 @@ export default class Game {
 
 			if (!isDisable && isConsistStraight && isStep && !this._stopFlag && !isDiagonal) {
 				this._steps.push(intBlock);
+				this._multSteps.push(intBlock);
 				const ans = this.check();
 				if (ans) {
 					this.setStep({coordinates});
@@ -126,6 +130,14 @@ export default class Game {
 
 	get steps() {
 		return this._steps;
+	}
+
+	get multSteps() {
+		return this._multSteps;
+	}
+
+	set multSteps({} = {}) {
+		this._multSteps = [];
 	}
 
 	/**
@@ -465,7 +477,7 @@ export default class Game {
      * @returns {string} Returns nickname of player who turn now
      */
 	getWhoseTurn() {
-		return this._whoseTurn;
+		return this._whoseTurn === this._listeners[0] ? 'Player1' : 'Player2';
 	}
 
 	/**
@@ -524,5 +536,12 @@ export default class Game {
 		}
 
 		return false;
+	}
+
+	set blocks(blocks = []) {
+		blocks.forEach(block => {
+			let coords = this.getCoordinates({block: block});
+			this.setStep({coordinates: coords});
+		})
 	}
 }

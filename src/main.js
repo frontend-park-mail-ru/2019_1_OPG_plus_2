@@ -1,6 +1,8 @@
 import 'normalize.css';
 import './scss/style.scss';
 
+import { getColors } from './modules/helpers'; 
+
 import Router from './modules/router.js';
 
 import MainPageModel from './app/model/main_page_model';
@@ -30,10 +32,17 @@ import EditProfileController from './app/controller/edit_profile_controller';
 import GameModel from './app/model/game_model';
 import GameView from './app/view/game_view';
 import GameController from './app/controller/game_controller';
+
+import MultiplayerModel from './app/model/multiplayer_model';
+import MultiplayerView from './app/view/multiplayer_view';
+import MultiplayerConroller from './app/controller/multiplayer_controller';
+
 import RulesView from './app/view/rulesView';
 import RulesController from './app/controller/rules_controller';
+
 import NotFoundView from './app/view/not_found_view';
 import NotFoundController from './app/controller/not_found_controller';
+
 import InDevelopmentView from './app/view/in_development_view';
 import InDevelopmentController from './app/controller/in_development_controller';
 
@@ -95,13 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	const nfView = new NotFoundView();
 	const nfController = new NotFoundController({model: nfModel, view: nfView, router: router});
 
-	const multiplaterModel = {};
-	const multiplayerView = new InDevelopmentView();
-	const multiplayerController = new InDevelopmentController({
-		model: multiplaterModel,
-		view: multiplayerView,
-		router: router
-	});
+	const multiplaterModel = new MultiplayerModel();
+	const multiplayerView = new MultiplayerView();
+	const multiplayerController = new MultiplayerConroller({model: multiplaterModel, view: multiplayerView, router: router});
 
 	router.add({handler: mainController});
 	router.add({re: '/leaders', handler: scoreController});
@@ -116,4 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	router.add({re: '/notfound', handler: nfController});
 
 	router.start();
+
+	getColors();
 });

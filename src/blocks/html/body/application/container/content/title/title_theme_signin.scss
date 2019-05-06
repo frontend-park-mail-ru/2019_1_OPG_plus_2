@@ -1,5 +1,5 @@
 .title_theme_signin {
-    color: $main-color;
+    color: var(--first-color);;
     grid-column: 1 / -1;
     grid-row: 1 / 3;
     align-items: flex-end;

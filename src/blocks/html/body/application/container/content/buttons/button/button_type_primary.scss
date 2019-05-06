@@ -1,12 +1,8 @@
 .button_type_primary{
-  background-color: #005FF9;
+  background-color: var(--second-color);
   transition: background-color 300ms ease;
   color: $color-text;
   @media (min-width: $desktop-min-width) {
     font-size: 2.3em;
-  }
-
-  &:hover {
-    background-color: rgba(0, 95, 249, 0.31);
   }
 }

@@ -13,6 +13,7 @@
     }
 
     @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        background-color: white;
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: 3fr 3fr 1fr;
         grid-column-gap: 12px;
