@@ -179,6 +179,10 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	_renderModal(winner) {
+		if (document.querySelector('.modal__window')) {
+			return;
+		}
+
 		const containerBlock = document.querySelector('.container.container_theme_game');
 		genericBeforeEnd(containerBlock, 
 			modalTemplate({
@@ -202,6 +206,9 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				modifiers: [],
 			}),
 		);
+
+		this._removeEventListeners();
+		this._createEventListeners();
 	}
 
 	apply({player = 'Player1', ans = false, steps = []} = {}) {
