@@ -19,7 +19,7 @@ import { DOWN_EVENT,
 		 UP_BLOCK_EVENT,
 		 OVER_BLOCK_EVENT } from '../../modules/events';
 
-export default class GameView extends NavigateMixinView(EventEmitterMixin(View)) {
+export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
 		this.down = this.down.bind(this);
@@ -28,6 +28,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	down(event) {
+		console.log('ok');
 		if (event.target.classList.contains('block') && !+event.target.dataset.isSet) {
 			const app = document.querySelector('#application');
 			app.addEventListener('pointermove', this.over, true);
@@ -37,6 +38,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	up(event) {
+		debugger;
 		const app = document.querySelector('#application');
 		app.removeEventListener('pointermove', this.over, true);
 		this._endBlock = event.target;
@@ -83,6 +85,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 
 	_removeEventListeners() {
 		super._removeEventListeners();
+		debugger;
 		this._removeTurnListener();
 	}
 
@@ -128,12 +131,12 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		genericBeforeEnd(playerLeftBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				// modifiers: [`avatar_theme_game ${data.whoseTurn === 'Player1' ? 'avatar_theme_p1_active' : ''}`],
-				url: `${data.avatar ? HOST + data.avatar : ''}`,
+				// url: `${data.players[0] ? HOST + data.avatar : ''}`,
+				url: '',
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_left'],
-				nickname: data.username, // TODO передача никнейма пользователя
+				nickname: data.players[0], // TODO передача никнейма пользователя
 			}),
 		);
 	}
@@ -143,12 +146,11 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		genericBeforeEnd(playerRightBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				// modifiers: [`avatar_theme_game ${data.whoseTurn === 'Player2' ? 'avatar_theme_p2_active' : ''}`],
-				url: `${data.avatar ? HOST + data.avatar : ''}`,
+				url: '',
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_right'],
-				nickname: 'Player2', // TODO передача никнейма пользователя
+				nickname: data.players[1], // TODO передача никнейма пользователя
 			}),
 		);
 	}
@@ -168,17 +170,22 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		const blocks = [];
 
 		[...Array(numBlocks)].forEach((_, i) => {
-			if (data.disableBlocks.indexOf( i ) != -1) {
-				blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
-			} else {
-				blocks.push(blockTemplate({ modifiers: [''], num: i }));
-			}
+			blocks.push(blockTemplate({ modifiers: [''], num: i }));
+			// if (data.disableBlocks.indexOf( i ) != -1) {
+			// 	blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
+			// } else {
+			// 	blocks.push(blockTemplate({ modifiers: [''], num: i }));
+			// }
 		});
 
 		genericBeforeEnd(fieldBlock, ...blocks);
 	}
 
 	_renderModal(winner) {
+		if (document.querySelector('.modal__window')) {
+			return;
+		}
+
 		const containerBlock = document.querySelector('.container.container_theme_game');
 		genericBeforeEnd(containerBlock, 
 			modalTemplate({
@@ -190,18 +197,15 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		const modalBlock = document.querySelector('.modal__window');
 		genericBeforeEnd(modalBlock, 
 			linkTemplate({
-				title: 'PlAY AGAIN',
-				dataset: '/game',
-				hr: '/game',
-				modifiers: ['button_type_secondary'],
-			}),
-			linkTemplate({
 				title: 'EXIT',
 				dataset: '/',
 				hr: '/',
 				modifiers: [],
 			}),
 		);
+
+		this._removeEventListeners();
+		this._createEventListeners();
 	}
 
 	apply({player = 'Player1', ans = false, steps = []} = {}) {
@@ -213,42 +217,42 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				this._blocks[el].dataset.isSet = 1;
 			});
 
-			player === 'Player1' 
-				? this._currentBlock.classList.add('block_theme_left-active') 
-				: this._currentBlock.classList.add('block_theme_right-active'); 
-			this._currentBlock.dataset.isSet = 1;
+			if (this._currentBlock) { 
+				player === 'Player1' 
+					? this._currentBlock.classList.add('block_theme_left-active') 
+					: this._currentBlock.classList.add('block_theme_right-active'); 
+				this._currentBlock.dataset.isSet = 1;
+			}
 		}
 	}
 
-	endStep({winner = null, player = 'Player1'} = {}) {
+	endStep({winner = null, player = 'Player1', whoseTurn = player, steps=[]} = {}) {
 		if (winner) {
 			this._removeTurnListener();
 			this._renderModal(winner);
 		} else {
+			steps.forEach(el => {
+				player === 'Player1' 
+					? this._blocks[el].classList.add('block_theme_left-active') 
+					: this._blocks[el].classList.add('block_theme_right-active');
+				this._blocks[el].dataset.isSet = 1;
+			});
+
 			const headBlock = this._root.querySelector('.head.head_theme_game');
-			// console.log(player);
-			// if (player === 'Player1') {
-			// 	let leftPlayer = this._root.querySelector('avatar_theme_p1_active');
-			// 	if (leftPlayer && leftPlayer.classList.contains('avatar_theme_p1_active')) {
-			// 		leftPlayer.classList.remove('avatar_theme_p1_active');
-			// 	}
-			// 	let rightPlayer = this._root.querySelector('.player.player_theme_player2').firstElementChild;
-			// 	if (rightPlayer && !rightPlayer.classList.contains('avatar_theme_p2_active')) {
-			// 		rightPlayer.classList.add('avatar_theme_p2_active');
-			// 	}
-			// } else if(player === 'Player2') {
-			// 	let rightPlayer = this._root.querySelector('avatar_theme_p2_active');
-			// 	if (rightPlayer && rightPlayer.classList.contains('avatar_theme_p2_active')) {
-			// 		rightPlayer.classList.remove('avatar_theme_p2_active');
-			// 	}
-			// 	let leftPlayer = this._root.querySelector('.player.player_theme_player1').firstElementChild;
-			// 	if (leftPlayer && !leftPlayer.classList.contains('avatar_theme_p1_active')) {
-			// 		leftPlayer.classList.add('avatar_theme_p1_active');
-			// 	}
-			// }
 			headBlock.innerHTML = '';
-			this._renderHead({whoseTurn: player});
+			this._renderHead({whoseTurn: whoseTurn});
 		}
+	}
+
+	_renderLoader() {
+		const containerBlock = document.querySelector('.container.container_theme_game');
+		genericBeforeEnd(containerBlock, 
+			modalTemplate({
+				modifiers: [],
+				winner: 'Player1',
+				loader: true,
+			}),
+		);
 	}
 
 	_cacheBlocks() {
@@ -256,14 +260,24 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 	
 	_render(data) {
-		this._root.innerHTML = '';
-		this._renderContainer();
-		this._renderMain(data);
-		this._renderHead(data);
-		this._renderLeftPlayer(data);
-		this._renderRightPlayer(data);
-		this._renderContent();
-		this._renderField(data);
+		if (data.wait) {
+			this._root.innerHTML = '';
+			this._renderContainer();
+			this._renderMain(data);
+			this._renderContent();
+			this._renderField(data);
+			this._renderLoader();
+		} else {
+			const containerBlock = this._root.querySelector('.container.container_theme_game');
+			const modal = this._root.querySelector('.modal');
+			if (modal) {
+				containerBlock.removeChild(this._root.querySelector('.modal'));
+			}
+			this._renderHead(data);
+			this._renderLeftPlayer(data);
+			this._renderRightPlayer(data);
+		}
+
 		this._cacheBlocks();
 	}
 
