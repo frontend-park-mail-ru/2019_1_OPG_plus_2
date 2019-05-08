@@ -53,6 +53,7 @@ const devMode = {
     plugins: [
         new webpack.DefinePlugin({
             HOST: JSON.stringify('http://localhost:8002'),
+            HOST_MULTIPLAYER_WS: JSON.stringify('ws://127.0.0.1:8002'),
         }),
     ]
 };
@@ -62,6 +63,7 @@ const prodMode = {
     plugins: [
         new webpack.DefinePlugin({
             HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
+            HOST_MULTIPLAYER_WS: JSON.stringify('wss://api.colors.hackallcode.ru'),
         }),
     ]
 };
