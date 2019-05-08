@@ -45,3 +45,7 @@ export const UP_OUT_FIELD_EVENT = 'finishStepOutField';
 
 export const FINISH_STEP_EVENT = 'finishStep';
 export const FINISH_GAME_EVENT = 'finishGame';
+
+/* Мультиплеер */
+
+export const START_GAME = 'startGame';
