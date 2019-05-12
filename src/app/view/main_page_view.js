@@ -17,7 +17,7 @@ import linesDownRightTemplate from '../../blocks/html/body/application/container
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
-import { genericBeforeEnd, colorLuminance, invertHex } from '../../modules/helpers.js';
+import { genericBeforeEnd, colorLuminance, setColors } from '../../modules/helpers.js';
 import { APP_PALLETS } from '../../modules/utils';
 
 export default class MainPageView extends NavigateMixinView(EventEmitterMixin(View)) {
@@ -34,15 +34,16 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 		});
 		let row = APP_PALLETS[Math['floor'](Math['random']() * 2000)]
 		let root = document.documentElement;
+		let colors = [`#${row[0]}`, `#${row[1]}`, `#${row[2]}`,
+					 `${colorLuminance(row[2], -0.2)}`, `${colorLuminance(row[2], -0.4)}`,
+					 'white', `${colorLuminance(row[1], -0.3)}`, `${colorLuminance(row[2], -0.4)}`];
 
-		root.style.setProperty('--first-color', `#${row[0]}`);
-		root.style.setProperty('--second-color', `#${row[1]}`);
-		root.style.setProperty('--third-color', `#${row[2]}`);
-		root.style.setProperty('--fourth-color', `${colorLuminance(row[2], -0.2)}`);
-		root.style.setProperty('--disable-block', `${colorLuminance(row[2], -0.4)}`);
-		root.style.setProperty('--text-color', `white`);
-		root.style.setProperty('--secondary-button', `${colorLuminance(row[1], -0.3)}`);
-		root.style.setProperty('--box-shadow', `${colorLuminance(row[2], -0.4)}`);
+		let variables = ['--first-color','--second-color', 
+						'--third-color', '--fourth-color',
+						'--disable-block', '--text-color', 
+						'--secondary-button','--box-shadow'];
+
+		setColors({root: root, colors: colors, variables: variables});
 		window.localStorage.setItem('colors', JSON.stringify(row));
 	}
 
@@ -53,15 +54,16 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 			item.classList.add('hide');
 		});
 		let root = document.documentElement;
-
-		root.style.setProperty('--first-color', `#FF9E00`);
-		root.style.setProperty('--second-color', `#005FF9`);
-		root.style.setProperty('--third-color', `#F7F9F9`);
-		root.style.setProperty('--fourth-color', `#EDEDED`);
-		root.style.setProperty('--disable-block', `#ADADAD`);
-		root.style.setProperty('--text-color', `black`);
-		root.style.setProperty('--secondary-button', `white`);
-		root.style.setProperty('--box-shadow', `gray`);
+		let colors = ['#FF9E00', '#005FF9', '#F7F9F9',
+					  '#EDEDED', '#ADADAD',
+					  'black', 'white', 'gray'];
+					 
+		let variables = ['--first-color','--second-color', 
+						'--third-color', '--fourth-color',
+						'--disable-block', '--text-color', 
+						'--secondary-button','--box-shadow'];
+		
+		setColors({root: root, colors: colors, variables: variables});
 		window.localStorage.clear();
 	}
 

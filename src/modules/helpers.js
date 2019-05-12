@@ -86,6 +86,12 @@ export function getColors() {
 	}
 }
 
+export function setColors({root = {}, colors=[], variables = []} = {}) {
+	[...variables].forEach((item, i) => {
+		root.style.setProperty(item, colors[i]);
+	});
+}
+
 export function invertHex(hexnum){
 	if(hexnum.length != 6) {
 	  alert("Hex color must be six hex numbers in length.");
