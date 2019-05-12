@@ -32,16 +32,16 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 		hide.forEach(item => {
 			item.classList.remove('hide');
 		});
-		let row = APP_PALLETS[Math['floor'](Math['random']() * 2000)]
+		let row = APP_PALLETS[Math['floor'](Math['random']() * 2000)];
 		let root = document.documentElement;
 		let colors = [`#${row[0]}`, `#${row[1]}`, `#${row[2]}`,
 					 `${colorLuminance(row[2], -0.2)}`, `${colorLuminance(row[2], -0.4)}`,
 					 'white', `${colorLuminance(row[1], -0.3)}`, `${colorLuminance(row[2], -0.4)}`];
 
 		let variables = ['--first-color','--second-color', 
-						'--third-color', '--fourth-color',
-						'--disable-block', '--text-color', 
-						'--secondary-button','--box-shadow'];
+			'--third-color', '--fourth-color',
+			'--disable-block', '--text-color', 
+			'--secondary-button','--box-shadow'];
 
 		setColors({root: root, colors: colors, variables: variables});
 		window.localStorage.setItem('colors', JSON.stringify(row));
@@ -60,9 +60,9 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 					  'black', 'white', 'gray'];
 					 
 		let variables = ['--first-color','--second-color', 
-						'--third-color', '--fourth-color',
-						'--disable-block', '--text-color', 
-						'--secondary-button','--box-shadow'];
+			'--third-color', '--fourth-color',
+			'--disable-block', '--text-color', 
+			'--secondary-button','--box-shadow'];
 		
 		setColors({root: root, colors: colors, variables: variables});
 		window.localStorage.clear();
@@ -97,7 +97,7 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 	_removeEventListeners() {
 		super._removeEventListeners();
 		this._removeChangeListener();
-		this._removeDefaultListener
+		this._removeDefaultListener;
 	}
 
 	_renderContainer() {
