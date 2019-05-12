@@ -1,13 +1,6 @@
 @keyframes active-left {
     from {box-shadow: 1px 1px 1px 1px var(--first-color);}
     to {box-shadow: inset 1px 1px 0px 2px var(--third-color);}
-    // 0% { box-shadow: 1px 1px 1px 1px orange; }
-    // 50% { box-shadow: 1px 1px 1px 2px rgb(255, 173, 21); }
-    // 60% { box-shadow: 1px 1px 1px 2px rgb(255, 181, 42); }
-    // 70% { box-shadow: inset 1px 1px 0px 2px rgb(255, 186, 58); }
-    // 80% { box-shadow: inset 1px 1px 0px 2px rgb(255, 207, 118); }
-    // 90% { box-shadow: inset 1px 1px 0px 2px rgb(255, 225, 169); }
-    // 100% { box-shadow: inset 1px 1px 0px 2px #F7F9F9; }
 }
 
 .block_theme_left-active {

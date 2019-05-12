@@ -36,12 +36,12 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 		let root = document.documentElement;
 		let colors = [`#${row[0]}`, `#${row[1]}`, `#${row[2]}`,
 					 `${colorLuminance(row[2], -0.2)}`, `${colorLuminance(row[2], -0.4)}`,
-					 'white', `${colorLuminance(row[1], -0.3)}`, `${colorLuminance(row[2], -0.4)}`];
+					 'white', `${colorLuminance(row[1], -0.3)}`, `${colorLuminance(row[2], -0.4)}`, `${colorLuminance(row[2], -0.3)}`];
 
 		let variables = ['--first-color','--second-color', 
 			'--third-color', '--fourth-color',
 			'--disable-block', '--text-color', 
-			'--secondary-button','--box-shadow'];
+			'--secondary-button','--box-shadow', '--border-color'];
 
 		setColors({root: root, colors: colors, variables: variables});
 		window.localStorage.setItem('colors', JSON.stringify(row));
@@ -57,12 +57,12 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 		let root = document.documentElement;
 		let colors = ['#FF9E00', '#005FF9', '#F7F9F9',
 					  '#EDEDED', '#ADADAD',
-					  'black', 'white', 'gray'];
+					  'black', 'white', 'gray', 'black'];
 					 
 		let variables = ['--first-color','--second-color', 
 			'--third-color', '--fourth-color',
 			'--disable-block', '--text-color', 
-			'--secondary-button','--box-shadow'];
+			'--secondary-button','--box-shadow', '--border-color'];
 		
 		setColors({root: root, colors: colors, variables: variables});
 		window.localStorage.clear();

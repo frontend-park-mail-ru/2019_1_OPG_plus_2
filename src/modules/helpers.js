@@ -83,6 +83,7 @@ export function getColors() {
 		root.style.setProperty('--secondary-button', `${colorLuminance(colors[1], -0.3)}`);
 		root.style.setProperty('--text-color', 'white');
 		root.style.setProperty('--box-shadow', `${colorLuminance(colors[2], -0.4)}`);
+		root.style.setProperty('--border-color', `${colorLuminance(colors[2], -0.3)}`);
 	}
 }
 
