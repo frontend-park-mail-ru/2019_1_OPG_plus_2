@@ -11,7 +11,7 @@ export default class Component {
 	_removeEventListeners() {
 	}
 
-	_render(data) {
+	_render() {
 	}
 
 	create({root = {}, data = {}} = {}) {

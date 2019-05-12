@@ -1,14 +1,13 @@
-.rules {
+.default {
     cursor: pointer;
     transition: all 250ms ease-out;
 
     &:hover {
         transform: scale(1.2);
     }
-
-    #rules {
+    
+    #default {
         fill: var(--second-color);
-
         @media (min-width: $desktop-layout) {
             height: 7vh;
             width: 7vh;

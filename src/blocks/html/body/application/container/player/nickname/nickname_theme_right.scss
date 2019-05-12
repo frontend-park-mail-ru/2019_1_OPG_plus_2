@@ -1,5 +1,5 @@
 .nickname_theme_right {
     @media (min-width: $desktop-min-width) {
-        color: #005FF9;
+        color: var(--second-color);
     }
 }
