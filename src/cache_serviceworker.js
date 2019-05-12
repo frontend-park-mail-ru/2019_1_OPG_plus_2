@@ -65,7 +65,7 @@ self.addEventListener('fetch', event => {
 	if (global.navigator.connection !== undefined &&
         global.navigator.connection.effectiveType !== undefined ){
 
-		console.log('Connection:' + global.navigator.connection.effectiveType);
+		// console.log('Connection:' + global.navigator.connection.effectiveType);
 		event.respondWith(
 			caches.match(url.pathname)
 				.catch(() => fetch(event.request))
@@ -88,7 +88,7 @@ function update (request) {
 			if (resp.ok) {
 				return caches.open(CACHE_NAME)
 					.then((cache) => {
-						console.log('update cache');
+						// console.log('update cache');
 						cache.put(request, resp.clone());
 						return resp;
 					});

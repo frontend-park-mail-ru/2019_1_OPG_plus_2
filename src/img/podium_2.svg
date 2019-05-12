@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+<svg version="1.1" id="scoreboard" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      height="173" width="297" viewBox="0 62 297 173" xml:space="preserve">
 <g>
 	<path d="M211.532,139.131V80.574h6.533c5.174,0,9.369-4.196,9.369-9.369c0-5.175-4.195-9.369-9.369-9.369H78.935

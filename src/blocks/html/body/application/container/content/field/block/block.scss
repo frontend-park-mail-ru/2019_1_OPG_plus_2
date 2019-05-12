@@ -1,6 +1,6 @@
 .block {
-    background-color: #EDEDED;
+    background-color: var(--fourth-color);
     font-size: 0;
-    box-shadow: inset 1px 1px 0px 2px #F7F9F9;
+    box-shadow: inset 1px 1px 0px 2px var(--third-color);
     user-select: none;
 }
