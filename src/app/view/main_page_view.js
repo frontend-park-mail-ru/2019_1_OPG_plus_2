@@ -53,6 +53,7 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 		[clear, separator].forEach((item) => {
 			item.classList.add('hide');
 		});
+
 		let root = document.documentElement;
 		let colors = ['#FF9E00', '#005FF9', '#F7F9F9',
 					  '#EDEDED', '#ADADAD',
@@ -199,7 +200,6 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 
 	}
 	
-	// TODO вынести innerHTML = '' в базовый класс
 	_render(data) {
 		this._root.innerHTML = '';
 		this._renderContainer();
