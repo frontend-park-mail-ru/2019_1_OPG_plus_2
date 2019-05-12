@@ -1,7 +1,7 @@
 .button_type_secondary {
-    background-color: white;
+    background-color: var(--secondary-button);
     transition: background-color 300ms ease;
-    color: black;
+    color: var(--text-color);
     
     &:hover {
         background-color: rgba(0, 0, 0, 0.3);

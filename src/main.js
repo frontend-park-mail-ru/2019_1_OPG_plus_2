@@ -1,6 +1,8 @@
 import 'normalize.css';
 import './scss/style.scss';
 
+import { getColors } from './modules/helpers'; 
+
 import Router from './modules/router.js';
 
 import MainPageModel from './app/model/main_page_model';
@@ -116,4 +118,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	router.add({re: '/notfound', handler: nfController});
 
 	router.start();
+
+	getColors();
 });

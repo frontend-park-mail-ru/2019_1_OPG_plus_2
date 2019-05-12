@@ -1,4 +1,7 @@
-.main-button_theme_play {
+.multiplayer-button {
+    display: grid;
+    text-decoration: none;
+
     #singleicon {
         grid-row: 1;
         width: 100%;
@@ -15,7 +18,6 @@
         &__userbody {
             fill: var(--second-color);
         }
-        
 
         @media (min-width: $desktop-layout) {
             height: 25vh;
@@ -23,7 +25,7 @@
 
         @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
             height: 18vh;
-            padding: 2vh 0 2vh;
+            padding: 5vh 0 5vh;
         }
 
         &:hover {
@@ -31,12 +33,30 @@
         }
     }
 
+    .label {
+        grid-column: 1 / -1;
+        font-family: "Unica One", cursive;
+        text-align: center;
+        color: var(--second-color);
+    }
+
     @media (min-width: $desktop-layout) {
-        grid-column: 1 / 3;
+        grid-row: 3 / 6;
+
+        .label {
+            grid-row: 2;
+            font-size: 7vh;
+        }
+
     }
 
     @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
-        grid-column: 1 / -2;
-        grid-row: 2 / 4;
+        grid-row: 3 / 5;
+
+        .label {
+            font-size: 4.7vh !important;
+            grid-row: 2;
+            font-size: 7vh;
+        }
     }
 }

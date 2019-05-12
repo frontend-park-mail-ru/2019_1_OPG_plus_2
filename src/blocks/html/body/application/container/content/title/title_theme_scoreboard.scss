@@ -1,5 +1,5 @@
 .title_theme_scoreboard {
-    color: $main-color;
+    color: var(--first-color);
     
     @media (min-width: $desktop-layout) {
         font-size: 7vh;

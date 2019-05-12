@@ -1,6 +1,6 @@
 .title_theme_main {
     font-family: $main-font-family;
-    color: $secondary-color;
+    color: var(--second-color);
     font-size: 15vh;
 
     @media (min-width: $desktop-layout) {

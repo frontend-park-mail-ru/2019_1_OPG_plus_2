@@ -5,6 +5,8 @@ import profileIconTemplate from '../../blocks/html/body/application/container/he
 import scoreBoardTemplate from '../../blocks/html/body/application/container/head/menu/scoreboard/scoreboard.pug';
 import rulesTemplate from '../../blocks/html/body/application/container/head/menu/rules/rules.pug';
 import separatorTemplate from '../../blocks/html/body/application/container/head/menu/separator/separator.pug';
+import themeTemplate from '../../blocks/html/body/application/container/head/menu/night/night.pug';
+import defaultTemplate from '../../blocks/html/body/application/container/head/menu/deafult/default.pug';
 import contentTemplate from '../../blocks/html/body/application/container/content/content.pug';
 import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
 import mainButtonTemplate from '../../blocks/html/body/application/container/content/main-button/main-button.pug';
@@ -15,19 +17,84 @@ import linesDownRightTemplate from '../../blocks/html/body/application/container
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
-import { genericBeforeEnd } from '../../modules/helpers.js';
+import { genericBeforeEnd, colorLuminance, invertHex } from '../../modules/helpers.js';
+import { APP_PALLETS } from '../../modules/utils';
 
 export default class MainPageView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
 		super();
+		this.onChangeTheme = this.onChangeTheme.bind(this);
+		this.onDefaultTheme = this.onDefaultTheme.bind(this);
+	}
+
+	onChangeTheme() {
+		let hide = this._root.querySelectorAll('.hide');
+		hide.forEach(item => {
+			item.classList.remove('hide');
+		});
+		let row = APP_PALLETS[Math['floor'](Math['random']() * 2000)]
+		let root = document.documentElement;
+
+		root.style.setProperty('--first-color', `#${row[0]}`);
+		root.style.setProperty('--second-color', `#${row[1]}`);
+		root.style.setProperty('--third-color', `#${row[2]}`);
+		root.style.setProperty('--fourth-color', `${colorLuminance(row[2], -0.2)}`);
+		root.style.setProperty('--disable-block', `${colorLuminance(row[2], -0.4)}`);
+		root.style.setProperty('--text-color', `white`);
+		root.style.setProperty('--secondary-button', `${colorLuminance(row[1], -0.3)}`);
+		root.style.setProperty('--box-shadow', `${colorLuminance(row[2], -0.4)}`);
+		window.localStorage.setItem('colors', JSON.stringify(row));
+	}
+
+	onDefaultTheme() {
+		let clear = this._root.querySelector('.default');
+		let separator = clear.previousElementSibling;
+		[clear, separator].forEach((item) => {
+			item.classList.add('hide');
+		});
+		let root = document.documentElement;
+
+		root.style.setProperty('--first-color', `#FF9E00`);
+		root.style.setProperty('--second-color', `#005FF9`);
+		root.style.setProperty('--third-color', `#F7F9F9`);
+		root.style.setProperty('--fourth-color', `#EDEDED`);
+		root.style.setProperty('--disable-block', `#ADADAD`);
+		root.style.setProperty('--text-color', `black`);
+		root.style.setProperty('--secondary-button', `white`);
+		root.style.setProperty('--box-shadow', `gray`);
+		window.localStorage.clear();
+	}
+
+	_createChangeListener() {
+		let night = this._root.querySelector('.night');
+		night.addEventListener('click', this.onChangeTheme, true);
+	}
+
+	_removeChangeListener() {
+		let night = this._root.querySelector('.night');
+		night.removeEventListener('click', this.onChangeTheme, true);
+	}
+
+	_createDefaultListener() {
+		let night = this._root.querySelector('.default');
+		night.addEventListener('click', this.onDefaultTheme, true);
+	}
+
+	_removeDefaultListener() {
+		let night = this._root.querySelector('.default');
+		night.removeEventListener('click', this.onDefaultTheme, true);
 	}
 
 	_createEventListeners() {
 		super._createEventListeners();
+		this._createChangeListener();
+		this._createDefaultListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
+		this._removeChangeListener();
+		this._removeDefaultListener
 	}
 
 	_renderContainer() {
@@ -74,15 +141,17 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 			}),
 			mainButtonTemplate({
 				hr: '/game',
-				modifier: ['main-button_theme_play'],
+				modifiers: ['main-button_theme_play'],
 				dataset: '/game',
 				label: 'Singleplayer',
+				type: 'singleplayer',
 			}),
 			mainButtonTemplate({
 				hr: `${data.isAuth ? '/multiplayer' : '/signin'}`,
-				modifier: [`${data.isAuth ? 'main-button_theme_multiplayer' : 'main-button_theme_signin'}`],
+				modifiers: [`${data.isAuth ? 'main-button_theme_multiplayer' : 'main-button_theme_signin'}`],
 				dataset: `${data.isAuth ? '/multiplayer' : '/signin'}`,
 				label: `${data.isAuth ? 'Multiplayer' : 'Sign In'}`,
+				type: `${data.isAuth ? 'multiplayer' : 'signin'}`,
 			}),
 		);
 
@@ -111,6 +180,18 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 				modifiers: [],
 				hr: '/rules',
 				dataset: '/rules',
+			}),
+			separatorTemplate({
+				modifiers: [],
+			}),
+			themeTemplate({
+				modifiers: [],
+			}),
+			separatorTemplate({
+				modifiers: [`${window.localStorage.getItem('colors') ? '' : 'hide'}`],
+			}),
+			defaultTemplate({
+				modifiers: [`${window.localStorage.getItem('colors') ? '' : 'hide'}`],
 			})
 		);
 
