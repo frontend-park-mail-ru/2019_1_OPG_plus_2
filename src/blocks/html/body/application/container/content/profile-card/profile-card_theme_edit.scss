@@ -8,12 +8,12 @@
         flex-grow: 1;
         box-shadow: var(--bg-3-color);
         border-radius: 3vh 3vh 3vh 3vh;
-        background-color: var(--bg-2-color);
+        background-color: var(--bg-color);
         animation: box 300ms forwards linear;
     }
 
     @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
-        background-color: var(--bg-2-color);
+        background-color: var(--bg-color);
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: 3fr 3fr 1fr;
         grid-column-gap: 12px;
