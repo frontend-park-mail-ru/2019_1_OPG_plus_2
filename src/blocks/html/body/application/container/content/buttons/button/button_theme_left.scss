@@ -1,12 +1,12 @@
 .button_theme_left {
-    color: var(--primary-color);
+    color: var(--primary-text-color);
     border: 1px solid var(--primary-color);
     transition: background-color 300ms linear;
     cursor: pointer;
     outline: none;
 
     &:hover {
-        color: var(--primary-2-color);
-        background-color: var(--primary-color);
+        color: var(--primary-2-text-color);
+        background-color: var(--primary-2-color);
     }
 }

@@ -1,7 +1,7 @@
 .button_type_secondary {
-    background-color: var(--secondary-3-color);
+    background-color: var(--secondary-button-color);
     transition: background-color 300ms ease;
-    color: var(--secondary-3-text-color);
+    color: var(--secondary-btn-text-color);
     
     &:hover {
         opacity: 0.8;

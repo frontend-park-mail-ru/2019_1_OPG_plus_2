@@ -4,16 +4,16 @@
     font-family: 'Roboto';
     font-size: 3vh;
     padding: 3vh 4vh 2vh;
-    border-bottom: 1px solid rgb(234, 234, 234);
+    border-bottom: 1px solid var(--bg-2-text-color);
 
     &__title {
         font-size: 3.6vh;
-        color: var(--bg-text-color);
+        color: var(--bg-2-text-color);
     }
 
     &__data {
         font-size: 3vh;
-        color: var(--bg-text-color);
+        color: var(--bg-2-text-color);
     }
 
     @media (min-width: $desktop-layout) {

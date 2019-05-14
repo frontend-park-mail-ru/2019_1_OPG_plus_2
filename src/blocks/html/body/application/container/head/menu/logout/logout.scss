@@ -6,7 +6,8 @@
     background-position: center;
 
     &:hover {
-        background-color: #E5E5E5;
+        background-color: var(--bg-3-color);
+        color: var(--bg-3-text-color);
     }
 
     @media (min-width: $desktop-layout) {

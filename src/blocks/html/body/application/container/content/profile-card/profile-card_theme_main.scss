@@ -5,7 +5,7 @@
 
 .profile-card_theme_main {
     display: grid;
-    background-color: white;
+    background-color: var(--bg-2-color);
     
     @media (min-width: $desktop-layout) {
         grid-template-columns: repeat(7, 1fr);

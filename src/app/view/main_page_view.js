@@ -19,7 +19,7 @@ import linesDownRightTemplate
 import View from './view';
 import {EventEmitterMixin} from '../event_emitter';
 import {NavigateMixinView} from '../navigate_view';
-import {colorBrightness, colorLuminance, genericBeforeEnd, setColors, resetColors} from '../../modules/helpers.js';
+import {colorBrightness, colorLuminance, genericBeforeEnd, resetColors, setColors} from '../../modules/helpers.js';
 import {APP_PALETTES, COLOR_NAMES} from '../../modules/utils';
 
 export default class MainPageView extends NavigateMixinView(EventEmitterMixin(View)) {
@@ -37,9 +37,9 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
 
         let root = document.documentElement;
 
-        let row = APP_PALETTES[Math['floor'](Math['random']() * APP_PALETTES.length)];
+        let row = APP_PALETTES[Math.floor(Math.random() * APP_PALETTES.length)];
         // Main theme colors:
-        // row = ['FF9E00', '005FF9', 'F7F9F9'];
+            // row = ['FF9E00', '005FF9', 'F7F9F9'];
 
         let colors = [];
         for (let r = 0; r < row.length; ++r) {
