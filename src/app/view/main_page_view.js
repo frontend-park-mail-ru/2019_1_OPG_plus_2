@@ -38,24 +38,24 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
         let root = document.documentElement;
 
         let row = APP_PALETTES[Math['floor'](Math['random']() * APP_PALETTES.length)];
-        let isDark = [];
-        let lumSign = [];
 
         let colors = [];
-        for (let i = 0; i < row.length; ++i) {
-            isDark[i] = colorBrightness(row[i]) < 128;
-            lumSign[i] = isDark[i] ? 1 : -1;
-            colors.push(`#${row[i]}`);
-            colors.push(`${colorLuminance(row[i], lumSign[i] * 0.15)}`);
-            colors.push(`${colorLuminance(row[i], lumSign[i] * 0.3)}`);
-            colors.push(isDark[i] ? 'var(--light-text-color)' : 'var(--dark-text-color)');
+        for (let r = 0; r < row.length; ++r) {
+            let lumSign = colorBrightness(row[r]) < 128 ? 1 : -1;
+            let variants = [row[r], colorLuminance(row[r], lumSign * 0.15), colorLuminance(row[r], lumSign * 0.4)];
+
+            for (let v = 0; v < variants.length; ++v) {
+                colors.push(`#${variants[v]}`);
+                let isDark = colorBrightness(variants[v]) < 128;
+                colors.push(isDark ? 'var(--light-text-color)' : 'var(--dark-text-color)');
+            }
         }
 
         let color_names = COLOR_NAMES;
 
         // Custom colors may be here...
         // Example:
-        // colors.push(isDark[0] ? '#ffffff' : `${colorLuminance(row[0], lumSign * 0.05)}`);
+        // colors.push('#ffffff');
         // color_names.push('--my-white-color');
 
         setColors({root: root, colors: colors, variables: color_names});
