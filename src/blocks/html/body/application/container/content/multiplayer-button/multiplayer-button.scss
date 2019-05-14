@@ -8,15 +8,15 @@
         transition: all 250ms ease-out;
 
         &__play {
-            fill: var(--first-color);
+            fill: var(--primary-color);
         }
 
         &__userhead {
-            fill: var(--second-color);
+            fill: var(--secondary-color);
         }
 
         &__userbody {
-            fill: var(--second-color);
+            fill: var(--secondary-color);
         }
 
         @media (min-width: $desktop-layout) {
@@ -37,7 +37,7 @@
         grid-column: 1 / -1;
         font-family: "Unica One", cursive;
         text-align: center;
-        color: var(--second-color);
+        color: var(--secondary-color);
     }
 
     @media (min-width: $desktop-layout) {

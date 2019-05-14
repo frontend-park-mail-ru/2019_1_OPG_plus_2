@@ -1,7 +1,7 @@
 .logout_theme_profile {
     grid-column: 1 / -1;
     font-family: "Roboto";  
-    color: black;
+    color: var(--bg-text-color);
     background-image: none !important;
     text-align: center;
     width: 100%;

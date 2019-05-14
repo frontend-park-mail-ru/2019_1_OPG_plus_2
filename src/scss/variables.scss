@@ -1,27 +1,34 @@
 :root {
-    --first-color: #FF9E00;
-    --second-color: #005FF9;
-    --third-color: #F7F9F9;
-    --fourth-color: #EDEDED;
-    --disable-block: #ADADAD;
-    --text-color: black;
-    --secondary-button: white;
-    --buttons-text-color: white;
-    --box-shadow: gray;
-    --border-color: black;
+    --light-text-color: #eee;
+    --dark-text-color: #111;
+
+    --primary-color: #FF9E00;
+    --primary-2-color: #d97800;
+    --primary-3-color: #b35200;
+    --primary-text-color: var(--dark-text-color);
+
+    --secondary-color: #005FF9;
+    --secondary-2-color: #0039d3;
+    --secondary-3-color: #0013ad;
+    --secondary-text-color: var(--dark-text-color);
+
+    --bg-color: #F7F9F9;
+    --bg-2-color: #d1d3d3;
+    --bg-3-color: #abadad;
+    --bg-text-color: var(--dark-text-color);
+
+    --primary-button-color: var(--secondary-color);
+    --primary-btn-text-color: var(--secondary-text-color);
+    --secondary-button-color: var(--bg-2-color);
+    --secondary-btn-text-color: var(--bg-text-color);
+
+    --border-color: var(--bg-2-color);
+    --box-shadow: var(--bg-3-color);
 }
 
-$color-main: #F7F9F9;
-$color-icons: white;
-$color-text: white;
-$color-lines: white;
 $main-font-family: 'Unica One', cursive;
 $secondary-font-family: 'Roboto';
 $scoreboard-font-size: 40px;
-
-$color-background: #F7F9F9;
-$main-color: #FF9E00;
-$secondary-color: #005FF9;
 
 /* media query sizes */
 

@@ -11,7 +11,7 @@
     }
 
     #scoreboard {
-        fill: var(--second-color);
+        fill: var(--secondary-color);
 
         @media (min-width: $desktop-layout) {
             height: 7vh;

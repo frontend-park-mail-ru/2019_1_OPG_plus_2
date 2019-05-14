@@ -1,11 +1,11 @@
 @keyframes active-left {
-    from {box-shadow: 1px 1px 1px 1px var(--first-color);}
-    to {box-shadow: inset 1px 1px 0px 2px var(--third-color);}
+    from {box-shadow: 1px 1px 1px 1px var(--primary-color);}
+    to {box-shadow: inset 1px 1px 0px 2px var(--bg-color);}
 }
 
 .block_theme_left-active {
-    background-color: var(--first-color);
-    box-shadow: 1px 1px 1px 1px var(--third-color);
+    background-color: var(--primary-color);
+    box-shadow: 1px 1px 1px 1px var(--bg-color);
     z-index: 3;
     animation: active-left 300ms forwards linear;
 }

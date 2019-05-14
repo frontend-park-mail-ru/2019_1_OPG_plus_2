@@ -14,7 +14,7 @@
 		right: 0px;
 		top: 40px;
 
-		border: 2px solid $color-lines;
+		border: 2px solid var(--primary-color);
         transform: rotate(-180deg);
 
         animation: line1 1s forwards linear;
@@ -27,7 +27,7 @@
 		right: 0px;
 		top: 70px;
 
-		border: 2px solid $color-lines;
+		border: 2px solid var(--primary-color);
 		transform: rotate(-180deg);
     }
 
@@ -38,7 +38,7 @@
 		right: 0px;
 		top: 100px;
 
-		border: 2px solid $color-lines;
+		border: 2px solid var(--primary-color);
 		transform: rotate(-180deg);
     }
 }

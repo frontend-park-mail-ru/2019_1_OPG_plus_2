@@ -63,33 +63,39 @@ export function colorLuminance(hex, lum) {
 	let rgb = '#', c, i;
 	for (i = 0; i < 3; i++) {
 		c = parseInt(hex.substr(i*2,2), 16);
-		c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+		c = Math.round(Math.min(Math.max(0, c + (255 * lum)), 255)).toString(16);
 		rgb += ('00'+c).substr(c.length);
 	}
 
 	return rgb;
 }
 
+export function colorBrightness(hex) {
+	let c1 = parseInt(hex.substr(0,2), 16);
+	let c2 = parseInt(hex.substr(2,2), 16);
+	let c3 = parseInt(hex.substr(4,2), 16);
+	return Math.max(c1, c2, c3);
+}
+
 export function getColors() {
 	let colors = JSON.parse(window.localStorage.getItem('colors'));
+	let variables = JSON.parse(window.localStorage.getItem('color_names'));
 
-	if (colors) {
+	if (colors && variables) {
 		let root = document.documentElement;
-		root.style.setProperty('--first-color', `#${colors[0]}`);
-		root.style.setProperty('--second-color', `#${colors[1]}`);
-		root.style.setProperty('--third-color', `#${colors[2]}`);
-		root.style.setProperty('--fourth-color', `${colorLuminance(colors[2], -0.2)}`);
-		root.style.setProperty('--disable-block', `${colorLuminance(colors[2], -0.4)}`);
-		root.style.setProperty('--secondary-button', `${colorLuminance(colors[1], -0.3)}`);
-		root.style.setProperty('--text-color', 'white');
-		root.style.setProperty('--box-shadow', `${colorLuminance(colors[2], -0.4)}`);
-		root.style.setProperty('--border-color', `${colorLuminance(colors[2], -0.3)}`);
+		setColors({root: root, colors: colors, variables: variables});
 	}
 }
 
 export function setColors({root = {}, colors=[], variables = []} = {}) {
 	[...variables].forEach((item, i) => {
 		root.style.setProperty(item, colors[i]);
+	});
+}
+
+export function resetColors({root = {}, variables = []} = {}) {
+	[...variables].forEach((item) => {
+		root.style.removeProperty(item);
 	});
 }
 

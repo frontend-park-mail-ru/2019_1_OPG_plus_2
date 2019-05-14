@@ -8,7 +8,7 @@
     display: grid;
     grid-column: 1/-1;
     grid-row: 1;
-    background-color: var(--first-color);
+    background-color: var(--primary-color);
     // background: linear-gradient(8deg, #005ff9 21%, #ffb338 69%);
 
     @media (min-width: $desktop-layout) {
