@@ -31,7 +31,7 @@ const R_ATTRIBUTES = /(\w+\s*)=(\s*".*?")/g;
  * @type {RegExp}
  */
 const emailRe = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/gi;
-const nameRe = /^[\w.-_@$]+$/gi;
+const nameRe = /^[\w.-_@$]{1,14}$/gi;
 
 /**
  * Makes passed string safe
@@ -55,7 +55,8 @@ export function makeSafe(unsafeString = '') {
  * @return {boolean}
  */
 export function validEmail(string = '') {
-	return emailRe.test(string.toLowerCase());
+	string = string.toLowerCase();
+	return !!string.match(emailRe);
 }
 
 /**
@@ -64,7 +65,8 @@ export function validEmail(string = '') {
  * @return {boolean}
  */
 export function validLogin(string = '') {
-	return nameRe.test(string.toLowerCase()) && string.length < 15;
+	string = string.toLowerCase();
+	return !!string.match(nameRe);
 }
 
 /**

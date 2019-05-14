@@ -20,12 +20,12 @@
     animation: shadow 300ms forwards linear;
 
     &__window {
-        // background-color: rgba(255,255,255,1);
         background-color: var(--third-color);
         display: flex;
         flex-direction: column;
         opacity: 0;
         animation: modal 300ms forwards linear 400ms;
+        border-radius: 20px;
     }
 
     &__winner {

@@ -138,7 +138,7 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		);
 	}
 
-	_renderRightPlayer() {
+	_renderRightPlayer(data) {
 		const playerRightBlock = this._root.querySelector('.player.player_theme_player2');
 		genericBeforeEnd(playerRightBlock, 
 			avatarTemplate({
