@@ -1,7 +1,7 @@
 @keyframes bg {
-    from {box-shadow: 0px -600px 70px -120px #005ff9 inset, 0px -590px 70px -120px #ffc04d inset;}
-    50% {box-shadow: 0px -190px 70px -120px #005ff9 inset, 0px -590px 70px -120px #ffc04d inset;}
-    to {box-shadow: 0px -290px 70px -120px #005ff9 inset, 0px -590px 70px -120px #ffc04d inset;}
+    from {box-shadow: 0 -600px 70px -120px #005ff9 inset, 0 -590px 70px -120px #ffc04d inset;}
+    50% {box-shadow: 0 -190px 70px -120px #005ff9 inset, 0 -590px 70px -120px #ffc04d inset;}
+    to {box-shadow: 0 -290px 70px -120px #005ff9 inset, 0 -590px 70px -120px #ffc04d inset;}
 }
 
 .profile-head {

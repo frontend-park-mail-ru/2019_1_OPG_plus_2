@@ -1,6 +1,6 @@
 @keyframes active-left {
     from {box-shadow: 1px 1px 1px 1px var(--primary-color);}
-    to {box-shadow: inset 1px 1px 0px 2px var(--bg-color);}
+    to {box-shadow: inset 1px 1px 0 2px var(--bg-color);}
 }
 
 .block_theme_left-active {
