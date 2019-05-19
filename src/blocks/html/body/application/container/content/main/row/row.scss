@@ -1,7 +1,7 @@
 .row {
     display: flex;
-    color: var(--text-color);
-    background: var(--fourth-color);
+    color: var(--bg-2-text-color);
+    background: var(--bg-2-color);
     font-family: "Roboto";
     padding: 13px;
     width: 100%;
@@ -32,7 +32,7 @@
 
     @media (min-width: $desktop-layout) {
         font-size: 4vh;
-        border-radius: 35px 0px 0px 0px;
+        border-radius: 35px 0 0 0;
         margin-bottom: 3vh;
 
         &__photo {

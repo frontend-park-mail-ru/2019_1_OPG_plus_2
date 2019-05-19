@@ -19,23 +19,23 @@
 
 .lines-up {
     position: absolute;
-    top: 0px;
+    top: 0;
 
     &__line1 {
         position: absolute;
-        background-color: var(--first-color);
+        background-color: var(--primary-color);
         animation: lines-up-line1 2s forwards cubic-bezier(0.76, 0.04, 0.25, 0.96);
     }
 
     &__line2 {
         position: absolute;
-        background-color: var(--second-color);
+        background-color: var(--secondary-color);
         animation: lines-up-line2 2s forwards cubic-bezier(0.76, 0.04, 0.25, 0.96);
     }
 
     &__line3 {
         position: absolute;
-        background-color: var(--first-color);
+        background-color: var(--primary-color);
         animation: lines-up-line3 2s forwards cubic-bezier(0.76, 0.04, 0.25, 0.96);
     }
 

@@ -19,11 +19,11 @@
 
 .lines-down-right {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
 
     &__line1 {
         position: absolute;
-        background-color: var(--first-color);
+        background-color: var(--primary-color);
         animation: lines-down-right-line1 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
         transform: rotate(180deg);
         bottom: 0vh;
@@ -31,7 +31,7 @@
 
     &__line2 {
         position: absolute;
-        background-color: var(--first-color);
+        background-color: var(--primary-color);
         animation: lines-down-right-line2 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
         transform: rotate(180deg);
         bottom: 0vh;
@@ -39,7 +39,7 @@
 
     &__line3 {
         position: absolute;
-        background-color: var(--second-color);
+        background-color: var(--secondary-color);
         animation: lines-down-right-line3 2s forwards cubic-bezier(0.76, 0.04, 0.38, 0.4);
         transform: rotate(180deg);
         bottom: 0vh;

@@ -197,13 +197,13 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				title: 'PlAY AGAIN',
 				dataset: '/game',
 				hr: '/game',
-				modifiers: ['button_type_secondary'],
+				modifiers: [],
 			}),
 			linkTemplate({
 				title: 'EXIT',
 				dataset: '/',
 				hr: '/',
-				modifiers: [],
+				modifiers: ['button_type_secondary'],
 			}),
 		);
 

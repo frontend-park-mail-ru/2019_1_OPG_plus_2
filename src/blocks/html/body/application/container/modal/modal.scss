@@ -20,7 +20,7 @@
     animation: shadow 300ms forwards linear;
 
     &__window {
-        background-color: var(--third-color);
+        background-color: var(--bg-color);
         display: flex;
         flex-direction: column;
         opacity: 0;
@@ -30,7 +30,7 @@
 
     &__winner {
         text-align: center;
-        color: var(--text-color);
+        color: var(--bg-text-color);
         font-family: "Roboto";
         margin-bottom: 4vh;
         font-size: 5vh !important;

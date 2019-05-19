@@ -1,27 +1,40 @@
 :root {
-    --first-color: #FF9E00;
-    --second-color: #005FF9;
-    --third-color: #F7F9F9;
-    --fourth-color: #EDEDED;
-    --disable-block: #ADADAD;
-    --text-color: black;
-    --secondary-button: white;
-    --buttons-text-color: white;
-    --box-shadow: gray;
-    --border-color: black;
+    --light-text-color: #eee;
+    --dark-text-color: #111;
+
+    --primary-color: #FF9E00;
+    --primary-text-color: var(--dark-text-color);
+    --primary-2-color: #d97800;
+    --primary-2-text-color: var(--light-text-color);
+    --primary-3-color: #993800;
+    --primary-3-text-color: var(--light-text-color);
+
+    --secondary-color: #005FF9;
+    --secondary-text-color: var(--light-text-color);
+    --secondary-2-color: #2685ff;
+    --secondary-2-text-color: var(--dark-text-color);
+    --secondary-3-color: #66c5ff;
+    --secondary-3-text-color: var(--dark-text-color);
+
+    --bg-color: #F7F9F9;
+    --bg-text-color: var(--dark-text-color);
+    --bg-2-color: #d1d3d3;
+    --bg-2-text-color: var(--dark-text-color);
+    --bg-3-color: #919393;
+    --bg-3-text-color: var(--dark-text-color);
+
+    --primary-button-color: var(--secondary-color);
+    --primary-btn-text-color: var(--secondary-text-color);
+    --secondary-button-color: var(--secondary-3-color);
+    --secondary-btn-text-color: var(--secondary-3-text-color);
+
+    --border-color: var(--bg-2-color);
+    --box-shadow: var(--bg-3-color);
 }
 
-$color-main: #F7F9F9;
-$color-icons: white;
-$color-text: white;
-$color-lines: white;
 $main-font-family: 'Unica One', cursive;
 $secondary-font-family: 'Roboto';
 $scoreboard-font-size: 40px;
-
-$color-background: #F7F9F9;
-$main-color: #FF9E00;
-$secondary-color: #005FF9;
 
 /* media query sizes */
 
