@@ -1,18 +1,18 @@
 @keyframes box {
-    from {box-shadow: 0px 0px 0px 0 var(--box-shadow);}
-    to {box-shadow: 0px 7px 19px 0 var(--box-shadow);}
+    from {box-shadow: 0 0 0 0 var(--box-shadow);}
+    to {box-shadow: 0 7px 19px 0 var(--box-shadow);}
 }
 
 .profile-card_theme_main {
     display: grid;
-    background-color: white;
+    background-color: var(--bg-color);
     
     @media (min-width: $desktop-layout) {
         grid-template-columns: repeat(7, 1fr);
         grid-column-gap: 10px;
         grid-template-rows: 4fr 4fr 1fr;
         flex-grow: 1;
-        box-shadow: 0px 7px 19px 0 var(--box-shadow);
+        box-shadow: 0 7px 19px 0 var(--box-shadow);
         border-radius: 3vh 3vh 3vh 3vh;
         animation: box 300ms forwards linear;
     }

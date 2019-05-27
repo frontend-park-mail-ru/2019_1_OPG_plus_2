@@ -1,10 +1,10 @@
 .button_type_secondary {
-    background-color: var(--secondary-button);
+    background-color: var(--secondary-button-color);
     transition: background-color 300ms ease;
-    color: var(--text-color);
+    color: var(--secondary-btn-text-color);
     
     &:hover {
-        background-color: rgba(0, 0, 0, 0.3);
+        opacity: 0.8;
     }
 
     @media (min-width: $desktop-layout) {

@@ -15,8 +15,8 @@
     @media (min-width: $desktop-layout) {
         grid-column: 1/3;
         display: grid;
-        background: linear-gradient(279deg, var(--third-color) 32%, var(--first-color) 20%, transparent 28%), 
-                    linear-gradient(260deg, var(--third-color) 33%, var(--first-color) 14%);
+        background: linear-gradient(279deg, var(--bg-color) 32%, var(--primary-color) 20%, transparent 28%),
+                    linear-gradient(260deg, var(--bg-color) 33%, var(--primary-color) 14%);
         opacity: 0.5;
     }
 

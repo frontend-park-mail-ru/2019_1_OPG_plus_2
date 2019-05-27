@@ -5,15 +5,15 @@
         transition: all 250ms ease-out;
 
         &__play {
-            fill: var(--first-color);
+            fill: var(--primary-color);
         }
 
         &__userhead {
-            fill: var(--second-color);
+            fill: var(--secondary-color);
         }
 
         &__userbody {
-            fill: var(--second-color);
+            fill: var(--secondary-color);
         }
         
 

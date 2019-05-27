@@ -1,7 +1,7 @@
 .button_type_primary{
-  background-color: var(--second-color);
+  background-color: var(--primary-button-color);
   transition: background-color 300ms ease;
-  color: $color-text;
+  color: var(--primary-btn-text-color);
   @media (min-width: $desktop-min-width) {
     font-size: 2.3em;
   }

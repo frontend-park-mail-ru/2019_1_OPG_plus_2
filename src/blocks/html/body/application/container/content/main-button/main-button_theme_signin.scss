@@ -6,11 +6,11 @@
         padding-right: 1vh;
 
         &__svg_1, &__svg_2 {
-            fill: var(--first-color);
+            fill: var(--primary-color);
         }
 
         &__svg_4, &__svg_3 {
-            fill: var(--second-color);
+            fill: var(--secondary-color);
         }
 
         @media (min-width: $desktop-layout) {

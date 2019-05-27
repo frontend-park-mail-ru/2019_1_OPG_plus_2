@@ -1,7 +1,7 @@
 .side_theme_left-passive {
     grid-row: 2 / -2;
     border-radius: 0 10px 10px 0;
-    background-color: var(--first-color);
+    background-color: var(--primary-color);
 
     @media (min-width: $desktop-layout) {
         grid-column: 1 / 6;

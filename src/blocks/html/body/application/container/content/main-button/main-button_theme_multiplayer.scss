@@ -6,11 +6,11 @@
         transition: all 250ms ease-out;
 
         &__svg_2, &__svg_4, &__svg_5, &__svg_6, &__svg_12, &__svg_13 {
-            fill: var(--second-color);
+            fill: var(--secondary-color);
         }
 
         &__svg_3 {
-            fill: var(--first-color);
+            fill: var(--primary-color);
         }
 
         @media (min-width: $desktop-layout) {
