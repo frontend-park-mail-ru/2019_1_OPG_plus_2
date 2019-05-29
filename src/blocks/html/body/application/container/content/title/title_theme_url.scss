@@ -1,0 +1,14 @@
+.title_theme_url {
+    color: var(--primary-color);
+    grid-column: 1 / -1;
+    grid-row: 1 / 3;
+
+    @media (min-width: $desktop-layout) {
+        font-size: 9vh;
+    }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        font-size: 6vh;
+        align-items: flex-end;
+    }
+}

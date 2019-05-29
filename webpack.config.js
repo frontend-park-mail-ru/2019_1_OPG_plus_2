@@ -19,7 +19,7 @@ const common = merge([
     {
         entry: {
             "index": PATHS.source + '/main.js',
-            "sw":  PATHS.source + '/cache_serviceworker.js',
+            // "sw":  PATHS.source + '/cache_serviceworker.js',
         },
         output: {
             path: PATHS.build,
@@ -28,6 +28,7 @@ const common = merge([
         plugins: [
             new HtmlWebpackPlugin({
                 template: PATHS.source + '/index.pug',
+                inject: false,
             }),
         ],
     },
@@ -53,7 +54,9 @@ const devMode = {
     plugins: [
         new webpack.DefinePlugin({
             HOST: JSON.stringify('http://localhost:8002'),
-            HOST_MULTIPLAYER_WS: JSON.stringify('ws://127.0.0.1:8002'),
+            MY_HOST: JSON.stringify('http://localhost:8001'),
+            HOST_MULTIPLAYER_WS: JSON.stringify('ws://127.0.0.1:8004'),
+            HOST_MULTIPLAYER: JSON.stringify('http://localhost:8004'),
         }),
     ]
 };

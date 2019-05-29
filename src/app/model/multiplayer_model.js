@@ -9,6 +9,7 @@ import { INIT_EVENT,
          FINISH_STEP_EVENT,
          END_OVER_BLOCK_EVENT,
          FINISH_GAME_EVENT } from '../../modules/events';
+import { conditionalExpression } from 'babel-types';
 
 export default class MultiplayerModel extends EventEmitterMixin(Model) {
 	constructor() {
@@ -88,9 +89,18 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
 		});
 	}
 
-	init({root = {}} = {}) {
+	init({root = {}, data = {}} = {}) {
         console.log('init');
-        this.openConnection({root: root, path: `${HOST_MULTIPLAYER_WS}/game/0/room`});
+        console.log(`${HOST_MULTIPLAYER_WS}/${data}/room`);
+        API.getUser()
+		.then((user) => {
+            User.set(user);
+            this.openConnection({root: root, path: `${HOST_MULTIPLAYER_WS}/${data}/room`});
+		})
+		.catch(() => {
+            debugger; // TODO убрать debugger и emit
+			this.emit(INIT_ERROR_EVENT);
+		});
 	}
 
 	doStartStep({block = null} = {}) {
@@ -110,12 +120,33 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
         this._game.doFinishStep({block}); // вернет true, если ход можно закончить
         
         console.log(this._game.multSteps);
+        let coords = this._game.multSteps.map(block => {
+            return [parseInt(block / 5, 10), parseInt(block % 5, 10)];
+        })
 
+        console.log(JSON.stringify({
+            user: this.me,
+            type: 'game',
+            data: {
+                coords: [
+                    {
+                        X: coords[0], 
+                        Y: coords[coords.length - 1],
+                    }
+                ],
+            }
+        }))
+        debugger;
         this._ws.send(JSON.stringify({
             user: this.me,
             type: 'game',
             data: {
-                coords: this._game.multSteps
+                coords: [
+                    {
+                        X: coords[0], 
+                        Y: coords[coords.length - 1],
+                    }
+                ],
             }
         }));
 

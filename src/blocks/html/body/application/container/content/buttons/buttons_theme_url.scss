@@ -1,0 +1,5 @@
+.buttons_theme_url {
+    @media (min-width: $desktop-layout) {
+        grid-row: 7/-3;
+    }
+}

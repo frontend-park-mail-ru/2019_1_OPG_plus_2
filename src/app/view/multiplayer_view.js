@@ -28,7 +28,6 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	down(event) {
-		console.log('ok');
 		if (event.target.classList.contains('block') && !+event.target.dataset.isSet) {
 			const app = document.querySelector('#application');
 			app.addEventListener('pointermove', this.over, true);
@@ -38,7 +37,6 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	up(event) {
-		debugger;
 		const app = document.querySelector('#application');
 		app.removeEventListener('pointermove', this.over, true);
 		this._endBlock = event.target;
@@ -85,7 +83,6 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 
 	_removeEventListeners() {
 		super._removeEventListeners();
-		debugger;
 		this._removeTurnListener();
 	}
 

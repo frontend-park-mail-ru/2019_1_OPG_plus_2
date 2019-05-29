@@ -23,7 +23,6 @@ export default class SignUpModel extends EventEmitterMixin(Model) {
 	}
 
 	signUp({root = {}, name='', email = '', password = '', password_repeat = ''} = {}) {
-		debugger;
 		if (!validEmail(email) || !email) {
 			this.emit(SIGN_UP_ERROR_EVENT, {root: root, error: {data: ['email'], message: 'Invalid Email'}, name: name, email: email});
 			return;

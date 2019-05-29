@@ -38,8 +38,6 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
         let root = document.documentElement;
 
         let row = APP_PALETTES[Math.floor(Math.random() * APP_PALETTES.length)];
-        // Main theme colors:
-            // row = ['FF9E00', '005FF9', 'F7F9F9'];
 
         let colors = [];
         for (let r = 0; r < row.length; ++r) {
@@ -54,11 +52,6 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
         }
 
         let color_names = COLOR_NAMES;
-
-        // Custom colors may be here...
-        // Example:
-        // colors.push('#ffffff');
-        // color_names.push('--my-white-color');
 
         setColors({root: root, colors: colors, variables: color_names});
         window.localStorage.setItem('colors', JSON.stringify(colors));
@@ -75,10 +68,6 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
         let root = document.documentElement;
 
         let color_names = COLOR_NAMES;
-
-        // Custom colors may be here...
-        // Example:
-        // color_names.push('--my-white-color');
 
         resetColors({root: root, variables: color_names});
         window.localStorage.removeItem('colors');
@@ -167,9 +156,9 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
                 type: 'singleplayer',
             }),
             mainButtonTemplate({
-                hr: `${data.isAuth ? '/multiplayer' : '/signin'}`,
+                hr: `${data.isAuth ? '/url' : '/signin'}`,
                 modifiers: [`${data.isAuth ? 'main-button_theme_multiplayer' : 'main-button_theme_signin'}`],
-                dataset: `${data.isAuth ? '/multiplayer' : '/signin'}`,
+                dataset: `${data.isAuth ? '/url' : '/signin'}`,
                 label: `${data.isAuth ? 'Multiplayer' : 'Sign In'}`,
                 type: `${data.isAuth ? 'multiplayer' : 'signin'}`,
             }),
