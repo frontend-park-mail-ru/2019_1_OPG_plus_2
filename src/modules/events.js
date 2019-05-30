@@ -46,6 +46,9 @@ export const UP_OUT_FIELD_EVENT = 'finishStepOutField';
 export const FINISH_STEP_EVENT = 'finishStep';
 export const FINISH_GAME_EVENT = 'finishGame';
 
-/* Мультиплеер */
+export const GENERATE_URL_EVENT = 'generateUrl';
+export const FINISH_GENERATE_URL_EVENT = 'finishGenerateUrl';
+export const FINISH_GENERATE_URL_ERROR_EVENT = 'finishGenerateUrlError';
 
+/* Мультиплеер */
 export const START_GAME = 'startGame';

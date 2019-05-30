@@ -46,6 +46,10 @@ import NotFoundController from './app/controller/not_found_controller';
 import InDevelopmentView from './app/view/in_development_view';
 import InDevelopmentController from './app/controller/in_development_controller';
 
+import UrlModel from './app/model/url_model';
+import UrlView from './app/view/url_view';
+import UrlConroller from './app/controller/url_controller';
+
 document.addEventListener('DOMContentLoaded', function () {
 
 	// if ('serviceWorker' in navigator) {
@@ -108,6 +112,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	const multiplayerView = new MultiplayerView();
 	const multiplayerController = new MultiplayerConroller({model: multiplaterModel, view: multiplayerView, router: router});
 
+	const urlModel = new UrlModel();
+	const urlView = new UrlView();
+	const urlController = new UrlConroller({model: urlModel, view: urlView, router: router});
+
 	router.add({handler: mainController});
 	router.add({re: '/leaders', handler: scoreController});
 	router.add({re: '/signin', handler: signInController});
@@ -115,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	router.add({re: '/signup', handler: signUpController});
 	router.add({re: '/editme', handler: editProfileController});
 	router.add({re: '/game', handler: gameController});
+	router.add({re: '/url', handler: urlController});
 	router.add({re: '/multiplayer', handler: multiplayerController});
 
 	router.add({re: '/rules', handler: rulesController});
