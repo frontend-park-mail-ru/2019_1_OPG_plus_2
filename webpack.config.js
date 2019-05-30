@@ -55,8 +55,8 @@ const devMode = {
         new webpack.DefinePlugin({
             HOST: JSON.stringify('http://localhost:8002'),
             MY_HOST: JSON.stringify('http://localhost:8001'),
-            HOST_MULTIPLAYER_WS: JSON.stringify('ws://127.0.0.1:8004'),
-            HOST_MULTIPLAYER: JSON.stringify('http://localhost:8004'),
+            HOST_MULTIPLAYER_WS: JSON.stringify('ws://127.0.0.1:8004/game'),
+            HOST_MULTIPLAYER: JSON.stringify('http://localhost:8004/game'),
         }),
     ]
 };

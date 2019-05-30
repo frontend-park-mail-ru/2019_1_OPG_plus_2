@@ -51,5 +51,4 @@ export const FINISH_GENERATE_URL_EVENT = 'finishGenerateUrl';
 export const FINISH_GENERATE_URL_ERROR_EVENT = 'finishGenerateUrlError';
 
 /* Мультиплеер */
-
 export const START_GAME = 'startGame';

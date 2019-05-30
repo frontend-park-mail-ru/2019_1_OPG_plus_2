@@ -9,7 +9,6 @@ import { INIT_EVENT,
          FINISH_STEP_EVENT,
          END_OVER_BLOCK_EVENT,
          FINISH_GAME_EVENT } from '../../modules/events';
-import { conditionalExpression } from 'babel-types';
 
 export default class MultiplayerModel extends EventEmitterMixin(Model) {
 	constructor() {
@@ -24,21 +23,27 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
             console.log(event);
 
             this._ws.onmessage = (event) => {
-                debugger;
                 console.log(event.data);
                 let strLines = event.data.split("\n");
                 strLines.forEach(str => {
                     let obj = JSON.parse(str);
 
                     if (obj.type === 'game' && obj.user !== this.me) {
+                        debugger;
                         if (obj.data.coords) {
-                            this._game.blocks = obj.data.coords;
+                            let blocks = this.getBlockArray({arr: obj.data.coords});
+                            this._game.blocks = blocks
+                            if (Math.abs(blocks[0] - blocks[1]) < 5) {
+                                blocks.splice(1, 0, ...this._game.getMissX(blocks[0], blocks[1]));
+                            } else {
+                                blocks.splice(1, 0, ...this._game.getMissY(blocks[0], blocks[1]));
+                            }
                             this._game.changeSide();
 
                             this.emit(FINISH_STEP_EVENT, {
                                 player: obj.user === this._game._listeners[0] ? 'Player1' : 'Player2', 
                                 whoseTurn: this._game.getWhoseTurn(),
-                                steps: obj.data.coords
+                                steps: blocks,
                             })
                         }
                     }
@@ -54,17 +59,20 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                     }
                     
                     if (obj.user === 'SERVICE') {
-                        console.log(this.me);
-                        console.log(obj);
+                        let disableBlocks = this.getBlockArray({arr: obj.data.event_data.locked});
+
                         this._game = new Game({
-                            listeners: obj.data.event_data.players, 
-                            firstStep: obj.data.event_data.whose_turn
-                        })
+                            listeners: obj.data.event_data.players,
+                            firstStep: obj.data.event_data.whose_turn,
+                            disableBlocks: disableBlocks,
+                        });
+
                         this.emit(START_GAME, {
                             wait: false, 
                             whoseTurn: obj.data.event_data.whose_turn === this._game._listeners[0] ? 'Player1' : 'Player2', 
                             me: this.me, 
-                            players: obj.data.event_data.players
+                            players: obj.data.event_data.players,
+                            disableBlocks: disableBlocks,
                         });
                     }
 
@@ -75,9 +83,9 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                 });
             }
 
-            this._ws.onclose = (event) => {
-                console.log(event);
-            }
+            // this._ws.onclose = (event) => {
+            //     console.log(event);
+            // }
 
             this.me = User._username;
             this._ws.send(JSON.stringify({
@@ -104,67 +112,54 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
 	}
 
 	doStartStep({block = null} = {}) {
-        console.log('do start step');
-        let ans = this._game.doStartStep({block});
+        let ans = false;
+
+        if (this._game._whoseTurn === this.me) {
+            ans = this._game.doStartStep({block});
+        }
+
 		this.emit(END_DOWN_EVENT, {player: this._game.getWhoseTurn(), ans: ans});
 	}
 
 	doOverStep({block = null} = {}) {
-        console.log('do over step');
 		let ans = this._game.doStep({block});
 		this.emit(END_OVER_BLOCK_EVENT, {player: this._game.getWhoseTurn(), ans: ans, steps: this._game.steps});
 	}
 
 	doFinishStep({block = null} = {}) {
-        console.log('do finish step');
-        this._game.doFinishStep({block}); // вернет true, если ход можно закончить
+        let ans = this._game.doFinishStep({block}); // вернет true, если ход можно закончить
         
-        console.log(this._game.multSteps);
-        let coords = this._game.multSteps.map(block => {
-            return [parseInt(block / 5, 10), parseInt(block % 5, 10)];
+        if (ans) { 
+            let coords = this._game.multSteps.map(block => {
+                return [parseInt(block / 5, 10), parseInt(block % 5, 10)];
+            })
+
+            debugger;
+            this._ws.send(JSON.stringify({
+                user: this.me,
+                type: 'game',
+                data: {
+                    coords: [
+                        {
+                            x: coords[0][0], 
+                            y: coords[0][1],
+                        },
+                        {
+                            x: coords[coords.length - 1][0], 
+                            y: coords[coords.length - 1][1],
+                        },
+                    ],
+                }
+            }));
+
+            this._game.multSteps = {};
+            this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn()});
+        }
+    }
+    
+    getBlockArray({arr = []} = {}) {
+        return arr.map(item => {
+          return item.x * 5 + item.y;
         })
-
-        console.log(JSON.stringify({
-            user: this.me,
-            type: 'game',
-            data: {
-                coords: [
-                    {
-                        X: coords[0], 
-                        Y: coords[coords.length - 1],
-                    }
-                ],
-            }
-        }))
-        debugger;
-        this._ws.send(JSON.stringify({
-            user: this.me,
-            type: 'game',
-            data: {
-                coords: [
-                    {
-                        X: coords[0], 
-                        Y: coords[coords.length - 1],
-                    }
-                ],
-            }
-        }));
-
-        this._game.multSteps = {};
-        this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn()});
-
-
-
-		// let isWinner = this._game.isWinner(); // возвращает true если был win condition
-		// if (isWinner) { // если ход можно закончить и победитель существует
-		// 	// издать событие конца игры
-		// 	this.emit(FINISH_GAME_EVENT, {
-		// 		winner: this._game.getWinner()}); // по окончании игры нам надо знать победителя
-		// } else { // если ход можно закончить
-		// 	// издать событие конца хода
-		// 	this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn()}); // по окончании хода, 
-		// 	// нам надо знать, 
-		// 	// чей сейчас ход и можно ли его завершить
-		// }
-	}
+    }
 }

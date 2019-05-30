@@ -30,7 +30,6 @@ export default class Router {
 					history.pushState(null, null, path);
 				}
 			}
-
 			
 			if (path.split('/')[1] === 'multiplayer') {
 				const route = '/' + path.split('/')[1];

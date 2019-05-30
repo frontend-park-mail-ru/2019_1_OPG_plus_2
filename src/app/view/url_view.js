@@ -14,7 +14,9 @@ import { genericBeforeEnd } from '../../modules/helpers.js';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
 import View from './view';
-import { GENERATE_URL_EVENT } from '../../modules/events';
+import { GENERATE_URL_EVENT, 
+		 START_GAME 
+	   } from '../../modules/events';
 
 export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -40,7 +42,7 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
 	onFormSubmit(event) {
 		const formsBlock = this._root.querySelector('.forms');
 		event.preventDefault();
-		this.emit(GENERATE_URL_EVENT);
+		this.emit(START_GAME, {path: '/' + formsBlock.elements[0].value.split('/').slice(3,6).join('/'), redirect: true});
 	}
 
 	_createSubmitListener() {

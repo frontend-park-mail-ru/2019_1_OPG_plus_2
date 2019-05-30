@@ -161,18 +161,13 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		);
 	}
 
-	_renderField(data) {
+	_renderField() {
 		const fieldBlock = this._root.querySelector('.field');
 		const numBlocks = 25;
 		const blocks = [];
 
 		[...Array(numBlocks)].forEach((_, i) => {
 			blocks.push(blockTemplate({ modifiers: [''], num: i }));
-			// if (data.disableBlocks.indexOf( i ) != -1) {
-			// 	blocks.push(blockTemplate({ modifiers: ['block_theme_del'], num: i }));
-			// } else {
-			// 	blocks.push(blockTemplate({ modifiers: [''], num: i }));
-			// }
 		});
 
 		genericBeforeEnd(fieldBlock, ...blocks);
@@ -252,6 +247,12 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		);
 	}
 
+	_setDisableBlocks({blocks = []} = {}) {
+		blocks.forEach(block => {
+			this._blocks[block].classList.add('block_theme_del')
+		})
+	}
+
 	_cacheBlocks() {
 		this._blocks = [...document.querySelectorAll('.block')];
 	}
@@ -262,7 +263,7 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 			this._renderContainer();
 			this._renderMain(data);
 			this._renderContent();
-			this._renderField(data);
+			this._renderField();
 			this._renderLoader();
 		} else {
 			const containerBlock = this._root.querySelector('.container.container_theme_game');
@@ -271,6 +272,7 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 				containerBlock.removeChild(this._root.querySelector('.modal'));
 			}
 			this._renderHead(data);
+			this._setDisableBlocks({blocks: data.disableBlocks});
 			this._renderLeftPlayer(data);
 			this._renderRightPlayer(data);
 		}
