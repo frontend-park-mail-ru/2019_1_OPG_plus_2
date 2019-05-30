@@ -59,6 +59,7 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                     }
                     
                     if (obj.user === 'SERVICE') {
+                        console.log(this.me);
                         let disableBlocks = this.getBlockArray({arr: obj.data.event_data.locked});
 
                         this._game = new Game({
@@ -71,6 +72,7 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                             wait: false, 
                             whoseTurn: obj.data.event_data.whose_turn === this._game._listeners[0] ? 'Player1' : 'Player2', 
                             me: this.me, 
+                            // enemy: this.me === obj.data.event_data.players[0] ? obj.data.event_data.players[1] : obj.data.event_data.players[0],
                             players: obj.data.event_data.players,
                             disableBlocks: disableBlocks,
                         });
