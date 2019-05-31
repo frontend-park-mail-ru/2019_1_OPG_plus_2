@@ -42,7 +42,7 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
 
                             this.emit(FINISH_STEP_EVENT, {
                                 player: obj.user === this._game._listeners[0] ? 'Player1' : 'Player2', 
-                                whoseTurn: this._game.getWhoseTurn(),
+                                whoseTurn: this._game.getWhoseTurnListener() === this.me ? 'Player2' : 'Player1',
                                 steps: blocks,
                             })
                         }
@@ -70,10 +70,13 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
 
                         this.emit(START_GAME, {
                             wait: false, 
-                            whoseTurn: obj.data.event_data.whose_turn === this._game._listeners[0] ? 'Player1' : 'Player2', 
+                            // whoseTurn: obj.data.event_data.whose_turn === this._game._listeners[0] ? 'Player1' : 'Player2', 
+                            whoseTurn: obj.data.event_data.whose_turn === this.me ? 'Player1' : 'Player2', 
                             me: this.me, 
-                            // enemy: this.me === obj.data.event_data.players[0] ? obj.data.event_data.players[1] : obj.data.event_data.players[0],
-                            players: obj.data.event_data.players,
+                            enemy: this.me === obj.data.event_data.players[0] 
+                                             ? obj.data.event_data.players[1] 
+                                             : obj.data.event_data.players[0],
+                            // players: obj.data.event_data.players,
                             disableBlocks: disableBlocks,
                         });
                     }

@@ -133,7 +133,8 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_left'],
-				nickname: data.player[0], // TODO передача никнейма пользователя
+				// nickname: data.players[0], // TODO передача никнейма пользователя
+				nickname: data.me, // TODO передача никнейма пользователя
 			}),
 		);
 	}
@@ -147,7 +148,8 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_right'],
-				nickname: data.player[1], // TODO передача никнейма пользователя
+				// nickname: data.players[1], // TODO передача никнейма пользователя
+				nickname: data.enemy, // TODO передача никнейма пользователя
 			}),
 		);
 	}
