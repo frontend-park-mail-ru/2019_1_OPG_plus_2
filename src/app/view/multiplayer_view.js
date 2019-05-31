@@ -182,7 +182,7 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		genericBeforeEnd(containerBlock, 
 			modalTemplate({
 				modifiers: [],
-				winner: winner,
+				winner: winner.username,
 			}),
 		);
 
