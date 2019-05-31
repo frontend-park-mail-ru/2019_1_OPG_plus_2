@@ -109,6 +109,7 @@ export default class SignUpView extends NavigateMixinView(EventEmitterMixin(View
 
 	_renderForms(data) {
 		const formsBlock = document.querySelector('.forms');
+		debugger;
 		genericBeforeEnd(formsBlock,
 			errorTemplate({
 				modifiers: [],
