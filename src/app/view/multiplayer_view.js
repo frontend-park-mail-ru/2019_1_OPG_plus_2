@@ -128,13 +128,11 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		genericBeforeEnd(playerLeftBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				// url: `${data.players[0] ? HOST + data.avatar : ''}`,
-				url: '',
+				url: `${data.players[0].avatar ? HOST + data.players[0].avatar : ''}`,
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_left'],
-				nickname: data.players[0], // TODO передача никнейма пользователя
-				// nickname: data.me, // TODO передача никнейма пользователя
+				nickname: data.players[0].username,
 			}),
 		);
 	}
@@ -144,12 +142,11 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		genericBeforeEnd(playerRightBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				url: '',
+				url: `${data.players[1].avatar ? HOST + data.players[1].avatar : ''}`,
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_right'],
-				nickname: data.players[1], // TODO передача никнейма пользователя
-				// nickname: data.enemy, // TODO передача никнейма пользователя
+				nickname: data.players[1].username,
 				
 			}),
 		);

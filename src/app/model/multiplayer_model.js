@@ -59,17 +59,23 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                     }
                     
                     if (obj.user === 'SERVICE') {
+                        debugger;
                         console.log(this.me);
+
                         let disableBlocks = this.getBlockArray({arr: obj.data.event_data.locked});
 
-                        if (this.me === obj.data.event_data.players[1]) {
-                            let tmp = obj.data.event_data.players[0];
-                            obj.data.event_data.players[0] = obj.data.event_data.players[1];
-                            obj.data.event_data.players[1] = tmp;
+                        if (this.me === obj.data.event_data.players[1].username) {
+                            let tmp = obj.data.event_data.players[0].username;
+                            obj.data.event_data.players[0].username = obj.data.event_data.players[1].username;
+                            obj.data.event_data.players[1].username = tmp;
                         }
 
+                        let nicknames = obj.data.event_data.players.map(player => {
+                            return player.username;
+                        });
+
                         this._game = new Game({
-                            listeners: obj.data.event_data.players,
+                            listeners: nicknames,
                             firstStep: obj.data.event_data.whose_turn,
                             disableBlocks: disableBlocks,
                         });
@@ -90,18 +96,12 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                 });
             }
 
-            // this._ws.onclose = (event) => {
-            //     console.log(event);
-            // }
-
             this.me = User._username;
             this._ws.send(JSON.stringify({
                 user: User._username,
                 avatar: User._avatar,
                 type: 'register',
             }));
-
-            // this._ws.close();
 		});
 	}
 
