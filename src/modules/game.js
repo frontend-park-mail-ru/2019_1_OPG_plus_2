@@ -480,6 +480,11 @@ export default class Game {
 		return this._whoseTurn === this._listeners[0] ? 'Player1' : 'Player2';
 	}
 
+	// TODO Это для получения именно имени пользователя, вероятно потом придется сменить то что выше на это
+	getWhoseTurnListener() {
+		return this._whoseTurn;
+	}
+
 	/**
      * Check is point consist diagonal
      * @param Object Object with point
