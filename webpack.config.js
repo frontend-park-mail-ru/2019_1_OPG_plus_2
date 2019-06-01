@@ -65,10 +65,10 @@ const prodMode = {
     mode: 'production',
     plugins: [
         new webpack.DefinePlugin({
-            HOST: JSON.stringify('https://api.colors.hackallcode.ru'),
-            MY_HOST: JSON.stringify('https://colors.hackallcode.ru'),
-            HOST_MULTIPLAYER_WS: JSON.stringify('wss://api.colors.hackallcode.ru/game'),
-            HOST_MULTIPLAYER: JSON.stringify('https://api.colors.hackallcode.ru/game'),
+            HOST: JSON.stringify('https://api.colors-game.ru'),
+            MY_HOST: JSON.stringify('https://colors-game.ru'),
+            HOST_MULTIPLAYER_WS: JSON.stringify('wss://api.colors-game.ru/game'),
+            HOST_MULTIPLAYER: JSON.stringify('https://api.colors-game.ru/game'),
         }),
     ]
 };

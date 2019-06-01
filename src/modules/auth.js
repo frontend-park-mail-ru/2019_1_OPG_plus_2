@@ -13,7 +13,7 @@ export default class Auth {
 						reject(null);
 					}
 				},
-				path: 'https://api.colors.hackallcode.ru/api/session',
+				path: 'https://api.colors-game.ru/api/session',
 			});
 		});
 	}
