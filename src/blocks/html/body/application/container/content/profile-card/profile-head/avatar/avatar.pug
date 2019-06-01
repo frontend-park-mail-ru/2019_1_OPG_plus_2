@@ -3,4 +3,5 @@ if url
         img(class='avatar__photo' src=url)
 else
     div(class='avatar ' + modifiers)
-        img(class='avatar__photo' src=require('./default_avatar.svg'))
+        include /img/default_avatar.svg
+        //- img(class='avatar__photo' src=require('./default_avatar.svg'))

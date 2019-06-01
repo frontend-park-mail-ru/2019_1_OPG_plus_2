@@ -9,15 +9,20 @@ import fieldTemplate from '../../blocks/html/body/application/container/content/
 import blockTemplate from '../../blocks/html/body/application/container/content/field/block/block.pug';
 import modalTemplate from '../../blocks/html/body/application/container/modal/modal.pug';
 import linkTemplate from '../../blocks/html/body/application/container/content/buttons/link/link.pug';
+import menuTemplate from '../../blocks/html/body/application/container/head/menu/menu.pug';
+import titleTemplate from '../../blocks/html/body/application/container/content/title/title.pug';
+import themeTemplate from '../../blocks/html/body/application/container/head/menu/night/night.pug';
+import backArrowTemplate from '../../blocks/html/body/application/container/head/menu/back-arrow/back-arrow.pug';
 
 import View from './view';
 import { EventEmitterMixin } from '../event_emitter';
 import { NavigateMixinView } from '../navigate_view';
-import { genericBeforeEnd } from '../../modules/helpers.js';
+import { genericBeforeEnd, colorBrightness, colorLuminance, setColors } from '../../modules/helpers.js';
 import { debounce, throttle } from '../../modules/helpers.js';
 import { DOWN_EVENT, 
 		 UP_BLOCK_EVENT,
 		 OVER_BLOCK_EVENT } from '../../modules/events';
+import {APP_PALETTES, COLOR_NAMES} from '../../modules/utils';
 
 export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -25,7 +30,42 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		this.down = this.down.bind(this);
 		this.up = debounce(this.up.bind(this), 100);
 		this.over = throttle(this.over.bind(this), 20);
+		this.onChangeTheme = this.onChangeTheme.bind(this);
 	}
+
+	onChangeTheme() {
+        let root = document.documentElement;
+
+        let row = APP_PALETTES[Math.floor(Math.random() * APP_PALETTES.length)];
+
+        let colors = [];
+        for (let r = 0; r < row.length; ++r) {
+            let lumSign = colorBrightness(row[r]) < 128 ? 1 : -1;
+            let variants = [row[r], colorLuminance(row[r], lumSign * 0.15), colorLuminance(row[r], lumSign * 0.4)];
+
+            for (let v = 0; v < variants.length; ++v) {
+                colors.push(`#${variants[v]}`);
+                let isDark = colorBrightness(variants[v]) < 128;
+                colors.push(isDark ? 'var(--light-text-color)' : 'var(--dark-text-color)');
+            }
+        }
+
+        let color_names = COLOR_NAMES;
+
+        setColors({root: root, colors: colors, variables: color_names});
+        window.localStorage.setItem('colors', JSON.stringify(colors));
+        window.localStorage.setItem('color_names', JSON.stringify(color_names));
+	}
+	
+	_createChangeListener() {
+        let night = this._root.querySelector('.night');
+        night.addEventListener('click', this.onChangeTheme, true);
+    }
+
+    _removeChangeListener() {
+        let night = this._root.querySelector('.night');
+        night.removeEventListener('click', this.onChangeTheme, true);
+    }
 
 	down(event) {
 		if (event.target.classList.contains('block') && !+event.target.dataset.isSet) {
@@ -79,14 +119,16 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 	_createEventListeners() {
 		super._createEventListeners();
 		this._createTurnListener();
+		this._createChangeListener();
 	}
 
 	_removeEventListeners() {
 		super._removeEventListeners();
 		this._removeTurnListener();
+		this._removeChangeListener();
 	}
 
-	_renderContainer() {
+	_renderContainer(data) {
 		genericBeforeEnd(this._root, containerTemplate({
 			modifiers: ['container_theme_game'],
 		}));
@@ -96,7 +138,7 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		const containerBlock = this._root.querySelector('.container.container_theme_game');
 		genericBeforeEnd(containerBlock, 
 			headTemplate({
-				modifiers: ['head_theme_game'],
+				modifiers: ['head_theme_play'],
 			}),
 			playerTemplate({
 				modifiers: ['player_theme_player1 player_theme_hidden']
@@ -111,7 +153,7 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 	}
 
 	_renderHead(data) {
-		const headBlock = this._root.querySelector('.head.head_theme_game');
+		const headBlock = this._root.querySelector('.head.head_theme_play');
 		// чтобы поменять сторону просто поменять классы
 		genericBeforeEnd(headBlock, 
 			sideTemplate({
@@ -121,6 +163,32 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 				modifiers: [`${data.whoseTurn === 'Player2' ? 'side_theme_right-active' : 'side_theme_right-passive'}`],
 			})
 		);
+	}
+
+	_renderMenu() {
+		const headBlock = this._root.querySelector('.head.head_theme_play');
+
+		genericBeforeEnd(headBlock,
+            menuTemplate({
+                modifiers: ['menu_theme_game'],
+            })
+		);
+		
+		const menuBlock = this._root.querySelector('.menu.menu_theme_game');
+		genericBeforeEnd(menuBlock,
+			backArrowTemplate({
+				modifiers: [],
+				hr: '/back',
+                dataset: '/back',
+			}),
+			titleTemplate({
+                title: 'colors',
+                modifiers: ['title_theme_game'],
+			}),
+			themeTemplate({
+                modifiers: [],
+            }),
+        );
 	}
 
 	_renderLeftPlayer(data) {
@@ -230,9 +298,14 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 				this._blocks[el].dataset.isSet = 1;
 			});
 
-			const headBlock = this._root.querySelector('.head.head_theme_game');
-			headBlock.innerHTML = '';
-			this._renderHead({whoseTurn: whoseTurn});
+			const containerBlock = this._root.querySelector('.container.container_theme_game');
+			if (whoseTurn === 'Player1') {
+				containerBlock.classList.remove('container_theme_right-step');
+				containerBlock.classList.add('container_theme_left-step');
+			} else {
+				containerBlock.classList.remove('container_theme_left-step');
+				containerBlock.classList.add('container_theme_right-step');
+			}
 		}
 	}
 
@@ -245,6 +318,17 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 				loader: true,
 			}),
 		);
+	}
+
+	_renderSide(data) {
+		const containerBlock = this._root.querySelector('.container.container_theme_game');
+		if (data.whoseTurn === 'Player1') {
+			containerBlock.classList.remove('container_theme_right-step');
+			containerBlock.classList.add('container_theme_left-step');
+		} else {
+			containerBlock.classList.remove('container_theme_left-step');
+			containerBlock.classList.add('container_theme_right-step');
+		}
 	}
 
 	_setDisableBlocks({blocks = []} = {}) {
@@ -260,8 +344,9 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 	_render(data) {
 		if (data.wait) {
 			this._root.innerHTML = '';
-			this._renderContainer();
+			this._renderContainer(data);
 			this._renderMain();
+			this._renderMenu();
 			this._renderContent();
 			this._renderField();
 			this._renderLoader();
@@ -271,7 +356,7 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 			if (modal) {
 				containerBlock.removeChild(this._root.querySelector('.modal'));
 			}
-			this._renderHead(data);
+			this._renderSide(data);
 			this._setDisableBlocks({blocks: data.disableBlocks});
 			this._renderLeftPlayer(data);
 			this._renderRightPlayer(data);

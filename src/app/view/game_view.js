@@ -318,9 +318,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				containerBlock.classList.remove('container_theme_left-step');
 				containerBlock.classList.add('container_theme_right-step');
 			}
-
-			// headBlock.innerHTML = '';
-			// this._renderHead({whoseTurn: player});
 		}
 	}
 
@@ -332,7 +329,6 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		this._root.innerHTML = '';
 		this._renderContainer(data);
 		this._renderMain(data);
-		// this._renderHead(data);
 		this._renderMenu();
 		this._renderLeftPlayer(data);
 		this._renderRightPlayer(data);

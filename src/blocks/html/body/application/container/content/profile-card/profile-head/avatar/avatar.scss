@@ -24,4 +24,13 @@
         border: 1vh solid var(--bg-color);
         border-radius: 100%;
     }
+    
+    #avatar__photo {
+        object-fit: cover;
+        object-position: top;
+        width: 18vh;
+        height: 18vh;
+        border: 1vh solid var(--bg-color);
+        border-radius: 100%;
+    }
 }
