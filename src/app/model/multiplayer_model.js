@@ -8,7 +8,8 @@ import { INIT_EVENT,
          END_DOWN_EVENT,
          FINISH_STEP_EVENT,
          END_OVER_BLOCK_EVENT,
-         FINISH_GAME_EVENT } from '../../modules/events';
+         FINISH_GAME_EVENT,
+         INIT_ERROR_EVENT } from '../../modules/events';
 
 export default class MultiplayerModel extends EventEmitterMixin(Model) {
 	constructor() {

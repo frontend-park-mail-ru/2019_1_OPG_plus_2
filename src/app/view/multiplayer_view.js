@@ -21,8 +21,8 @@ import { genericBeforeEnd, colorBrightness, colorLuminance, setColors } from '..
 import { debounce, throttle } from '../../modules/helpers.js';
 import { DOWN_EVENT, 
 		 UP_BLOCK_EVENT,
-		 OVER_BLOCK_EVENT } from '../../modules/events';
-import {APP_PALETTES, COLOR_NAMES} from '../../modules/utils';
+		 OVER_BLOCK_EVENT} from '../../modules/events';
+import { APP_PALETTES, COLOR_NAMES } from '../../modules/utils';
 
 export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {

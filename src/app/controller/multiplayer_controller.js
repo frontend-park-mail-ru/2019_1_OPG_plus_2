@@ -1,5 +1,6 @@
 import Controller from './controller';
 import { NavigateMixinController } from '../navigate_controller';
+import { SIGN_IN } from '../paths';
 import { INIT_EVENT, 
          START_GAME,
          DOWN_EVENT,
@@ -8,7 +9,8 @@ import { INIT_EVENT,
          FINISH_STEP_EVENT,
          OVER_BLOCK_EVENT,
          END_OVER_BLOCK_EVENT,
-         FINISH_GAME_EVENT } from '../../modules/events';
+		 FINISH_GAME_EVENT,
+		 INIT_ERROR_EVENT } from '../../modules/events';
 
 export default class MultiplayerController extends NavigateMixinController(Controller) {
 	constructor({
@@ -16,10 +18,18 @@ export default class MultiplayerController extends NavigateMixinController(Contr
 		view = {},
 		router = {},
 	} = {}) {
-		super({model: model, view: view, router: router});
-        this._model.on(INIT_EVENT, ({root = {}, wait = true} = {}) => { this.render({root: root, data: {wait: wait}}); 
-		this._model.on(START_GAME, (data = {}) => this.startGame(data))
-    });
+		super({model, view, router});
+
+		this._model.on(INIT_EVENT, ({root = {}, wait = true} = {}) => this.render({
+			root, 
+			data: {
+				wait
+			}
+		}));
+		
+		this._model.on(INIT_ERROR_EVENT, () => this.onNavigate({path: SIGN_IN, redirect: true}));
+
+		this._model.on(START_GAME, (data = {}) => this.startGame(data));
 		this._view.on(DOWN_EVENT, ({block = null} = {}) => { this.doStartStep({block}) });
 		this._model.on(END_DOWN_EVENT, ({player = 'Player1', ans = false} = {}) => { this.apply({player, ans}) });
 
