@@ -31,7 +31,6 @@ export default class Router {
 				}
 			}
 			
-			debugger;
 			if (path.split('/')[1] === 'multiplayer') {
 				const route = '/' + path.split('/')[1];
 				const room = path.split('/')[2];

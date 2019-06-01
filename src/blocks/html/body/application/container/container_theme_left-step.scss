@@ -3,8 +3,17 @@
     to {box-shadow: 350px 0px 300px -220px var(--primary-color) inset;}
 }
 
+@keyframes left-step-mobile {
+    from {box-shadow: 0px 0px 300px -220px var(--primary-color) inset;}
+    to {box-shadow: 0px -270px 300px -220px var(--primary-color) inset;}
+}
+
 .container_theme_left-step {
     @media (min-width: $desktop-layout) {
         animation: left-step 200ms linear forwards;
+    }
+
+    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+        animation: left-step-mobile 200ms linear forwards;
     }
 }

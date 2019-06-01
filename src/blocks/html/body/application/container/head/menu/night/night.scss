@@ -1,6 +1,8 @@
 .night {
     cursor: pointer;
     transition: all 250ms ease-out;
+    display: flex;
+    align-items: center;
 
     &:hover {
         transform: scale(1.2);

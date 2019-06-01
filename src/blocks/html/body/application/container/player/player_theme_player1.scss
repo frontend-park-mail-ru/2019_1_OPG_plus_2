@@ -5,7 +5,7 @@
     }
 
     @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
-        grid-column: 1 / 4;
-        grid-row: 3 / -1;
+        grid-column: 1/-1;
+        grid-row: 3/-1;
     }
 }
