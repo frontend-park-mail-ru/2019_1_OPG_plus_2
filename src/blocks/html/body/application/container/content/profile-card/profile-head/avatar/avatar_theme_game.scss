@@ -4,4 +4,8 @@
         grid-column: 3;
         border: none;
     }
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        display: none;
+    }
 }

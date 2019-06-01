@@ -205,12 +205,11 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		genericBeforeEnd(playerLeftBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				// modifiers: [`avatar_theme_game ${data.whoseTurn === 'Player1' ? 'avatar_theme_p1_active' : ''}`],
 				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_left'],
-				nickname: data.username, // TODO передача никнейма пользователя
+				nickname: data.username,
 			}),
 		);
 	}
@@ -220,12 +219,11 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 		genericBeforeEnd(playerRightBlock, 
 			avatarTemplate({
 				modifiers: ['avatar_theme_game'],
-				// modifiers: [`avatar_theme_game ${data.whoseTurn === 'Player2' ? 'avatar_theme_p2_active' : ''}`],
 				url: `${data.avatar ? HOST + data.avatar : ''}`,
 			}),
 			nicknameTemplate({
 				modifiers: ['nickname_theme_right'],
-				nickname: 'Player2', // TODO передача никнейма пользователя
+				nickname: 'Player2',
 			}),
 		);
 	}
@@ -305,10 +303,12 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 	}
 
 	endStep({winner = null, player = 'Player1'} = {}) {
+		if (!this._root) {
+			return;
+		}
 		if (winner) {
 			this._renderModal(winner);
 		} else {
-			const headBlock = this._root.querySelector('.head.head_theme_game');
 			let containerBlock = this._root.querySelector('.container');
 
 			if (player === 'Player1') {
