@@ -17,10 +17,10 @@ import linesDownRightTemplate
     from '../../blocks/html/body/application/container/lines/lines-down-right/lines-down-right.pug';
 
 import View from './view';
-import {EventEmitterMixin} from '../event_emitter';
-import {NavigateMixinView} from '../navigate_view';
-import {colorBrightness, colorLuminance, genericBeforeEnd, resetColors, setColors} from '../../modules/helpers.js';
-import {APP_PALETTES, COLOR_NAMES} from '../../modules/utils';
+import { EventEmitterMixin } from '../event_emitter';
+import { NavigateMixinView } from '../navigate_view';
+import { colorBrightness, colorLuminance, genericBeforeEnd, resetColors, setColors } from '../../modules/helpers.js';
+import { APP_PALETTES, COLOR_NAMES } from '../../modules/utils';
 
 export default class MainPageView extends NavigateMixinView(EventEmitterMixin(View)) {
     constructor() {
@@ -103,7 +103,7 @@ export default class MainPageView extends NavigateMixinView(EventEmitterMixin(Vi
     _removeEventListeners() {
         super._removeEventListeners();
         this._removeChangeListener();
-        this._removeDefaultListener;
+        this._removeDefaultListener();
     }
 
     _renderContainer() {

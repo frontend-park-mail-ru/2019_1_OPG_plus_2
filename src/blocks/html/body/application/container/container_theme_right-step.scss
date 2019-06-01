@@ -1,0 +1,10 @@
+@keyframes right-step {
+    from {box-shadow: 0px 0px 300px -220px var(--secondary-color) inset;}
+    to {box-shadow: -350px 0px 300px -220px var(--secondary-color) inset;}
+}
+
+.container_theme_right-step {
+    @media (min-width: $desktop-layout) {
+        animation: right-step 200ms linear forwards;
+    }
+}
