@@ -31,6 +31,7 @@ export default class Router {
 				}
 			}
 			
+			debugger;
 			if (path.split('/')[1] === 'multiplayer') {
 				const route = '/' + path.split('/')[1];
 				const room = path.split('/')[2];
@@ -41,14 +42,14 @@ export default class Router {
 			}
 
 			if (!this.routes[path]) {
-				this.routes['/notfound'].open({root: this.root, data: data});
+				this.currentRoute = this.routes['/notfound'];
+				this.currentRoute.open({root: this.root, data: data});
 				return;
 			}
 
 			if (this.currentRoute) {
 				this.currentRoute.close();
 			}
-
 			this.currentRoute = this.routes[path];
 			this.currentRoute.open({root: this.root, data: data});
 		} else {
