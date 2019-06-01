@@ -1,6 +1,6 @@
 @keyframes shadow {
-    from {background-color: rgba(0,0,0,0);}
-    to {background-color: rgba(0,0,0,0.5);}
+    from {opacity: 0;}
+    to {opacity: 0.5;}
 }
 
 @keyframes modal {
@@ -16,11 +16,23 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
-    background-color: rgba(0,0,0,0.5);
-    animation: shadow 300ms forwards linear;
+
+    &__back {
+        z-index: 105;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.5;
+        background-color: var(--bg-text-color);
+        animation: shadow 300ms forwards linear;
+    }
 
     &__window {
+        z-index: 110;
         background-color: var(--bg-color);
+        color: var(--bg-text-color);
         display: flex;
         flex-direction: column;
         opacity: 0;
@@ -30,7 +42,6 @@
 
     &__winner {
         text-align: center;
-        color: var(--bg-text-color);
         font-family: "Roboto";
         margin-bottom: 4vh;
         font-size: 5vh !important;
