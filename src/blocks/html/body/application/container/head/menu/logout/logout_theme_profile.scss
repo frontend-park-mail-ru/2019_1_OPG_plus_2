@@ -10,7 +10,7 @@
     @media (min-width: $desktop-layout) {
         padding: 3vh 1vh 3vh;
         font-size: 3vh;  
-        border-top: 1px solid rgb(234, 234, 234);
+        border-top: 1px solid var(--bg-3-color);
     }
 
     @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
