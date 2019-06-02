@@ -125,9 +125,13 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
 				placeholder: 'Url',
 				type: 'text',
                 value: `${data.id ? MY_HOST + '/multiplayer/' + data.id : ''}`,
-                req: true,
+				req: true,
+				help: true,
 			}),
 		);
+
+		let helpBlock = document.querySelector('.form__help');
+		helpBlock.classList.add('help-hidden');
 	}
 
 	_renderButtons() {
@@ -145,6 +149,14 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
 		);
 	}
 
+	_renderHelp() {
+		// debugger;
+		let helpBlock = document.querySelector('.form__help');
+		helpBlock.classList.remove('help-hidden');
+
+		setTimeout(() => {helpBlock.classList.add('help-hidden')}, 5000);
+	}
+
 	_render(data) {
         if (data.isRender) {
             this._root.innerHTML = '';
@@ -157,7 +169,8 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
         } else {
             const formsBlock = document.querySelector('.forms');
             formsBlock.innerHTML = '';
-            this._renderForms(data);
+			this._renderForms(data);
+			this._renderHelp();
         }
 	}
 
