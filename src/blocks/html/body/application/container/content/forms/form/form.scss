@@ -6,7 +6,7 @@
     &__form-title {
         font-family: Roboto;
         font-size: 3vh;
-        color: black;
+        color: var(--bg-text-color);
         margin-bottom: 1vh;
     }
 
@@ -14,6 +14,13 @@
         font-family: "Roboto";
         border: 1px solid rgba(0, 0, 0, 0.3);
         padding: 2vh 1vh 2vh;
+    }
+
+    &__help {
+        font-family: "Roboto";
+        color: var(--bg-text-color);
+        text-align: center;
+        padding-top: 20px;
     }
 
     @media (min-width: $desktop-layout) {
@@ -27,4 +34,8 @@
             font-size: 3vh;
         }
     }
+}
+
+.help-hidden {
+    opacity: 0;
 }

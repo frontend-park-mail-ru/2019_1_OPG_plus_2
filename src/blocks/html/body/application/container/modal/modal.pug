@@ -1,3 +1,15 @@
 div(class='modal ' + modifiers) 
+    div(class='modal__back')
     div(class='modal__window')
-        span(class='modal__winner') #{winner} WIN
+        if loader
+            span(class='modal__winner') Waiting Players
+            include ./modal.svg
+        else
+            span(class='modal__winner ' + winner_mod) #{winner} win!
+            if score
+                div(class='modal__score ' + score_mod)
+                    span(class='score__was') #{old}
+                    span(class='score__arrow1')='⟶'
+                    span(class='score__inc') #{inc}
+                    span(class='score__arrow2')='⟶'
+                    span(class='score__new') #{now}

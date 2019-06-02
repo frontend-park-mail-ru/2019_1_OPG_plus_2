@@ -1,7 +1,7 @@
 .logout_theme_profile {
     grid-column: 1 / -1;
     font-family: "Roboto";  
-    color: black;
+    color: var(--bg-text-color);
     background-image: none !important;
     text-align: center;
     width: 100%;
@@ -10,10 +10,10 @@
     @media (min-width: $desktop-layout) {
         padding: 3vh 1vh 3vh;
         font-size: 3vh;  
-        border-top: 1px solid rgb(234, 234, 234);
+        border-top: 1px solid var(--bg-3-color);
     }
 
     @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
-        box-shadow: 0px 0px 7px 0px #cacaca;
+        box-shadow: 0 0 7px 0 var(--bg-2-color);
     }
 }

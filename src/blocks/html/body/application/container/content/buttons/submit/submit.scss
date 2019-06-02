@@ -2,12 +2,18 @@
     font-family: "Roboto";
     font-size: 3vh;
     text-align: center;
-    color: white;
-    background-color: $secondary-color;
+    color: var(--primary-text-color);
+    background-color: var(--primary-color);
+    box-shadow: 0 5px 11px 0 var(--border-color);
+    border-radius: 10px;
     display: block;
     width: 100%;
     padding: 2vh 8% 2vh;
     text-decoration: none;
     border: none;
     cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
 }

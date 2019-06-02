@@ -74,7 +74,6 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 
 		genericBeforeEnd(profileCardBlock, 
 			profileHeadTemplate({
-				// modifiers: ['profile-card_theme_main'],
 				modifiers: [],
 			}),
 			profileDataTemplate({
@@ -87,7 +86,6 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 	}
 
 	_renderProfileHead(data) {
-		// const profileHeadBlock = document.querySelector('.profile-head.profile-card_theme_main');
 		const profileHeadBlock = document.querySelector('.profile-head');
 		genericBeforeEnd(profileHeadBlock,
 			menuTemplate({
@@ -139,7 +137,7 @@ export default class ProfileView extends NavigateMixinView(EventEmitterMixin(Vie
 				dataset: '/logout',
 				content: 'Exit',
 			})
-		) 
+		); 
 
 	}
 

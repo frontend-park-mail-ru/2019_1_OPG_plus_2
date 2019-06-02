@@ -1,10 +1,9 @@
-// для блока
 @keyframes del {
-    0% { background-color: #EDEDED; }
-    100% { background-color: #ADADAD; }
+    0% { background-color: var(--bg-2-color); }
+    100% { background-color: var(--bg-3-color); }
 }
 
 .block_theme_del {
-    background-color: #EDEDED;
+    background-color: var(--bg-2-color);
     animation: del 300ms 300ms forwards linear;
 }

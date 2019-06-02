@@ -1,5 +1,12 @@
 .nickname_theme_right {
-    @media (min-width: $desktop-min-width) {
-        color: #005FF9;
+    color: var(--secondary-color);
+
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

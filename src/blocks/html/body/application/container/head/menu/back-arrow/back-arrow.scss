@@ -1,0 +1,24 @@
+.back-arrow {
+    cursor: pointer;
+    transition: all 250ms ease-out;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+    
+    #page_back {
+        fill: var(--secondary-color);
+        @media (min-width: $desktop-layout) {
+            height: 7vh;
+            width: 7vh;
+            padding: 4vh;
+        }
+
+        @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
+            height: 5vh;
+            width: 5vh;
+            padding: 3vh 3vh 3vh;
+        }
+
+    }
+}

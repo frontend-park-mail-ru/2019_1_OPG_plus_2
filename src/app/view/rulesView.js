@@ -58,7 +58,7 @@ export default class RulesView extends NavigateMixinView(EventEmitterMixin(View)
 
 		genericBeforeEnd(contentBlock,
 			rulesImageTemplate(),
-		)
+		);
 
 	}
 

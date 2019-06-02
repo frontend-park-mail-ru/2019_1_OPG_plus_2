@@ -1,16 +1,11 @@
 @keyframes active-right {
-    0% { box-shadow: 1px 1px 1px 1px #005FF9; }
-    50% { box-shadow: 1px 1px 1px 2px rgb(21, 105, 241); }
-    60% { box-shadow: 1px 1px 1px 2px rgb(39, 116, 240); }
-    70% { box-shadow: inset 1px 1px 0px 2px rgb(69, 131, 230); }
-    80% { box-shadow: inset 1px 1px 0px 2px rgb(126, 167, 233);}
-    90% { box-shadow: inset 1px 1px 0px 2px rgb(166, 193, 238); }
-    100% { box-shadow: inset 1px 1px 0px 2px #F7F9F9; }
+    from {box-shadow: 1px 1px 1px 1px var(--secondary-color);}
+    to {box-shadow: inset 1px 1px 0 2px var(--bg-color);}
 }
 
 .block_theme_right-active {
-    background-color: #005FF9;
-    box-shadow: 1px 1px 1px 1px #005FF9;
+    background-color: var(--secondary-color);
+    box-shadow: 1px 1px 1px 1px var(--bg-color);
     z-index: 3;
     animation: active-right 300ms forwards linear;
 }

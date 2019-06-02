@@ -47,6 +47,19 @@ export default class API {
 			});
 	}
 
+	static getUrl() {
+		return AjaxModule.doGet({
+			path: `${HOST_MULTIPLAYER}/new_room`,
+		})
+		.then(response => {
+			if (!ok.includes(response.status)) {
+				throw response;
+			} else {
+				return response.json();
+			}
+		})
+	}
+
 	/**
      * This method logs user out and deletes cookie
      */

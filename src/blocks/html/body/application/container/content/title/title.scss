@@ -1,8 +1,9 @@
 .title {
     font-family: "Roboto";
-    color: $color-text;
+    color: var(--bg-text-color);
     display: flex;
     margin: 0;
     align-items: center;
     justify-content: center;
+    user-select: none;
 }

@@ -5,7 +5,7 @@
         grid-template: repeat(4, 1fr)/repeat(5, 1fr);
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-min-width) {
         grid-column: 2/-2;
         grid-template: repeat(4, 1fr)/repeat(5, 1fr);
     }

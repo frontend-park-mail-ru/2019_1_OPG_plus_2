@@ -3,7 +3,7 @@
         grid-template-columns: repeat(12, 1fr);
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-min-width) {
         grid-template-columns: repeat(12, 1fr);
     }
 }
