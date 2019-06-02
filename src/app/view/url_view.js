@@ -17,6 +17,7 @@ import View from './view';
 import { GENERATE_URL_EVENT, 
 		 START_GAME 
 	   } from '../../modules/events';
+import {copyToClipboard} from "../../modules/helpers";
 
 export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) {
 	constructor() {
@@ -128,6 +129,8 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
                 req: true,
 			}),
 		);
+
+		copyToClipboard(MY_HOST + '/multiplayer/' + data.id);
 	}
 
 	_renderButtons() {
