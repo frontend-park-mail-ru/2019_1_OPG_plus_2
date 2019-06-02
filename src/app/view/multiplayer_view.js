@@ -252,24 +252,24 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 			genericBeforeEnd(containerBlock, 
 				modalTemplate({
 					modifiers: [],
-					// score_mod: ['left'],
 					winner_mod: ['left'],
 					old: data.old,
 					inc: `+${data.inc}`,
 					winner: data.winner.username,
-					now: data.old + data.inc
+					now: data.old + data.inc,
+					score: true,
 				}),
 			);
 		} else {
 			genericBeforeEnd(containerBlock, 
 				modalTemplate({
 					modifiers: [],
-					// score_mod: ['left'],
 					winner_mod: ['right'],
 					old: data.old,
 					inc: data.dec,
 					winner: data.winner.username,
-					now: data.old - data.inc
+					now: data.old - data.inc,
+					score: true,
 				}),
 			);
 		}
