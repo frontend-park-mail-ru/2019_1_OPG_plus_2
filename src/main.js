@@ -1,5 +1,6 @@
 import 'normalize.css';
 import './scss/style.scss';
+import './img/icon.png'
 
 import { getColors } from './modules/helpers'; 
 
