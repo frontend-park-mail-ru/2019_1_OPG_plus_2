@@ -10,9 +10,9 @@ export default class ProfileModel extends EventEmitterMixin(Model) {
 	}
 
 	init({root = {}} = {}) {
-		if (User.exist()) {
-			this.emit(INIT_EVENT, {root: root, data: User.get()});
-		} else {
+		// if (User.exist()) {
+		// 	this.emit(INIT_EVENT, {root: root, data: User.get()});
+		// } else {
 			API.getUser()
 				.then((user) => {
 					User.set(user);
@@ -21,7 +21,7 @@ export default class ProfileModel extends EventEmitterMixin(Model) {
 				.catch(() => {
 					this.emit(INIT_ERROR_EVENT);
 				});
-		}
+		// }
 	}
 
 	logout() {
