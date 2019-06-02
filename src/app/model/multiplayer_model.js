@@ -30,7 +30,6 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                     let obj = JSON.parse(str);
 
                     if (obj.type === 'game' && obj.user !== this.me) {
-                        debugger;
                         if (obj.data.coords) {
                             let blocks = this.getBlockArray({arr: obj.data.coords});
                             this._game.blocks = blocks
@@ -40,7 +39,6 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                                 blocks.splice(1, 0, ...this._game.getMissY(blocks[0], blocks[1]));
                             }
                             this._game.changeSide();
-
                             this.emit(FINISH_STEP_EVENT, {
                                 player: obj.user === this._game._listeners[0] ? 'Player1' : 'Player2', 
                                 whoseTurn: this._game.getWhoseTurn(),
@@ -51,16 +49,17 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
 
                     if (obj.type === 'event' && obj.data.event_type === 'win') {
                         this.emit(FINISH_STEP_EVENT, {
+                            me: this.me,
                             winner: obj.data.event_data.winner,
-                            player: '',
-                            steps: [],
+                            inc: obj.data.event_data.score_inc,
+                            dec: obj.data.event_data.score_dec,
+                            old: User._score,
                         });
 
                         return;
                     }
                     
                     if (obj.user === 'SERVICE') {
-                        debugger;
                         console.log(this.me);
 
                         let disableBlocks = this.getBlockArray({arr: obj.data.event_data.locked});
@@ -115,7 +114,6 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
             this.openConnection({root: root, path: `${HOST_MULTIPLAYER_WS}/${data}/room`});
 		})
 		.catch(() => {
-            debugger; // TODO убрать debugger и emit
 			this.emit(INIT_ERROR_EVENT);
 		});
 	}
@@ -143,7 +141,6 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                 return [parseInt(block / 5, 10), parseInt(block % 5, 10)];
             })
 
-            debugger;
             this._ws.send(JSON.stringify({
                 user: this.me,
                 type: 'game',
@@ -162,13 +159,17 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
             }));
 
             this._game.multSteps = {};
-            this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn()});
+            this.emit(FINISH_STEP_EVENT, {player: this._game.getWhoseTurn(), steps: []});
         }
     }
     
     getBlockArray({arr = []} = {}) {
-        return arr.map(item => {
-          return item.x * 5 + item.y;
-        })
+        if (arr) { 
+            return arr.map(item => {
+            return item.x * 5 + item.y;
+            })
+        } else {
+            return [];
+        }
     }
 }

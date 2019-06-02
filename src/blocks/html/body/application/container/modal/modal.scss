@@ -8,6 +8,11 @@
     to {opacity: 1;}
 }
 
+@keyframes show {
+    from {opacity: 0};
+    to {opacity: 1;}
+}
+
 .modal {
     position: absolute;
     width: 100%;
@@ -48,6 +53,39 @@
         animation: modal 300ms forwards linear 400ms;
     }
 
+    &__score {
+        display: flex;
+        justify-content: space-around;
+        font-family: "Roboto";
+        margin-bottom: 4vh;
+        font-size: 3vh !important;
+    }
+
+    .score__was {
+        opacity: 0;
+        animation: show 300ms linear forwards 500ms;
+    }
+
+    .score__arrow1 {
+        opacity: 0;
+        animation: show 300ms linear forwards 1s;
+    }
+
+    .score__inc {
+        opacity: 0;
+        animation: show 300ms linear forwards 1.5s;
+    }
+
+    .score__arrow2 {
+        opacity: 0;
+        animation: show 300ms linear forwards 2s;
+    }
+
+    .score__new {
+        opacity: 0;
+        animation: show 300ms linear forwards 2.5s;
+    }
+
     @media (min-width: $desktop-layout) {
         &__window {
             width: 30%;
@@ -62,5 +100,13 @@
             height: 30%;
             padding: 6vh 7vh 9vh;
         }
+    }
+
+    .left {
+        color: var(--primary-color);
+    }
+
+    .right {
+        color: var(--secondary-color);
     }
 }
