@@ -3,7 +3,6 @@
     color: var(--bg-2-text-color);
     background: var(--bg-2-color);
     font-family: "Roboto";
-    padding: 13px;
     width: 100%;
     align-items: center;
     box-sizing: border-box;
@@ -35,6 +34,7 @@
         font-size: 4vh;
         border-radius: 35px 0 0 0;
         margin-bottom: 3vh;
+        padding: 1.8vh;
 
         &__photo {
             overflow: hidden;
@@ -53,6 +53,7 @@
     @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         font-size: 3vh;
         margin-bottom: 2vh;
+        padding: 2vh;
 
         &__photo {
             overflow: hidden;
