@@ -39,7 +39,7 @@ export default class SignUpModel extends EventEmitterMixin(Model) {
 		}
 
 		if (!validPassword(password)) {
-			this.emit(SIGN_UP_ERROR_EVENT, {root, error: { data: ['password'], message: 'Invalid password, must be more than 5 characters' }, name: name, email: email});
+			this.emit(SIGN_UP_ERROR_EVENT, {root, error: { data: ['password'], message: 'Invalid password, must be 6 or more characters' }, name: name, email: email});
 			return;
 		}
 		API.signUp({
