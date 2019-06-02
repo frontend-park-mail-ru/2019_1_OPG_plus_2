@@ -241,18 +241,38 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		genericBeforeEnd(fieldBlock, ...blocks);
 	}
 
-	_renderModal(winner) {
+	_renderModal(data = {}) {
 		if (document.querySelector('.modal__window')) {
 			return;
 		}
 
 		const containerBlock = document.querySelector('.container.container_theme_game');
-		genericBeforeEnd(containerBlock, 
-			modalTemplate({
-				modifiers: [],
-				winner: winner.username,
-			}),
-		);
+
+		if (data.me === data.winner.username) {
+			genericBeforeEnd(containerBlock, 
+				modalTemplate({
+					modifiers: [],
+					// score_mod: ['left'],
+					winner_mod: ['left'],
+					old: data.old,
+					inc: `+${data.inc}`,
+					winner: data.winner.username,
+					now: data.old + data.inc
+				}),
+			);
+		} else {
+			genericBeforeEnd(containerBlock, 
+				modalTemplate({
+					modifiers: [],
+					// score_mod: ['left'],
+					winner_mod: ['right'],
+					old: data.old,
+					inc: data.dec,
+					winner: data.winner.username,
+					now: data.old - data.inc
+				}),
+			);
+		}
 
 		const modalBlock = document.querySelector('.modal__window');
 		genericBeforeEnd(modalBlock, 
@@ -286,20 +306,20 @@ export default class MultiplayerView extends NavigateMixinView(EventEmitterMixin
 		}
 	}
 
-	endStep({winner = null, player = 'Player1', whoseTurn = player, steps=[]} = {}) {
-		if (winner) {
+	endStep(data = {}) {
+		if (data.winner) {
 			this._removeTurnListener();
-			this._renderModal(winner);
+			this._renderModal(data);
 		} else {
-			steps.forEach(el => {
-				player === 'Player1' 
+			data.steps.forEach(el => {
+				data.player === 'Player1' 
 					? this._blocks[el].classList.add('block_theme_left-active') 
 					: this._blocks[el].classList.add('block_theme_right-active');
 				this._blocks[el].dataset.isSet = 1;
 			});
 
 			const containerBlock = this._root.querySelector('.container.container_theme_game');
-			if (whoseTurn === 'Player1') {
+			if (data.whoseTurn === 'Player1') {
 				containerBlock.classList.remove('container_theme_right-step');
 				containerBlock.classList.add('container_theme_left-step');
 			} else {

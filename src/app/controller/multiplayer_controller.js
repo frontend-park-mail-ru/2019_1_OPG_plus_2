@@ -37,9 +37,11 @@ export default class MultiplayerController extends NavigateMixinController(Contr
 		this._model.on(END_OVER_BLOCK_EVENT, ({player = 'Player1', ans = false, steps = []} = {}) => {this.apply({player, ans, steps});});
 
 		this._view.on(UP_BLOCK_EVENT, ({block = null} = {}) => {this.doFinishStep({block})});
-        this._model.on(FINISH_STEP_EVENT, ({winner = null, player = 'Player1', whoseTurn = player ,steps = []} = {}) => {this.doEndStep({winner, player, whoseTurn ,steps})});
+        // this._model.on(FINISH_STEP_EVENT, ({winner = null, inc = 0, dec = 0, player = 'Player1', whoseTurn = player ,steps = []} = {}) => {this.doEndStep({winner, inc, dec, player, whoseTurn ,steps})});
+        this._model.on(FINISH_STEP_EVENT, (data = {}) => this.doEndStep(data));
         
-		this._model.on(FINISH_GAME_EVENT, ({ winner = null, player = 'Player1', whoseTurn = player, steps = []} = {}) => {this.doEndStep({winner, player, whoseTurn, steps})}); 
+		// this._model.on(FINISH_GAME_EVENT, ({ me,winner = null, player = 'Player1', whoseTurn = player, steps = []} = {}) => {this.doEndStep({winner, player, whoseTurn, steps})}); 
+		this._model.on(FINISH_GAME_EVENT, (data = {}) => this.doEndStep(data)); 
     }
     
     startGame(data) {
@@ -62,7 +64,7 @@ export default class MultiplayerController extends NavigateMixinController(Contr
 		this._view.apply({player, ans, steps});
 	}
 
-	doEndStep({winner = null, player = 'Player1', whoseTurn, steps = []} = {}) {
-        this._view.endStep({winner, player, whoseTurn, steps});
+	doEndStep(data = {}) {
+        this._view.endStep(data);
 	}
 }
