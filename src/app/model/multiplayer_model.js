@@ -21,10 +21,7 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
         this._ws = new WebSocket(path);
 
 		this._ws.onopen = ((event) => {
-            console.log(event);
-
             this._ws.onmessage = (event) => {
-                console.log(event.data);
                 let strLines = event.data.split("\n");
                 strLines.forEach(str => {
                     let obj = JSON.parse(str);
@@ -60,8 +57,6 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
                     }
                     
                     if (obj.user === 'SERVICE') {
-                        console.log(this.me);
-
                         let disableBlocks = this.getBlockArray({arr: obj.data.event_data.locked});
 
                         if (this.me === obj.data.event_data.players[1].username) {
@@ -106,8 +101,6 @@ export default class MultiplayerModel extends EventEmitterMixin(Model) {
 	}
 
 	init({root = {}, data = {}} = {}) {
-        console.log('init');
-        console.log(`${HOST_MULTIPLAYER_WS}/${data}/room`);
         API.getUser()
 		.then((user) => {
             User.set(user);
