@@ -16,6 +16,13 @@
         padding: 2vh 1vh 2vh;
     }
 
+    &__help {
+        font-family: "Roboto";
+        color: white;
+        text-align: center;
+        padding-top: 20px;
+    }
+
     @media (min-width: $desktop-layout) {
         &__text-form {
             font-size: 3.5vh;
@@ -27,4 +34,8 @@
             font-size: 3vh;
         }
     }
+}
+
+.help-hidden {
+    opacity: 0;
 }

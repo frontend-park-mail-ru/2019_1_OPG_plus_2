@@ -5,6 +5,8 @@ if req
             input(type=type, name=name, class='form__text-form ' + formModifiers, value=value required autofocus)
         else
             input(type=type, name=name, class='form__text-form ' + formModifiers, value=value required)
+        if help
+            div(class='form__help ' + modifiers)="URL has been copied to clipboard."
 else 
     div(class='form ' + modifiers)
         label(class='form__form-title' for=name) #{placeholder}
@@ -12,3 +14,5 @@ else
             input(type=type, name=name, class='form__text-form ' + formModifiers, value=value autofocus)
         else
             input(type=type, name=name, class='form__text-form ' + formModifiers, value=value)
+        if help
+            div(class='form__help ' + modifiers)="URL has been copied to clipboard."

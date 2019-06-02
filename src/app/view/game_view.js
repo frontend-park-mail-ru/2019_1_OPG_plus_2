@@ -150,13 +150,13 @@ export default class GameView extends NavigateMixinView(EventEmitterMixin(View))
 				modifiers: ['head_theme_play'],
 			}),
 			playerTemplate({
-				modifiers: ['player_theme_player1 player_theme_hidden']
+				modifiers: ['player_theme_player1']
 			}),
 			contentTemplate({
 				modifiers: ['content_theme_game'],
 			}),
 			playerTemplate({
-				modifiers: ['player_theme_player2 player_theme_hidden']
+				modifiers: ['player_theme_player2']
 			})
 		);
 	}

@@ -1,5 +1,5 @@
 .avatar_theme_game {
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         grid-row: 3 / 4;
         grid-column: 3;
         border: none;

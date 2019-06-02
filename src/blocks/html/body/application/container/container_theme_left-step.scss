@@ -13,7 +13,7 @@
         animation: left-step 200ms linear forwards;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         animation: left-step-mobile 200ms linear forwards;
     }
 }
