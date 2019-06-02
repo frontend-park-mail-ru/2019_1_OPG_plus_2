@@ -102,8 +102,7 @@ export function getColors() {
             let root = document.documentElement;
             setColors({root: root, colors: colors, variables: variables});
         }
-    }
-    catch(e) {
+    } catch (e) {
         console.error("Unknown theme in local storage: " + e);
     }
 }
@@ -125,3 +124,15 @@ export function resetColors({root = {}, variables = []} = {}) {
         root.style.removeProperty(item);
     });
 }
+
+export const copyToClipboard = str => {
+    const el = document.createElement('textarea');
+    el.value = str;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+};
