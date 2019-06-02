@@ -1,5 +1,5 @@
 .player {
-    @media (min-width: $desktop-min-width) {
+    @media (min-width: $desktop-layout) {
         display: grid;
         grid-template: repeat(7, 1fr) / repeat(5, 1fr);
         grid-column-gap: 20px;
@@ -7,7 +7,7 @@
         user-select: none;
     }
 
-    @media (min-width: $mobile-min-width) and (max-width: $mobile-max-width) {
+    @media (min-width: $mobile-layout) and (max-width: $desktop-layout) {
         display: grid;
         grid-template: repeat(7, 1fr) / repeat(5, 1fr);
         grid-column-gap: 20px;
