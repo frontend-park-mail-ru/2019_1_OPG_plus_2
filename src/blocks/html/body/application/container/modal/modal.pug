@@ -6,9 +6,10 @@ div(class='modal ' + modifiers)
             include ./modal.svg
         else
             span(class='modal__winner ' + winner_mod) #{winner} win!
-            div(class='modal__score ' + score_mod)
-                span(class='score__was') #{old}
-                span(class='score__arrow1')='⟶'
-                span(class='score__inc') #{inc}
-                span(class='score__arrow2')='⟶'
-                span(class='score__new') #{now}
+            if score
+                div(class='modal__score ' + score_mod)
+                    span(class='score__was') #{old}
+                    span(class='score__arrow1')='⟶'
+                    span(class='score__inc') #{inc}
+                    span(class='score__arrow2')='⟶'
+                    span(class='score__new') #{now}
