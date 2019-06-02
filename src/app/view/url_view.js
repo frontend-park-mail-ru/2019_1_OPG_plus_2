@@ -102,7 +102,7 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
 
 		genericBeforeEnd(contentBlock, 
 			titleTemplate({
-				title: 'GENERATE URL',
+				title: 'MULTIPLAYER',
 				modifiers: ['title_theme_url'],
 			}),
 			formsTemplate({
@@ -123,7 +123,7 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
 				modifiers: ['forms_theme_url'],
 				formModifiers: [''],
 				username: 'url',
-				placeholder: 'Url',
+				placeholder: 'Link',
 				type: 'text',
                 value: `${data.id ? MY_HOST + '/multiplayer/' + data.id : ''}`,
                 req: true,
@@ -138,10 +138,10 @@ export default class UrlView extends NavigateMixinView(EventEmitterMixin(View)) 
 		genericBeforeEnd(buttonsBlock, 
 			buttonTemplate({
 				modifiers: ['button_type_primary'],
-				text: 'GENERATE URL',
+				text: 'CREATE ROOM',
             }),
             sumbitTemplate({
-				value: 'PLAY',
+				value: 'JOIN ROOM',
 				form: 'url',
 				modifiers: ['button_type_secondary'],
 			})
