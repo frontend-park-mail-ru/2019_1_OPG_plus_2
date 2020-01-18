@@ -9,7 +9,7 @@ const sass = require('./webpack/sass');
 const extractCSS = require('./webpack/css.extract');
 const images = require('./webpack/images');
 const babel = require('./webpack/babel');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const bundleAnalyzer = require('./webpack/bundleAnalyzer');
 
 const PATHS = {
     source: path.join(__dirname, 'src'),
@@ -30,8 +30,7 @@ const common = merge([
             new HtmlWebpackPlugin({
                 template: PATHS.source + '/index.pug',
                 inject: false,
-            }),
-            new BundleAnalyzerPlugin()
+            })
         ],
     },
     pug(),
@@ -90,6 +89,7 @@ module.exports = function (env) {
             common,
             devserver(),
             sass(),
+            bundleAnalyzer(),
             dev,
             devMode,
         ])
