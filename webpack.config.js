@@ -9,6 +9,7 @@ const sass = require('./webpack/sass');
 const extractCSS = require('./webpack/css.extract');
 const images = require('./webpack/images');
 const babel = require('./webpack/babel');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const PATHS = {
     source: path.join(__dirname, 'src'),
@@ -30,6 +31,7 @@ const common = merge([
                 template: PATHS.source + '/index.pug',
                 inject: false,
             }),
+            new BundleAnalyzerPlugin()
         ],
     },
     pug(),
@@ -53,7 +55,7 @@ const devMode = {
     mode: 'development',
     plugins: [
         new webpack.DefinePlugin({
-            HOST: JSON.stringify('http://localhost:8002'),
+            HOST: JSON.stringify('http://localhost:8080'),
             MY_HOST: JSON.stringify('http://localhost:8001'),
             HOST_MULTIPLAYER_WS: JSON.stringify('ws://127.0.0.1:8004/game'),
             HOST_MULTIPLAYER: JSON.stringify('http://localhost:8004/game'),
